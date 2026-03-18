@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-primary-color: #060c12;
+  ---color-primary-gray: rgba(255, 255, 255, 0.64);
+  --color-border-gray: rgba(0, 0, 0, 0.16);
+  --color-secondary-gray:rgba(0, 0, 0, 0.09);
+  --color-secondary-black:#1A1411;
+  --color-light-gray: rgba(0, 0, 0, 0.2);
+  --color-primary-black: #1a1411;
+  --container-max-width: 1360px;
+  --container-padding-x: 1rem;
+  --container-padding-y: 2rem;
+  --shadow-nav-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.08);
+  --color-transparent-gray: rgba(70, 70, 70, 0.5);
+
+  /* Font family */
+  /* add your custom fonts here */
+  --font-family-inter: "Inter", sans-serif;
+
+  /* Breakpoints */
+  /* customize your breakpoints if needed */
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 576px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1024px;
+  --breakpoint-2xl: 1280px;
+  --breakpoint-3xl: 1440px;
+  --breakpoint-4xl: 1760px;
+
+  --container-max-width: 1440px;
+  --container-padding-x: 1rem;
+}
+
+@layer components {
+  *body {
+    font-family: "Inter", sans-serif;
+  }
+  .container {
+    max-width: var(--container-max-width);
+    padding-left: var(--container-padding-x);
+    padding-right: var(--container-padding-x);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .common-input {
+    @apply h-auto w-full p-6 border border-solid border-light-gray rounded-3xl text-lg text-lg leading-[177%] font-medium  outline-none   ;
+  }
+}
