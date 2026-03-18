@@ -3,118 +3,118 @@ import gear1 from "../../../assets/img/materials/ABS.GF_Grid_LP 1.png";
 import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
 import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
-import { Link } from "react-router";
 import { Upload } from "../../SvgContainer/SvgContainer";
 
 const materials = [
   {
     imgSrc: gear1,
-    title: "ABS.GF_Grid_LP",
-    description:
-      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
-  },
-  {
-    imgSrc: gear2,
-    title: "ABS_Grid_LP",
-    description:
-      "L’ASA è un materiale resistente e stabile ai raggi UV, perfetto per applicazioni da esterno.",
-  },
-  {
-    imgSrc: gear3,
-    title: "PETG_Grid_LP",
+    title: "ABS-GF FDM",
     description:
       "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici, risultando ideale per applicazioni esterne e strutturali.",
   },
   {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    imgSrc: gear2,
+    title: "ABS FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
+  },
+  {
+    imgSrc: gear3,
+    title: "ASA FDM",
+    description:
+      "L’ASA è un materiale resistente e stabile ai raggi UV, perfetto per applicazioni da esterno.",
   },
   {
     imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    title: "ASA-CF FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard.",
+  },
+  {
+    imgSrc: gear3,
+    title: "PCFDM",
+    description:
+      "Il policarbonato è un termoplastico di livello industriale con elevata resistenza al calore e grande robustezza meccanica.",
   },
   {
     imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    title: "PET-CFFDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "Miscela di PET resistente e fibra di carbonio. La fibra di carbonio aumenta durezza e resistenza meccanica, mantenendo il basso warping e il ridotto ritiro tipici del PET. Ottima resistenza al calore.",
+  },
+  {
+    imgSrc: gear1,
+    title: "PA6-CF FDM",
+    description:
+      "Il Nylon 6 rinforzato con fibra di carbonio offre proprietà elevate di rigidità e resistenza.",
+  },
+  {
+    imgSrc: gear2,
+    title: "PA6-GF FDM",
+    description:
+      "Il Nylon 6 rinforzato con fibra di vetro è altamente resistente e durevole.",
+  },
+  {
+    imgSrc: gear3,
+    title: "PETG FDM",
+    description:
+      "Il PETG combina resistenza, stabilità chimica e costi contenuti.",
   },
   {
     imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    title: "PETG-CF FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "Il PETG rinforzato con fibra di carbonio è più resistente e rigido.",
+  },
+  {
+    imgSrc: gear1,
+    title: "PLA Aero FDM",
+    description:
+      "Il PLA Aero riduce peso grazie alla schiumatura durante la stampa.",
+  },
+  {
+    imgSrc: gear2,
+    title: "PLA FDM",
+    description:
+      "Il PLA è ideale per prototipi economici.",
+  },
+  {
+    imgSrc: gear3,
+    title: "Resina per prototipi visivi (SLA)",
+    description:
+      "Materiale flessibile ed elastico per applicazioni a contatto.",
   },
   {
     imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    title: "Resina rigida alta prestazione (SLA)",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "Perfetto per parti flessibili come guarnizioni.",
+  },
+  {
+    imgSrc: gear1,
+    title: "TPE FDM",
+    description:
+      "Ottima per modelli trasparenti o estetici.",
+  },
+  {
+    imgSrc: gear2,
+    title: "TPU FDM",
+    description:
+      "Materiale rigido per componenti strutturali.",
+  },
+  {
+    imgSrc: gear3,
+    title: "Resina castable (SLA)",
+    description:
+      "Ideale per gioielli e fusioni.",
   },
   {
     imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    title: "Resina dentale (SLA)",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "Per modelli odontoiatrici ad alta precisione.",
   },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
-  {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
-    description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
-  },
+
 ];
 
 export default function MaterialsPage() {
