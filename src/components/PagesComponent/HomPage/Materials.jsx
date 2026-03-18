@@ -4,7 +4,6 @@ import gear1 from "../../../assets/img/materials/ABS.GF_Grid_LP 1.png";
 import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
 import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
-import Uv from "../../../assets/img/home/Uv.png";
 import { Upload } from "../../SvgContainer/SvgContainer";
 
 const materials = [
