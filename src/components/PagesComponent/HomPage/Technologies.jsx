@@ -7,26 +7,26 @@ const Technologies = () => {
   const navigate = useNavigate();
   return (
     <section id="technologies" className="h-auto w-full pb-25">
-      <div className="container flex flex-col gap-y-25">
-        <h2 className="text-[73px] font-normal text-black">Technologies</h2>
+      <div className="container mx-auto px-50">
+        <h2 className="text-4xl font-semibold text-black pb-5">Tecnologie</h2>
         <Marquee
           speed={60}
           pauseOnHover={true}
           gradient={false}
           direction="left"
         >
-          <div className="flex cursor-pointer flex-row gap-x-7.5 mx-4">
+          <div className="flex cursor-pointer flex-row  mx-4">
             {technologies.map((technology, idx) => (
               <div
                 onClick={() => {
                   navigate(`/technology-details/${technology?.title}`);
                 }}
                 key={idx}
-                className="flex flex-col gap-y-12.5 min-w-[632px]"
+                className="flex flex-col gap-y-12.5 "
               >
                 <img
                   src={technology.bgImg}
-                  className="w-[632px] h-[500px] object-cover rounded-xl"
+                  className="w-[330px] h-[300px] object-cover rounded-xl"
                   alt={technology.title}
                 />
                 <div className="flex flex-col gap-y-3.5 max-w-[379px]">
