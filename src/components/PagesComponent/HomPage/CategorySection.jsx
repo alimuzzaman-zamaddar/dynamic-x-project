@@ -3,24 +3,13 @@ import {
   Alimantare,
   Architectaa,
   Automotive,
-  BioEquipment,
-  CustomFood,
   Dime,
   Drone,
-  Fashion,
   Fashions,
-  Fixtures,
-  IndustrialTooling,
-  Jewellery,
   Medicale,
   Prodo,
   Proto,
-  Prototyping,
-  Ship,
-  Shoes,
   Support,
-  Veterinary,
-  VintageCamera,
   Yatch,
 } from "../../SvgContainer/SvgContainer";
 import { useNavigate } from "react-router";
@@ -85,79 +74,73 @@ const categories = [
 
 const COLS = 3;
 
-// Split categories into rows of COLS, last row may have fewer
-const rows = categories.reduce((acc, item, idx) => {
-  const rowIdx = Math.floor(idx / COLS);
-  if (!acc[rowIdx]) acc[rowIdx] = [];
-  acc[rowIdx].push(item);
-  return acc;
-}, []);
-
-const CategoryCard = ({ category, fullWidthOnTwo }) => {
+const CategoryCard = ({ category }) => {
   const navigate = useNavigate();
   const Icon = category.icon;
+
   return (
-    <li
+    <div
       onClick={() => navigate(`/service/${category.title}`)}
-      className={`cursor-pointer border border-solid border-black rounded-xl flex items-center justify-center ${fullWidthOnTwo ? "w-full" : "w-full"
-        }`}
+      className="group cursor-pointer border border-black rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
-      <div className="py-7.5 px-5 flex flex-col items-center gap-y-3">
-        <Icon />
-        <span className="text-xl text-center xl:text-2xl font-normal text-black">
+      <div className="py-7.5 px-5 flex flex-col items-center gap-y-3 flex-grow">
+        {/* ICON */}
+        <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
+          <Icon />
+        </div>
+
+        {/* TITLE */}
+        <span className="text-lg text-center font-semibold text-black group-hover:text-white transition-all duration-300">
           {category.title}
         </span>
+
+        {/* DESCRIPTION */}
         <p
-          className="overflow-hidden text-center"
+          className="text-center text-black/50 group-hover:text-white/80 transition-all duration-300"
           style={{
-            color: "rgba(0, 0, 0, 0.64)",
             fontFamily: "Inter",
             fontSize: "16px",
             fontWeight: 500,
             lineHeight: "24px",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            textOverflow: "ellipsis",
           }}
         >
           {category.subtitle}
         </p>
       </div>
-    </li>
+    </div>
   );
 };
 
 const CategorySection = () => {
   return (
     <section className="h-auto w-full py-10 xl:py-25">
-      <div className="container flex flex-col gap-y-10 xl:gap-y-25">
-        <h2 className="text-2xl md:text-[36px] 3xl:text-[73px] font-normal text-black">
+      <div className=""></div>
+      <div className="container mx-auto px-50">
+        <h2 className="text-4xl font-semibold text-black pb-3">
           Categorie
         </h2>
 
         <div className="flex flex-col gap-y-7.5 w-full">
           <div className="flex flex-col gap-y-3">
-            <h2 className="text-2xl md:text-[30px] 3xl:text-[40px] font-normal text-black">
+            <h2 className="text-lg font-normal text-black">
               La stampa 3D resa semplice. Soluzioni per ogni progetto, idea e applicazione.
             </h2>
           </div>
 
-          <ul className="flex flex-col gap-7.5">
-            {rows.map((row, rowIdx) => {
-              const isTwoCard = row.length === 2;
+          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 gap-7.5">
+            {categories.map((category, idx) => {
+              const isLastRow = idx >= 8;
+
               return (
-                <ul
-                  key={rowIdx}
-                  className={`grid gap-7.5 ${isTwoCard
-                    ? "grid-cols-2"
-                    : "lg:grid-cols-2 2xl:grid-cols-3"
-                    }`}
+                <li
+                  key={idx}
+                  className={`
+          flex
+          ${isLastRow ? "xl:col-span-4" : "xl:col-span-3"}
+        `}
                 >
-                  {row.map((category, idx) => (
-                    <CategoryCard key={idx} category={category} />
-                  ))}
-                </ul>
+                  <CategoryCard category={category} />
+                </li>
               );
             })}
           </ul>
