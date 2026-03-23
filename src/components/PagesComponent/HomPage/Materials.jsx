@@ -39,7 +39,7 @@ const Materials = () => {
       <div className="container flex flex-col gap-y-24 ">
         <div className="flex flex-row  justify-between">
           <h2 className="text-[73px] font-normal text-black ">Materials</h2>
-          <Link className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
+          <Link to={"/allmaterials"} className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
             {" "}
             See all
           </Link>

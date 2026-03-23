@@ -35,11 +35,31 @@ const MaterialContact = ({
       label: "Professional 3D Scanning & Reverse Engineering",
     },
   ];
+  const materialOptions = [
+    { value: "abs-gf-fdm", label: "ABS-GF FDM" },
+    { value: "abs-fdm", label: "ABS FDM" },
+    { value: "asa-fdm", label: "ASA FDM" },
+    { value: "asa-cf-fdm", label: "ASA-CF FDM" },
+    { value: "pcfdm", label: "PCFDM" },
+    { value: "pet-cf-fdm", label: "PET-CFFDM" },
+    { value: "pa6-cf-fdm", label: "PA6-CF FDM" },
+    { value: "pa6-gf-fdm", label: "PA6-GF FDM" },
+    { value: "petg-fdm", label: "PETG FDM" },
+    { value: "petg-cf-fdm", label: "PETG-CF FDM" },
+    { value: "pla-aero-fdm", label: "PLA Aero FDM" },
+    { value: "pla-fdm", label: "PLA FDM" },
+    { value: "resina-per-prototipi-visivi-sla", label: "Resina per prototipi visivi (SLA)" },
+    { value: "resina-rigida-alta-prestazione-sla", label: "Resina rigida alta prestazione (SLA)" },
+    { value: "tpe-fdm", label: "TPE FDM" },
+    { value: "tpu-fdm", label: "TPU FDM" },
+    { value: "resina-castable-sla", label: "Resina castable (SLA)" },
+    { value: "resina-dentale-sla", label: "Resina dentale (SLA)" },
+  ];
 
   return (
     <section className="h-auto py-31 w-full">
       <div className="container  flex flex-row justify-between gap-x-26.5 items-center">
-        <div className="flex flex-col gap-y-15.5 max-w-[648px]">
+        <div className="flex flex-col gap-y-15.5 max-w-162">
           <h2 className="text-black font-normal leading-[123%] text-[71.1px]">
             {title}
           </h2>
@@ -82,10 +102,8 @@ const MaterialContact = ({
               placeholder="Select service category"
               onChange={value => console.log("Selected:", value)}
             />
-
-            {/* <input type="text" placeholder="Subject" className="common-input" /> */}
             <CustomDropdown
-              options={serviceOptions}
+              options={materialOptions}
               placeholder="Material"
               onChange={value => console.log("Selected:", value)}
             />
@@ -94,7 +112,7 @@ const MaterialContact = ({
 
             <textarea
               placeholder="Message"
-              className="common-input min-h-[146px]"
+              className="common-input min-h-36.5"
             />
           </div>
 
