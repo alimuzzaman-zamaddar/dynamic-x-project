@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import drone from "../../assets/img/bg/drone.jpg";
 import { useParams } from "react-router";
