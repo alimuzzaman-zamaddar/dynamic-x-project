@@ -57,7 +57,7 @@ const Materials = () => {
       <div className="container mx-auto px-50 ">
         <div className="flex flex-row  justify-between">
           <h2 className="text-4xl font-semibold text-black pb-5 ">Materials</h2>
-          <Link to={"/allmaterials"} className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
+          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
             {" "}
             See all
           </Link>
@@ -110,10 +110,10 @@ const Materials = () => {
                         Upload Design
                       </span>
                     </div>
-                    <input
+                    {/* <input
                       type="file"
                       className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
-                    />
+                    /> */}
                   </button>
                 </div>
               </li>

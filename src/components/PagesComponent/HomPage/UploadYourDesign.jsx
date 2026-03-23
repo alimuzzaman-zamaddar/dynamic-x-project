@@ -34,10 +34,10 @@ const UploadYourDesign = () => {
               Upload Your Design
             </span>
           </div>
-          <input
+          {/* <input
             type="file"
             className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
-          />
+          /> */}
         </div>
       </div>
     </section>

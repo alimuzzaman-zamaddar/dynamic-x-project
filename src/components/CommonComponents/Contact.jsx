@@ -68,7 +68,7 @@ const Contact = ({
               <input
                 type="text"
                 placeholder="Country Code"
-                className="common-input w-[25%]"
+                className="common-input w-[27%]"
               />
               <input
                 type="text"
