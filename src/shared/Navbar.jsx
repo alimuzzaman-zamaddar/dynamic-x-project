@@ -66,7 +66,7 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  const isHome = pathName === "/";
+  // const isHome = pathName === "/";
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const Navbar = () => {
           />
         </div>
         {/* navbar desktop */}
-        {isHome && (
+       
           <ul className=" hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center  ">
             {navMenu.map((nav, idx) => {
               return (
@@ -116,7 +116,7 @@ const Navbar = () => {
               );
             })}
           </ul>
-        )}
+     
 
         {/* navbar mobile */}
         <div

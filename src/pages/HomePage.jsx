@@ -9,7 +9,6 @@ import Technologies from "../components/PagesComponent/HomPage/Technologies";
 import Services from "../components/PagesComponent/HomPage/Services";
 import Materials from "../components/PagesComponent/HomPage/Materials";
 import BioStamp from "../components/PagesComponent/HomPage/BioStamp";
-import RealStories from "../components/PagesComponent/HomPage/RealStories";
 
 const HomePage = () => {
   return (

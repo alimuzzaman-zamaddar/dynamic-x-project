@@ -16,16 +16,16 @@ const HomeHero = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative container w-full pb-[113px] pt-[100px] sm:pt-[160px] 2xl:pt-[201px] flex flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
+      <div className="relative container mx-auto  w-full pb-[113px] pt-[100px] sm:pt-[160px] 2xl:pt-[201px] flex px-30 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
         <div className="flex flex-col gap-y-6.5 items-start">
-          <h4 className=" text-2xl 2xl:text-[30.4px] font-normal leading-[144%] text-white max-w-[626px]">
+          <h4 className=" text-xl 2xl:text-[24px] font-normal leading-[144%] text-white max-w-[626px]">
             Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
           </h4>
           <div className="flex xl:flex-row flex-col xxl:gap-7 gap-3">
             <button
               type="button"
               className={`
-    group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70
+    group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-normal tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70
     active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2
   `}
             >
@@ -55,7 +55,7 @@ const HomeHero = () => {
             <button
               type="button"
               className={`
-    group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] hover:text-neutral-900 hover:bg-white border hover:border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out bg-transparent text-white border-white/70
+    group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-normal tracking-[-0.01em] hover:text-neutral-900 hover:bg-white border hover:border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out bg-transparent text-white border-white/70
     active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2
   `}
             >
@@ -86,12 +86,12 @@ const HomeHero = () => {
           </div>
         </div>
 
-        <div className="flex mt-[83.5px] flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
-          <h3 className=" text-lg md:text-2xl lg:text-[36px] text-white font-semibold leading-[123%] max-w-[640px]">
+        <div className="flex mt-[300px] flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
+          <h3 className=" text-xl 2xl:text-[24px] text-white font-semibold leading-[123%] max-w-[640px]">
             Dal concept al prodotto finito, in modo semplice e rapido.
             Senza stampi. Senza minimi d’ordine. Senza rischi inutilli.
           </h3>
-          <span className=" text-xl lg:text-2xl max-w-[650] 3xl:max-w-[750px] font-light leading-[133%] text-white opacity-70">
+          <span className=" text-base lg:text-[18px] max-w-[650] 3xl:max-w-[650px] font-light leading-[133%] text-white opacity-70">
             Rendiamo la stampa 3D professionale accessibile a startup, innovatori e azienda strutturate.
           </span>
         </div>

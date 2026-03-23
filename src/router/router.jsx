@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage";
 import ComingSoon from "../pages/ComingSoonPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
+import AllMaterials from "../pages/AllMaterials";
+import { StampaPage } from "../pages/StampaPage";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,16 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "/allmaterials",
+        element: <AllMaterials />,
+      },
+      {
         path: "/service/:category",
         element: <CategoryDetailsPage />,
+      },
+      {
+        path: "/stampa",
+        element: <StampaPage />,
       },
       {
         path: "/coming-soon",

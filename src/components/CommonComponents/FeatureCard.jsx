@@ -6,8 +6,8 @@ export const FeatureCard = ({ icon, title, description }) => {
       <div className="flex justify-center">
         {React.createElement(icon)}
       </div>
-      <h3 className="pt-10 pb-2.5 font-normal text-xl text-white">{title}</h3>
-      <p className="font-normal text-lg text-white">{description}</p>
+      <h3 className="pt-10 pb-2.5 font-normal text-base text-center text-white">{title}</h3>
+      <p className="font-normal text-lg text-white/50 text-center">{description}</p>
     </div>
   );
 };

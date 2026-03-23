@@ -4,48 +4,65 @@ import gear1 from "../../../assets/img/materials/ABS.GF_Grid_LP 1.png";
 import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
 import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
-import Uv from "../../../assets/img/home/Uv.png";
 import { Upload } from "../../SvgContainer/SvgContainer";
 
 const materials = [
   {
     imgSrc: gear1,
-    title: "ABS.GF_Grid_LP",
+    title: "ABS-GF",
+    subtitle: "FDM",
+    description:
+      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici.",
+  },
+  {
+    imgSrc: gear2,
+    title: "ABS",
+    subtitle: "FDM",
     description:
       "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
   },
   {
-    imgSrc: gear2,
-    title: "ABS_Grid_LP",
+    imgSrc: gear3,
+    title: "ASA",
+    subtitle: "FDM",
     description:
       "L’ASA è un materiale resistente e stabile ai raggi UV, perfetto per applicazioni da esterno.",
   },
   {
-    imgSrc: gear3,
-    title: "PETG_Grid_LP",
+    imgSrc: gear4,
+    title: "ASA",
+    subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici, risultando ideale per applicazioni esterne e strutturali.",
+      "L’ASA è un materiale resistente e stabile ai raggi UV, perfetto per applicazioni da esterno.",
   },
   {
-    imgSrc: gear4,
-    title: "PETG-CF_Grid_LP",
+    imgSrc: gear1,
+    title: "ASA-CF",
+    subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. Ideale per componenti ad alto stress.",
+  },
+  {
+    imgSrc: gear3,
+    title: "PA6-CF",
+    subtitle: "FDM",
+    description:
+      "Il Nylon 6 rinforzato con fibra di carbonio offre eccellenti proprietà meccaniche, elevata rigidità e resistenza termica. Mantiene leggerezza e resistenza agli urti.",
   },
 ];
 
 const Materials = () => {
   return (
     <section id="materials" className="h-auto w-full pb-25 ">
-      <div className="container flex flex-col gap-y-24 ">
+      <div className="container mx-auto px-50 ">
         <div className="flex flex-row  justify-between">
-          <h2 className="text-[73px] font-normal text-black ">Materials</h2>
-          <Link className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
+          <h2 className="text-4xl font-semibold text-black pb-5 ">Materials</h2>
+          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
             {" "}
             See all
           </Link>
         </div>
-        <ul className="grid justify-between gap-y-8 gap-x-7.5 grid-cols-2">
+        <ul className="grid justify-between gap-y-8 gap-x-7.5 grid-cols-3">
           {materials.map((material, idx) => {
             return (
               <li
@@ -57,17 +74,22 @@ const Materials = () => {
                 key={idx}
                 className="p-7.5 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
               >
-                <img
-                  className="max-w-[245px] max-h-[243px] object-cover "
-                  src={material.imgSrc}
-                  alt={material.title}
-                />
                 <div className="flex flex-col gap-y-6 ">
                   <div className="flex flex-col gap-y-3  ">
-                    <h5 className="text-black font-normal leading-[134%] text-2xl  ">
-                      {" "}
-                      {material.title}{" "}
-                    </h5>
+                    <div className="flex justify-between">
+                      <div className="">
+                        <h5 className="text-black font-normal leading-[134%] text-2xl">
+                          {material.title}{" "}
+                        </h5>
+                        <p className="text-sm text-gray-500">{material.subtitle}</p>
+                      </div>
+                      <img
+                        className="w-18 h-18 object-cover "
+                        src={material.imgSrc}
+                        alt={material.title}
+                      />
+
+                    </div>
                     <span className="text-base font-light leading-[150%]  max-w-[389px] ">
                       Polymer with excellent performance, ductility and thermal
                       resistance, the most used for stability and value for
@@ -88,10 +110,10 @@ const Materials = () => {
                         Upload Design
                       </span>
                     </div>
-                    <input
+                    {/* <input
                       type="file"
                       className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
-                    />
+                    /> */}
                   </button>
                 </div>
               </li>
