@@ -37,13 +37,13 @@ const Contact = ({
   ];
 
   return (
-    <section className="h-auto py-31 w-full">
-      <div className="container  flex flex-row justify-between gap-x-26.5 items-center">
-        <div className="flex flex-col gap-y-15.5 max-w-[648px]">
-          <h2 className="text-black font-normal leading-[123%] text-[71.1px]">
+    <section className="h-auto py-21 w-full">
+      <div className="container mx-auto px-50  flex flex-row justify-between gap-x-26.5 items-center">
+        <div className=" max-w-162">
+          <h2 className=" leading-[123%] text-4xl font-semibold text-black pb-5">
             {title}
           </h2>
-          <span className="text-black opacity-64 text-2xl font-light leading-[133%]">
+          <span className="text-black/50 opacity-64 text-base font-light leading-[133%]">
             {description}
           </span>
         </div>
