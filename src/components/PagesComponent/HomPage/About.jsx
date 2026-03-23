@@ -3,8 +3,8 @@ import logo from "../../../assets/img/home/DynamicsX - GREEN 1.png";
 
 const About = () => {
   return (
-    <section id="about-us" className="h-auto w-full py-8 xl:py-26.25 ">
-      <div className="container flex flex-col gap-y-6 xl:gap-y-8  ">
+    <section id="about-us" className="h-auto w-full py-8 xl:py-15.25 ">
+      <div className="container mx-auto px-50 flex flex-col gap-y-6 xl:gap-y-8  ">
         <h2 className=" text-[21.9px] font-normal leading-[146%] text-black  ">
           {" "}
           About Us{" "}
