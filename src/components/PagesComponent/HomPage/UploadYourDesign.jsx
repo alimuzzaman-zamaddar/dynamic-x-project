@@ -5,8 +5,8 @@ import { FeatureCard } from '../../CommonComponents/FeatureCard'
 const UploadYourDesign = () => {
   return (
     <section className='bg-black py-16 px-4'>
-      <div className="container mx-auto">
-        <h4 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-normal text-center leading-tight">
+      <div className="container mx-auto px-50">
+        <h4 className="text-white text-4xl font-normal text-center leading-tight">
           Come Funziona: dal File alla Produzione
         </h4>
 
@@ -16,11 +16,7 @@ const UploadYourDesign = () => {
           <FeatureCard icon={Analysis} title="ANALISI" description="Verifichiamo il tuo progetto in tempo reale" />
           <FeatureCard icon={Preventivo} title="PREVENTIVO" description="Ricevi un offerta chiara e immediata tempo di realizzazione" />
           <FeatureCard icon={Prodizune} title="PRODUZIONE" description="Stampiamo con precisione" />
-          <div className="col-span-2 md:col-span-1 flex justify-center md:block">
-            <div className="w-full max-w-xs md:max-w-none">
-              <FeatureCard icon={Consegna} title="CONSEGNA" description="Ricevo il tuo modello in pochi giorni" />
-            </div>
-          </div>
+          <FeatureCard icon={Consegna} title="CONSEGNA" description="Ricevo il tuo modello in pochi giorni" />
         </div>
 
         {/* Upload drop-zone */}
