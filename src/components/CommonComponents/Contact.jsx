@@ -1,6 +1,8 @@
 import React from "react";
 import Container from "../../shared/Container";
 import CustomDropdown from "../CustomComponents/CustomDropDown";
+import { Link } from "react-scroll";
+import { FileUpload } from "../SvgContainer/SvgContainer";
 
 const Contact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -38,7 +40,7 @@ const Contact = ({
   ];
 
   return (
-    <section className="h-auto lg:py-21 py-8 w-full">
+    <section className="h-auto lg:pt-21 pt-8 w-full">
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
@@ -64,8 +66,10 @@ const Contact = ({
                 />
               </div>
 
-              <input type="email" placeholder="Email" className="common-input" />
-
+              <div className="flex sm:flex-row flex-col w-full gap-6 items-center">
+                <input type="email" placeholder="Email" className="common-input" />
+                <input type="text" placeholder="Subject" className="common-input" />
+              </div>
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <input
                   type="text"
@@ -85,12 +89,27 @@ const Contact = ({
                 onChange={value => console.log("Selected:", value)}
               />
 
-              <input type="text" placeholder="Subject" className="common-input" />
 
               <textarea
                 placeholder="Message"
                 className="common-input min-h-[146px]"
               />
+              <div
+                className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer border-2 border-gray-300"
+              >
+                <Link to={"/upload-design"}>
+                  <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
+                    <FileUpload />
+                    <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+                      Upload Your Design
+                    </span>
+                  </div>
+                </Link>
+                <input
+                  type="file"
+                  className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
+                />
+              </div>
             </div>
 
             <button

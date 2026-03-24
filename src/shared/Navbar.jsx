@@ -6,36 +6,38 @@ import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
 const navMenu = [
   {
     label: "Home",
-    path: "hero",
+    path: "/",
   },
   {
-    label: "about us",
-    path: "about-us",
+    label: "Chi Siamo",
+    path: "/",
   },
   {
-    label: "Services",
-    path: "services",
+    label: "Servizi",
+    path: "/",
   },
   {
-    label: "technologies",
-    path: "technologies",
+    label: "Tecnologie",
+    path: "/",
   },
-  {
-    label: "materials",
-    path: "materials",
-  },
+  { label: "Materiali", path: "/allmaterials", type: "route" },
+
 
   {
-    label: "news",
-    path: "news",
-  },
-  {
-    label: "Biostamp 3D",
-    path: "biostamp-3d",
+    label: "Catalogo",
+    path: "/",
   },
   {
     label: "2D to 3D",
-    path: "biostamp-2d-3d",
+    path: "/",
+  },
+  {
+    label: "Bio stamp 3D",
+    path: "/",
+  },
+  {
+    label: "News",
+    path: "/",
   },
 ];
 
@@ -108,24 +110,29 @@ const Navbar = () => {
         </div>
         {/* navbar desktop */}
 
-        <ul className=" hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center  ">
-          {navMenu.map((nav, idx) => {
-            return (
-              <li key={idx}>
+        <ul className="hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
+          {navMenu.map((nav, idx) => (
+            <li key={idx}>
+              {nav.type === "scroll" ? (
                 <Link
-                  smooth={true}
+                  smooth
                   duration={500}
                   to={nav.path}
-                  className={` text-sm xl:text-[15.6px] font-normal leading-[128%] text-white hover:text-blue-500    capitalize cursor-pointer 
-              transition-colors duration-700 ease-in-out`}
+                  className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
                 >
                   {nav.label}
                 </Link>
-              </li>
-            );
-          })}
+              ) : (
+                <span
+                  onClick={() => navigate(nav.path)}
+                  className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
+                >
+                  {nav.label}
+                </span>
+              )}
+            </li>
+          ))}
         </ul>
-
 
         {/* navbar mobile */}
         <div
