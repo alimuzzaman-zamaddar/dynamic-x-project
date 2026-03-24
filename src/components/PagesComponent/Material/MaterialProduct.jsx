@@ -123,7 +123,7 @@ export default function MaterialsPage() {
     <section id="materials" className="xl:mt-45 mt-25">
       <Container>
         <div className="flex flex-row  justify-between">
-          <h2 className="lg:text-[48px] text-2xl font-semibold text-black pb-5">Materials</h2>
+          <h2 className="lg:text-[36px] text-2xl font-semibold text-black pb-5">Materiali</h2>
         </div>
         <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {materials.map((material, idx) => {

@@ -63,7 +63,7 @@ const MaterialContact = ({
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
-            <h2 className=" leading-[123%] lg:text-4xl text-2xl font-semibold text-black pb-5">
+            <h2 className=" leading-[123%] lg:text-4xl text-2xl font-normal text-black pb-5">
               {title}
             </h2>
             <span className="text-black/50 opacity-64 xl:text-base text-sm font-light leading-[133%]">

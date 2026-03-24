@@ -5,6 +5,7 @@ import ComingSoon from "../pages/ComingSoonPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import AllMaterials from "../pages/AllMaterials";
+import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
 
 const router = createBrowserRouter([
@@ -21,8 +22,8 @@ const router = createBrowserRouter([
         element: <AllMaterials />,
       },
       {
-        path: "/allmaterials",
-        element: <AllMaterials />,
+        path: "/upload-design",
+        element: <Uploaddesign />,
       },
       {
         path: "/service/:category",
