@@ -45,11 +45,9 @@
     margin-right: auto;
   }
 
-.common-input {
-  @apply h-auto w-full p-6 border border-light-gray rounded-3xl 
-         text-lg leading-[177%] font-medium outline-none 
-         placeholder:text-gray-500 focus:placeholder:text-gray-300;
-}
+  .common-input {
+    @apply h-auto w-full lg:p-6 p-3 border border-solid border-light-gray lg:rounded-3xl rounded-2xl  lg:text-lg text-sm leading-[177%] font-medium  outline-none;
+  }
 }
 
 @layer components {
@@ -121,7 +119,7 @@
 
   /* Description */
   .feature-item-description {
-    @apply text-black text-center text-[12px] font-normal leading-[24px] ;
+    @apply text-black text-center text-[12px] font-normal leading-[24px];
   }
 }
 

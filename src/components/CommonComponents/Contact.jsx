@@ -38,20 +38,20 @@ const Contact = ({
   ];
 
   return (
-    <section className="h-auto py-21 w-full">
+    <section className="h-auto lg:py-21 py-8 w-full">
       <Container>
-        <div className="  flex flex-row justify-between gap-x-26.5 items-center">
-          <div className=" max-w-162">
-            <h2 className=" leading-[123%] text-4xl font-semibold text-black pb-5">
+        <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
+          <div className="xl:max-w-162 w-full">
+            <h2 className=" leading-[123%] lg:text-4xl text-2xl font-normal text-black pb-5">
               {title}
             </h2>
-            <span className="text-black/50 opacity-64 text-base font-light leading-[133%]">
+            <span className="text-black/50 opacity-64 xl:text-base text-sm font-light leading-[133%]">
               {description}
             </span>
           </div>
 
           <form
-            className="flex flex-col w-full relative gap-y-6"
+            className="flex flex-col w-full relative gap-y-6 xl:pt-0 pt-5"
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-y-6">
@@ -66,11 +66,11 @@ const Contact = ({
 
               <input type="email" placeholder="Email" className="common-input" />
 
-              <div className="flex flex-row gap-x-6 items-center">
+              <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <input
                   type="text"
                   placeholder="Country Code"
-                  className="common-input w-[27%]"
+                  className="common-input sm:w-[55%] w-full xl:mb-0 mb-5"
                 />
                 <input
                   type="text"
@@ -96,7 +96,7 @@ const Contact = ({
             <button
               className="
               h-auto w-full flex bg-black text-white items-center justify-center 
-              rounded-3xl py-6 cursor-pointer 
+              rounded-3xl xl:py-6 py-3 cursor-pointer 
               border border-transparent 
               hover:border-solid hover:bg-transparent hover:border-black hover:text-black 
               ease-in-out duration-500 

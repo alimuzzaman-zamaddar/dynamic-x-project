@@ -1,6 +1,6 @@
 import machine from "../assets/img/wellnesss.png"
-import machine_gray from "../assets/img/home/printing-gray.jpg";
 import fixing from "../assets/img/home/fixing.png";
+import machine_gray from "../assets/img/home/printing-gray.jpg";
 
 
 export const technologies = [
