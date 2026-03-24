@@ -21,6 +21,10 @@ const router = createBrowserRouter([
         element: <AllMaterials />,
       },
       {
+        path: "/allmaterials",
+        element: <AllMaterials />,
+      },
+      {
         path: "/service/:category",
         element: <CategoryDetailsPage />,
       },

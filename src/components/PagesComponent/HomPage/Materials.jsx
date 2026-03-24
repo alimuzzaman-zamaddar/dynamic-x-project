@@ -58,7 +58,7 @@ const Materials = () => {
       <Container>
         <div className="flex flex-row  justify-between">
           <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-5 ">Materials</h2>
-          <Link to={"/allmaterials"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
+          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
             See all
           </Link>
         </div>

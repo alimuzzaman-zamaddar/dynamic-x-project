@@ -80,10 +80,19 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const isHome = pathName === "/";
 
   return (
     <nav
-      className={`fixed ease-in-out duration-500 transition-opacity lg:px-0 px-4   top-0 left-0 w-full z-50 ${pathName.includes("/technology-details") ? "bg-black" : `${scrollY < 200 ? "bg-black" : "bg-black"}`}  `}
+      className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
+  ${pathName.includes("/technology-details")
+          ? "bg-transparent"
+          : isHome
+            ? scrollY < 200
+              ? "bg-transparent"
+              : "bg-black"
+            : "bg-black"
+        }`}
     >
       <div className="max-w-[1440px] mx-auto lg:py-8 py-4 flex items-center justify-between">
         <div
