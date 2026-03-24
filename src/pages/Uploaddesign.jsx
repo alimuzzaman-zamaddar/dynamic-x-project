@@ -59,7 +59,7 @@ const Uploaddesign = ({
   ];
 
   return (
-    <section className="h-auto pt-30 px-4 lg:pt-50 py-8 w-full">
+    <section className="h-auto pt-30 px-4 lg:pt-50 pb-20 w-full">
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
@@ -84,7 +84,7 @@ const Uploaddesign = ({
                   className="common-input"
                 />
               </div>
-              <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
+              <div className="flex sm:flex-row flex-col w-full gap-6 items-center">
                 <input type="email" placeholder="Email" className="common-input" />
                 <input type="text" placeholder="Subject" className="common-input" />
               </div>
