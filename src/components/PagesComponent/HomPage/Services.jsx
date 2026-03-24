@@ -7,6 +7,7 @@ import machine4 from "../../../assets/img/home/service5.png";
 import machine5 from "../../../assets/img/home/service6.png";
 import machine6 from "../../../assets/img/home/serive7.png";
 import machine7 from "../../../assets/img/home/service8.png";
+import Container from "../../../shared/Container";
 
 const techonologies = [
   {
@@ -64,9 +65,8 @@ const techonologies = [
   },
 ];
 
-const CARD_WIDTH = 260; // px, width of each card
-const CARD_GAP = 24; // px, gap between cards
-const CARDS_VISIBLE = 4; // how many cards visible at once (last one partially)
+const CARD_WIDTH = 260; 
+const CARD_GAP = 16;
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -87,7 +87,7 @@ const Services = () => {
 
   return (
     <section id="services" className="h-auto w-full pb-25">
-      <div className="container mx-auto px-50">
+      <Container>
         {/* Header */}
         <h2 className="text-4xl font-semibold text-black pb-6">Servizi</h2>
 
@@ -194,7 +194,7 @@ const Services = () => {
             </svg>
           </button>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
