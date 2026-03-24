@@ -2,6 +2,7 @@ import React from 'react'
 import { Analysis, Carica, Consegna, FileUpload, Preventivo, Prodizune } from '../../SvgContainer/SvgContainer'
 import { FeatureCard } from '../../CommonComponents/FeatureCard'
 import Container from '../../../shared/Container'
+import { Link } from 'react-router'
 
 const UploadYourDesign = () => {
   return (
@@ -27,12 +28,14 @@ const UploadYourDesign = () => {
           }}
           className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer"
         >
-          <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
-            <FileUpload />
-            <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
-              Upload Your Design
-            </span>
-          </div>
+          <Link to={"/upload-design"}>
+            <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
+              <FileUpload />
+              <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+                Upload Your Design
+              </span>
+            </div>
+          </Link>
           {/* <input
             type="file"
             className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"

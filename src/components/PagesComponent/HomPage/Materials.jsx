@@ -58,7 +58,7 @@ const Materials = () => {
       <Container>
         <div className="flex flex-row  justify-between">
           <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-5 ">Materials</h2>
-          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
+          <Link to={"/allmaterials"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
             See all
           </Link>
         </div>
@@ -104,12 +104,14 @@ const Materials = () => {
                     }}
                     className="h-auto w-auto xl:px-6 px-3 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
                   >
-                    <div className="flex flex-row gap-x-2.5 items-center ">
-                      <Upload />
-                      <span className="text-base font-normal leading-[200%] text-black ">
-                        Upload Design
-                      </span>
-                    </div>
+                    <Link to={"/upload-design"}>
+                      <div className="flex flex-row gap-x-2.5 items-center ">
+                        <Upload />
+                        <span className="text-base font-normal leading-[200%] text-black ">
+                          Upload Design
+                        </span>
+                      </div>
+                    </Link>
                     {/* <input
                       type="file"
                       className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "

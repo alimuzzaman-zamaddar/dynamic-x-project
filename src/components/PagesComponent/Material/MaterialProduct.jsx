@@ -5,6 +5,7 @@ import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
 import { Upload } from "../../SvgContainer/SvgContainer";
 import Container from "../../../shared/Container";
+import { Link } from "react-router";
 
 const materials = [
   {
@@ -167,12 +168,14 @@ export default function MaterialsPage() {
                     }}
                     className="h-auto w-auto xl:px-6 px-3 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
                   >
-                    <div className="flex flex-row gap-x-2.5 items-center ">
-                      <Upload />
-                      <span className="text-base font-normal leading-[200%] text-black ">
-                        Upload Design
-                      </span>
-                    </div>
+                    <Link to={"/upload-design"}>
+                      <div className="flex flex-row gap-x-2.5 items-center ">
+                        <Upload />
+                        <span className="text-base font-normal leading-[200%] text-black ">
+                          Upload Design
+                        </span>
+                      </div>
+                    </Link>
                     {/* <input
                              type="file"
                              className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
