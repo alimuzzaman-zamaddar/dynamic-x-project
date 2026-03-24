@@ -15,8 +15,8 @@ import React from "react";
           {items?.map((item, index) => (
             <div
               key={index}
-              className={`py-6 md:py-8 divider-top ${
-                index === items.length - 1 ? "divider-bottom" : ""
+              className={`py-6 md:py-8 border-t-2 border-black ${
+                index === items.length - 1 ? " border-b-2 border-black" : ""
               }`}
             >
               <div className="flex items-center justify-center gap-2 mb-2">
@@ -24,7 +24,7 @@ import React from "react";
                 <h3 className="item-title">{item.title}</h3>
               </div>
 
-              <p className="item-description text-center max-w-[700px] mx-auto">
+              <p className="item-description text-center">
                 {item.description}
               </p>
             </div>

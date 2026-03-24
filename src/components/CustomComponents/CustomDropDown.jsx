@@ -8,7 +8,7 @@ const CustomDropdown = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
 
-  const handleSelect = value => {
+  const handleSelect = (value) => {
     setSelected(value);
     setIsOpen(false);
     if (onChange) onChange(value);
@@ -55,12 +55,12 @@ const CustomDropdown = ({
             divide-y divide-gray-100
           "
         >
-          {options.map(option => (
+          {options.map((option) => (
             <div
               key={option.value}
               className={`
-                px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors
-                ${selected === option.value ? "bg-gray-50 font-medium" : ""}
+                px-6 py-4 cursor-pointer hover:bg-gray-50 text-gray-500 transition-colors
+                ${selected === option.value ? "bg-gray-50 font-medium text-gray-500" : ""}
               `}
               onClick={() => handleSelect(option.value)}
             >
