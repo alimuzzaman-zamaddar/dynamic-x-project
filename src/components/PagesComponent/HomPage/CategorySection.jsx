@@ -84,14 +84,14 @@ const CategoryCard = ({ category }) => {
       onClick={() => navigate(`/service/${category.title}`)}
       className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
-      <div className="py-7.5 px-5 flex flex-col items-center gap-y-3 flex-grow">
+      <div className="lg:py-7.5 py-3 lg:px-5 px-3 flex flex-col items-center gap-y-3 flex-grow">
         {/* ICON */}
         <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
           <Icon />
         </div>
 
         {/* TITLE */}
-        <span className="text-lg text-center font-semibold text-black group-hover:text-white transition-all duration-300">
+        <span className="lg:text-lg text-base text-center font-semibold text-black group-hover:text-white transition-all duration-300">
           {category.title}
         </span>
 
@@ -115,20 +115,19 @@ const CategoryCard = ({ category }) => {
 const CategorySection = () => {
   return (
     <section className="h-auto w-full py-10 xl:py-25">
-      <div className=""></div>
       <Container>
-        <h2 className="text-4xl font-semibold text-black pb-3">
+        <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-3">
           Categorie
         </h2>
 
         <div className="flex flex-col gap-y-7.5 w-full">
           <div className="flex flex-col gap-y-3">
-            <h2 className="text-lg font-normal text-black">
+            <h2 className="lg:text-lg text-base font-normal text-black">
               La stampa 3D resa semplice. Soluzioni per ogni progetto, idea e applicazione.
             </h2>
           </div>
 
-          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 gap-7.5">
+          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
             {categories.map((category, idx) => {
               const isLastRow = idx >= 8;
 

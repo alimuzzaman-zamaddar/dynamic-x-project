@@ -4,6 +4,8 @@ import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
 import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
 import { Upload } from "../../SvgContainer/SvgContainer";
+import Container from "../../../shared/Container";
+import { Link } from "react-router";
 
 const materials = [
   {
@@ -119,12 +121,12 @@ const materials = [
 
 export default function MaterialsPage() {
   return (
-    <section id="materials" className="mt-45">
-      <div className="container">
+    <section id="materials" className="xl:mt-45 mt-25">
+      <Container>
         <div className="flex flex-row  justify-between">
-          <h2 className="text-[48px] font-semibold text-black pb-5">Materials</h2>
+          <h2 className="lg:text-[36px] text-2xl font-semibold text-black pb-5">Materiali</h2>
         </div>
-        <ul className="grid justify-between gap-y-8 gap-x-7.5 grid-cols-2">
+        <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {materials.map((material, idx) => {
             return (
               <li
@@ -134,19 +136,24 @@ export default function MaterialsPage() {
                   backdropFilter: " blur(4.5px)",
                 }}
                 key={idx}
-                className="p-7.5 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
+                className="xl:p-7.5 p-3 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
               >
-                <img
-                  className="max-w-[245px] max-h-[243px] object-cover "
-                  src={material.imgSrc}
-                  alt={material.title}
-                />
                 <div className="flex flex-col gap-y-6 ">
                   <div className="flex flex-col gap-y-3  ">
-                    <h5 className="text-black font-normal leading-[134%] text-2xl  ">
-                      {" "}
-                      {material.title}{" "}
-                    </h5>
+                    <div className="flex justify-between">
+                      <div className="">
+                        <h5 className="text-black font-normal leading-[134%] text-2xl">
+                          {material.title}{" "}
+                        </h5>
+                        <p className="text-sm text-gray-500">{material.subtitle}</p>
+                      </div>
+                      <img
+                        className="w-18 h-18 object-cover "
+                        src={material.imgSrc}
+                        alt={material.title}
+                      />
+
+                    </div>
                     <span className="text-base font-light leading-[150%]  max-w-[389px] ">
                       Polymer with excellent performance, ductility and thermal
                       resistance, the most used for stability and value for
@@ -159,25 +166,27 @@ export default function MaterialsPage() {
                       background: "rgba(0, 0, 0, 0.09)",
                       backdropFilter: " blur(5.09px)",
                     }}
-                    className="h-auto w-auto px-6 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
+                    className="h-auto w-auto xl:px-6 px-3 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
                   >
-                    <div className="flex flex-row gap-x-2.5 items-center ">
-                      <Upload />
-                      <span className="text-base font-normal leading-[200%] text-black ">
-                        Upload Design
-                      </span>
-                    </div>
-                    <input
-                      type="file"
-                      className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
-                    />
+                    <Link to={"/upload-design"}>
+                      <div className="flex flex-row gap-x-2.5 items-center ">
+                        <Upload />
+                        <span className="text-base font-normal leading-[200%] text-black ">
+                          Upload Design
+                        </span>
+                      </div>
+                    </Link>
+                    {/* <input
+                             type="file"
+                             className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
+                           /> */}
                   </button>
                 </div>
               </li>
             );
           })}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -65,7 +65,7 @@ const techonologies = [
   },
 ];
 
-const CARD_WIDTH = 260; 
+const CARD_WIDTH = 260;
 const CARD_GAP = 16;
 
 const Services = () => {
@@ -82,14 +82,13 @@ const Services = () => {
     setActiveIndex((prev) => Math.min(prev + 1, maxIndex));
   };
 
-  // Translate the slider so activeIndex card is first visible
   const translateX = activeIndex * (CARD_WIDTH + CARD_GAP);
 
   return (
-    <section id="services" className="h-auto w-full pb-25">
+    <section id="services" className="h-auto w-full xl:pb-25 pb-10">
       <Container>
         {/* Header */}
-        <h2 className="text-4xl font-semibold text-black pb-6">Servizi</h2>
+        <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-6">Servizi</h2>
 
         {/* Slider wrapper — overflow hidden to clip cards */}
         <div className="relative overflow-hidden">

@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "../../../shared/Container";
-import CustomDropdown from "../../CustomComponents/CustomDropDown";
+import Container from "../shared/Container";
+import CustomDropdown from "../components/CustomComponents/CustomDropDown";
 
-const MaterialContact = ({
+const Uploaddesign = ({
   title = "CONTACT US AND GET A QUOTE",
   description = "Professional 3D printing service for prototyping and production. Over 100+ materials available with lead times as fast as 24 hours.",
 }) => {
@@ -59,7 +59,7 @@ const MaterialContact = ({
   ];
 
   return (
-    <section className="h-auto lg:py-21 py-8 w-full">
+    <section className="h-auto pt-30 px-4 lg:pt-50 pb-20 w-full">
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
@@ -84,8 +84,10 @@ const MaterialContact = ({
                   className="common-input"
                 />
               </div>
-
-              <input type="email" placeholder="Email" className="common-input" />
+              <div className="flex sm:flex-row flex-col w-full gap-6 items-center">
+                <input type="email" placeholder="Email" className="common-input" />
+                <input type="text" placeholder="Subject" className="common-input" />
+              </div>
 
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <input
@@ -113,7 +115,7 @@ const MaterialContact = ({
 
               </div>
 
-              <input type="text" placeholder="Subject" className="common-input" />
+
 
               <textarea
                 placeholder="Message"
@@ -141,4 +143,4 @@ const MaterialContact = ({
   );
 };
 
-export default MaterialContact;
+export default Uploaddesign;
