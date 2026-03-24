@@ -427,7 +427,7 @@ export const Upload = () => {
 }
 export const Carica = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 84 84" fill="none">
       <mask id="mask0_4397_684" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="84" height="84">
         <path d="M82.25 82.25V1.75H1.75V82.25H82.25Z" fill="white" stroke="white" strokeWidth="3.5" />
       </mask>
@@ -445,7 +445,7 @@ export const Carica = () => {
 }
 export const Analysis = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 84 84" fill="none">
       <g clipPath="url(#clip0_4397_701)">
         <mask id="mask0_4397_701" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="84" height="84">
           <path d="M82.25 82.25V1.75H1.75V82.25H82.25Z" fill="white" stroke="white" strokeWidth="3.5" />
@@ -471,7 +471,7 @@ export const Analysis = () => {
 
 export const Preventivo = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 84 84" fill="none">
       <mask id="mask0_4478_7" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="84" height="84">
         <path d="M82.25 82.25V1.75H1.75V82.25H82.25Z" fill="white" stroke="white" strokeWidth="3.5" />
       </mask>
@@ -491,7 +491,7 @@ export const Preventivo = () => {
 
 export const Prodizune = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 84 84" fill="none">
       <mask id="mask0_4397_722" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="84" height="84">
         <path d="M82.25 82.25V1.75H1.75V82.25H82.25Z" fill="white" stroke="white" strokeWidth="3.5" />
       </mask>
@@ -510,7 +510,7 @@ export const Prodizune = () => {
 
 export const Consegna = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 84 84" fill="none">
       <g clipPath="url(#clip0_4397_739)">
         <path d="M59.7336 60.7906H33.1797" stroke="white" strokeWidth="3.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
         <mask id="mask0_4397_739" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="84" height="84">
