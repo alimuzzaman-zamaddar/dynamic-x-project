@@ -2,7 +2,8 @@ import React from "react";
 import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import bannerImg from "../assets/img/stampa/stampa.png";
 import FeatureHighlightsSection from "../components/PagesComponent/Stampa/FeatureHighlightsSection";
-import BenefitsSection from "../components/PagesComponent/Stampa/BenefitsSection";
+import { BenefitsSection } from "../components/PagesComponent/Stampa/BenefitsSection";
+
 const data = [
   {
     title: "Prototipazione Rapida",
