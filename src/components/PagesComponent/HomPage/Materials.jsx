@@ -5,6 +5,7 @@ import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
 import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
 import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
 import { Upload } from "../../SvgContainer/SvgContainer";
+import Container from "../../../shared/Container";
 
 const materials = [
   {
@@ -54,11 +55,10 @@ const materials = [
 const Materials = () => {
   return (
     <section id="materials" className="h-auto w-full pb-25 ">
-      <div className="container mx-auto px-50 ">
+      <Container>
         <div className="flex flex-row  justify-between">
           <h2 className="text-4xl font-semibold text-black pb-5 ">Materials</h2>
-          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64  ">
-            {" "}
+          <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
             See all
           </Link>
         </div>
@@ -120,7 +120,7 @@ const Materials = () => {
             );
           })}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 };
