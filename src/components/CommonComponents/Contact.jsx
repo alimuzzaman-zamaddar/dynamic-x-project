@@ -1,6 +1,6 @@
 import React from "react";
-import CustomDropdown from "../CustomComponents/CustomDropDown";
 import Container from "../../shared/Container";
+import CustomDropdown from "../CustomComponents/CustomDropDown";
 
 const Contact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -70,7 +70,7 @@ const Contact = ({
                 <input
                   type="text"
                   placeholder="Country Code"
-                  className="common-input w-[27%]"
+                  className="common-input w-[50%]"
                 />
                 <input
                   type="text"

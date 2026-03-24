@@ -5,7 +5,7 @@ import hero_video from "../../../assets/videos/recording mountain top.mp4";
 
 const HomeHero = () => {
   return (
-    <section id="hero" className="relative h-[750px] lg:h-[832px] w-full overflow-hidden">
+    <section id="hero" className="relative  w-full overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src={hero_video}
@@ -16,7 +16,7 @@ const HomeHero = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative max-w-[1440px] mx-auto   w-full pb-[113px] pt-[100px] sm:pt-[160px] 2xl:pt-[201px] flex px-30 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
+      <div className="relative max-w-[1440px] mx-auto   w-full lg:pb-[113px] pb-10 pt-[100px] sm:pt-[160px] 2xl:pt-[201px] flex lg:px-30 px-4 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
         <div className="flex flex-col gap-y-6.5 items-start">
           <h4 className=" text-xl 2xl:text-[24px] font-normal leading-[144%] text-white max-w-[626px]">
             Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
@@ -86,7 +86,7 @@ const HomeHero = () => {
           </div>
         </div>
 
-        <div className="flex mt-[300px] flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
+        <div className="flex lg:mt-[300px] mt-25 flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
           <h3 className=" text-xl 2xl:text-[24px] text-white font-semibold leading-[123%] max-w-[640px]">
             Dal concept al prodotto finito, in modo semplice e rapido.
             Senza stampi. Senza minimi d’ordine. Senza rischi inutilli.
