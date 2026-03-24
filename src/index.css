@@ -5,8 +5,8 @@
   --color-primary-color: #060c12;
   ---color-primary-gray: rgba(255, 255, 255, 0.64);
   --color-border-gray: rgba(0, 0, 0, 0.16);
-  --color-secondary-gray:rgba(0, 0, 0, 0.09);
-  --color-secondary-black:#1A1411;
+  --color-secondary-gray: rgba(0, 0, 0, 0.09);
+  --color-secondary-black: #1a1411;
   --color-light-gray: rgba(0, 0, 0, 0.2);
   --color-primary-black: #1a1411;
   --container-max-width: 1360px;
@@ -29,7 +29,6 @@
   --breakpoint-2xl: 1280px;
   --breakpoint-3xl: 1440px;
   --breakpoint-4xl: 1760px;
-
   --container-max-width: 1440px;
   --container-padding-x: 1rem;
 }
@@ -47,10 +46,9 @@
   }
 
   .common-input {
-    @apply h-auto w-full p-6 border border-solid border-light-gray rounded-3xl text-lg text-lg leading-[177%] font-medium  outline-none   ;
+    @apply h-auto w-full p-6 border border-solid border-light-gray rounded-3xl text-lg text-lg leading-[177%] font-medium  outline-none;
   }
 }
-
 
 @layer components {
   /* Banner Wrapper */
@@ -76,7 +74,6 @@
            leading-6 sm:leading-7 md:leading-8 
            max-w-[90%] sm:max-w-[600px] md:max-w-[632px];
   }
-
 }
 
 @layer components {
@@ -122,6 +119,53 @@
 
   /* Description */
   .feature-item-description {
-    @apply text-black text-center text-[12px] font-normal leading-[24px] leading-6;
+    @apply text-black text-center text-[12px] font-normal leading-[24px] ;
+  }
+}
+
+@layer components {
+  /* ===== COMMON LAYOUT ===== */
+
+  .section {
+    @apply w-full py-10 md:py-16;
+  }
+
+  .container-main {
+    @apply max-w-[1040px] mx-auto px-4;
+  }
+
+  /* ===== COMMON HEADER ===== */
+
+  .section-header {
+    @apply mb-6 md:mb-10;
+  }
+
+  .section-title {
+    @apply text-black font-semibold 
+           text-xl sm:text-2xl md:text-4xl leading-tight;
+  }
+
+  .section-description {
+    @apply text-black text-[12px] leading-[24px] mt-2 max-w-[800px];
+  }
+
+  /* ===== COMMON ITEM TEXT ===== */
+
+  .item-title {
+    @apply text-black text-sm md:text-base font-semibold leading-6;
+  }
+
+  .item-description {
+    @apply text-black text-[12px] leading-[24px];
+  }
+
+  /* ===== COMMON DIVIDER ===== */
+
+  .divider-top {
+    @apply border-t border-black;
+  }
+
+  .divider-bottom {
+    @apply border-b border-black;
   }
 }
