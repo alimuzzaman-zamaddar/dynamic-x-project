@@ -1,5 +1,6 @@
 import React from "react";
 import CustomDropdown from "../CustomComponents/CustomDropDown";
+import Container from "../../shared/Container";
 
 const Contact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -38,61 +39,62 @@ const Contact = ({
 
   return (
     <section className="h-auto py-21 w-full">
-      <div className="container mx-auto px-50  flex flex-row justify-between gap-x-26.5 items-center">
-        <div className=" max-w-162">
-          <h2 className=" leading-[123%] text-4xl font-semibold text-black pb-5">
-            {title}
-          </h2>
-          <span className="text-black/50 opacity-64 text-base font-light leading-[133%]">
-            {description}
-          </span>
-        </div>
-
-        <form
-          className="flex flex-col w-full relative gap-y-6"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex flex-col gap-y-6">
-            <div className="flex flex-row gap-x-6 items-center">
-              <input type="text" placeholder="Name" className="common-input" />
-              <input
-                type="text"
-                placeholder="Surname"
-                className="common-input"
-              />
-            </div>
-
-            <input type="email" placeholder="Email" className="common-input" />
-
-            <div className="flex flex-row gap-x-6 items-center">
-              <input
-                type="text"
-                placeholder="Country Code"
-                className="common-input w-[27%]"
-              />
-              <input
-                type="text"
-                placeholder="Phone number"
-                className="common-input"
-              />
-            </div>
-
-            <CustomDropdown
-              options={serviceOptions}
-              placeholder="Select service category"
-              onChange={value => console.log("Selected:", value)}
-            />
-
-            <input type="text" placeholder="Subject" className="common-input" />
-
-            <textarea
-              placeholder="Message"
-              className="common-input min-h-[146px]"
-            />
+      <Container>
+        <div className="  flex flex-row justify-between gap-x-26.5 items-center">
+          <div className=" max-w-162">
+            <h2 className=" leading-[123%] text-4xl font-semibold text-black pb-5">
+              {title}
+            </h2>
+            <span className="text-black/50 opacity-64 text-base font-light leading-[133%]">
+              {description}
+            </span>
           </div>
 
-          <button
-            className="
+          <form
+            className="flex flex-col w-full relative gap-y-6"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex flex-col gap-y-6">
+              <div className="flex flex-row gap-x-6 items-center">
+                <input type="text" placeholder="Name" className="common-input" />
+                <input
+                  type="text"
+                  placeholder="Surname"
+                  className="common-input"
+                />
+              </div>
+
+              <input type="email" placeholder="Email" className="common-input" />
+
+              <div className="flex flex-row gap-x-6 items-center">
+                <input
+                  type="text"
+                  placeholder="Country Code"
+                  className="common-input w-[27%]"
+                />
+                <input
+                  type="text"
+                  placeholder="Phone number"
+                  className="common-input"
+                />
+              </div>
+
+              <CustomDropdown
+                options={serviceOptions}
+                placeholder="Select service category"
+                onChange={value => console.log("Selected:", value)}
+              />
+
+              <input type="text" placeholder="Subject" className="common-input" />
+
+              <textarea
+                placeholder="Message"
+                className="common-input min-h-[146px]"
+              />
+            </div>
+
+            <button
+              className="
               h-auto w-full flex bg-black text-white items-center justify-center 
               rounded-3xl py-6 cursor-pointer 
               border border-transparent 
@@ -100,12 +102,13 @@ const Contact = ({
               ease-in-out duration-500 
               text-lg leading-[177%] font-medium capitalize
             "
-            type="submit"
-          >
-            submit
-          </button>
-        </form>
-      </div>
+              type="submit"
+            >
+              submit
+            </button>
+          </form>
+        </div>
+      </Container>
     </section>
   );
 };

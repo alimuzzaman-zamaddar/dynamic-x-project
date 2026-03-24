@@ -13,6 +13,7 @@ import {
   Yatch,
 } from "../../SvgContainer/SvgContainer";
 import { useNavigate } from "react-router";
+import Container from "../../../shared/Container";
 
 const categories = [
   {
@@ -81,7 +82,7 @@ const CategoryCard = ({ category }) => {
   return (
     <div
       onClick={() => navigate(`/service/${category.title}`)}
-      className="group cursor-pointer border border-black rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
+      className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
       <div className="py-7.5 px-5 flex flex-col items-center gap-y-3 flex-grow">
         {/* ICON */}
@@ -115,7 +116,7 @@ const CategorySection = () => {
   return (
     <section className="h-auto w-full py-10 xl:py-25">
       <div className=""></div>
-      <div className="container mx-auto px-50">
+      <Container>
         <h2 className="text-4xl font-semibold text-black pb-3">
           Categorie
         </h2>
@@ -145,7 +146,7 @@ const CategorySection = () => {
             })}
           </ul>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

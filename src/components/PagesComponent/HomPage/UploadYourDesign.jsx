@@ -1,11 +1,12 @@
 import React from 'react'
 import { Analysis, Carica, Consegna, FileUpload, Preventivo, Prodizune } from '../../SvgContainer/SvgContainer'
 import { FeatureCard } from '../../CommonComponents/FeatureCard'
+import Container from '../../../shared/Container'
 
 const UploadYourDesign = () => {
   return (
     <section className='bg-black py-16 px-4'>
-      <div className="container mx-auto px-50">
+      <Container>
         <h4 className="text-white text-4xl font-normal text-center leading-tight">
           Come Funziona: dal File alla Produzione
         </h4>
@@ -30,7 +31,7 @@ const UploadYourDesign = () => {
         >
           <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
             <FileUpload />
-            <span className="text-lg sm:text-xl md:text-2xl font-normal leading-[133%] text-black text-center">
+            <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
               Upload Your Design
             </span>
           </div>
@@ -39,7 +40,7 @@ const UploadYourDesign = () => {
             className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
           /> */}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

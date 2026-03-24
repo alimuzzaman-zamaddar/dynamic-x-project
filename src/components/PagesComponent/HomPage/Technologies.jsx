@@ -2,12 +2,13 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router";
 import { technologies } from "../../../static_data/static.data";
+import Container from "../../../shared/Container";
 
 const Technologies = () => {
   const navigate = useNavigate();
   return (
     <section id="technologies" className="h-auto w-full pb-25">
-      <div className="container mx-auto px-50">
+      <Container>
         <h2 className="text-4xl font-semibold text-black pb-5">Tecnologie</h2>
         <Marquee
           speed={60}
@@ -15,7 +16,7 @@ const Technologies = () => {
           gradient={false}
           direction="left"
         >
-          <div className="flex cursor-pointer flex-row  mx-4">
+          <div className="flex cursor-pointer flex-row mx-4">
             {technologies.map((technology, idx) => (
               <div
                 onClick={() => {
@@ -41,7 +42,7 @@ const Technologies = () => {
             ))}
           </div>
         </Marquee>
-      </div>
+      </Container>
     </section>
   );
 };

@@ -85,7 +85,7 @@ const Navbar = () => {
     <nav
       className={`fixed ease-in-out duration-500 transition-opacity   top-0 left-0 w-full z-50 ${pathName.includes("/technology-details") ? "bg-black" : `${scrollY < 200 ? "bg-black" : "bg-black"}`}  `}
     >
-      <div className="container py-8 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto py-8 flex items-center justify-between">
         <div
           onClick={() => {
             navigate("/");
