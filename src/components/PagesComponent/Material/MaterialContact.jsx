@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "../../../shared/Container";
 import CustomDropdown from "../../CustomComponents/CustomDropDown";
 
 const MaterialContact = ({
@@ -8,6 +9,27 @@ const MaterialContact = ({
   const handleSubmit = e => {
     e.preventDefault();
   };
+
+  const materialOptions = [
+    { value: "abs-gf-fdm", label: "ABS-GF FDM" },
+    { value: "abs-fdm", label: "ABS FDM" },
+    { value: "asa-fdm", label: "ASA FDM" },
+    { value: "asa-cf-fdm", label: "ASA-CF FDM" },
+    { value: "pcfdm", label: "PCFDM" },
+    { value: "pet-cf-fdm", label: "PET-CFFDM" },
+    { value: "pa6-cf-fdm", label: "PA6-CF FDM" },
+    { value: "pa6-gf-fdm", label: "PA6-GF FDM" },
+    { value: "petg-fdm", label: "PETG FDM" },
+    { value: "petg-cf-fdm", label: "PETG-CF FDM" },
+    { value: "pla-aero-fdm", label: "PLA Aero FDM" },
+    { value: "pla-fdm", label: "PLA FDM" },
+    { value: "resina-per-prototipi-visivi-sla", label: "Resina per prototipi visivi (SLA)" },
+    { value: "resina-rigida-alta-prestazione-sla", label: "Resina rigida alta prestazione (SLA)" },
+    { value: "tpe-fdm", label: "TPE FDM" },
+    { value: "tpu-fdm", label: "TPU FDM" },
+    { value: "resina-castable-sla", label: "Resina castable (SLA)" },
+    { value: "resina-dentale-sla", label: "Resina dentale (SLA)" },
+  ];
 
   const serviceOptions = [
     {
@@ -35,102 +57,86 @@ const MaterialContact = ({
       label: "Professional 3D Scanning & Reverse Engineering",
     },
   ];
-  const materialOptions = [
-    { value: "abs-gf-fdm", label: "ABS-GF FDM" },
-    { value: "abs-fdm", label: "ABS FDM" },
-    { value: "asa-fdm", label: "ASA FDM" },
-    { value: "asa-cf-fdm", label: "ASA-CF FDM" },
-    { value: "pcfdm", label: "PCFDM" },
-    { value: "pet-cf-fdm", label: "PET-CFFDM" },
-    { value: "pa6-cf-fdm", label: "PA6-CF FDM" },
-    { value: "pa6-gf-fdm", label: "PA6-GF FDM" },
-    { value: "petg-fdm", label: "PETG FDM" },
-    { value: "petg-cf-fdm", label: "PETG-CF FDM" },
-    { value: "pla-aero-fdm", label: "PLA Aero FDM" },
-    { value: "pla-fdm", label: "PLA FDM" },
-    { value: "resina-per-prototipi-visivi-sla", label: "Resina per prototipi visivi (SLA)" },
-    { value: "resina-rigida-alta-prestazione-sla", label: "Resina rigida alta prestazione (SLA)" },
-    { value: "tpe-fdm", label: "TPE FDM" },
-    { value: "tpu-fdm", label: "TPU FDM" },
-    { value: "resina-castable-sla", label: "Resina castable (SLA)" },
-    { value: "resina-dentale-sla", label: "Resina dentale (SLA)" },
-  ];
 
   return (
-    <section className="h-auto py-31 w-full">
-      <div className="container  flex flex-row justify-between gap-x-26.5 items-center">
-        <div className="flex flex-col gap-y-15.5 max-w-162">
-          <h2 className="text-black font-normal leading-[123%] text-[71.1px]">
-            {title}
-          </h2>
-          <span className="text-black opacity-64 text-2xl font-light leading-[133%]">
-            {description}
-          </span>
-        </div>
-
-        <form
-          className="flex flex-col w-full relative gap-y-6"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex flex-col gap-y-6">
-            <div className="flex flex-row gap-x-6 items-center">
-              <input type="text" placeholder="Name" className="common-input" />
-              <input
-                type="text"
-                placeholder="Surname"
-                className="common-input"
-              />
-            </div>
-
-            <input type="email" placeholder="Email" className="common-input" />
-
-            <div className="flex flex-row gap-x-6 items-center">
-              <input
-                type="text"
-                placeholder="Country Code"
-                className="common-input w-[25%]"
-              />
-              <input
-                type="text"
-                placeholder="Phone number"
-                className="common-input"
-              />
-            </div>
-
-            <CustomDropdown
-              options={serviceOptions}
-              placeholder="Select service category"
-              onChange={value => console.log("Selected:", value)}
-            />
-            <CustomDropdown
-              options={materialOptions}
-              placeholder="Material"
-              onChange={value => console.log("Selected:", value)}
-            />
-
-            <input type="text" placeholder="Subject" className="common-input" />
-
-            <textarea
-              placeholder="Message"
-              className="common-input min-h-36.5"
-            />
+    <section className="h-auto lg:py-21 py-8 w-full">
+      <Container>
+        <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
+          <div className="xl:max-w-162 w-full">
+            <h2 className=" leading-[123%] lg:text-4xl text-2xl font-semibold text-black pb-5">
+              {title}
+            </h2>
+            <span className="text-black/50 opacity-64 xl:text-base text-sm font-light leading-[133%]">
+              {description}
+            </span>
           </div>
 
-          <button
-            className="
+          <form
+            className="flex flex-col w-full relative gap-y-6 xl:pt-0 pt-5"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex flex-col gap-y-6">
+              <div className="flex flex-row gap-x-6 items-center">
+                <input type="text" placeholder="Name" className="common-input" />
+                <input
+                  type="text"
+                  placeholder="Surname"
+                  className="common-input"
+                />
+              </div>
+
+              <input type="email" placeholder="Email" className="common-input" />
+
+              <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
+                <input
+                  type="text"
+                  placeholder="Country Code"
+                  className="common-input sm:w-[55%] w-full xl:mb-0 mb-5"
+                />
+                <input
+                  type="text"
+                  placeholder="Phone number"
+                  className="common-input"
+                />
+              </div>
+              <div className="flex gap-2">
+                <CustomDropdown
+                  options={serviceOptions}
+                  placeholder=" service"
+                  onChange={value => console.log("Selected:", value)}
+                />
+                <CustomDropdown
+                  options={materialOptions}
+                  placeholder="Material"
+                  onChange={value => console.log("Selected:", value)}
+                />
+
+              </div>
+
+              <input type="text" placeholder="Subject" className="common-input" />
+
+              <textarea
+                placeholder="Message"
+                className="common-input min-h-[146px]"
+              />
+            </div>
+
+            <button
+              className="
               h-auto w-full flex bg-black text-white items-center justify-center 
-              rounded-3xl py-6 cursor-pointer 
+              rounded-3xl xl:py-6 py-3 cursor-pointer 
               border border-transparent 
               hover:border-solid hover:bg-transparent hover:border-black hover:text-black 
               ease-in-out duration-500 
               text-lg leading-[177%] font-medium capitalize
             "
-            type="submit"
-          >
-            submit
-          </button>
-        </form>
-      </div>
+              type="submit"
+            >
+              submit
+            </button>
+          </form>
+        </div>
+      </Container>
     </section>
   );
 };

@@ -38,7 +38,7 @@ const footerNav = [
 const Footer = () => {
   return (
     <footer className="h-auto  w-full bg-secondary-black pt-12 xl:pt-24 pb-[33.5px] ">
-      <div className="max-width-[1440px] px-4 mx-auto  flex flex-col gap-y-20 lg:gap-y-30  ">
+      <div className="max-w-[1440px] px-4 mx-auto  flex flex-col gap-y-20 lg:gap-y-30  ">
         <div className="flex flex-col gap-y-12 lg:flex-row justify-between ">
           <img
             src={logo}
