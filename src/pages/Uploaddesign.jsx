@@ -59,7 +59,7 @@ const Uploaddesign = ({
   ];
 
   return (
-    <section className="h-auto lg:pt-50 py-8 w-full">
+    <section className="h-auto pt-30 px-4 lg:pt-50 py-8 w-full">
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
