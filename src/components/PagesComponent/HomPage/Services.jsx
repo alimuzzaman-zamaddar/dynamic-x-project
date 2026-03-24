@@ -157,7 +157,7 @@ const Services = () => {
           <button
             onClick={handlePrev}
             disabled={activeIndex === 0}
-            className="w-10 h-10 cursor-pointer rounded-full border border-gray-300 flex items-center justify-center text-black hover:bg-black hover:text-white hover:border-black transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-10 h-10 cursor-pointer rounded-full border-2 border-gray-600 flex items-center justify-center text-black hover:bg-black hover:text-white hover:border-black transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Previous"
           >
             <svg
@@ -176,7 +176,7 @@ const Services = () => {
           <button
             onClick={handleNext}
             disabled={activeIndex === maxIndex}
-            className="w-10 h-10 cursor-pointer rounded-full border border-gray-300 flex items-center justify-center text-black hover:bg-black hover:text-white hover:border-black transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-10 h-10 cursor-pointer rounded-full border-2 border-gray-600 flex items-center justify-center text-black hover:bg-black hover:text-white hover:border-black transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Next"
           >
             <svg

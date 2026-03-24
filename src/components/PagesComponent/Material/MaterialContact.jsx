@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../../shared/Container";
 import CustomDropdown from "../../CustomComponents/CustomDropDown";
+import { FileUpload } from "../../SvgContainer/SvgContainer";
 
 const MaterialContact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -119,6 +120,21 @@ const MaterialContact = ({
                 placeholder="Message"
                 className="common-input min-h-[146px]"
               />
+              <div
+                className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer border-2 border-gray-300"
+              >
+                <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
+                  <FileUpload />
+                  <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+                    Upload Your Design
+                  </span>
+                </div>
+
+                <input
+                  type="file"
+                  className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
+                />
+              </div>
             </div>
 
             <button
