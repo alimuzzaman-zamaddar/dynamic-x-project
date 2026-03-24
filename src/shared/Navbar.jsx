@@ -83,9 +83,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed ease-in-out duration-500 transition-opacity   top-0 left-0 w-full z-50 ${pathName.includes("/technology-details") ? "bg-black" : `${scrollY < 200 ? "bg-black" : "bg-black"}`}  `}
+      className={`fixed ease-in-out duration-500 transition-opacity lg:px-0 px-4   top-0 left-0 w-full z-50 ${pathName.includes("/technology-details") ? "bg-black" : `${scrollY < 200 ? "bg-black" : "bg-black"}`}  `}
     >
-      <div className="max-w-[1440px] mx-auto py-8 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto lg:py-8 py-4 flex items-center justify-between">
         <div
           onClick={() => {
             navigate("/");
@@ -98,25 +98,25 @@ const Navbar = () => {
           />
         </div>
         {/* navbar desktop */}
-       
-          <ul className=" hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center  ">
-            {navMenu.map((nav, idx) => {
-              return (
-                <li key={idx}>
-                  <Link
-                    smooth={true}
-                    duration={500}
-                    to={nav.path}
-                    className={` text-sm xl:text-[15.6px] font-normal leading-[128%] text-white hover:text-blue-500    capitalize cursor-pointer 
+
+        <ul className=" hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center  ">
+          {navMenu.map((nav, idx) => {
+            return (
+              <li key={idx}>
+                <Link
+                  smooth={true}
+                  duration={500}
+                  to={nav.path}
+                  className={` text-sm xl:text-[15.6px] font-normal leading-[128%] text-white hover:text-blue-500    capitalize cursor-pointer 
               transition-colors duration-700 ease-in-out`}
-                  >
-                    {nav.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-     
+                >
+                  {nav.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
 
         {/* navbar mobile */}
         <div

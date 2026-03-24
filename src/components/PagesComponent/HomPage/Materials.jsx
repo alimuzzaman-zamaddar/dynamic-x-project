@@ -54,15 +54,15 @@ const materials = [
 
 const Materials = () => {
   return (
-    <section id="materials" className="h-auto w-full pb-25 ">
+    <section id="materials" className="h-auto w-full xl:pb-25 pb-10">
       <Container>
         <div className="flex flex-row  justify-between">
-          <h2 className="text-4xl font-semibold text-black pb-5 ">Materials</h2>
+          <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-5 ">Materials</h2>
           <Link to={"/"} className="text-[22px] font-normal leading-[146%] text-black opacity-64">
             See all
           </Link>
         </div>
-        <ul className="grid justify-between gap-y-8 gap-x-7.5 grid-cols-3">
+        <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {materials.map((material, idx) => {
             return (
               <li
@@ -72,7 +72,7 @@ const Materials = () => {
                   backdropFilter: " blur(4.5px)",
                 }}
                 key={idx}
-                className="p-7.5 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
+                className="xl:p-7.5 p-3 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
               >
                 <div className="flex flex-col gap-y-6 ">
                   <div className="flex flex-col gap-y-3  ">
@@ -102,7 +102,7 @@ const Materials = () => {
                       background: "rgba(0, 0, 0, 0.09)",
                       backdropFilter: " blur(5.09px)",
                     }}
-                    className="h-auto w-auto px-6 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
+                    className="h-auto w-auto xl:px-6 px-3 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
                   >
                     <div className="flex flex-row gap-x-2.5 items-center ">
                       <Upload />

@@ -16,12 +16,12 @@ const HomeHero = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative max-w-[1440px] mx-auto   w-full lg:pb-[113px] pb-10 pt-[100px] sm:pt-[160px] 2xl:pt-[201px] flex lg:px-30 px-4 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
+      <div className="relative max-w-[1440px] mx-auto   w-full lg:pb-[113px] pb-10 pt-[100px] sm:pt-[10px] 2xl:pt-[201px] flex xl:px-30 px-4 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
         <div className="flex flex-col gap-y-6.5 items-start">
           <h4 className=" text-xl 2xl:text-[24px] font-normal leading-[144%] text-white max-w-[626px]">
             Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
           </h4>
-          <div className="flex xl:flex-row flex-col xxl:gap-7 gap-3">
+          <div className="flex 2xl:flex-row flex-col xxl:gap-7 gap-3">
             <button
               type="button"
               className={`

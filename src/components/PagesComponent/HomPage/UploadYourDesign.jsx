@@ -5,13 +5,11 @@ import Container from '../../../shared/Container'
 
 const UploadYourDesign = () => {
   return (
-    <section className='bg-black py-16 px-4'>
+    <section className='bg-black lg:py-16 py-4'>
       <Container>
-        <h4 className="text-white text-4xl font-normal text-center leading-tight">
+        <h4 className="text-white lg:text-4xl text-2xl font-normal text-center leading-tight">
           Come Funziona: dal File alla Produzione
         </h4>
-
-        {/* Cards grid — 2 cols on mobile, 3 on md, 5 on lg+ */}
         <div className="py-8 sm:py-12 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-7">
           <FeatureCard icon={Carica} title="UPLOAD" description="Carica il file in formato STL, STEP. OBL o file 2D" />
           <FeatureCard icon={Analysis} title="ANALISI" description="Verifichiamo il tuo progetto in tempo reale" />
@@ -27,7 +25,7 @@ const UploadYourDesign = () => {
             background: "#fff",
             backdropFilter: "blur(5.1px)",
           }}
-          className="relative h-auto w-full py-10 sm:py-14 px-4 rounded-xl flex items-center justify-center cursor-pointer"
+          className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer"
         >
           <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
             <FileUpload />
