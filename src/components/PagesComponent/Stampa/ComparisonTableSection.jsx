@@ -13,7 +13,7 @@ const ComparisonTableSection = ({ data, categories }) => {
           <div className="min-w-[700px] md:min-w-[900px] border border-[#F3F4F6] rounded-xl overflow-hidden">
             
             {/* Header */}
-            <div className="grid grid-cols-[120px_repeat(3,minmax(180px,1fr))] bg-gray-50 border-b border-[#F3F4F6]">
+            <div className="grid grid-cols-[0px_repeat(4,minmax(180px,1fr))] border-b border-[#F3F4F6]">
               <div></div>
 
               {data.map((col, i) => (
@@ -50,7 +50,7 @@ const ComparisonTableSection = ({ data, categories }) => {
             {categories.map((cat, rowIndex) => (
               <div
                 key={rowIndex}
-                className="grid grid-cols-[120px_repeat(3,minmax(180px,1fr))] border-b border-[#F3F4F6] last:border-none"
+                className="grid grid-cols-[200px_repeat(3,minmax(180px,1fr))] border-b border-[#F3F4F6] last:border-none"
               >
                 {/* Label */}
                 <div className="p-4 text-sm text-gray-700">
@@ -118,7 +118,7 @@ const ComparisonTableSection = ({ data, categories }) => {
             ))}
 
             {/* Footer */}
-            <div className="grid grid-cols-[120px_repeat(3,minmax(180px,1fr))] bg-gray-50 border-t border-[#F3F4F6]">
+            <div className="grid grid-cols-[200px_repeat(3,minmax(180px,1fr))] bg-gray-50 border-t border-[#F3F4F6]">
               {/* Label */}
               <div className="p-4 text-sm font-semibold text-[#6A7282]">
                 MEDIA
