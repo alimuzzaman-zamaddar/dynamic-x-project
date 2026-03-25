@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { technologies } from "../../../static_data/static.data";
 import Container from "../../../shared/Container";
+import React, { useRef, useState, useEffect } from "react";
+import { technologies } from "../../../static_data/static.data";
 
 const Technologies = () => {
   const navigate = useNavigate();
