@@ -2,6 +2,7 @@ import React from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { ArrowBlack } from "../../SvgContainer/SvgContainer";
 import hero_video from "../../../assets/videos/recording mountain top.mp4";
+import { Link } from "react-router";
 
 const HomeHero = () => {
   return (
@@ -22,66 +23,70 @@ const HomeHero = () => {
             Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
           </h4>
           <div className="flex 2xl:flex-row flex-col xxl:gap-7 gap-3">
-            <button
-              type="button"
-              className={`
+            <Link to={"/upload-design"}>
+              <button
+                type="button"
+                className={`
     group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-normal tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70
     active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2
   `}
-            >
-              <span
-                className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
-    `}
               >
-                Carica il tuo file
-              </span>
+                <span
+                  className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
+    `}
+                >
+                  Carica il tuo file
+                </span>
 
-              <div
-                className={`
+                <div
+                  className={`
       absolute right-1.5 top-1/2 -translate-y-1/2
       flex size-11 items-center justify-center rounded-full
       bg-neutral-900 text-white
       transition-all duration-500 ease-out
       group-hover:bg-transparent group-hover:scale-110 group-hover:rotate-135
     `}
-              >
-                <ArrowBlack className="size-5 transition-transform duration-500 group-hover:scale-110" />
-              </div>
+                >
+                  <ArrowBlack className="size-5 transition-transform duration-500 group-hover:scale-110" />
+                </div>
 
-              <div
-                className={` absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full`}
-              />
-            </button>
-            <button
-              type="button"
-              className={`
+                <div
+                  className={` absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full`}
+                />
+              </button>
+            </Link>
+            <Link to={"/upload-design"}>
+              <button
+                type="button"
+                className={`
     group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-normal tracking-[-0.01em] hover:text-neutral-900 hover:bg-white border hover:border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out bg-transparent text-white border-white/70
     active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2
   `}
-            >
-              <span
-                className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
-    `}
               >
-                Ottieni consulenza gratutta
-              </span>
+                <span
+                  className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
+    `}
+                >
+                  Ottieni consulenza gratutta
+                </span>
 
-              <div
-                className={`
+                <div
+                  className={`
       absolute right-1.5 top-1/2 -translate-y-1/2
       flex size-11 items-center justify-center rounded-full
       group-hover:bg-black text-white
       transition-all duration-500 ease-out
       bg-white group-hover:scale-110 group-hover:rotate-[135deg]
     `}
-              >
-                <FiArrowUpRight className="size-5 transition-transform duration-500 group-hover:scale-110 text-black group-hover:text-white" />
-              </div>
+                >
+                  <FiArrowUpRight className="size-5 transition-transform duration-500 group-hover:scale-110 text-black group-hover:text-white" />
+                </div>
 
-              <div
-                className={` absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full`}
-              />
-            </button>
+                <div
+                  className={` absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full`}
+                />
+              </button>
+            </Link>
 
           </div>
         </div>
