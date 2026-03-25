@@ -10,7 +10,7 @@ const Cosa = () => {
     <section>
       <Container>
         <h2 className='lg:text-4xl text-2xl font-semibold text-[#0A0A0A]'>Cosa Stampiamo</h2>
-        <p className='text-xs font-light text-[#1E2939] pt-4'>Dal prototipo alla produzione, la nostra gamma copre ogni esigenza del designer di moda moderno. Ogni categoria di prodotto è supportata da una profonda expertise tecnica e da materiali selezionati per rispondere alle specifiche esigenze estetiche e funzionali del settore.</p>
+        <p className='text-xs font-normal text-[#1E2939] pt-4'>Dal prototipo alla produzione, la nostra gamma copre ogni esigenza del designer di moda moderno. Ogni categoria di prodotto è supportata da una profonda expertise tecnica e da materiali selezionati per rispondere alle specifiche esigenze estetiche e funzionali del settore.</p>
         <div className="flex md:flex-row flex-col gap-4 mt-10">
           <div className="">
             <img src={Ochiali} alt="Ochiali" className='xl:h-61 h-40 w-full' />
