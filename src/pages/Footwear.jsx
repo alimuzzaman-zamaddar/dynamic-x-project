@@ -4,6 +4,7 @@ import NewBanner from '../components/CommonComponents/NewBanner'
 import FashionAccesories from '../components/PagesComponent/Fashion/FashionAccesories'
 import Cosa from '../components/PagesComponent/Fashion/Cosa'
 import Moda from '../components/PagesComponent/Fashion/Moda'
+import TechnoloyStampa from '../components/PagesComponent/Fashion/TechnoloyStampa'
 
 const Footwear = () => {
   return (
@@ -12,6 +13,7 @@ const Footwear = () => {
       <FashionAccesories />
       <Cosa />
       <Moda />
+      <TechnoloyStampa />
     </>
   )
 }
