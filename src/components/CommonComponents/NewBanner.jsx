@@ -9,7 +9,7 @@ const NewBanner = ({
 }) => {
   return (
     <div
-      className=" w-full pt-65 pb-20 bg-center bg-cover bg-no-repeat"
+      className=" w-full xl:pt-65 pt-40 pb-20 bg-center bg-cover bg-no-repeat"
       style={{
         backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0.4) 0.16%, rgba(0,0,0,0.4) 36.87%, rgba(102,102,102,0.4) 99.85%), url(${image})`,
       }}
