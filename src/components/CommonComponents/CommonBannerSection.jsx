@@ -3,7 +3,7 @@ import { ArrowBlack } from "../SvgContainer/SvgContainer";
 
 const CommonBannerSection = ({
   title,
-  description,
+  description = "",
   buttonText = "Upload File",
   image,
 }) => {
@@ -21,9 +21,11 @@ const CommonBannerSection = ({
         </h1>
 
         {/* Description */}
-        <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-[600px] md:max-w-[632px] mx-auto">
-          {description}
-        </p>
+        {description && (
+          <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-[600px] md:max-w-[632px] mx-auto">
+            {description}
+          </p>
+        )}
         {/*  Clean Button */}
         <button
           type="button"
