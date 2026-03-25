@@ -74,7 +74,7 @@ const Contact = ({
                 <input
                   type="text"
                   placeholder="Country Code"
-                  className="common-input sm:w-[55%] w-full xl:mb-0 mb-5"
+                  className="common-input sm:w-[60%] w-full xl:mb-0 mb-5"
                 />
                 <input
                   type="text"

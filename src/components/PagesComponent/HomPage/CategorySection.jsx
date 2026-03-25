@@ -84,7 +84,7 @@ const CategoryCard = ({ category }) => {
       // onClick={() => navigate(`/service/${category.title}`)}
       className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
-      <div className="lg:py-7.5 py-3 lg:px-5 px-3 flex flex-col items-center gap-y-3 flex-grow">
+      <div className="lg:p-6  p-3 flex flex-col items-center gap-y-3 flex-grow">
         {/* ICON */}
         <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
           <Icon />
