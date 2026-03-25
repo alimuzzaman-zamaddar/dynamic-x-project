@@ -7,6 +7,7 @@ import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import AllMaterials from "../pages/AllMaterials";
 import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
+import { Stampasla } from "../pages/Stampasla";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/stampa",
         element: <StampaPage />,
+      },
+      {
+        path: "/stampasla",
+        element: <Stampasla />,
       },
       {
         path: "/coming-soon",
