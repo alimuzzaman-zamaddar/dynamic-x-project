@@ -2,17 +2,17 @@ import React from "react";
 
 const CompatibilityMatrixSection = ({ title, columns, rows }) => {
   return (
-    <section className="section">
+    <section className="section mt-20">
       <div className="container-main">
         {/* Title */}
         <h2 className="section-title mb-8">{title}</h2>
 
         {/* Wrapper */}
         <div className="border border-[#E5E7EB] rounded-2xl p-4 md:p-6 overflow-x-auto xl:overflow-visible">
-          
+
           {/* Grid */}
           <div className="min-w-[700px] xl:min-w-0">
-            
+
             {/* Header */}
             <div className="grid grid-cols-[160px_repeat(5,minmax(100px,1fr))] mb-6">
               <div></div>
@@ -74,9 +74,9 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
                         style={
                           active
                             ? {
-                                borderColor: `${row.color}30`,
-                                backgroundColor: `${row.color}15`,
-                              }
+                              borderColor: `${row.color}30`,
+                              backgroundColor: `${row.color}15`,
+                            }
                             : {}
                         }
                       >
