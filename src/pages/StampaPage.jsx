@@ -250,13 +250,15 @@ export const StampaPage = () => {
       />
       <StatsSection
         heading="Precisione e Affidabilità Garantite"
-        description="Le nostre macchine FDM operano con parametri di processo rigorosi..."
+        description="Le nostre macchine FDM operano con parametri di processo rigorosi per assicurare qualità costante su ogni commessa. Di seguito le specifiche tecniche di riferimento per la pianificazione del tuo progetto."
         stats={statsData}
-        highlight="Volume di stampa: Variabile in base alla configurazione della macchina..."
-        footer="Ogni componente prodotto segue un flusso qualitativo strutturato..."
+        highlight="Volume di stampa: Variabile in base alla configurazione della macchina. Il sistema è ottimizzato per parti di piccole e medie dimensioni. Contattaci per valutare geometrie fuori standard o esigenze produttive speciali."
+        footer="Ogni componente prodotto segue un flusso qualitativo strutturato: dalla verifica del file in ingresso al controllo dimensionale finale, garantiamo che ogni pezzo rispetti le specifiche concordate prima della spedizione."
       />
       <ComparisonTableSection data={tableData} categories={categories} />
-      <Contact />
+      <div className="mb-6">
+        <Contact />
+      </div>
     </div>
   );
 };
