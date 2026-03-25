@@ -95,7 +95,7 @@ const Technologies = () => {
           {technologies.map((technology, idx) => (
             <div
               key={idx}
-              onClick={() => navigate(`/technology-details/${technology?.title}`)}
+              onClick={() => navigate(`/${technology?.title2}`)}
               className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
             >
               <div className="overflow-hidden rounded-xl">
