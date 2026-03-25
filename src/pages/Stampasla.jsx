@@ -3,9 +3,18 @@ import StatsSectionsla from "../components/PagesComponent/Stampasla/StatsSection
 import bannerimage from "../assets/img/stampa/banner2.png";
 import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import WhyChooseSection from "../components/PagesComponent/Stampasla/WhyChooseSection";
-import { IdealeIcon, MaterialiIcon, SearchIcon, TempiIcon } from "../components/SvgContainer/SvgContainer1";
+import {
+  IdealeIcon,
+  MaterialiIcon,
+  SearchIcon,
+  TempiIcon,
+} from "../components/SvgContainer/SvgContainer1";
 import ProcessSection from "../components/PagesComponent/Stampasla/ProcessSection";
 import CtaSection from "../components/PagesComponent/Stampasla/CtaSection";
+import MaterialsInfoSection from "../components/PagesComponent/Stampasla/MaterialsInfoSection";
+import ProsConsSection from "../components/PagesComponent/Stampasla/ProsConsSection";
+import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
+import Contact from "../components/CommonComponents/Contact";
 const statsData = [
   {
     value: "0.025mm",
@@ -36,22 +45,57 @@ const features = [
       "Superfici lisce, spigoli nitidi e dettagli fini che altre tecnologie di stampa 3D faticano a eguagliare. Ideale per geometrie complesse e",
     icon: <SearchIcon />,
   },
-    {
+  {
     title: "Tempi di Produzione Rapidi",
-    description: "Ciclo produttivo completo in pochi giorni lavorativi. Dalla conferma dell'ordine alla consegna, senza ritardi inattesi.",
+    description:
+      "Ciclo produttivo completo in pochi giorni lavorativi. Dalla conferma dell'ordine alla consegna, senza ritardi inattesi.",
     icon: <TempiIcon />,
   },
   {
     title: "Ideale per Prototipi Estetici",
     description:
       "Perfetta per modelli visivi, presentazioni ai clienti e parti che richiedono finiture superficiali raffinate e un aspetto professionale.",
-    icon: <IdealeIcon   />,
+    icon: <IdealeIcon />,
   },
 
   {
     title: "Materiali Speciali Avanzati",
-    description: "Ampia gamma di resine: trasparenti, ignifughe, ESD, simili ad ABS o nylon — per ogni applicazione tecnica e funzionale.",
+    description:
+      "Ampia gamma di resine: trasparenti, ignifughe, ESD, simili ad ABS o nylon — per ogni applicazione tecnica e funzionale.",
     icon: <MaterialiIcon />,
+  },
+];
+
+const categories = [
+  { label: "Risoluzione" },
+  { label: "Accuratezza" },
+  { label: "Finitura Superficiale" },
+  { label: "Rendimento" },
+  { label: "Design Complessi" },
+  { label: "Facilità di Utilizzo" },
+];
+
+const tableData = [
+  {
+    name: "FDM",
+    subtitle: "Modellazione a Deposizione Fusa",
+    color: "#2563EB",
+    values: [2, 4, 2, 3, 3, 5],
+    avg: 3.2,
+  },
+  {
+    name: "SLA",
+    subtitle: "Stereolitografia",
+    color: "#DC2626",
+    values: [5, 5, 5, 4, 4, 5],
+    avg: 4.7,
+  },
+  {
+    name: "SLS",
+    subtitle: "Sinterizzazione Laser Selettiva",
+    color: "#16A34A",
+    values: [4, 5, 4, 5, 5, 4],
+    avg: 4.5,
   },
 ];
 export const Stampasla = () => {
@@ -77,6 +121,13 @@ export const Stampasla = () => {
       />
       <ProcessSection />
       <CtaSection />
+
+      <MaterialsInfoSection />
+      <ProsConsSection />
+      <ComparisonTableSection data={tableData} categories={categories} />
+      <div className="mb-6">
+        <Contact />
+      </div>
     </div>
   );
 };
