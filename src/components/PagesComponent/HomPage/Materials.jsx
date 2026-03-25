@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router";
-import gear1 from "../../../assets/img/materials/ABS.GF_Grid_LP 1.png";
-import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
-import gear3 from "../../../assets/img/materials/PETG-CF_Grid_LP 1.png";
-import gear4 from "../../../assets/img/materials/PETG_Grid_LP 1.png";
-import { Upload } from "../../SvgContainer/SvgContainer";
 import Container from "../../../shared/Container";
+import { Upload } from "../../SvgContainer/SvgContainer";
+import gear2 from "../../../assets/img/materials/ABS_Grid_LP 1.png";
+import gear1 from "../../../assets/img/materials/ABS.GF_Grid_LP 1.png";
+import gear5 from "../../../assets/img/materials/ASA_Grid_LP 1 (1).png";
 
 const materials = [
   {
@@ -13,7 +12,7 @@ const materials = [
     title: "ABS-GF",
     subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici.",
+      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici, risultando ideale per applicazioni esterne e strutturali.",
   },
   {
     imgSrc: gear2,
@@ -23,14 +22,14 @@ const materials = [
       "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
   },
   {
-    imgSrc: gear3,
+    imgSrc: gear5,
     title: "ASA",
     subtitle: "FDM",
     description:
       "L’ASA è un materiale resistente e stabile ai raggi UV, perfetto per applicazioni da esterno.",
   },
   {
-    imgSrc: gear4,
+    imgSrc: gear5,
     title: "ASA",
     subtitle: "FDM",
     description:
@@ -44,7 +43,7 @@ const materials = [
       "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. Ideale per componenti ad alto stress.",
   },
   {
-    imgSrc: gear3,
+    imgSrc: gear2,
     title: "PA6-CF",
     subtitle: "FDM",
     description:
@@ -62,61 +61,63 @@ const Materials = () => {
             See all
           </Link>
         </div>
-        <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {materials.map((material, idx) => {
             return (
               <li
+                key={idx}
                 style={{
                   border: "1px solid rgba(0, 0, 0, 0.11)",
                   background: "rgba(0, 0, 0, 0.09)",
                   backdropFilter: " blur(4.5px)",
                 }}
-                key={idx}
-                className="xl:p-7.5 p-3 h-auto w-full rounded-xl flex flex-row gap-x-12 items-center "
+                className="xl:p-7.5 p-3 w-full rounded-xl flex flex-col h-full"
               >
-                <div className="flex flex-col gap-y-6 ">
-                  <div className="flex flex-col gap-y-3  ">
+                <div className="flex flex-col gap-y-6 h-full">
+
+                  {/* TOP CONTENT */}
+                  <div className="flex flex-col gap-y-3">
                     <div className="flex justify-between">
-                      <div className="">
+                      <div>
                         <h5 className="text-black font-normal leading-[134%] text-2xl">
-                          {material.title}{" "}
+                          {material.title}
                         </h5>
                         <p className="text-sm text-gray-500">{material.subtitle}</p>
                       </div>
+
                       <img
-                        className="w-18 h-18 object-cover "
+                        className="w-18 h-18 object-cover"
                         src={material.imgSrc}
                         alt={material.title}
                       />
-
                     </div>
-                    <span className="text-base font-light leading-[150%]  max-w-[389px] ">
-                      Polymer with excellent performance, ductility and thermal
-                      resistance, the most used for stability and value for
-                      money.
+
+                    <span className="text-base font-light leading-[150%] max-w-[389px] mt-5">
+                      {material.description}
                     </span>
                   </div>
-                  <button
-                    style={{
-                      border: "1px solid rgba(0, 0, 0, 0.16)",
-                      background: "rgba(0, 0, 0, 0.09)",
-                      backdropFilter: " blur(5.09px)",
-                    }}
-                    className="h-auto w-auto xl:px-6 px-3 py-3 relative flex items-center justify-center rounded-xl cursor-pointer max-w-[193px] "
-                  >
-                    <Link to={"/upload-design"}>
-                      <div className="flex flex-row gap-x-2.5 items-center ">
-                        <Upload />
-                        <span className="text-base font-normal leading-[200%] text-black ">
-                          Upload Design
-                        </span>
-                      </div>
-                    </Link>
-                    {/* <input
-                      type="file"
-                      className="absolute top-0 left-0 h-full w-full  rounded-xl opacity-0 cursor-pointer "
-                    /> */}
-                  </button>
+
+                  {/* BUTTON (PUSHED TO BOTTOM) */}
+                  <div className="mt-auto">
+                    <button
+                      style={{
+                        border: "1px solid rgba(0, 0, 0, 0.16)",
+                        background: "rgba(0, 0, 0, 0.09)",
+                        backdropFilter: " blur(5.09px)",
+                      }}
+                      className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer max-w-[193px]"
+                    >
+                      <Link to={"/upload-design"}>
+                        <div className="flex gap-x-2.5 items-center">
+                          <Upload />
+                          <span className="text-base font-normal leading-[200%] text-black">
+                            Upload Design
+                          </span>
+                        </div>
+                      </Link>
+                    </button>
+                  </div>
+
                 </div>
               </li>
             );
