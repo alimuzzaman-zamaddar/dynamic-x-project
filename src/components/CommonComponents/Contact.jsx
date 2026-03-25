@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "../../shared/Container";
-import CustomDropdown from "../CustomComponents/CustomDropDown";
 import { Link } from "react-scroll";
+import Container from "../../shared/Container";
 import { FileUpload } from "../SvgContainer/SvgContainer";
+import CustomDropdown from "../CustomComponents/CustomDropDown";
 
 const Contact = ({
   title = "CONTACT US AND GET A QUOTE",
