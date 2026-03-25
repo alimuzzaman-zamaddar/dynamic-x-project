@@ -19,11 +19,13 @@ const categories = [
   {
     icon: Drone,
     title: "DRONI & COMPONENTI",
+    title2: "drone",
     subtitle: "Stampa componenti leggeri e resistenti per droni ad alte prestazioni.",
   },
   {
     icon: Automotive,
     title: "AUTOMOTIVE D'EPOCA E PARTI RARE",
+    title2: "vintage",
     subtitle: "Ricrea componenti introvabili per restauri di precisione.",
   },
   {
@@ -81,7 +83,7 @@ const CategoryCard = ({ category }) => {
 
   return (
     <div
-      // onClick={() => navigate(`/service/${category.title}`)}
+      onClick={() => navigate(`/${category.title2}`)}
       className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
       <div className="lg:p-6  p-3 flex flex-col items-center gap-y-3 flex-grow">
@@ -127,7 +129,8 @@ const CategorySection = () => {
             </h2>
           </div>
 
-          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
+          <ul 
+           className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
             {categories.map((category, idx) => {
               const isLastRow = idx >= 8;
 

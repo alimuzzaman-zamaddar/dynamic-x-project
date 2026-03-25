@@ -9,6 +9,8 @@ import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
+import Vintage from "../pages/Vintage";
+import { Drone } from "../pages/Drone";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "/stampasls",
         element: <Stampasls />,
+      },
+      {
+        path: "/vintage",
+        element: <Vintage />,
+      },
+      {
+        path: "/drone",
+        element: <Drone />,
       },
       {
         path: "/coming-soon",
