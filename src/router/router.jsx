@@ -9,10 +9,8 @@ import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
-
 import Vintage from "../pages/Vintage";
 import { Drone } from "../pages/Drone";
-
 import Footwear from "../pages/Footwear";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
 
@@ -50,14 +48,14 @@ const router = createBrowserRouter([
         element: <Stampasls />,
       },
       {
- 
         path: "/vintage",
         element: <Vintage />,
       },
       {
         path: "/drone",
         element: <Drone />,
-
+      },
+      {
         path: "/footwear",
         element: <Footwear />,
       },
