@@ -5,6 +5,9 @@ import FashionAccesories from '../components/PagesComponent/Fashion/FashionAcces
 import Cosa from '../components/PagesComponent/Fashion/Cosa'
 import Moda from '../components/PagesComponent/Fashion/Moda'
 import TechnoloyStampa from '../components/PagesComponent/Fashion/TechnoloyStampa'
+import Visione from '../components/PagesComponent/Fashion/Visione'
+import Contact from "../components/CommonComponents/Contact";
+
 
 const Footwear = () => {
   return (
@@ -14,6 +17,10 @@ const Footwear = () => {
       <Cosa />
       <Moda />
       <TechnoloyStampa />
+      <Visione />
+      <div className="pb-18">
+        <Contact />
+      </div>
     </>
   )
 }
