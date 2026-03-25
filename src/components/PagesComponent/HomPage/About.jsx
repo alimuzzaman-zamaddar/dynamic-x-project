@@ -11,7 +11,7 @@ const About = () => {
             {" "}
             About Us{" "}
           </h2>
-          <div className="w-full flex flex-col gap-y-8 xl:flex-row justify-between items-center">
+          <div className="w-full flex flex-col gap-8 xl:flex-row justify-between items-center">
             <img
               src={logo}
               className=""

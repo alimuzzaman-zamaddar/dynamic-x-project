@@ -71,18 +71,18 @@ const Materials = () => {
                   background: "rgba(0, 0, 0, 0.09)",
                   backdropFilter: " blur(4.5px)",
                 }}
-                className="xl:p-7.5 p-3 w-full rounded-xl flex flex-col h-full"
+                className="xl:p-6 p-3 w-full rounded-xl flex flex-col h-full"
               >
-                <div className="flex flex-col gap-y-6 h-full">
+                <div className="flex flex-col gap-y-3 h-full">
 
                   {/* TOP CONTENT */}
                   <div className="flex flex-col gap-y-3">
                     <div className="flex justify-between">
                       <div>
-                        <h5 className="text-black font-normal leading-[134%] text-2xl">
+                        <h5 className="text-black font-normal leading-[134%] text-base">
                           {material.title}
                         </h5>
-                        <p className="text-sm text-gray-500">{material.subtitle}</p>
+                        <p className="text-xs text-black font-light">{material.subtitle}</p>
                       </div>
 
                       <img
@@ -92,7 +92,7 @@ const Materials = () => {
                       />
                     </div>
 
-                    <span className="text-base font-light leading-[150%] max-w-[389px] mt-5">
+                    <span className="text-xs text-black/60 font-light leading-[150%] max-w-[389px] mt-5">
                       {material.description}
                     </span>
                   </div>
@@ -105,7 +105,7 @@ const Materials = () => {
                         background: "rgba(0, 0, 0, 0.09)",
                         backdropFilter: " blur(5.09px)",
                       }}
-                      className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer max-w-[193px]"
+                      className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer"
                     >
                       <Link to={"/upload-design"}>
                         <div className="flex gap-x-2.5 items-center">

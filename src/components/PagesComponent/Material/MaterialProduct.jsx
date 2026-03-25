@@ -164,9 +164,9 @@ export default function MaterialsPage() {
                   background: "rgba(0, 0, 0, 0.09)",
                   backdropFilter: " blur(4.5px)",
                 }}
-                className="xl:p-7.5 p-3 w-full rounded-xl flex flex-col h-full"
+                className="xl:p-6 p-3 w-full rounded-xl flex flex-col h-full"
               >
-                <div className="flex flex-col gap-y-6 h-full">
+                <div className="flex flex-col h-full gap-3">
 
                   {/* TOP CONTENT */}
                   <div className="flex flex-col gap-y-3">
@@ -175,17 +175,17 @@ export default function MaterialsPage() {
                         <h5 className="text-black font-semibold leading-[134%] text-xs">
                           {material.title}
                         </h5>
-                        <p className="text-ms text-gray-500 mt-3">{material.subtitle}</p>
+                        <p className="text-xs font-light text-black mt-2">{material.subtitle}</p>
                       </div>
 
                       <img
-                        className="w-25 h-25 object-center object-contain"
+                        className="w-20 h-20 object-center object-contain"
                         src={material.imgSrc}
                         alt={material.title}
                       />
                     </div>
 
-                    <span className="text-base font-light leading-[150%] max-w-[389px] mt-5">
+                    <span className="text-xs font-light leading-[150%] max-w-[290px] mt-5 text-black/60">
                       {material.description}
                     </span>
                   </div>
@@ -198,7 +198,7 @@ export default function MaterialsPage() {
                         background: "rgba(0, 0, 0, 0.09)",
                         backdropFilter: " blur(5.09px)",
                       }}
-                      className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer max-w-[193px]"
+                      className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer  shrink-0"
                     >
                       <Link to={"/upload-design"}>
                         <div className="flex gap-x-2.5 items-center">
