@@ -11,7 +11,7 @@ const SlsComparisonTable = () => {
             SLS vs. Altre Tecnologie di Stampa 3D
           </h2>
 
-          <p className="section-description">
+          <p className="section-description text-sm!">
             La SLS si distingue nettamente da FDM e SLA per la combinazione unica di libertà geometrica
             e proprietà meccaniche. Ecco un confronto rapido per orientare la scelta tecnologica.
           </p>
@@ -23,7 +23,7 @@ const SlsComparisonTable = () => {
           <div className="min-w-[900px] xl:min-w-full border border-[#E5E7EB] rounded-xl overflow-hidden">
 
             {/* Header */}
-            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-xs font-semibold text-black">
+            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-sm font-semibold text-black">
               <div className="p-4">Caratteristica</div>
               <div className="p-4 border-l border-[#E5E7EB]">SLS</div>
               <div className="p-4 border-l border-[#E5E7EB]">FDM</div>
@@ -31,8 +31,8 @@ const SlsComparisonTable = () => {
             </div>
 
             {/* Row 1 */}
-            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-xs bg-[#F9FAFB]">
-              <div className="p-4 font-medium text-black">
+            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-sm text-black font-semibold bg-[#F9FAFB]">
+              <div className="p-4 text-sm text-black font-semibold ">
                 Strutture di supporto
               </div>
               <div className="p-4 border-l border-[#E5E7EB] text-gray-600">
@@ -47,8 +47,8 @@ const SlsComparisonTable = () => {
             </div>
 
             {/* Row 2 */}
-            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-xs">
-              <div className="p-4 font-medium text-black">
+            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-sm">
+              <div className="p-4 text-sm text-black font-semibold">
                 Resistenza meccanica
               </div>
               <div className="p-4 border-l border-[#E5E7EB] text-gray-600">
@@ -63,8 +63,8 @@ const SlsComparisonTable = () => {
             </div>
 
             {/* Row 3 */}
-            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-xs bg-[#F9FAFB]">
-              <div className="p-4 font-medium text-black">
+            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-sm bg-[#F9FAFB]">
+              <div className="p-4 text-sm text-black font-semibold">
                 Geometrie complesse
               </div>
               <div className="p-4 border-l border-[#E5E7EB] text-gray-600">
@@ -79,8 +79,8 @@ const SlsComparisonTable = () => {
             </div>
 
             {/* Row 4 */}
-            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-xs">
-              <div className="p-4 font-medium text-black">
+            <div className="grid grid-cols-4 border-b border-[#E5E7EB] text-sm">
+              <div className="p-4 text-sm text-black font-semibold">
                 Materiali tecnici
               </div>
               <div className="p-4 border-l border-[#E5E7EB] text-gray-600">
@@ -95,8 +95,8 @@ const SlsComparisonTable = () => {
             </div>
 
             {/* Row 5 */}
-            <div className="grid grid-cols-4 text-xs bg-[#F9FAFB]">
-              <div className="p-4 font-medium text-black">
+            <div className="grid grid-cols-4 text-sm bg-[#F9FAFB]">
+              <div className="p-4 text-sm text-black font-semibold">
                 Ideale per
               </div>
               <div className="p-4 border-l border-[#E5E7EB] text-gray-600">

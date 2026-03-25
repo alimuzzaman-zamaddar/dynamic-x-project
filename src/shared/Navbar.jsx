@@ -83,20 +83,22 @@ const Navbar = () => {
     };
   }, []);
   const isHome = pathName === "/";
+  const isFashion = pathName === "/footwear";
+  const isIndustrial = pathName === "/industrial";
 
   return (
     <nav
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
   ${pathName.includes("/technology-details")
           ? "bg-transparent"
-          : isHome
+          : isHome || isFashion || isIndustrial
             ? scrollY < 200
               ? "bg-transparent"
               : "bg-black"
             : "bg-black"
         }`}
     >
-      <div className="max-w-[1440px] mx-auto lg:py-8 py-4 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto lg:py-8 py-4 px-4 flex items-center justify-between">
         <div
           onClick={() => {
             navigate("/");
@@ -110,7 +112,7 @@ const Navbar = () => {
         </div>
         {/* navbar desktop */}
 
-        <ul className="hidden xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
+        <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
           {navMenu.map((nav, idx) => (
             <li key={idx}>
               {nav.type === "scroll" ? (
@@ -137,7 +139,7 @@ const Navbar = () => {
         {/* navbar mobile */}
         <div
           ref={sidebarRef}
-          className={`  fixed xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-[280px] bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`  fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-[280px] bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <img
             src={logo}
@@ -169,7 +171,7 @@ const Navbar = () => {
         {/* mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative xl:hidden w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5"
+          className="relative 2xl:hidden w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5"
           aria-label="Toggle menu"
         >
           <span
@@ -187,7 +189,7 @@ const Navbar = () => {
         </button>
 
         {/* login button */}
-        <button className=" hidden xl:flex text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
+        <button className=" hidden 2xl:flex text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
           Login
         </button>
       </div>

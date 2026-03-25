@@ -47,7 +47,7 @@ export const Stampasls = () => {
     <div>
       <div className="px-4 xl:px-0 mt-34">
         <CommonBannerSection
-          title="banner"
+          title="Stampa 3D SLS"
           description="Produzione additiva professionale per parti funzionali, geometrie complesse e piccole serie senza stampi."
           image={banner}
         />
