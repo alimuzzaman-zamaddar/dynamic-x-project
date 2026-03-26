@@ -100,6 +100,41 @@ export const Pan = () => {
     </svg>
   );
 };
+export const Tolle = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <path d="M35.5016 25.5C35.8745 25.8717 36.1704 26.3132 36.3723 26.7994C36.5742 27.2856 36.6781 27.8069 36.6781 28.3334C36.6781 28.8598 36.5742 29.3811 36.3723 29.8673C36.1704 30.3535 35.8745 30.7951 35.5016 31.1667L31.1683 35.5C30.7967 35.8729 30.3551 36.1688 29.8689 36.3707C29.3827 36.5726 28.8614 36.6765 28.335 36.6765C27.8085 36.6765 27.2872 36.5726 26.801 36.3707C26.3148 36.1688 25.8732 35.8729 25.5016 35.5L4.50162 14.5C3.75255 13.7473 3.33203 12.7286 3.33203 11.6667C3.33203 10.6048 3.75255 9.58607 4.50162 8.83337L8.83496 4.50004C9.58766 3.75096 10.6064 3.33044 11.6683 3.33044C12.7302 3.33044 13.7489 3.75096 14.5016 4.50004L35.5016 25.5Z" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M24.168 20.8333L27.5013 17.5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M19.168 15.8333L22.5013 12.5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M14.168 10.8333L17.5013 7.5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M29.168 25.8333L32.5013 22.5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Materiali = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="36" viewBox="0 0 30 36" fill="none">
+      <path d="M27.9167 19.5841C27.9167 27.9174 22.0833 32.0841 15.15 34.5008C14.7869 34.6238 14.3926 34.6179 14.0333 34.4841C7.08333 32.0841 1.25 27.9174 1.25 19.5841V7.91742C1.25 7.47539 1.4256 7.05147 1.73816 6.7389C2.05072 6.42634 2.47464 6.25075 2.91667 6.25075C6.25 6.25075 10.4167 4.25075 13.3167 1.71742C13.6698 1.41575 14.1189 1.25 14.5833 1.25C15.0477 1.25 15.4969 1.41575 15.85 1.71742C18.7667 4.26742 22.9167 6.25075 26.25 6.25075C26.692 6.25075 27.116 6.42634 27.4285 6.7389C27.7411 7.05147 27.9167 7.47539 27.9167 7.91742V19.5841Z" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Tempi = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path d="M17.9167 34.5833C27.1214 34.5833 34.5833 27.1214 34.5833 17.9167C34.5833 8.71192 27.1214 1.25 17.9167 1.25C8.71192 1.25 1.25 8.71192 1.25 17.9167C1.25 27.1214 8.71192 34.5833 17.9167 34.5833Z" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Supporto = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <path d="M26.6654 35V31.6667C26.6654 29.8986 25.963 28.2029 24.7127 26.9526C23.4625 25.7024 21.7668 25 19.9987 25H9.9987C8.23059 25 6.5349 25.7024 5.28465 26.9526C4.03441 28.2029 3.33203 29.8986 3.33203 31.6667V35" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M14.9987 18.3333C18.6806 18.3333 21.6654 15.3486 21.6654 11.6667C21.6654 7.98477 18.6806 5 14.9987 5C11.3168 5 8.33203 7.98477 8.33203 11.6667C8.33203 15.3486 11.3168 18.3333 14.9987 18.3333Z" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M36.668 35V31.6667C36.6669 30.1896 36.1752 28.7546 35.2702 27.5872C34.3653 26.4198 33.0982 25.586 31.668 25.2167" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M26.668 5.21667C28.102 5.58384 29.373 6.41784 30.2807 7.58719C31.1884 8.75654 31.681 10.1947 31.681 11.675C31.681 13.1553 31.1884 14.5935 30.2807 15.7628C29.373 16.9322 28.102 17.7662 26.668 18.1333" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
 
 export const ArrowWhite = () => {
   return (
