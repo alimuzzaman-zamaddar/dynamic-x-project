@@ -50,16 +50,16 @@ const CadToPhysicalSection = () => {
         </div>
 
         {/* Process Flow Wrapper */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col xl:flex-row items-center gap-6">
           
           {/* Left Steps Column */}
-          <div className="flex flex-col gap-24  md:left-0 md:top-[15%] md:w-[320px] text-left">
+          <div className="flex flex-col xl:gap-6 xl:gap-24  md:left-0 md:top-[15%] md:w-[320px] text-left">
             {steps.filter(step => step.position.includes('left')).map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <h4 className="font-bold text-xs text-black/90">
                   {step.title}
                 </h4>
-                <p className="text-xs text-primary-gray/80 leading-relaxed max-w-[167px]">
+                <p className="text-xs text-primary-gray/80 leading-relaxed xl:max-w-[167px]">
                   {step.desc}
                 </p>
               </div>
@@ -67,22 +67,22 @@ const CadToPhysicalSection = () => {
           </div>
 
           {/* Central Graphic (Image from image_12.png) */}
-          <div className="flex items-center justify-center my-16 md:my-0 md:w-full">
+          <div className="flex items-center justify-center my-4 xl:my-16 md:my-0 md:w-full">
             <img 
               src={CadPhysicalGraphic} 
               alt="CAD to Physical model process flow graphic" 
-              className=""
+              className="h-[150px] xl:h-auto"
             />
           </div>
 
           {/* Right Steps Column */}
-          <div className="flex flex-col gap-24  text-left md:text-right">
+          <div className="flex flex-col  xl:gap-24  text-left md:text-right">
             {steps.filter(step => step.position.includes('right')).map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <h4 className="font-bold text-xs text-black/90">
                   {step.title}
                 </h4>
-                <p className="text-xs text-primary-gray/80 leading-relaxed max-w-[167px] md:max-w-none md:ml-auto">
+                <p className="text-xs text-primary-gray/80 leading-relaxed xl:max-w-[167px] md:max-w-none md:ml-auto">
                   {step.desc}
                 </p>
               </div>
