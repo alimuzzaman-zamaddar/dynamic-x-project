@@ -17,6 +17,7 @@ import { Yacht } from "../pages/Yacht";
 import Architettura from "../pages/Architettura";
 import MedicaleLab from "../pages/MedicaleLab";
 import Jwellery from "../pages/Jwellery";
+import Vetemarysupports from "../pages/Vetemarysupports";
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/architettura",
         element: <Architettura />,
+      },
+      {
+        path: "/vetemarysupports",
+        element: <Vetemarysupports />,
       },
       {
 
