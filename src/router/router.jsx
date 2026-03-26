@@ -14,6 +14,7 @@ import { Drone } from "../pages/Drone";
 import Footwear from "../pages/Footwear";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import MedicaleLab from "../pages/MedicaleLab";
+import Jwellery from "../pages/Jwellery";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/medicale-lab",
         element: <MedicaleLab />,
+      },
+      {
+        path: "/jwellery",
+        element: <Jwellery />,
       },
       {
         path: "/coming-soon",

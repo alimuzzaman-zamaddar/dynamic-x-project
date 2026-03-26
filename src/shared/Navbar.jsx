@@ -86,13 +86,14 @@ const Navbar = () => {
   const isFashion = pathName === "/footwear";
   const isIndustrial = pathName === "/industrial";
   const isMedicale = pathName === "/medicale-lab";
+  const isJwellery = pathName === "/jwellery";
 
   return (
     <nav
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
   ${pathName.includes("/technology-details")
           ? "bg-transparent"
-          : isHome || isFashion || isIndustrial || isMedicale
+          : isHome || isFashion || isIndustrial || isMedicale || isJwellery
             ? scrollY < 200
               ? "bg-transparent"
               : "bg-black"
