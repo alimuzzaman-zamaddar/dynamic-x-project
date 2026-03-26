@@ -17,6 +17,7 @@ import { Yacht } from "../pages/Yacht";
 import Architettura from "../pages/Architettura";
 import MedicaleLab from "../pages/MedicaleLab";
 import Jwellery from "../pages/Jwellery";
+import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
 
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/vintage",
         element: <Vintage />,
+      },
+      {
+        path: "/veterinary",
+        element: <Veterinary />,
       },
       {
         path: "/drone",

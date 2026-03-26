@@ -37,7 +37,7 @@ const categories = [
   {
     icon: Medicale,
     title: "MEDICALE, LAB & BIOTECH",
-    link: "/medicale",
+    link: "/medicale-lab",
     subtitle: "Stampa elementi di precisione per ricerca, laboratorio e medicale.",
   },
   {
@@ -61,7 +61,7 @@ const categories = [
   {
     icon: Proto,
     title: "GIOIELLERIA",
-    link: "/gioielleria",
+    link: "/jwellery",
     subtitle: "Prototipi e modelli di precisione per design e fusione.",
   },
   {
