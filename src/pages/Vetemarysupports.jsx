@@ -6,6 +6,7 @@ import HighQualityMaterialsSection from "../components/PagesComponent/Vetemarysu
 import PrintTechnologiesSection from "../components/PagesComponent/Vetemarysupports/PrintTechnologiesSection";
 import CollaborazioneSection from "../components/PagesComponent/Vetemarysupports/CollaborazioneSection";
 import WhyChooseDevices from "../components/PagesComponent/Vetemarysupports/WhyChooseDevices";
+import Contact from "../components/CommonComponents/Contact";
 
 const Vetemarysupports = () => {
   return (
@@ -16,6 +17,9 @@ const Vetemarysupports = () => {
       <PrintTechnologiesSection />
       <WhyChooseDevices />
       <CollaborazioneSection />
+      <div className="mb-6">
+        <Contact />
+      </div>
     </div>
   );
 };
