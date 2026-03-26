@@ -5,8 +5,11 @@ import PrintingTechnologies from "../components/PagesComponent/Vintage/PrintingT
 import StatsSectionVintage from "../components/PagesComponent/Vintage/StatsSectionVintage";
 import PerChiLavoriamo from "../components/PagesComponent/Vintage/PerChiLavoriamo";
 import StartProjectSection from "../components/PagesComponent/Vintage/StartProjectSection";
-import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
 import Contact from "../components/CommonComponents/Contact";
+import NewBanner from "../components/CommonComponents/NewBanner";
+import Vintagebanner from "../assets/img/bg/vintageban.png"
+
+
 const statsData = [
   {
     value: "±0.1mm",
@@ -31,6 +34,7 @@ const statsData = [
 const Vintage = () => {
   return (
     <div className="">
+      <NewBanner image={Vintagebanner} title={"AUTOMOTIVE D’EPOCA & PARTI RARE"} />
       <AutomotiveSection />
       <ComponentsStampiamoSection />
       <PrintingTechnologies />
