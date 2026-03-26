@@ -7,6 +7,7 @@ import Creazione from '../components/PagesComponent/Jwellery/Creazione'
 import Metallo from '../components/PagesComponent/Jwellery/Metallo'
 import Qualita from '../components/PagesComponent/Jwellery/Qualita'
 import Lusso from '../components/PagesComponent/Jwellery/Lusso'
+import Iniziate from '../components/PagesComponent/Jwellery/Iniziate'
 
 const Jwellery = () => {
   return (
@@ -18,6 +19,7 @@ const Jwellery = () => {
       <Metallo />
       <Qualita />
       <Lusso />
+      <Iniziate />
     </>
   )
 }
