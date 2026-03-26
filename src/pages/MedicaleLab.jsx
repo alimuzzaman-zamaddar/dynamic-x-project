@@ -5,6 +5,7 @@ import Rechiedi from '../components/PagesComponent/Medical/Richiedi'
 import Scientifica from '../components/PagesComponent/Medical/Scientifica'
 import Funzionable from '../components/PagesComponent/Medical/Funzionable'
 import Laboratorio from '../components/PagesComponent/Medical/Laboratorio'
+import Contact from '../components/CommonComponents/Contact'
 
 const MedicaleLab = () => {
   return (
@@ -14,6 +15,9 @@ const MedicaleLab = () => {
       <Funzionable />
       <Laboratorio />
       <Rechiedi />
+      <div className="lg:pb-18 pb-8">
+        <Contact />
+      </div>
     </>
   )
 }
