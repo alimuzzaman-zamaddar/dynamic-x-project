@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../../../shared/Container'
+import { Car, Clock, Usd } from '../../SvgContainer/SvgContainer'
 
 const Pronto = () => {
   return (
@@ -17,6 +18,26 @@ const Pronto = () => {
             <h3 className='text-base font-semibold text-black'>Richiedi Consulenza</h3>
             <h5 className='text-xs font-normal text-black py-4'>Parla con i nostri tecnici per trovare la soluzione ottimale per la tua applicazione.</h5>
             <h6 className='text-base font-semibold text-[#1E2939] cursor-pointer'>→ Contattaci</h6>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+          <div className="w-full">
+            <div className="py-3 rounded-[40px] bg-[#F0EEEB] flex justify-center items-center">
+              <Clock />
+            </div>
+            <h3 className='text-base font-semibold text-black pt-3'>Risposta entro 24h</h3>
+          </div>
+          <div className="w-full">
+            <div className="py-3 rounded-[40px] bg-[#F0EEEB] flex justify-center items-center">
+              <Usd />
+            </div>
+            <h3 className='text-base font-semibold text-black pt-3'>Preventivo gratuito</h3>
+          </div>
+          <div className="w-full">
+            <div className="py-3 rounded-[40px] bg-[#F0EEEB] flex justify-center items-center">
+              <Car />
+            </div>
+            <h3 className='text-base font-semibold text-black pt-3'>Spedizione in tutta Italia</h3>
           </div>
         </div>
       </Container>

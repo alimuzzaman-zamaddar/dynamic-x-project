@@ -38,6 +38,39 @@ export const SLA = () => {
     </svg>
   );
 };
+export const Clock = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14.0007 25.6666C20.444 25.6666 25.6673 20.4432 25.6673 13.9999C25.6673 7.5566 20.444 2.33325 14.0007 2.33325C7.55733 2.33325 2.33398 7.5566 2.33398 13.9999C2.33398 20.4432 7.55733 25.6666 14.0007 25.6666Z" stroke="#0A0A0A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M14 7V14L18.6667 16.3333" stroke="#0A0A0A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Usd = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <g clip-path="url(#clip0_4588_2911)">
+        <path d="M14 1.16675V26.8334" stroke="#0A0A0A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M19.8333 5.83325H11.0833C10.0004 5.83325 8.96175 6.26346 8.19598 7.02923C7.43021 7.79501 7 8.83362 7 9.91659C7 10.9996 7.43021 12.0382 8.19598 12.8039C8.96175 13.5697 10.0004 13.9999 11.0833 13.9999H16.9167C17.9996 13.9999 19.0382 14.4301 19.804 15.1959C20.5698 15.9617 21 17.0003 21 18.0833C21 19.1662 20.5698 20.2048 19.804 20.9706C19.0382 21.7364 17.9996 22.1666 16.9167 22.1666H7" stroke="#0A0A0A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+      <defs>
+        <clipPath id="clip0_4588_2911">
+          <rect width="28" height="28" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+export const Car = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28" fill="none">
+      <path d="M19 5H2C1.44772 5 1 5.44772 1 6V18C1 18.5523 1.44772 19 2 19H19C19.5523 19 20 18.5523 20 18V6C20 5.44772 19.5523 5 19 5Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M20 10H24L28 15V19H20V10Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M5.5 23C6.88071 23 8 21.8807 8 20.5C8 19.1193 6.88071 18 5.5 18C4.11929 18 3 19.1193 3 20.5C3 21.8807 4.11929 23 5.5 23Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M25.5 23C26.8807 23 28 21.8807 28 20.5C28 19.1193 26.8807 18 25.5 18C24.1193 18 23 19.1193 23 20.5C23 21.8807 24.1193 23 25.5 23Z" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
 
 export const ArrowWhite = () => {
   return (
