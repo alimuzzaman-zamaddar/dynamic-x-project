@@ -8,6 +8,7 @@ import Metallo from '../components/PagesComponent/Jwellery/Metallo'
 import Qualita from '../components/PagesComponent/Jwellery/Qualita'
 import Lusso from '../components/PagesComponent/Jwellery/Lusso'
 import Iniziate from '../components/PagesComponent/Jwellery/Iniziate'
+import Contact from '../components/CommonComponents/Contact'
 
 const Jwellery = () => {
   return (
@@ -20,6 +21,9 @@ const Jwellery = () => {
       <Qualita />
       <Lusso />
       <Iniziate />
+      <div className="lg:pb-18 pb-8">
+        <Contact />
+      </div>
     </>
   )
 }
