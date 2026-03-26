@@ -13,8 +13,11 @@ import Vintage from "../pages/Vintage";
 import { Drone } from "../pages/Drone";
 import Footwear from "../pages/Footwear";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
+import { Yacht } from "../pages/Yacht";
+import Architettura from "../pages/Architettura";
 import MedicaleLab from "../pages/MedicaleLab";
 import Jwellery from "../pages/Jwellery";
+
 
 const router = createBrowserRouter([
   {
@@ -58,6 +61,16 @@ const router = createBrowserRouter([
         element: <Drone />,
       },
       {
+
+        path: "/yacht",
+        element: <Yacht />,
+      },
+      {
+        path: "/architettura",
+        element: <Architettura />,
+      },
+      {
+
         path: "/footwear",
         element: <Footwear />,
       },
