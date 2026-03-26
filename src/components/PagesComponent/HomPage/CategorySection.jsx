@@ -19,63 +19,70 @@ const categories = [
   {
     icon: Drone,
     title: "DRONI & COMPONENTI",
-    title2: "drone",
+    link: "/drone",
     subtitle: "Stampa componenti leggeri e resistenti per droni ad alte prestazioni.",
   },
   {
     icon: Automotive,
     title: "AUTOMOTIVE D'EPOCA E PARTI RARE",
-    title2: "vintage",
+    link: "/vintage",
     subtitle: "Ricrea componenti introvabili per restauri di precisione.",
   },
   {
     icon: Yatch,
     title: "YACHT & COMPONENTI",
+    link: "/yatch",
     subtitle: "Parti tecniche e accessori custom per il settore nautico.",
   },
   {
     icon: Medicale,
     title: "MEDICALE, LAB & BIOTECH",
+    link: "/medicale",
     subtitle: "Stampa elementi di precisione per ricerca, laboratorio e medicale.",
   },
   {
     icon: Dime,
     title: "DIME & COMPONENTI INDUSTRIALI",
+    link: "/industriale",
     subtitle: "Attrezzature tecniche e componenti per produzione industriale.",
   },
   {
     icon: Architectaa,
     title: "ARCHITETTURA",
+    link: "/architettura",
     subtitle: "Modelli architettonici dettagliati per studi e presentazioni.",
   },
   {
     icon: Support,
     title: "SUPPORTI VETERINARI",
+    link: "/veterinari",
     subtitle: "Produzione additiva ad alta precisione per componenti funzionali e industriali.",
   },
   {
     icon: Proto,
     title: "GIOIELLERIA",
+    link: "/gioielleria",
     subtitle: "Prototipi e modelli di precisione per design e fusione.",
   },
   {
     icon: Fashions,
     title: "FASHION",
+    link: "/footwear",
     subtitle: "Accessori e componenti innovativi per moda e design.",
   },
   {
     icon: Prodo,
     title: "PROTOTIPI & PRODOTTI CUSTOM",
+    link: "/prototipi",
     subtitle: "Dall'idea al prodotto: prototipi e soluzioni su misura.",
   },
   {
     icon: Alimantare,
     title: "ALIMENTARE",
+    link: "/alimentare",
     subtitle: "Stampi e strumenti personalizzati per il settore food.",
   },
 ];
-
-const COLS = 3;
 
 const CategoryCard = ({ category }) => {
   const navigate = useNavigate();
@@ -83,7 +90,7 @@ const CategoryCard = ({ category }) => {
 
   return (
     <div
-      onClick={() => navigate(`/${category.title2}`)}
+      onClick={() => navigate(`/${category.link}`)}
       className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
       <div className="lg:p-6  p-3 flex flex-col items-center gap-y-3 flex-grow">
@@ -129,8 +136,8 @@ const CategorySection = () => {
             </h2>
           </div>
 
-          <ul 
-           className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
+          <ul
+            className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
             {categories.map((category, idx) => {
               const isLastRow = idx >= 8;
 

@@ -7,10 +7,13 @@ import TechnologiesSectionDrone from "../components/PagesComponent/Drone/Technol
 import WhyChooseSectionDrone from "../components/PagesComponent/Drone/WhyChooseSectionDrone";
 import StartYourProject from "../components/PagesComponent/Drone/StartYourProject";
 import Contact from "../components/CommonComponents/Contact";
+import NewBanner from "../components/CommonComponents/NewBanner";
+import DroneBAnner from "../assets/img/bg/droneban.png"
 
 export const Drone = () => {
   return (
     <div className="">
+      <NewBanner image={DroneBAnner} title={"DRONI & UAV COMPONENTI"} />
       <SlsAdvantagesSectionDrone />
       <MaterialsGridSectionDrone />
       <PrintingTechnologiesDrone />

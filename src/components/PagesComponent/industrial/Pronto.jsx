@@ -7,6 +7,18 @@ const Pronto = () => {
       <Container>
         <h2 className='lg:text-4xl text-2xl font-semibold text-[#0A0A0A]'>Pronto a Stampare il Tuo Progetto?</h2>
         <p className='text-xs font-normal text-[#1E2939] pt-4'>Carica il tuo file o contattaci per una consulenza tecnica gratuita. Analizziamo la tua geometria e ti proponiamo il materiale e la tecnologia più adatta.</p>
+        <div className="flex md:flex-row flex-col gap-6 py-10">
+          <div className="">
+            <h3 className='text-base font-semibold text-black'>Carica il Tuo File.</h3>
+            <h5 className='text-base font-normal text-black py-4'>Inviaci il tuo file CAD o STL. Riceverai un preventivo dettagliato entro 24 ore.</h5>
+            <h6 className='text-base font-semibold text-[#1E2939] cursor-pointer'>→ Invia il file</h6>
+          </div>
+          <div className="">
+            <h3 className='text-base font-semibold text-black'>Richiedi Consulenza</h3>
+            <h5 className='text-xs font-normal text-black py-4'>Parla con i nostri tecnici per trovare la soluzione ottimale per la tua applicazione.</h5>
+            <h6 className='text-base font-semibold text-[#1E2939] cursor-pointer'>→ Contattaci</h6>
+          </div>
+        </div>
       </Container>
     </section>
   )
