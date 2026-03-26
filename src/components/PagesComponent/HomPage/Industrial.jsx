@@ -4,6 +4,7 @@ import Dime from "../../PagesComponent/industrial/Dime"
 import Materiali from "../../PagesComponent/industrial/Materiali"
 import Pronto from "../../PagesComponent/industrial/Pronto"
 import InduatrialBg from "../../../assets/img/industrial/industrialbg.png"
+import Contact from '../../CommonComponents/Contact'
 
 const Industrial = () => {
   return (
@@ -11,7 +12,10 @@ const Industrial = () => {
       <NewBanner image={InduatrialBg} title={"DIME & COMPONENTI INDUSTRIALI"} />
       <Dime />
       <Materiali />
-      <Pronto/>
+      <Pronto />
+      <div className="lg:pb-18 pb-8">
+        <Contact />
+      </div>
     </section>
   )
 }
