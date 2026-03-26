@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
-import { Outlet, ScrollRestoration, Navigate } from "react-router";
+import { Outlet } from "react-router";
+import ScrollToTop from "../shared/ScrollToTop ";
 
 const Layout = () => {
   useEffect(() => {
@@ -14,10 +15,10 @@ const Layout = () => {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <Outlet />
       <Footer />
-      <ScrollRestoration getKey={location => location.pathname} />
     </>
   );
 };
