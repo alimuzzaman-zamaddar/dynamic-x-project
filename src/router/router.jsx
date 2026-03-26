@@ -13,6 +13,7 @@ import Vintage from "../pages/Vintage";
 import { Drone } from "../pages/Drone";
 import Footwear from "../pages/Footwear";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
+import MedicaleLab from "../pages/MedicaleLab";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/industrial",
         element: <Industrial />,
+      },
+      {
+        path: "/medicale-lab",
+        element: <MedicaleLab />,
       },
       {
         path: "/coming-soon",
