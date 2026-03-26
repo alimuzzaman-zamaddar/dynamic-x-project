@@ -6,6 +6,8 @@ import ArchitecturalModels from "../components/PagesComponent/Architettura/Archi
 import CosaStampiamo from "../components/PagesComponent/Architettura/CosaStampiamo";
 import MaterialAndTechnologySection from "../components/PagesComponent/Architettura/MaterialAndTechnologySection";
 import CadToPhysicalSection from "../components/PagesComponent/Architettura/CadToPhysicalSection";
+import WhyChooseUsSectionatchitettura from "../components/PagesComponent/Architettura/WhyChooseUsSectionatchitettura";
+import RequestQuoteSection from "../components/PagesComponent/Architettura/RequestQuoteSection";
 
 const Architettura = () => {
   return (
@@ -16,7 +18,8 @@ const Architettura = () => {
       <CosaStampiamo />
       <MaterialAndTechnologySection />
       <CadToPhysicalSection />
-
+      <WhyChooseUsSectionatchitettura />
+      <RequestQuoteSection />
 
       <div className="mb-6">
         <Contact />
