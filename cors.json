@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:5173", "https://your-production-domain.com"],
+    "origin": ["http://localhost:5173", "https://stefano-dynamix.netlify.app/"],
     "method": ["GET", "POST", "PUT", "DELETE", "HEAD"],
     "maxAgeSeconds": 3600,
     "responseHeader": ["Content-Type", "Authorization"]
