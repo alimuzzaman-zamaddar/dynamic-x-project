@@ -3,7 +3,7 @@ import Container from "../../../shared/Container";
 
 const Nostro = () => {
   return (
-    <section className="py-16">
+    <section className="lg:py-18 py-8">
       <Container>
         {/* Title */}
         <h2 className="lg:text-4xl text-2xl font-semibold text-[#0A0A0A]">
