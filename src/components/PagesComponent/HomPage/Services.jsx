@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import Container from "../../../shared/Container";
 import machine from "../../../assets/img/home/service.png";
 import machine1 from "../../../assets/img/home/service2.png";
 import machine2 from "../../../assets/img/home/service3.png";
@@ -7,7 +8,6 @@ import machine4 from "../../../assets/img/home/service5.png";
 import machine5 from "../../../assets/img/home/service6.png";
 import machine6 from "../../../assets/img/home/serive7.png";
 import machine7 from "../../../assets/img/home/service8.png";
-import Container from "../../../shared/Container";
 
 const techonologies = [
   {

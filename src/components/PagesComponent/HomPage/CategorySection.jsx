@@ -73,7 +73,7 @@ const categories = [
   {
     icon: Prodo,
     title: "PROTOTIPI & PRODOTTI CUSTOM",
-    link: "/prototipi",
+    link: "/prototyping",
     subtitle: "Dall'idea al prodotto: prototipi e soluzioni su misura.",
   },
   {

@@ -2,7 +2,6 @@ import React from 'react';
 
 const YachtComponentSection = () => {
   return (
-    // section with default py-5 md:py-8 from your theme
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard content max-width (1040px) */}
       <div className="container-main">

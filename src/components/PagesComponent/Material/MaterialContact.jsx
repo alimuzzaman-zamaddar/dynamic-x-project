@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Container from "../../../shared/Container";
-import CustomDropdown from "../../CustomComponents/CustomDropDown";
 import { FileUpload } from "../../SvgContainer/SvgContainer";
+import CustomDropdown from "../../CustomComponents/CustomDropDown";
 
 const MaterialContact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -23,7 +23,6 @@ const MaterialContact = ({
       preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : null,
     }));
     setUploadedFiles(prev => [...prev, ...newFiles]);
-    // Reset input so same file can be re-selected
     e.target.value = "";
   };
 

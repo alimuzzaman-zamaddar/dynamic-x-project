@@ -1,10 +1,10 @@
 import React from 'react'
-import NewBanner from '../../CommonComponents/NewBanner'
-import Dime from "../../PagesComponent/industrial/Dime"
-import Materiali from "../../PagesComponent/industrial/Materiali"
-import Pronto from "../../PagesComponent/industrial/Pronto"
-import InduatrialBg from "../../../assets/img/industrial/industrialbg.png"
 import Contact from '../../CommonComponents/Contact'
+import Dime from "../../PagesComponent/industrial/Dime"
+import NewBanner from '../../CommonComponents/NewBanner'
+import Pronto from "../../PagesComponent/industrial/Pronto"
+import Materiali from "../../PagesComponent/industrial/Materiali"
+import InduatrialBg from "../../../assets/img/industrial/industrialbg.png"
 
 const Industrial = () => {
   return (

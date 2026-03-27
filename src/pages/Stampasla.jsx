@@ -1,6 +1,10 @@
 import React from "react";
-import StatsSectionsla from "../components/PagesComponent/Stampasla/StatsSectionsla";
 import bannerimage from "../assets/img/stampa/banner2.png";
+import Contact from "../components/CommonComponents/Contact";
+import CtaSection from "../components/PagesComponent/Stampasla/CtaSection";
+import ProcessSection from "../components/PagesComponent/Stampasla/ProcessSection";
+import ProsConsSection from "../components/PagesComponent/Stampasla/ProsConsSection";
+import StatsSectionsla from "../components/PagesComponent/Stampasla/StatsSectionsla";
 import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import WhyChooseSection from "../components/PagesComponent/Stampasla/WhyChooseSection";
 import {
@@ -9,12 +13,10 @@ import {
   SearchIcon,
   TempiIcon,
 } from "../components/SvgContainer/SvgContainer1";
-import ProcessSection from "../components/PagesComponent/Stampasla/ProcessSection";
-import CtaSection from "../components/PagesComponent/Stampasla/CtaSection";
 import MaterialsInfoSection from "../components/PagesComponent/Stampasla/MaterialsInfoSection";
-import ProsConsSection from "../components/PagesComponent/Stampasla/ProsConsSection";
 import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
-import Contact from "../components/CommonComponents/Contact";
+
+
 const statsData = [
   {
     value: "0.025mm",
@@ -98,6 +100,7 @@ const tableData = [
     avg: 4.5,
   },
 ];
+
 export const Stampasla = () => {
   return (
     <div>

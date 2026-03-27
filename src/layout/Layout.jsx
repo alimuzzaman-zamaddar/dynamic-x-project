@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 import { Outlet } from "react-router";
+import React, { useEffect } from "react";
 import ScrollToTop from "../shared/ScrollToTop ";
 
 const Layout = () => {
