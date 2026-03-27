@@ -29,7 +29,7 @@ const navMenu = [
   },
   {
     label: "2D to 3D",
-    path: "/",
+    path: "/2d3d",
   },
   {
     label: "Bio stamp 3D",

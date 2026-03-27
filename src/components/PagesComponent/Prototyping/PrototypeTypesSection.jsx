@@ -23,7 +23,7 @@ const PrototypeTypesSection = () => {
       <div className="container-main flex flex-col">
         
         {/* Header Block with custom gap */}
-        <div className="flex flex-col gap-6 section-header">
+        <div className="flex flex-col gap-6 section-header border-b-2 border-black pb-5">
           {/* section-title for uniform title style (4xl on md) */}
           <h2 className="section-title">
             Tipologie di Prototipo
@@ -40,7 +40,7 @@ const PrototypeTypesSection = () => {
             // Flex column to manage point content layout
             <div key={index} className="flex flex-col gap-4 text-left">
               {/* Point Title */}
-              <h3 className="text-primary-black font-semibold text-2xl leading-tight">
+              <h3 className="text-primary-black font-semibold ">
                 {point.title}
               </h3>
               {/* Point Description (small text size with standard leading) */}
