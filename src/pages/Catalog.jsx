@@ -6,6 +6,7 @@ import Vita from '../components/PagesComponent/Catalog/Vita'
 import Pensato from '../components/PagesComponent/Catalog/Pensato'
 import Resta from '../components/PagesComponent/Catalog/Resta'
 import Portata from '../components/PagesComponent/Catalog/Portata'
+import Contact from '../components/CommonComponents/Contact'
 
 const Catalog = () => {
   return (
@@ -16,6 +17,7 @@ const Catalog = () => {
       <Pensato />
       <Resta />
       <Portata />
+      <Contact />
     </>
   )
 }
