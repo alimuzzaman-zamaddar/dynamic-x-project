@@ -31,7 +31,7 @@ const categories = [
   {
     icon: Yatch,
     title: "YACHT & COMPONENTI",
-    link: "/yatch",
+    link: "/yacht",
     subtitle: "Parti tecniche e accessori custom per il settore nautico.",
   },
   {
@@ -43,7 +43,7 @@ const categories = [
   {
     icon: Dime,
     title: "DIME & COMPONENTI INDUSTRIALI",
-    link: "/industriale",
+    link: "/industrial",
     subtitle: "Attrezzature tecniche e componenti per produzione industriale.",
   },
   {
@@ -55,7 +55,7 @@ const categories = [
   {
     icon: Support,
     title: "SUPPORTI VETERINARI",
-    link: "/veterinari",
+    link: "/vetemarysupports",
     subtitle: "Produzione additiva ad alta precisione per componenti funzionali e industriali.",
   },
   {
