@@ -20,6 +20,7 @@ import Jwellery from "../pages/Jwellery";
 import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
 import Prototyping from "../pages/Prototyping";
+import TwoDThreeD from "../pages/TwoDThreeD";
 
 
 const router = createBrowserRouter([
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: "/prototyping",
         element: <Prototyping />,
+      },
+      {
+        path: "/2d3d",
+        element: <TwoDThreeD />,
       },
       {
 

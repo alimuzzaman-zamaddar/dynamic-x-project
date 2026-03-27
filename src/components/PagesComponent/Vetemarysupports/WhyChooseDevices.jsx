@@ -1,11 +1,5 @@
 import React from 'react';
 
-/**
- * WhyChooseDevices Component
- * Renders a specialized section for "Perché Scegliere i Nostri Dispositivi" following
- * the established design system: .section for padding, .container-main for max-width,
- * and a 2x2 grid of featured cards with numerical dividers.
- */
 const WhyChooseDevices = () => {
   const points = [
     {

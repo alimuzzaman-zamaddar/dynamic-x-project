@@ -5,15 +5,23 @@ import ConceptToProductSection from "../components/PagesComponent/Prototyping/Co
 import PrintTechnologiesSection from "../components/PagesComponent/Prototyping/PrintTechnologiesSection";
 import PrototypeTypesSection from "../components/PagesComponent/Prototyping/PrototypeTypesSection";
 import TimeToMarketSection from "../components/PagesComponent/Prototyping/TimeToMarketSection";
+import PrototypingCosa from "../components/PagesComponent/Prototyping/PrototypingCosa";
+import ProductDevelopmentCTA from "../components/PagesComponent/Prototyping/ProductDevelopmentCTA";
+import Contact from "../components/CommonComponents/Contact";
 
 const Prototyping = () => {
   return (
     <div>
       <NewBanner title="Prototyping" image={banner} />
       <ConceptToProductSection />
+      <PrototypingCosa />
       <PrintTechnologiesSection />
       <PrototypeTypesSection />
       <TimeToMarketSection />
+      <ProductDevelopmentCTA />
+      <div className="mb-6">
+        <Contact />
+      </div>
     </div>
   );
 };
