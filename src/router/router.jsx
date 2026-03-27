@@ -22,7 +22,6 @@ import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import Prototyping from "../pages/Prototyping";
 import TwoDThreeD from "../pages/TwoDThreeD";
 
 
