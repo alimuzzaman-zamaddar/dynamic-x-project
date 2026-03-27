@@ -11,7 +11,7 @@ const NewBanner = ({
 }) => {
   return (
     <div
-      className="w-full xl:pt-65 pt-40 pb-20 bg-center bg-cover bg-no-repeat"
+      className="w-full xl:pt-65 pt-35 xl:pb-20 pb-10 bg-center bg-cover bg-no-repeat"
       style={{ backgroundImage: `url(${image})` }}
     >
       <div className="banner-content text-center px-2 sm:px-4">
