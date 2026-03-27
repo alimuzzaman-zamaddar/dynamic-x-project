@@ -17,7 +17,9 @@ const Catalog = () => {
       <Pensato />
       <Resta />
       <Portata />
-      <Contact />
+      <div className="lg:pb-18 pb-8">
+        <Contact />
+      </div>
     </>
   )
 }
