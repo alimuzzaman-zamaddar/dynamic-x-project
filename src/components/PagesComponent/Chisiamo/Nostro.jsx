@@ -5,12 +5,10 @@ const Nostro = () => {
   return (
     <section className="lg:pb-18 pb-8">
       <Container>
-        {/* Title */}
         <h2 className="lg:text-4xl text-2xl font-semibold text-[#0A0A0A]">
           Il Nostro Approccio
         </h2>
 
-        {/* Description */}
         <p className="text-xs font-normal text-[#1E2939] pt-4 max-w-4xl">
           Ogni progetto DynamicsX segue un percorso strutturato e collaudato,
           pensato per garantire il massimo risultato in tempi ottimali. Il
@@ -20,7 +18,6 @@ const Nostro = () => {
           seconda della complessità del componente.
         </p>
 
-        {/* Top Bars */}
         <div className="flex flex-col gap-3 my-10">
           <div className="bg-[#1A1F2E] py-4 px-6 w-[75%]">
             <h2 className="text-[14px] font-semibold text-white">
@@ -41,15 +38,11 @@ const Nostro = () => {
           </div>
         </div>
 
-        {/* Timeline */}
         <div className="relative mt-16">
-          {/* Center line */}
-          <div className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-[2px] bg-gray-300"></div>
+          <div className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-0.5 bg-gray-300"></div>
 
           <div className="flex flex-col gap-16">
-            {/* Phase 1 */}
             <div className="relative flex items-start justify-between">
-              {/* Left */}
               <div className="w-[45%] text-right">
                 <h3 className="text-sm font-semibold text-[#0A0A0A]">
                   Fase 1 — Ascolto e Analisi

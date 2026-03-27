@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router";
 import { FiArrowUpRight } from "react-icons/fi";
 import { ArrowBlack } from "../../SvgContainer/SvgContainer";
 import hero_video from "../../../assets/videos/recording mountain top.mp4";
-import { Link } from "react-router";
 
 const HomeHero = () => {
   return (

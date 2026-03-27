@@ -1,11 +1,5 @@
 import React from 'react';
 
-/**
- * HighQualityMaterialsSection Component
- * Renders a specialized section for "Materiali di Alta Qualità" following
- * the established design system: .section for padding, .container-main for max-width,
- * and specific text styling for titles, descriptions, and list items with black bullets.
- */
 const HighQualityMaterialsSection = () => {
   const materials = [
     {

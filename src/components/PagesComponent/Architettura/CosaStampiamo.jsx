@@ -1,8 +1,8 @@
 import React from "react";
 import Container from "../../../shared/Container";
-import Ochiali from "../../../assets/img/stampa/Image (Plastici e Masterplan).png";
-import Ochiali1 from "../../../assets/img/stampa/Image (Interni Dettagliati).png";
 import Ochiali2 from "../../../assets/img/stampa/Image (Mockup Immobiliari).png";
+import Ochiali1 from "../../../assets/img/stampa/Image (Interni Dettagliati).png";
+import Ochiali from "../../../assets/img/stampa/Image (Plastici e Masterplan).png";
 
 const CosaStampiamo = () => {
   return (

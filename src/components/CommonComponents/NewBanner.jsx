@@ -1,13 +1,13 @@
 import React from "react";
-import { ArrowBlack } from "../SvgContainer/SvgContainer";
 import { Link } from "react-router";
+import { ArrowBlack } from "../SvgContainer/SvgContainer";
 
 const NewBanner = ({
   title,
   description = "",
   buttonText = "Upload Design",
   image,
-  showButton = true, // ← new prop, true by default
+  showButton = true,
 }) => {
   return (
     <div

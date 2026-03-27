@@ -1,5 +1,4 @@
 import React from 'react';
-import { HiOutlineCheckCircle } from "react-icons/hi2"; // A filled icon would match better
 import { CheckIcon } from '../../SvgContainer/SvgContainer1';
 
 const StartProjectSection = () => {

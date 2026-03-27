@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../../shared/Container";
-import Ochiali from "../../../assets/img/stampa/Image (Supporti Strumentazione).png";
 import Ochiali1 from "../../../assets/img/stampa/Image (Bocchette Custom).png";
+import Ochiali from "../../../assets/img/stampa/Image (Supporti Strumentazione).png";
 import Ochiali2 from "../../../assets/img/stampa/Image (Alloggiamenti Elettronica).png";
 import Ochiali3 from "../../../assets/img/stampa/Image (Parti Interior Personalizzate).png";
 

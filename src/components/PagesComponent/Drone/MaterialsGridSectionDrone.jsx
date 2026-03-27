@@ -1,5 +1,4 @@
 import React from "react";
-
 import img1 from "../../../assets/img/stampa/ImageWithFallback.png";
 import img2 from "../../../assets/img/stampa/ImageWithFallback (1).png";
 import img3 from "../../../assets/img/stampa/ImageWithFallback (2).png";

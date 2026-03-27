@@ -1,8 +1,7 @@
 import { useParams } from "react-router";
 import { technologies } from "../../static_data/static.data";
-import ComparisonSection from "../PagesComponent/TechnologyDetails/ComparisonSection";
-import FdmSection from "../PagesComponent/TechnologyDetails/FdmSection";
 import FdmTechnologySection from "../PagesComponent/TechnologyDetails/FdmSection";
+import ComparisonSection from "../PagesComponent/TechnologyDetails/ComparisonSection";
 
 const TechnologyDetails = () => {
   const { title } = useParams();

@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../../../assets/img/home/DynamicsX - GREEN 1.png";
 import Container from "../../../shared/Container";
+import logo from "../../../assets/img/home/DynamicsX - GREEN 1.png";
 
 const About = () => {
   return (

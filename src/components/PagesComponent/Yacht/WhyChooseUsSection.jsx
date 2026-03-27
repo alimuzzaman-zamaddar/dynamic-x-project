@@ -1,6 +1,5 @@
 import React from "react";
 import { CheckIcon } from "../../SvgContainer/SvgContainer1";
-// import { HiCheckCircle } from "react-icons/hi2"; // Optional: to replace the SVG check with a robust icon library
 
 const WhyChooseUsSection = () => {
   const stats = [

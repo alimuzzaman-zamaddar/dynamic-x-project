@@ -1,7 +1,4 @@
 import React from 'react';
-import { HiOutlineWrench } from "react-icons/hi2";
-import { GiTrophy } from "react-icons/gi";
-import { HiOutlineTruck } from "react-icons/hi2";
 import { CollezionistiIcon, ToolsIcon, VintageCarIcon } from '../../SvgContainer/SvgContainer1';
 
 const PerChiLavoriamo = () => {

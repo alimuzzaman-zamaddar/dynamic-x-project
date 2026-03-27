@@ -1,8 +1,8 @@
 import React from 'react'
-import { Analysis, Carica, Consegna, FileUpload, Preventivo, Prodizune } from '../../SvgContainer/SvgContainer'
-import { FeatureCard } from '../../CommonComponents/FeatureCard'
-import Container from '../../../shared/Container'
 import { Link } from 'react-router'
+import Container from '../../../shared/Container'
+import { FeatureCard } from '../../CommonComponents/FeatureCard'
+import { Analysis, Carica, Consegna, FileUpload, Preventivo, Prodizune } from '../../SvgContainer/SvgContainer'
 
 const UploadYourDesign = () => {
   return (

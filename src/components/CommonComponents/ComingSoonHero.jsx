@@ -1,6 +1,6 @@
 import React from "react";
-import hero_video from "../../assets/videos/recording mountain top.mp4";
 import { ArrowBlack } from "../SvgContainer/SvgContainer";
+import hero_video from "../../assets/videos/recording mountain top.mp4";
 
 const ComingSoonHero = () => {
   return (
