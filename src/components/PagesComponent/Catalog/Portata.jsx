@@ -3,7 +3,7 @@ import Container from '../../../shared/Container'
 
 const Portata = () => {
   return (
-    <section className='lg:py-18 py-8'>
+    <section className='lg:pt-18 pt-8'>
       <Container>
         <h2 className="section-title mb-3">
           Il Futuro è a Portata di Clic.

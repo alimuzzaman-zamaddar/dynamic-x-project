@@ -21,6 +21,7 @@ import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
 import Prototyping from "../pages/Prototyping";
 import Catalog from "../pages/Catalog";
+import ChiSiamo from "../pages/ChiSiamo";
 
 
 const router = createBrowserRouter([
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: "/catalog",
         element: <Catalog />,
+      },
+      {
+        path: "/chi-siamo",
+        element: <ChiSiamo />,
       },
       {
         path: "/technology-details/:title",
