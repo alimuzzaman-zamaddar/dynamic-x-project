@@ -19,6 +19,7 @@ import MedicaleLab from "../pages/MedicaleLab";
 import Jwellery from "../pages/Jwellery";
 import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
+import Prototyping from "../pages/Prototyping";
 
 
 const router = createBrowserRouter([
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/vetemarysupports",
         element: <Vetemarysupports />,
+      },
+      {
+        path: "/prototyping",
+        element: <Prototyping />,
       },
       {
 

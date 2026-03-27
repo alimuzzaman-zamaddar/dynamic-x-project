@@ -550,3 +550,13 @@ export const FileIcon = () => {
 </svg>
   );
 };
+export const TargetIcon = () => {
+  return (
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+  <path d="M13.9975 25.664C20.4402 25.664 25.663 20.4412 25.663 13.9985C25.663 7.55582 20.4402 2.33301 13.9975 2.33301C7.55485 2.33301 2.33203 7.55582 2.33203 13.9985C2.33203 20.4412 7.55485 25.664 13.9975 25.664Z" stroke="#1A1A1A" stroke-width="2.3331" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M13.9993 20.9978C17.8649 20.9978 20.9986 17.8642 20.9986 13.9986C20.9986 10.133 17.8649 6.99927 13.9993 6.99927C10.1337 6.99927 7 10.133 7 13.9986C7 17.8642 10.1337 20.9978 13.9993 20.9978Z" stroke="#1A1A1A" stroke-width="2.3331" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M13.9972 16.3317C15.2857 16.3317 16.3303 15.2872 16.3303 13.9986C16.3303 12.7101 15.2857 11.6655 13.9972 11.6655C12.7086 11.6655 11.6641 12.7101 11.6641 13.9986C11.6641 15.2872 12.7086 16.3317 13.9972 16.3317Z" stroke="#1A1A1A" stroke-width="2.3331" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18.6641 9.33241L22.1637 5.83276M18.6641 9.33241H22.1637M18.6641 9.33241V5.83276" stroke="#1A1A1A" stroke-width="2.3331" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+  );
+};
