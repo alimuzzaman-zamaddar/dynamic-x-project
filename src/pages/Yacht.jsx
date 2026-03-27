@@ -1,12 +1,12 @@
 import React from "react";
-import NewBanner from "../components/CommonComponents/NewBanner";
 import banner from "../assets/img/stampa/Yacht.png";
+import Contact from "../components/CommonComponents/Contact";
+import NewBanner from "../components/CommonComponents/NewBanner";
 import Componenti from "../components/PagesComponent/Yacht/Componenti";
+import WhyChooseUsSection from "../components/PagesComponent/Yacht/WhyChooseUsSection";
+import TechnologiesSection from "../components/PagesComponent/Yacht/TechnologiesSection";
 import YachtComponentSection from "../components/PagesComponent/Yacht/YachtComponentSection";
 import CertifiedMaterialsSection from "../components/PagesComponent/Yacht/CertifiedMaterialsSection";
-import TechnologiesSection from "../components/PagesComponent/Yacht/TechnologiesSection";
-import WhyChooseUsSection from "../components/PagesComponent/Yacht/WhyChooseUsSection";
-import Contact from "../components/CommonComponents/Contact";
 
 export const Yacht = () => {
   return (

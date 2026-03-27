@@ -10,7 +10,7 @@ const navMenu = [
   },
   {
     label: "Chi Siamo",
-    path: "/",
+    path: "/chi-siamo",
   },
   {
     label: "Servizi",
@@ -25,7 +25,7 @@ const navMenu = [
 
   {
     label: "Catalogo",
-    path: "/",
+    path: "/catalog",
   },
   {
     label: "2D to 3D",
@@ -83,21 +83,23 @@ const Navbar = () => {
     };
   }, []);
   const isHome = pathName === "/";
-  const isFashion = pathName === "/footwear";
-  const isIndustrial = pathName === "/industrial";
-  const isMedicale = pathName === "/medicale-lab";
-  const isJwellery = pathName === "/jwellery";
   const isDrone = pathName === "/drone";
   const isVintage = pathName === "/vintage";
-  const isArchitettura = pathName === "/architettura";
+  const isCatalog = pathName === "/catalog";
+  const isFashion = pathName === "/footwear";
+  const isJwellery = pathName === "/jwellery";
+  const isChiSiamo = pathName === "/chi-siamo";
+  const isIndustrial = pathName === "/industrial";
   const isVeterinary = pathName === "/veterinary";
+  const isMedicale = pathName === "/medicale-lab";
+  const isArchitettura = pathName === "/architettura";
 
   return (
     <nav
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
   ${pathName.includes("/technology-details")
           ? "bg-transparent"
-          : isHome || isFashion || isIndustrial || isMedicale || isJwellery || isArchitettura || isVintage || isDrone || isVeterinary
+        : isHome || isFashion || isIndustrial || isMedicale || isJwellery || isArchitettura || isVintage || isDrone || isVeterinary || isCatalog || isChiSiamo
             ? scrollY < 200
               ? "bg-transparent"
               : "bg-black"

@@ -1,5 +1,4 @@
 import React from 'react';
-// Assuming the artisan image is uploaded to assets/img/artisan-model-maker.jpg
 import ArtisanGraphic from '../../../assets/img/stampa/Architect.png';
 
 const WhyChooseUsSectionatchitettura = () => {

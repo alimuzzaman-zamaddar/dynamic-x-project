@@ -1,12 +1,7 @@
 import React from 'react';
-// Assuming the image from image_12.png is uploaded to assets/img/cad-physical-graphic.png
 import CadPhysicalGraphic from '../../../assets/img/stampa/CadToPhysicalSection.png';
 
-/**
- * CadToPhysicalSection Component
- * Renders the "Dal File CAD al Modello Fisico" section, including the 
- * four-step process positioned around the central graphic from image_12.png.
- */
+
 const CadToPhysicalSection = () => {
   const steps = [
     { 

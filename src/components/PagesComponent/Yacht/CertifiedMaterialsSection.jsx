@@ -1,39 +1,37 @@
 import React from 'react';
-import { FaUser } from 'react-icons/fa';
-import { HiOutlineSun, HiOutlineWrench } from "react-icons/hi2";
 import { IoIosWater } from "react-icons/io";
 import { FileIcon } from '../../SvgContainer/SvgContainer1';
+import { HiOutlineSun, HiOutlineWrench } from "react-icons/hi2";
 
 const CertifiedMaterialsSection = () => {
   const materials = [
     {
       id: 1,
-      icon: <HiOutlineSun className="size-8" />, // Representing UV resistance
+      icon: <HiOutlineSun className="size-8" />, 
       title: "ASA Marino",
       description: "Acrilonitrile Stirene Acrilato con stabilizzatori UV avanzati. Eccellente resistenza agli agenti atmosferici, colori stabili nel tempo, ideale per componenti in vista su coperta."
     },
     {
       id: 2,
-      icon: <HiOutlineWrench className="size-8" />, // Representing technical ease of post-processing
+      icon: <HiOutlineWrench className="size-8" />, 
       title: "PETG Tecnico",
       description: "Polietilene tereftalato glicole ad alta purezza. Ottima resistenza chimica, trasparenza selettiva, facilità di lavorazione post-stampa per finiture premium."
     },
     {
       id: 3,
-      icon: <FileIcon />, // Representing layers/strength for Nylon
+      icon: <FileIcon />,
       title: "Nylon",
       description: "Poliammide ad alta tenacità per parti soggette a carichi meccanici ripetuti. Elevata flessibilità, resistenza all'abrasione e compatibilità con inserti metallici."
     },
     {
       id: 4,
-      icon: <IoIosWater className="size-8" />, // Representing water/fluid near motors
+      icon: <IoIosWater className="size-8" />, 
       title: "Resine High-Temp",
       description: "Resine fotoinduribili per applicazioni ad alta temperatura. Ideali per alloggiamenti vicini a motori, impianti di scarico o componenti in prossimità di fonti di calore."
     }
   ];
 
   return (
-    // section class for consistent py-5 md:py-8
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard max-width */}
       <div className="container-main">

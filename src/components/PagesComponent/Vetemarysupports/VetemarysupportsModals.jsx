@@ -1,8 +1,8 @@
 import React from "react";
 import Container from "../../../shared/Container";
-import Ochiali from "../../../assets/img/stampa/Image (Tutori Personalizzati).png";
 import Ochiali1 from "../../../assets/img/stampa/Image (Protesi).png";
 import Ochiali2 from "../../../assets/img/stampa/Image (Guide Chirurgiche).png";
+import Ochiali from "../../../assets/img/stampa/Image (Tutori Personalizzati).png";
 
 const VetemarysupportsModals = () => {
   return (

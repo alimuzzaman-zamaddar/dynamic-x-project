@@ -3,9 +3,9 @@ import {
   ArrowWhite,
 } from "../../SvgContainer/SvgContainer";
 import model from "../../../assets/img/technology/model.png";
-import prototype from "../../../assets/img/technology/prototype.png";
 import pattern from "../../../assets/img/technology/pattern.png";
 import fixtures from "../../../assets/img/technology/fixtures.png";
+import prototype from "../../../assets/img/technology/prototype.png";
 import production from "../../../assets/img/technology/production.png";
 
 const fdmDAta = [

@@ -2,7 +2,6 @@ export default function AutomotiveSection() {
   return (
     <section className="section">
       <div className="container-main">
-        {/* ===== TOP CONTENT ===== */}
         <div className="section-header text-left">
           <h2 className="section-title mb-4">
             Automotive d'Epoca & Parti Rare

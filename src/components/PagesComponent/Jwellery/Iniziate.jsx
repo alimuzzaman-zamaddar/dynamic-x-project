@@ -1,6 +1,6 @@
 import React from 'react'
-import Container from '../../../shared/Container'
 import Inti from "../../../assets/img/inti.png"
+import Container from '../../../shared/Container'
 
 const Iniziate = () => {
   return (

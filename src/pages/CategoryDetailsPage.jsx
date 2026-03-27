@@ -1,6 +1,6 @@
 import React from "react";
-import CommonHeroV1 from "../components/CommonComponents/CommonHeroV1";
 import Contact from "../components/CommonComponents/Contact";
+import CommonHeroV1 from "../components/CommonComponents/CommonHeroV1";
 
 const CategoryDetailsPage = () => {
   return (

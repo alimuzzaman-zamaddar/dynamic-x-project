@@ -1,9 +1,8 @@
 import React from "react";
-
 import img1 from "../../../assets/img/stampa/Image (PA12 — Nylon Standard).png"
 import img2 from "../../../assets/img/stampa/Image (PA11 — Maggiore Elasticità).png"
-import img3 from "../../../assets/img/stampa/Image (TPU Flex — Componenti Flessibili).png"
 import img4 from "../../../assets/img/stampa/Image (Alumide — Composito Metallico).png"
+import img3 from "../../../assets/img/stampa/Image (TPU Flex — Componenti Flessibili).png"
 
 const MaterialsGridSection = () => {
   return (

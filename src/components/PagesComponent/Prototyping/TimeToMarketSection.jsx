@@ -1,7 +1,7 @@
-import React from "react";
-
-import { IoArrowForward } from "react-icons/io5";
-import { TargetIcon , HiOutlineLightningBolt, HiOutlineBeaker} from "../../SvgContainer/SvgContainer1";
+import React from 'react';
+import { HiOutlineArrowRight } from "react-icons/hi2";
+import { TargetIcon } from '../../SvgContainer/SvgContainer1';
+import { HiOutlineLightningBolt, HiOutlineBeaker } from "react-icons/hi";
 
 const TimeToMarketSection = () => {
   const topFeatures = [

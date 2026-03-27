@@ -1,15 +1,16 @@
 import React from "react";
-import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import banner from "../assets/img/stampa/Stampasls.png";
+import Contact from "../components/CommonComponents/Contact";
 import SlsInfoSection from "../components/PagesComponent/Stampasls/SlsInfoSection";
+import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
+import SlsProsConsSection from "../components/PagesComponent/Stampasls/SlsProsConsSection";
+import SlsComparisonTable from "../components/PagesComponent/Stampasls/SlsComparisonTable";
+import ApplicationsSection from "../components/PagesComponent/Stampasls/ApplicationsSection";
 import SlsAdvantagesSection from "../components/PagesComponent/Stampasls/SlsAdvantagesSection";
 import MaterialsGridSection from "../components/PagesComponent/Stampasls/MaterialsGridSection";
-import SlsAdvantagesSection2 from "../components/PagesComponent/Stampasls/SlsAdvantagesSection2";
-import SlsProsConsSection from "../components/PagesComponent/Stampasls/SlsProsConsSection";
-import ApplicationsSection from "../components/PagesComponent/Stampasls/ApplicationsSection";
-import SlsComparisonTable from "../components/PagesComponent/Stampasls/SlsComparisonTable";
-import Contact from "../components/CommonComponents/Contact";
 import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
+import SlsAdvantagesSection2 from "../components/PagesComponent/Stampasls/SlsAdvantagesSection2";
+
 const categories = [
   { label: "Risoluzione" },
   { label: "Accuratezza" },
@@ -42,9 +43,10 @@ const tableData = [
     avg: 4.5,
   },
 ];
+
 export const Stampasls = () => {
   return (
-    <div>
+    <>
       <div className="px-4 xl:px-0 mt-34">
         <CommonBannerSection
           title="Stampa 3D SLS"
@@ -55,7 +57,6 @@ export const Stampasls = () => {
       <SlsInfoSection />
       <SlsAdvantagesSection />
       <MaterialsGridSection />
-
       <SlsProsConsSection />
       <ApplicationsSection />
       <SlsComparisonTable />
@@ -64,6 +65,6 @@ export const Stampasls = () => {
       <div className="mb-6">
         <Contact />
       </div>
-    </div>
+    </>
   );
 };

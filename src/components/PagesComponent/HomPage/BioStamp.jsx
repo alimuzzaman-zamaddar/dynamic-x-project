@@ -1,6 +1,6 @@
 import React from "react";
-import bio_stamp from "../../../assets/img/bg/Desktop.png";
 import Container from "../../../shared/Container";
+import bio_stamp from "../../../assets/img/bg/Desktop.png";
 
 const BioStamp = () => {
   return (

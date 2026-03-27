@@ -1,13 +1,13 @@
 import React from "react";
-import AutomotiveSection from "../components/PagesComponent/Vintage/AutomotiveSection";
-import ComponentsStampiamoSection from "../components/PagesComponent/Vintage/ComponentsStampiamoSection";
-import PrintingTechnologies from "../components/PagesComponent/Vintage/PrintingTechnologies";
-import StatsSectionVintage from "../components/PagesComponent/Vintage/StatsSectionVintage";
-import PerChiLavoriamo from "../components/PagesComponent/Vintage/PerChiLavoriamo";
-import StartProjectSection from "../components/PagesComponent/Vintage/StartProjectSection";
+import Vintagebanner from "../assets/img/bg/vintageban.png"
 import Contact from "../components/CommonComponents/Contact";
 import NewBanner from "../components/CommonComponents/NewBanner";
-import Vintagebanner from "../assets/img/bg/vintageban.png"
+import PerChiLavoriamo from "../components/PagesComponent/Vintage/PerChiLavoriamo";
+import AutomotiveSection from "../components/PagesComponent/Vintage/AutomotiveSection";
+import StatsSectionVintage from "../components/PagesComponent/Vintage/StatsSectionVintage";
+import StartProjectSection from "../components/PagesComponent/Vintage/StartProjectSection";
+import PrintingTechnologies from "../components/PagesComponent/Vintage/PrintingTechnologies";
+import ComponentsStampiamoSection from "../components/PagesComponent/Vintage/ComponentsStampiamoSection";
 
 
 const statsData = [
@@ -33,7 +33,7 @@ const statsData = [
 
 const Vintage = () => {
   return (
-    <div className="">
+    <>
       <NewBanner image={Vintagebanner} title={"AUTOMOTIVE D’EPOCA & PARTI RARE"} />
       <AutomotiveSection />
       <ComponentsStampiamoSection />
@@ -48,7 +48,7 @@ const Vintage = () => {
       <div className="mb-6">
         <Contact />
       </div>
-    </div>
+    </>
   );
 };
 

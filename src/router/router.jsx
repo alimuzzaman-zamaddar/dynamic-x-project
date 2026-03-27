@@ -1,24 +1,27 @@
-import { createBrowserRouter } from "react-router";
 import Layout from "../layout/Layout";
+import Vintage from "../pages/Vintage";
+import { Drone } from "../pages/Drone";
+import { Yacht } from "../pages/Yacht";
+import Catalog from "../pages/Catalog";
 import HomePage from "../pages/HomePage";
+import Footwear from "../pages/Footwear";
+import Jwellery from "../pages/Jwellery";
+import ChiSiamo from "../pages/ChiSiamo";
+import Veterinary from "../pages/Veterinary";
+import { Stampasla } from "../pages/Stampasla";
+import { Stampasls } from "../pages/Stampasls";
+import MedicaleLab from "../pages/MedicaleLab";
+import Prototyping from "../pages/Prototyping";
+import { createBrowserRouter } from "react-router";
 import ComingSoon from "../pages/ComingSoonPage";
-import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
-import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import AllMaterials from "../pages/AllMaterials";
 import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
-import { Stampasla } from "../pages/Stampasla";
-import { Stampasls } from "../pages/Stampasls";
-import Vintage from "../pages/Vintage";
-import { Drone } from "../pages/Drone";
-import Footwear from "../pages/Footwear";
-import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import { Yacht } from "../pages/Yacht";
 import Architettura from "../pages/Architettura";
-import MedicaleLab from "../pages/MedicaleLab";
-import Jwellery from "../pages/Jwellery";
-import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
+import CategoryDetailsPage from "../pages/CategoryDetailsPage";
+import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
+import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import Prototyping from "../pages/Prototyping";
 import TwoDThreeD from "../pages/TwoDThreeD";
 
@@ -109,6 +112,14 @@ const router = createBrowserRouter([
       {
         path: "/coming-soon",
         element: <ComingSoon />,
+      },
+      {
+        path: "/catalog",
+        element: <Catalog />,
+      },
+      {
+        path: "/chi-siamo",
+        element: <ChiSiamo />,
       },
       {
         path: "/technology-details/:title",

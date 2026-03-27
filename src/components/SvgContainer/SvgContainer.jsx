@@ -31,6 +31,40 @@ export const FDM = () => {
     </svg>
   );
 };
+export const Materialli = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M17.1063 3.10461C16.7589 2.94614 16.3815 2.86414 15.9996 2.86414C15.6178 2.86414 15.2404 2.94614 14.893 3.10461L3.46629 8.30461C3.22969 8.40894 3.02853 8.57981 2.88731 8.79642C2.74609 9.01303 2.6709 9.26603 2.6709 9.52461C2.6709 9.78319 2.74609 10.0362 2.88731 10.2528C3.02853 10.4694 3.22969 10.6403 3.46629 10.7446L14.9063 15.9579C15.2537 16.1164 15.6311 16.1984 16.013 16.1984C16.3948 16.1984 16.7722 16.1164 17.1196 15.9579L28.5596 10.7579C28.7962 10.6536 28.9974 10.4827 29.1386 10.2661C29.2798 10.0495 29.355 9.79653 29.355 9.53795C29.355 9.27936 29.2798 9.02636 29.1386 8.80975C28.9974 8.59314 28.7962 8.42227 28.5596 8.31795L17.1063 3.10461Z" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2.667 16.1979C2.66637 16.4529 2.73888 16.7028 2.87595 16.9178C3.01302 17.1329 3.20889 17.3041 3.44033 17.4112L14.907 22.6245C15.2526 22.781 15.6276 22.862 16.007 22.862C16.3864 22.862 16.7614 22.781 17.107 22.6245L28.547 17.4245C28.783 17.3185 28.9831 17.146 29.1227 16.9282C29.2624 16.7104 29.3357 16.4566 29.3337 16.1979" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2.667 22.8645C2.66637 23.1195 2.73888 23.3694 2.87595 23.5844C3.01302 23.7995 3.20889 23.9707 3.44033 24.0778L14.907 29.2912C15.2526 29.4477 15.6276 29.5286 16.007 29.5286C16.3864 29.5286 16.7614 29.4477 17.107 29.2912L28.547 24.0912C28.783 23.9851 28.9831 23.8126 29.1227 23.5948C29.2624 23.377 29.3357 23.1232 29.3337 22.8645" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Light = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M20 18.6666C20.2667 17.3333 20.9333 16.4 22 15.3333C23.3333 14.1333 24 12.4 24 10.6666C24 8.54489 23.1571 6.51006 21.6569 5.00977C20.1566 3.50948 18.1217 2.66663 16 2.66663C13.8783 2.66663 11.8434 3.50948 10.3431 5.00977C8.84286 6.51006 8 8.54489 8 10.6666C8 12 8.26667 13.6 10 15.3333C10.9333 16.2666 11.7333 17.3333 12 18.6666" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M12 24H20" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.333 29.3334H18.6663" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
+export const Tech = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M23.9976 5.33276H7.99939C6.52679 5.33276 5.33301 6.52654 5.33301 7.99914V23.9974C5.33301 25.47 6.52679 26.6638 7.99939 26.6638H23.9976C25.4702 26.6638 26.664 25.47 26.664 23.9974V7.99914C26.664 6.52654 25.4702 5.33276 23.9976 5.33276Z" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M18.665 11.9987H13.3322C12.5959 11.9987 11.999 12.5955 11.999 13.3318V18.6646C11.999 19.4009 12.5959 19.9978 13.3322 19.9978H18.665C19.4013 19.9978 19.9982 19.4009 19.9982 18.6646V13.3318C19.9982 12.5955 19.4013 11.9987 18.665 11.9987Z" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M19.998 2.66638V5.33276" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M19.998 26.6638V29.3302" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2.66602 19.9978H5.33239" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2.66602 11.9987H5.33239" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M26.6641 19.9978H29.3304" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M26.6641 11.9987H29.3304" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M11.999 2.66638V5.33276" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M11.999 26.6638V29.3302" stroke="black" stroke-width="1.99978" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  );
+};
 export const SLA = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">

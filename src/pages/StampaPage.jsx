@@ -1,10 +1,13 @@
 import React from "react";
-import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import bannerImg from "../assets/img/stampa/stampa.png";
-import FeatureHighlightsSection from "../components/PagesComponent/Stampa/FeatureHighlightsSection";
-import { BenefitsSection } from "../components/PagesComponent/Stampa/BenefitsSection";
-import MaterialsSection from "../components/PagesComponent/Stampa/MaterialsSection";
+import Contact from "../components/CommonComponents/Contact";
+import StatsSection from "../components/PagesComponent/Stampa/StatsSection";
 import UseCasesSection from "../components/PagesComponent/Stampa/UseCasesSection";
+import MaterialsSection from "../components/PagesComponent/Stampa/MaterialsSection";
+import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
+import { BenefitsSection } from "../components/PagesComponent/Stampa/BenefitsSection";
+import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
+import FeatureHighlightsSection from "../components/PagesComponent/Stampa/FeatureHighlightsSection";
 import {
   AttrezzatureIcon,
   ComponentiIcon,
@@ -13,9 +16,6 @@ import {
   SettingsIcon,
   SupportiIcon,
 } from "../components/SvgContainer/SvgContainer1";
-import StatsSection from "../components/PagesComponent/Stampa/StatsSection";
-import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
-import Contact from "../components/CommonComponents/Contact";
 
 const data = [
   {
