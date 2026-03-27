@@ -1,7 +1,6 @@
 import React from "react";
 import Contact from "../components/CommonComponents/Contact";
 import MaterialProduct from "../components/PagesComponent/Material/MaterialProduct";
-import MaterialContact from "../components/PagesComponent/Material/MaterialContact";
 import CompatibilityMatrixSection from "../components/PagesComponent/Stampa/CompatibilityMatrixSection";
 import { AutoExtIcon, AutoInIcon, DroneIcon, FunctionalIcon, MechanicalIcon } from "../components/SvgContainer/SvgContainer1";
 
@@ -10,7 +9,7 @@ const columns = [
   { label: "Mechanical", icon: <MechanicalIcon />, color: "#546E7A" },
   { label: "Drone", icon: <DroneIcon />, color: "#0288D1" },
   { label: "Auto Ext.", icon: <AutoExtIcon />, color: "#00838F" },
-  { label: "Auto Int.", icon: <AutoInIcon /> , color: "#F59E0B" },
+  { label: "Auto Int.", icon: <AutoInIcon />, color: "#F59E0B" },
 ];
 
 const rows = [
@@ -80,7 +79,9 @@ const AllMaterials = () => {
         columns={columns}
         rows={rows}
       />
-      <MaterialContact />
+      <div className="lg:pb-18 pb-8">
+        <Contact />
+      </div>
     </>
   );
 };

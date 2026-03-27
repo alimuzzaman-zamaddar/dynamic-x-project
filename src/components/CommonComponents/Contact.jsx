@@ -1,12 +1,12 @@
-import { db } from "../../firebase"; 
+import { db } from "../../firebase";
 import emailjs from "@emailjs/browser";
 import React, { useState } from "react";
-import { storage } from "../../firebase";
 import Container from "../../shared/Container";
 import { FileUpload } from "../SvgContainer/SvgContainer";
 import CustomDropdown from "../CustomComponents/CustomDropDown";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+// ❌ REMOVED: storage imports (no longer needed)
 
 const Contact = ({
   title = "CONTACT US AND GET A QUOTE",
@@ -25,7 +25,12 @@ const Contact = ({
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, file: e.target.files[0] });
+    const file = e.target.files[0];
+    if (file && file.size > 10 * 1024 * 1024) {
+      alert("File size must be under 10MB");
+      return;
+    }
+    setFormData({ ...formData, file });
   };
 
   const handleSubmit = async (e) => {
@@ -34,15 +39,31 @@ const Contact = ({
     setStatus("");
 
     try {
-      // Upload file to Firebase Storage first
+      // ✅ Upload file to Cloudinary
       let fileURL = "No file uploaded";
+      let fileName = "No file";
+
       if (formData.file) {
-        const fileRef = ref(storage, `uploads/${Date.now()}_${formData.file.name}`);
-        await uploadBytes(fileRef, formData.file);
-        fileURL = await getDownloadURL(fileRef); 
+        fileName = formData.file.name;
+
+        const cloudinaryData = new FormData();
+        cloudinaryData.append("file", formData.file);
+        cloudinaryData.append("upload_preset", "stefano_uploads"); // ✅ your preset
+        cloudinaryData.append("cloud_name", "dyuqrepwj");          // ✅ your cloud name
+
+        const cloudinaryRes = await fetch(
+          "https://api.cloudinary.com/v1_1/dyuqrepwj/auto/upload", // ✅ your cloud name
+          {
+            method: "POST",
+            body: cloudinaryData,
+          }
+        );
+
+        const cloudinaryJson = await cloudinaryRes.json();
+        fileURL = cloudinaryJson.secure_url; // ✅ real viewable/downloadable link
       }
 
-      // Save to Firestore with file URL
+      // ✅ Save to Firestore with real file URL
       await addDoc(collection(db, "contacts"), {
         name: formData.name,
         surname: formData.surname,
@@ -52,22 +73,25 @@ const Contact = ({
         phone: formData.phone,
         service: formData.service,
         message: formData.message,
-        fileURL: fileURL, 
+        fileURL: fileURL,
+        fileName: fileName,
         createdAt: serverTimestamp(),
       });
 
-      // Send email via EmailJS with file URL
+      // ✅ Send email via EmailJS with real file link
       await emailjs.send(
         "service_madniod",
         "template_9q8zhbi",
         {
-          from_name: `${formData.name} ${formData.surname}`,
+          from_name: formData.name,
+          surname: formData.surname,
           from_email: formData.email,
           subject: formData.subject,
-          phone: `${formData.countryCode} ${formData.phone}`,
+          country_code: formData.countryCode,
+          phone: formData.phone,
           service: formData.service,
           message: formData.message,
-          file_name: fileURL, 
+          file_name: fileURL,
         },
         "XrpBmbTJztTtJrP2f"
       );
@@ -143,18 +167,19 @@ const Contact = ({
                 <input
                   type="text" name="countryCode" placeholder="Country Code"
                   className="common-input sm:w-[60%] w-full xl:mb-0 mb-5"
-                  value={formData.countryCode} onChange={handleChange}
+                  value={formData.countryCode} onChange={handleChange} required
                 />
                 <input
                   type="text" name="phone" placeholder="Phone number"
                   className="common-input"
-                  value={formData.phone} onChange={handleChange}
+                  value={formData.phone} onChange={handleChange} required
                 />
               </div>
 
               <CustomDropdown
                 options={serviceOptions}
                 placeholder="Select service category"
+                required
                 onChange={(value) => setFormData({ ...formData, service: value })}
               />
 
@@ -179,9 +204,8 @@ const Contact = ({
               </div>
             </div>
 
-            {/* Status Message */}
             {status && (
-              <p className={`text-sm font-medium text-center ${status.startsWith("✅") ? "text-green-600" : "text-red-500"}`}>
+              <p className={`text-sm font-medium text-center ${status.startsWith("✅") ? "text-red-600" : "text-green-500"}`}>
                 {status}
               </p>
             )}
