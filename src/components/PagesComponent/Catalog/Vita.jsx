@@ -49,9 +49,6 @@ const Vita = () => {
               Progetti, tutorial e casi studio per stimolare la tua creatività e potenziare le tue idee.
             </p>
           </div>
-
-
-
         </div>
       </Container>
     </section>
