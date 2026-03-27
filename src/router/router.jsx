@@ -20,6 +20,7 @@ import Jwellery from "../pages/Jwellery";
 import Veterinary from "../pages/Veterinary";
 import Vetemarysupports from "../pages/Vetemarysupports";
 import Prototyping from "../pages/Prototyping";
+import Catalog from "../pages/Catalog";
 
 
 const router = createBrowserRouter([
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: "/coming-soon",
         element: <ComingSoon />,
+      },
+      {
+        path: "/catalog",
+        element: <Catalog />,
       },
       {
         path: "/technology-details/:title",
