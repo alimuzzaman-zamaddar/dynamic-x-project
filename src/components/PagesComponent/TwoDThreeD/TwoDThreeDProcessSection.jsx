@@ -25,7 +25,7 @@ const TwoDThreeDProcessSection = () => {
             <div className="">
               <img src={pimg1} alt="" />
             </div>
-            <h3 className="mt-4 font-bold text-black">
+            <h3 className="mt-8 font-semibold text-black">
               2. Trasformazione Automatica
             </h3>
             <p className="text-xs text-gray-600 mt-2">
@@ -39,7 +39,7 @@ const TwoDThreeDProcessSection = () => {
             <div className="">
               <img src={pimg2} alt="" />
             </div>
-            <h3 className="mt-4 font-bold text-black">
+            <h3 className="mt-8 font-semibold text-black">
               2. Trasformazione Automatica
             </h3>
             <p className="text-xs text-gray-600 mt-2">
@@ -53,7 +53,7 @@ const TwoDThreeDProcessSection = () => {
             <div className="">
               <img src={pimg3} alt="" />
             </div>
-            <h3 className="mt-4 font-bold text-black">3. Stampa e Ricevi</h3>
+            <h3 className="mt-8 font-semibold text-black">3. Stampa e Ricevi</h3>
             <p className="text-xs text-gray-600 mt-2">
               Ottieni un preventivo istantaneo e ricevi il tuo oggetto stampato
               in 3D direttamente a casa tua.

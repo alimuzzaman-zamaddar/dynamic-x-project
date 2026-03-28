@@ -32,7 +32,7 @@ const FuturesSection = () => {
       <div className="container-main">
         
         {/* Header Block using section-header */}
-        <div className="section-header mb-16 md:mb-20 flex flex-col gap-6">
+        <div className="section-header mb-6 md:mb-10 flex flex-col gap-6">
           {/* section-title for uniform title style (semibold, 4xl on md) */}
           <h2 className="section-title">
             Il Futuro della Stampa 3D Sta Arrivando
@@ -40,7 +40,7 @@ const FuturesSection = () => {
         </div>
 
         {/* Feature Grid with center-aligned icons in gray blocks */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 md:mt-10 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3 md:mt-6 text-center">
           {features.map((feature, index) => (
             // Flex column to manage point content layout
             <div key={index} className="flex flex-col items-center gap-6 text-center">

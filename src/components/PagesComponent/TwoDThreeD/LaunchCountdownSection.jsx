@@ -37,7 +37,7 @@ const LaunchCountdownSection = () => {
         </div>
 
         {/* Feature Grid with horizontal divider */}
-        <div className="relative mt-24">
+        <div className="relative">
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-3  mt-16 md:mt-10 text-center">
             {benefits.map((benefit, index) => (
               // flex-col to keep title, label, and description stacked
