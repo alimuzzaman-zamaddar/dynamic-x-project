@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 
 const ProductDevelopmentCTA = () => {
@@ -24,14 +25,14 @@ const ProductDevelopmentCTA = () => {
       description: "Supporto tecnico in ogni fase del progetto senza costi aggiuntivi"
     }
   ];
-// Shared button styles to maintain 60px height and pill shape
+  // Shared button styles to maintain 60px height and pill shape
   const btnBase = "h-[60px] cursor-pointer px-8 rounded-full font-medium uppercase text-sm tracking-wide whitespace-nowrap flex items-center justify-center transition-all duration-300 border";
   return (
     // section class for consistent py-5 md:py-8
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard content max-width (1040px) and centering */}
       <div className="container-main">
-        
+
         {/* Main Header Area using established section-header and text classes */}
         <div className="section-header flex flex-col gap-6">
           {/* section-title for uniform font scaling */}
@@ -64,23 +65,29 @@ const ProductDevelopmentCTA = () => {
           ))}
         </div>
 
-{/* Responsive Button Row */}
+        {/* Responsive Button Row */}
         <div className="flex flex-col md:flex-row items-center gap-4 mt-20 md:mt-24">
-          
-          {/* Solid -> Outlined on Hover */}
-          <button className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}>
-            Richiedi una Consulenza Gratuita
-          </button>
-          
-          {/* Outlined -> Solid on Hover */}
-          <button className={`${btnBase} bg-transparent text-primary-black border-border-gray hover:bg-[#1a1411] hover:text-white hover:border-[#1a1411]`}>
-            Scopri i Materiali Disponibili
-          </button>
 
           {/* Solid -> Outlined on Hover */}
-          <button className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}>
-            Carica il tuo design
-          </button>
+          <Link to={"/upload-design"}>
+            <button className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}>
+              Richiedi una Consulenza Gratuita
+            </button>
+          </Link>
+
+          {/* Outlined -> Solid on Hover */}
+          <Link to={"/upload-design"}>
+            <button className={`${btnBase} bg-transparent text-primary-black border-border-gray hover:bg-[#1a1411] hover:text-white hover:border-[#1a1411]`}>
+              Scopri i Materiali Disponibili
+            </button>
+          </Link>
+
+          {/* Solid -> Outlined on Hover */}
+          <Link to={"/upload-design"}>
+            <button className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}>
+              Carica il tuo design
+            </button>
+          </Link>
         </div>
 
       </div>

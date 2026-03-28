@@ -65,10 +65,6 @@ const router = createBrowserRouter([
         element: <Vintage />,
       },
       {
-        path: "/veterinary",
-        element: <Veterinary />,
-      },
-      {
         path: "/drone",
         element: <Drone />,
       },

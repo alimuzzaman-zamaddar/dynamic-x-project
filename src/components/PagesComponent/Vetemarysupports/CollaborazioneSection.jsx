@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { CheckIcon } from "../../SvgContainer/SvgContainer1";
 
 export default function CollaborazioneSection() {
@@ -20,9 +21,9 @@ export default function CollaborazioneSection() {
 
       {/* Checkbox card */}
       <div className="bg-[#DDDDE8] px-5 py-4 mb-8 flex items-start gap-4">
-       <div className="shrink-0">
-         <CheckIcon />
-       </div>
+        <div className="shrink-0">
+          <CheckIcon />
+        </div>
         <p className="item-description">
           Ogni progetto parte da una consulenza dedicata: inviaci le immagini
           diagnostiche o i dati di scansione del paziente e ti proporremo la
@@ -30,15 +31,18 @@ export default function CollaborazioneSection() {
         </p>
       </div>
 
-        <div className="flex flex-wrap items-center gap-4 my-11">
+      <div className="flex flex-wrap items-center gap-4 my-11">
+        <Link to={"/upload-design"}>
           <button className="h-12 cursor-pointer px-8 bg-[#1a1411] text-white rounded-full text-base font-medium flex items-center justify-center transition hover:bg-white whitespace-nowrap hover:text-black hover:border border hover:border-black ">
             Richiedi una Consulenza
           </button>
-
+        </Link>
+        <Link to={"/upload-design"}>
           <button className="h-12 cursor-pointer px-8 bg-transparent text-primary-black font-medium border border-black rounded-full text-base flex items-center justify-center transition hover:bg-black hover:text-white whitespace-nowrap">
-             Scopri i Materiali
+            Scopri i Materiali
           </button>
-        </div>
+        </Link>
+      </div>
     </section>
   );
 }
