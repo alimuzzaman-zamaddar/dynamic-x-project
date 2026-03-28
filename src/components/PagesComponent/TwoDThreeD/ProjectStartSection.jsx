@@ -1,6 +1,7 @@
 import React from 'react';
 import { HiOutlineCheckCircle } from "react-icons/hi2";
 import { CheckIcon } from '../../SvgContainer/SvgContainer1';
+import { Link } from 'react-router';
 
 /**
  * ProjectStartSection Component
@@ -32,7 +33,7 @@ const ProjectStartSection = () => {
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard 1040px max-width */}
       <div className="container-main">
-        
+
         {/* Header Block with highlighted text */}
         <div className="section-header mb-6 md:mb-10">
           <h2 className="section-title">
@@ -62,7 +63,7 @@ const ProjectStartSection = () => {
 
         {/* Info Box: Light gray rounded box with specific checkbox icon */}
         <div className="mt-10 p-8 bg-[#e5e4f3]  flex items-start gap-5">
-          <CheckIcon/>
+          <CheckIcon />
           <p className="text-[12px] leading-[18px] text-primary-black/80 w-[80%]">
             🚀 <b>Lavori in corso:</b> Il servizio è in fase di sviluppo avanzato. Iscriviti ora per non perdere il lancio ufficiale e accedere alle promozioni  riservate ai primi utenti.
           </p>
@@ -70,9 +71,11 @@ const ProjectStartSection = () => {
 
         {/* Action Button: 60px height, Pill shape, Opposite hover */}
         <div className="mt-10">
-          <button className="h-[60px] w-full md:w-auto px-10 bg-[#1a1411] text-white border border-[#1a1411] rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 hover:bg-transparent hover:text-primary-black">
-            Iscriviti Ora
-          </button>
+          <Link to={"/upload-design"}>
+            <button className="h-[60px] w-full md:w-auto px-10 bg-[#1a1411] text-white border border-[#1a1411] rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 hover:bg-transparent hover:text-primary-black cursor-pointer">
+              Iscriviti Ora
+            </button>
+          </Link>
         </div>
 
       </div>
