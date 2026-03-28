@@ -3,8 +3,11 @@ import Footer from "../shared/Footer";
 import { Outlet } from "react-router";
 import React, { useEffect } from "react";
 import ScrollToTop from "../shared/ScrollToTop ";
+import useHashScroll from "../hooks/useHashScroll";
 
 const Layout = () => {
+  useHashScroll();
+
   useEffect(() => {
     const prev = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";

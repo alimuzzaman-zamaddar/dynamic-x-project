@@ -8,6 +8,7 @@ import Footwear from "../pages/Footwear";
 import Jwellery from "../pages/Jwellery";
 import ChiSiamo from "../pages/ChiSiamo";
 import Veterinary from "../pages/Veterinary";
+import TwoDThreeD from "../pages/TwoDThreeD";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
 import MedicaleLab from "../pages/MedicaleLab";
@@ -22,7 +23,8 @@ import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import TwoDThreeD from "../pages/TwoDThreeD";
+import BioStamp from "../pages/BioStamp";
+import News from "../pages/News";
 
 
 const router = createBrowserRouter([
@@ -61,10 +63,6 @@ const router = createBrowserRouter([
       {
         path: "/vintage",
         element: <Vintage />,
-      },
-      {
-        path: "/veterinary",
-        element: <Veterinary />,
       },
       {
         path: "/drone",
@@ -119,6 +117,14 @@ const router = createBrowserRouter([
       {
         path: "/chi-siamo",
         element: <ChiSiamo />,
+      },
+      {
+        path: "/bio-stamp",
+        element: <BioStamp />,
+      },
+      {
+        path: "/news",
+        element: <News />,
       },
       {
         path: "/technology-details/:title",

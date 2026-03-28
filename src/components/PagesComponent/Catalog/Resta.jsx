@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../../../shared/Container'
+import { Link } from 'react-router'
 
 const Resta = () => {
   return (
@@ -43,11 +44,13 @@ const Resta = () => {
             </p>
           </div>
         </div>
-        <button
-          className='px-7 py-3 rounded-xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
-        >
-          Iscriviti Ora e Non Perderti Nulla!
-        </button>
+        <Link to={"upload-design"}>
+          <button
+            className='px-7 py-3 rounded-xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
+          >
+            Iscriviti Ora e Non Perderti Nulla!
+          </button>
+        </Link>
         <div className="mt-10">
           <h3 className="font-semibold text-black">
             Perché Iscriversi?
