@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../../../shared/Container'
+import { Link } from 'react-router'
 
 const Portata = () => {
   return (
@@ -14,11 +15,13 @@ const Portata = () => {
         <p className="section-description">
           Il nostro catalogo stampa 3D sta arrivando. Preparati a creare senza limiti: la rivoluzione inizia con un clic.
         </p>
-        <button
-          className='px-7 py-3 rounded-xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold mt-10'
-        >
-          Iscriviti e Resta Aggiornato
-        </button>
+        <Link to={"/upload-design"}>
+          <button
+            className='px-7 py-3 rounded-xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold mt-10'
+          >
+            Iscriviti e Resta Aggiornato
+          </button>
+        </Link>
       </Container>
     </section>
   )

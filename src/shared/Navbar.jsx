@@ -12,13 +12,10 @@ const navMenu = [
     label: "Chi Siamo",
     path: "/chi-siamo",
   },
-  {
-    label: "Servizi",
-    path: "/",
-  },
+  { label: "Servizi", path: "/", hash: "services" },
   {
     label: "Tecnologie",
-    path: "/",
+    hash: "technologies",
   },
   { label: "Materiali", path: "/allmaterials", type: "route" },
 
@@ -33,11 +30,11 @@ const navMenu = [
   },
   {
     label: "Bio stamp 3D",
-    path: "/",
+    path: "/bio-stamp",
   },
   {
     label: "News",
-    path: "/",
+    path: "/news",
   },
 ];
 
@@ -99,7 +96,7 @@ const Navbar = () => {
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
   ${pathName.includes("/technology-details")
           ? "bg-transparent"
-        : isHome || isFashion || isIndustrial || isMedicale || isJwellery || isArchitettura || isVintage || isDrone || isVeterinary || isCatalog || isChiSiamo
+          : isHome || isFashion || isIndustrial || isMedicale || isJwellery || isArchitettura || isVintage || isDrone || isVeterinary || isCatalog || isChiSiamo
             ? scrollY < 200
               ? "bg-transparent"
               : "bg-black"
@@ -134,7 +131,20 @@ const Navbar = () => {
                 </Link>
               ) : (
                 <span
-                  onClick={() => navigate(nav.path)}
+                  onClick={() => {
+                    if (nav.hash) {
+                      if (pathName !== nav.path) {
+                        navigate(nav.path);
+                        setTimeout(() => {
+                          document.getElementById(nav.hash)?.scrollIntoView({ behavior: "smooth" });
+                        }, 300);
+                      } else {
+                        document.getElementById(nav.hash)?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    } else {
+                      navigate(nav.path);
+                    }
+                  }}
                   className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
                 >
                   {nav.label}
