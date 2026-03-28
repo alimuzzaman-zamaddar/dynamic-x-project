@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../../../shared/Container'
+import { Link } from 'react-router'
 
 const Futuro = () => {
   return (
@@ -13,11 +14,13 @@ const Futuro = () => {
           >
             Scopri di più
           </button>
-          <button
-            className='px-7 py-3 rounded-2xl hover:bg-[#1A1A2E] cursor-pointer hover:text-white bg-transparent text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
-          >
-            Iscriviti alla Newsletter
-          </button>
+          <Link to={"/upload-design"}>
+            <button
+              className='px-7 py-3 rounded-2xl hover:bg-[#1A1A2E] cursor-pointer hover:text-white bg-transparent text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
+            >
+              Iscriviti alla Newsletter
+            </button>
+          </Link>
         </div>
       </Container>
     </section>

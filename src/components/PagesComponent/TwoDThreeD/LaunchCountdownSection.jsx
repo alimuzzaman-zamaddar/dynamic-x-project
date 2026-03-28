@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 /**
  * LaunchCountdownSection Component
@@ -23,7 +24,7 @@ const LaunchCountdownSection = () => {
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard max-width (1040px) */}
       <div className="container-main">
-        
+
         {/* Header Block using section-header */}
         <div className="section-header mb-6 md:mb-10 flex flex-col gap-6">
           {/* section-title for uniform font and size */}
@@ -65,9 +66,11 @@ const LaunchCountdownSection = () => {
 
         {/* Action Button: Dark fill, white text, pill shape, specific specs (60px height, fully rounded, uppercase) */}
         <div className="flex flex-wrap items-center gap-4 mt-6 md:mt-10">
-          <button className="h-[60px] cursor-pointer px-8 bg-[#1a1411] hover:bg-white hover:text-black border  text-white rounded-full font-medium uppercase text-sm tracking-wide whitespace-nowrap flex items-center justify-center transition hover:bg-black/90">
-            Iscriviti per Aggiornamenti Esclusivi
-          </button>
+          <Link to={"/upload-design"}>
+            <button className="h-[60px] cursor-pointer px-8 bg-[#1a1411] hover:bg-white hover:text-black border  text-white rounded-full font-medium uppercase text-sm tracking-wide whitespace-nowrap flex items-center justify-center transition hover:bg-black/90">
+              Iscriviti per Aggiornamenti Esclusivi
+            </button>
+          </Link>
         </div>
 
       </div>

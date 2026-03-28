@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const SlsInfoSection = () => {
   return (
@@ -15,10 +16,11 @@ const SlsInfoSection = () => {
           <p className="text-gray-600 text-xs md:text-base  mb-6">
             Tecnologia di stampa 3D avanzata per componenti funzionali, geometrie complesse e produzione industriale senza compromessi.
           </p>
-
-          <button className="px-6 py-3 rounded-full bg-[#1E1E2F] text-white text-xs font-medium hover:opacity-90 transition">
-            Richiedi un Preventivo
-          </button>
+          <Link to={"/upload-design"}>
+            <button className="px-6 py-3 rounded-full bg-[#1E1E2F] text-white text-xs font-medium hover:opacity-90 transition">
+              Richiedi un Preventivo
+            </button>
+          </Link>
 
         </div>
 
@@ -32,7 +34,7 @@ const SlsInfoSection = () => {
           <div className="flex flex-col gap-4 text-xs text-gray-600 leading-[160%] max-w-[900px]">
 
             <p>
-              La <strong>Sinterizzazione Laser Selettiva (SLS)</strong> è una tecnologia di stampa 3D basata sul processo <em>Powder Bed Fusion</em>. 
+              La <strong>Sinterizzazione Laser Selettiva (SLS)</strong> è una tecnologia di stampa 3D basata sul processo <em>Powder Bed Fusion</em>.
               Un laser ad alta potenza scansiona selettivamente strati successivi di polvere polimerica, fondendo le particelle tra loro e costruendo il componente tridimensionale strato dopo strato.
             </p>
 
@@ -41,7 +43,7 @@ const SlsInfoSection = () => {
             </p>
 
             <p>
-              Il risultato sono componenti solidi, altamente resistenti e dimensionalmente precisi — ideali per 
+              Il risultato sono componenti solidi, altamente resistenti e dimensionalmente precisi — ideali per
               <strong> prototipazione avanzata e produzione in volumi medio-bassi</strong> con caratteristiche meccaniche paragonabili allo stampaggio a iniezione.
             </p>
 

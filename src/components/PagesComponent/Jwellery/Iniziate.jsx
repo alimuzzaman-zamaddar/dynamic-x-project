@@ -1,6 +1,7 @@
 import React from 'react'
 import Inti from "../../../assets/img/inti.png"
 import Container from '../../../shared/Container'
+import { Link } from 'react-router'
 
 const Iniziate = () => {
   return (
@@ -13,16 +14,20 @@ const Iniziate = () => {
           <p className='text-xs font-normal text-[#1E2939]'>Ogni progetto è trattato con la massima riservatezza. I vostri file e i vostri design sono protetti da accordi di non divulgazione disponibili su richiesta.</p>
         </div>
         <div className="flex flex-wrap gap-4">
-          <button
-            className='px-7 py-3 rounded-4xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
-          >
-            Richiedi un Preventivo
-          </button>
-          <button
-            className='px-7 py-3 rounded-4xl hover:bg-[#1A1A2E] cursor-pointer hover:text-white bg-transparent text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
-          >
-            Scopri i Materiali
-          </button>
+          <Link to={"/upload-design"}>
+            <button
+              className='px-7 py-3 rounded-4xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
+            >
+              Richiedi un Preventivo
+            </button>
+          </Link>
+          <Link to={"/upload-design"}>
+            <button
+              className='px-7 py-3 rounded-4xl hover:bg-[#1A1A2E] cursor-pointer hover:text-white bg-transparent text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
+            >
+              Scopri i Materiali
+            </button>
+          </Link>
         </div>
       </Container>
     </section>
