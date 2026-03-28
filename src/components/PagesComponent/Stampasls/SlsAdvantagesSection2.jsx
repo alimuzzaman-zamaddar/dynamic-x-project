@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const SlsAdvantagesSection2 = () => {
   return (
@@ -46,20 +47,24 @@ const SlsAdvantagesSection2 = () => {
             </p>
           </div>
         </div>
-                  {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-6">
 
-              {/* Primary Button */}
-              <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300">
-                Carica il Tuo File e Ottieni un Preventivo
-              </button>
+          {/* Primary Button */}
+          <Link to={"/upload-design"}>
+            <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300">
+              Carica il Tuo File e Ottieni un Preventivo
+            </button>
+          </Link>
 
-              {/* Secondary Button */}
-              <button className="px-6 py-4 rounded-full border border-black text-black font-medium text-sm md:text-base hover:bg-black hover:text-white transition-all duration-300">
-                Ottieni una consulenza
-              </button>
+          {/* Secondary Button */}
+          <Link to={"/upload-design"}>
+            <button className="px-6 py-4 rounded-full border border-black text-black font-medium text-sm md:text-base hover:bg-black hover:text-white transition-all duration-300">
+              Ottieni una consulenza
+            </button>
+          </Link>
 
-            </div>
+        </div>
       </div>
     </section>
   );
