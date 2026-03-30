@@ -106,8 +106,7 @@ const materials = [
     imgSrc: gear10,
     title: "TPE",
     subtitle: "FDM",
-    description:
-      "Ottina per modelli trapsarenti o estetici.",
+    description: "Ottina per modelli trapsarenti o estetici.",
   },
   {
     imgSrc: gear11,
@@ -144,14 +143,16 @@ const materials = [
     description:
       "Progettata per modelli odontoiatrici e protesi con precisione elevate e materiali con certificazioni mediche.",
   },
-]
+];
 
 export default function MaterialsPage() {
   return (
     <section id="materials" className="xl:mt-45 mt-25">
       <Container>
         <div className="flex flex-row  justify-between">
-          <h2 className="lg:text-[36px] text-2xl font-semibold text-black pb-5">Materiali</h2>
+          <h2 className="lg:text-[36px] text-2xl font-semibold text-black pb-5">
+            Materiali
+          </h2>
         </div>
         <ul className="grid justify-between lg:gap-8 gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {materials.map((material, idx) => {
@@ -166,15 +167,16 @@ export default function MaterialsPage() {
                 className="xl:p-6 p-3 w-full rounded-xl flex flex-col h-full"
               >
                 <div className="flex flex-col h-full gap-3">
-
                   {/* TOP CONTENT */}
                   <div className="flex flex-col gap-y-3">
                     <div className="flex justify-between">
                       <div>
-                        <h5 className="text-black font-semibold leading-[134%] text-xs">
+                        <h5 className="text-black font-semibold leading-[134%] text-[15px]">
                           {material.title}
                         </h5>
-                        <p className="text-xs font-light text-black mt-2">{material.subtitle}</p>
+                        <p className="text-[15px] font-light text-black mt-2">
+                          {material.subtitle}
+                        </p>
                       </div>
 
                       <img
@@ -184,7 +186,7 @@ export default function MaterialsPage() {
                       />
                     </div>
 
-                    <span className="text-xs font-light leading-[150%] max-w-[290px] mt-5 text-black/60">
+                    <span className="text-[15px] font-light leading-[150%] max-w-[290px] mt-5 text-black/60">
                       {material.description}
                     </span>
                   </div>
@@ -209,7 +211,6 @@ export default function MaterialsPage() {
                       </Link>
                     </button>
                   </div>
-
                 </div>
               </li>
             );

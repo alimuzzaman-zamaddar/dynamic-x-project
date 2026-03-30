@@ -24,6 +24,9 @@ import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
+import BioStamp from "../pages/BioStamp";
+import News from "../pages/News";
+import Newsletter from "../pages/Newsletter";
 
 
 const router = createBrowserRouter([
@@ -112,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: "/catalog",
         element: <Catalog />,
+      },
+      {
+        path: "/newsletter",
+        element: <Newsletter />,
       },
       {
         path: "/chi-siamo",

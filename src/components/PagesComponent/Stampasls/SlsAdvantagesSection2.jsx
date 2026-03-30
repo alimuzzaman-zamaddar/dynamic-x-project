@@ -21,7 +21,7 @@ const SlsAdvantagesSection2 = () => {
           {/* Card 1 */}
           <div className="bg-[#F0EEEB] rounded-2xl p-6 md:p-8">
             <h3 className="font-semibold text-black mb-2">Upload Immediato</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Formati .STL, .STEP, .OBJ e altri. Analisi automatica della
               geometria e quotazione rapida.
             </p>
@@ -30,7 +30,7 @@ const SlsAdvantagesSection2 = () => {
           {/* Card 2 */}
           <div className="bg-[#F0EEEB] rounded-2xl p-6 md:p-8">
             <h3 className="font-semibold text-black mb-2">Supporto Tecnico</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Ingegneri specializzati disponibili per ottimizzare il design e
               selezionare il materiale più adatto alle tue esigenze.
             </p>
@@ -41,7 +41,7 @@ const SlsAdvantagesSection2 = () => {
             <h3 className="font-semibold text-black mb-2">
               Consegna Garantita
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Produzione e spedizione tracciata direttamente a destinazione.
               Lead time a partire da 7 giorni lavorativi.
             </p>
@@ -49,7 +49,6 @@ const SlsAdvantagesSection2 = () => {
         </div>
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-
           {/* Primary Button */}
           <Link to={"/upload-design"}>
             <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300">
@@ -63,7 +62,6 @@ const SlsAdvantagesSection2 = () => {
               Ottieni una consulenza
             </button>
           </Link>
-
         </div>
       </div>
     </section>

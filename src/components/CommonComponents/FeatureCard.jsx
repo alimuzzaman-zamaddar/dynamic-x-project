@@ -7,7 +7,7 @@ export const FeatureCard = ({ icon, title, description }) => {
         {React.createElement(icon)}
       </div>
       <h3 className="pt-5 pb-2.5 font-normal text-base text-center text-white">{title}</h3>
-      <p className="font-normal text-xs text-white/50 text-center">{description}</p>
+      <p className="font-normal text-[15px] text-white/50 text-center">{description}</p>
     </div>
   );
 };

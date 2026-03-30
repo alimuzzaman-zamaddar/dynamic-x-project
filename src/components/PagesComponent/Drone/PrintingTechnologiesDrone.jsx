@@ -48,9 +48,7 @@ const PrintingTechnologiesDrone = () => {
               <h3 className="font-semibold text-primary-black leading-tight">
                 {tech.title}
               </h3>
-              <p className="text-[12px]  text-black/70">
-                {tech.description}
-              </p>
+              <p className="text-[15px]  text-black/70">{tech.description}</p>
             </div>
           ))}
         </div>

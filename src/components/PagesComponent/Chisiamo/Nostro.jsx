@@ -9,7 +9,7 @@ const Nostro = () => {
           Il Nostro Approccio
         </h2>
 
-        <p className="text-xs font-normal text-[#1E2939] pt-4 max-w-4xl">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4 max-w-4xl">
           Ogni progetto DynamicsX segue un percorso strutturato e collaudato,
           pensato per garantire il massimo risultato in tempi ottimali. Il
           nostro workflow in 3 fasi è progettato per eliminare le incertezze e
@@ -47,7 +47,7 @@ const Nostro = () => {
                 <h3 className="text-sm font-semibold text-[#0A0A0A]">
                   Fase 1 — Ascolto e Analisi
                 </h3>
-                <p className="text-xs text-[#1E2939] mt-2">
+                <p className="text-[15px] text-[#1E2939] mt-2">
                   Il cliente invia i file tecnici e le specifiche base. Il team
                   DynamicsX conduce un'analisi di fattibilità e suggerisce
                   eventuali modifiche per migliorare efficienza e stampabilità.
@@ -75,7 +75,7 @@ const Nostro = () => {
                 <h3 className="text-sm font-semibold text-[#0A0A0A]">
                   Fase 2 — Prototipazione Rapida
                 </h3>
-                <p className="text-xs text-[#1E2939] mt-2">
+                <p className="text-[15px] text-[#1E2939] mt-2">
                   Primo prototipo fisico consegnato entro 48–72 ore. Il cliente
                   valida forma, accoppiamenti e funzionalità. Sono inclusi fino
                   a 2 cicli di revisione, con aggiornamenti CAD gestiti
@@ -91,7 +91,7 @@ const Nostro = () => {
                 <h3 className="text-sm font-semibold text-[#0A0A0A]">
                   Fase 3 — Produzione e Scaling
                 </h3>
-                <p className="text-xs text-[#1E2939] mt-2">
+                <p className="text-[15px] text-[#1E2939] mt-2">
                   Avvio del lotto di produzione finale con parametri validati.
                   Controllo qualità, ispezioni dimensionali, verifica delle
                   finiture superficiali e test funzionali. Spedizione tracciata
@@ -109,7 +109,7 @@ const Nostro = () => {
         </div>
 
         {/* Bottom Text */}
-        <p className='text-xs font-normal text-[#1E2939] pt-10'>Questo processo è stato affinato in oltre 100 progetti su 4 diversi settori industriali. DynamicsX mantiene una libreria aggiornata di profili di stampa validati per i clienti abituali, accelerando notevolmente i tempi per gli ordini futuri.</p>
+        <p className='text-[15px] font-normal text-[#1E2939] pt-10'>Questo processo è stato affinato in oltre 100 progetti su 4 diversi settori industriali. DynamicsX mantiene una libreria aggiornata di profili di stampa validati per i clienti abituali, accelerando notevolmente i tempi per gli ordini futuri.</p>
       </Container>
     </section>
   );

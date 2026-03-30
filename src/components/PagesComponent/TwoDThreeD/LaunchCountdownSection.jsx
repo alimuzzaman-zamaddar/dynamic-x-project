@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router";
 
 /**
  * LaunchCountdownSection Component
@@ -16,7 +16,7 @@ const LaunchCountdownSection = () => {
     },
     {
       title: "Aggiornamenti in tempo reale sul lancio",
-    }
+    },
   ];
 
   return (
@@ -24,7 +24,6 @@ const LaunchCountdownSection = () => {
     <section className="section bg-white text-primary-black font-family-inter">
       {/* container-main for standard max-width (1040px) */}
       <div className="container-main">
-
         {/* Header Block using section-header */}
         <div className="section-header mb-6 md:mb-10 flex flex-col gap-6">
           {/* section-title for uniform font and size */}
@@ -33,34 +32,36 @@ const LaunchCountdownSection = () => {
           </h2>
           {/* section-description for consistent body style (12px, leading-24px, bold highlights) */}
           <p className="section-description max-w-[1200px] text-primary-gray/80 mt-1">
-            Stiamo perfezionando ogni dettaglio per offrirti un'esperienza utente <b>impeccabile e senza compromessi.</b>
+            Stiamo perfezionando ogni dettaglio per offrirti un'esperienza
+            utente <b>impeccabile e senza compromessi.</b>
           </p>
         </div>
 
         {/* Feature Grid with horizontal divider */}
-        <div className="relative mt-24">
+        <div className="relative">
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-3  mt-16 md:mt-10 text-center">
             {benefits.map((benefit, index) => (
               // flex-col to keep title, label, and description stacked
-              <div key={index} className="flex flex-col items-center text-center py-6 px-4">
+              <div
+                key={index}
+                className="flex flex-col items-center text-center py-6 px-4"
+              >
                 {/* Point Title (bold text style, specific weight and size) */}
-                <h3 className="font-semibold">
-                  {benefit.title}
-                </h3>
+                <h3 className="font-semibold">{benefit.title}</h3>
               </div>
             ))}
           </div>
 
           {/* Horizontal Divider Line */}
           <div className="absolute top-[-30px] md:top-[-4px] left-0 w-full h-0.5 bg-black/90 my-0 md:my-0"></div>
-
         </div>
 
         {/* Footer Sub-Header Block (Iscriviti alla nostra newsletter) */}
         <div className="section-header mt-6 md:mt-10 flex flex-col gap-6 text-left">
           {/* Description text (small text size with standard leading) */}
-          <p className="text-primary-black/80 text-[13px] leading-[22px] max-w-[1200px]">
-            Iscriviti alla nostra newsletter per essere tra i primissimi a sapere quando il servizio sarà attivo.
+          <p className="text-primary-black/80 text-[15px] leading-[22px] max-w-[1200px]">
+            Iscriviti alla nostra newsletter per essere tra i primissimi a
+            sapere quando il servizio sarà attivo.
           </p>
         </div>
 
@@ -72,7 +73,6 @@ const LaunchCountdownSection = () => {
             </button>
           </Link>
         </div>
-
       </div>
     </section>
   );

@@ -82,7 +82,7 @@ const Materials = () => {
                         <h5 className="text-black font-normal leading-[134%] text-base">
                           {material.title}
                         </h5>
-                        <p className="text-xs text-black font-light">{material.subtitle}</p>
+                        <p className="text-[15px] text-black font-light">{material.subtitle}</p>
                       </div>
 
                       <img
@@ -92,7 +92,7 @@ const Materials = () => {
                       />
                     </div>
 
-                    <span className="text-xs text-black/60 font-light leading-[150%] max-w-[389px] mt-5">
+                    <span className="text-[15px] text-black/60 font-light leading-[150%] max-w-[389px] mt-5">
                       {material.description}
                     </span>
                   </div>

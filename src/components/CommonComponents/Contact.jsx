@@ -192,7 +192,7 @@ const Contact = ({
               <div className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer border-2 border-gray-300">
                 <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
                   <FileUpload />
-                  <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+                  <span className="text-[15px] sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
                     {formData.file ? formData.file.name : "Upload Your Design"}
                   </span>
                 </div>

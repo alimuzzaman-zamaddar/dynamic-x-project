@@ -21,7 +21,7 @@ const Resta = () => {
             <h3 className="font-semibold text-black">
               Anteprime
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Accesso anticipato ai lanci.
             </p>
           </div>
@@ -30,7 +30,7 @@ const Resta = () => {
             <h3 className="font-semibold text-black">
               Offerte
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Sconti riservati agli iscritti.
             </p>
           </div>
@@ -39,7 +39,7 @@ const Resta = () => {
             <h3 className="font-semibold text-black">
               Guide
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Consigli pratici per le tue stampe.
             </p>
           </div>
@@ -65,7 +65,7 @@ const Resta = () => {
               <h3 className="font-semibold text-black">
                 Inserisci la mail
               </h3>
-              <p className="text-xs text-gray-600 leading-[160%]">
+              <p className="text-[15px] text-gray-600 leading-[160%]">
                 Registrati in pochi secondi.
               </p>
             </div>
@@ -73,7 +73,7 @@ const Resta = () => {
               <h3 className="font-semibold text-black">
                 Ricevi aggiornamenti
               </h3>
-              <p className="text-xs text-gray-600 leading-[160%]">
+              <p className="text-[15px] text-gray-600 leading-[160%]">
                 Notizie direttamente in posta.
               </p>
             </div>
@@ -81,7 +81,7 @@ const Resta = () => {
               <h3 className="font-semibold text-black">
                 Accesso anticipato
               </h3>
-              <p className="text-xs text-gray-600 leading-[160%]">
+              <p className="text-[15px] text-gray-600 leading-[160%]">
                 Esplora il catalogo per primo.
               </p>
             </div>

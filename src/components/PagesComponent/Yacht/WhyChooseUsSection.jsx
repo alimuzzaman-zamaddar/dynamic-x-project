@@ -58,7 +58,7 @@ const WhyChooseUsSection = () => {
                 {stat.label}
               </div>
               {/* Statistic description (normal weight, smaller font) */}
-              <p className="text-primary-black/80 text-[13px] leading-[22px] max-w-[320px] mt-[-6px]">
+              <p className="text-primary-black/80 text-[15px] leading-[22px] max-w-[320px] mt-[-6px]">
                 {stat.description}
               </p>
             </div>
@@ -70,7 +70,7 @@ const WhyChooseUsSection = () => {
           <div className="text-primary-black shrink-0">
             <CheckIcon />
           </div>
-          <p className="text-[13px] leading-[22px] text-primary-black/90">
+          <p className="text-[15px] leading-[22px] text-primary-black/90">
             Ogni progetto inizia con un'analisi tecnica approfondita. Contattaci
             per ricevere una consulenza personalizzata e un preventivo su misura
             per la tua applicazione nautica.

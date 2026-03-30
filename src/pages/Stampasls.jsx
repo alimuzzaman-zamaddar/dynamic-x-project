@@ -47,7 +47,7 @@ const tableData = [
 export const Stampasls = () => {
   return (
     <>
-      <div className="px-4 xl:px-0 mt-34">
+      <div className=" mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title="Stampa 3D SLS"
           description="Produzione additiva professionale per parti funzionali, geometrie complesse e piccole serie senza stampi."

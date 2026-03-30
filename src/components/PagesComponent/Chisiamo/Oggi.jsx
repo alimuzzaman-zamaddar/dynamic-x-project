@@ -10,7 +10,7 @@ const Oggi = () => {
         </h2>
 
         {/* Description */}
-        <p className="text-xs font-normal text-[#1E2939] pt-4 max-w-4xl">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4 max-w-4xl">
           La missione di DynamicsX è eliminare le lacune critiche nella catena di fornitura in quattro settori ad alto valore: produzione di droni, restauro di auto d'epoca, medicina veterinaria e attrezzature industriali specializzate. Grazie alla manifattura additiva, realizziamo componenti ingegnerizzati di precisione su richiesta, sostituendo parti fuori produzione, non reperibili o troppo costose tramite i canali tradizionali. Il nostro mercato di riferimento attuale è vasto e in rapida crescita, includendo circa 2,3 milioni di veicoli d'epoca in Italia che necessitano di ricambi non standard, oltre 40.000 operatori di droni registrati e un comparto di ortopedia veterinaria che registra un tasso di crescita annuo dell'8%.
         </p>
         <div className="py-10 flex flex-col gap-4">
@@ -22,7 +22,7 @@ const Oggi = () => {
               <h3 className="text-sm font-semibold text-[#0A0A0A]">
                 Oggi
               </h3>
-              <p className="text-xs text-[#1E2939] mt-2">
+              <p className="text-[15px] text-[#1E2939] mt-2">
                 Produzione di telai per droni e componenti strutturali, parti meccaniche e di interni per auto d'epoca, impianti ortopedici veterinari, guide chirurgiche e dime industriali su misura.
               </p>
             </div>
@@ -35,7 +35,7 @@ const Oggi = () => {
               <h3 className="text-sm font-semibold text-[#0A0A0A]">
                 Domani
               </h3>
-              <p className="text-xs text-[#1E2939] mt-2">
+              <p className="text-[15px] text-[#1E2939] mt-2">
                 Sviluppo di biostampa conforme alle normative FDA/CE per impianti specifici per il paziente, creazione di scaffold riassorbibili per la rigenerazione ossea e partnership strategiche con chirurghi ortopedici e cliniche veterinarie per il co-sviluppo tecnologico.
               </p>
             </div>
@@ -47,7 +47,7 @@ const Oggi = () => {
         </h2>
 
         {/* Description */}
-        <p className="text-xs font-normal text-[#1E2939] pt-4 ">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4 ">
           L'obiettivo di DynamicsX è diventare il partner italiano di riferimento per la manifattura additiva di precisione nei settori di nicchia entro il 2027, implementando una linea di produzione medicale dedicata e certificata secondo la norma ISO 13485. La nostra strategia poggia su tre pilastri fondamentali: la Velocità, con uno standard di consegna in 48 ore; la Precisione, garantita da una tolleranza dimensionale di ±0.1mm; e la Personalizzazione totale, con soluzioni realizzate su misura e assenza di quantitativi minimi d'ordine.
         </p>
       </Container>
