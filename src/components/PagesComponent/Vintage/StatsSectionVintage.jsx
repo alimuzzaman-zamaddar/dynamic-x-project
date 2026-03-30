@@ -20,13 +20,12 @@ const StatsSectionVintage = ({ heading, description, stats }) => {
                 {item.label}
               </p>
 
-              <p className="text-black text-[12px] leading-[20px] max-w-[300px]">
+              <p className="text-black text-[15px] leading-[20px] max-w-[300px]">
                 {item.description}
               </p>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

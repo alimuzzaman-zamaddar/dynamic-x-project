@@ -23,7 +23,7 @@ const SlsAdvantagesSectionDrone2 = () => {
           {/* Card 1 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">PA-CF</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Nylon rinforzato con fibra di carbonio corta. Rapporto
               resistenza/peso eccezionale, rigidità elevata, bassa deformazione
               termica. Il materiale di riferimento per frame e parti
@@ -36,7 +36,7 @@ const SlsAdvantagesSectionDrone2 = () => {
             <h3 className="font-semibold text-black mb-2">
               Nylon Rinforzato in Fibra di Carbonio
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Elevata tenacità e resistenza all'impatto. Ideale per bracci e
               supporti soggetti a carichi dinamici e urti accidentali durante le
               operazioni di campo.
@@ -46,7 +46,7 @@ const SlsAdvantagesSectionDrone2 = () => {
           {/* Card 3 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">ABS Tecnico</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Versatile e lavorabile, con buona resistenza chimica e agli UV.
               Adatto per scocche, pannelli e componenti di copertura non
               strutturali.
@@ -55,7 +55,7 @@ const SlsAdvantagesSectionDrone2 = () => {
           {/* Card 4 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">Resine High-Temp</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Resine fotopolimeriche con temperatura di deflazione superiore a
               200°C. Indispensabili per carter motore e componenti in prossimità
               di fonti di calore intenso.

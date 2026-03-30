@@ -51,10 +51,10 @@ const CadToPhysicalSection = () => {
           <div className="flex flex-col xl:gap-6 xl:gap-24  md:left-0 md:top-[15%] md:w-[320px] text-left">
             {steps.filter(step => step.position.includes('left')).map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
-                <h4 className="font-bold text-xs text-black/90">
+                <h4 className="font-bold text-[15px] text-black/90">
                   {step.title}
                 </h4>
-                <p className="text-xs text-primary-gray/80 leading-relaxed xl:max-w-[167px]">
+                <p className="text-[15px] text-primary-gray/80 leading-relaxed xl:max-w-[167px]">
                   {step.desc}
                 </p>
               </div>
@@ -74,10 +74,10 @@ const CadToPhysicalSection = () => {
           <div className="flex flex-col  xl:gap-24  text-left md:text-right">
             {steps.filter(step => step.position.includes('right')).map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
-                <h4 className="font-bold text-xs text-black/90">
+                <h4 className="font-bold text-[15px] text-black/90">
                   {step.title}
                 </h4>
-                <p className="text-xs text-primary-gray/80 leading-relaxed xl:max-w-[167px] md:max-w-none md:ml-auto">
+                <p className="text-[15px] text-primary-gray/80 leading-relaxed xl:max-w-[167px] md:max-w-none md:ml-auto">
                   {step.desc}
                 </p>
               </div>
@@ -87,7 +87,7 @@ const CadToPhysicalSection = () => {
 
         {/* File Formats Footer */}
         <div className="mt-6 xl:mt-10 pt-8">
-          <p className="text-xs text-primary-gray/90 leading-relaxed max-w-[1000px]">
+          <p className="text-[15px] text-primary-gray/90 leading-relaxed max-w-[1000px]">
             Accettiamo file nei formati più diffusi: <strong>.dwg, .dxf, .stl, .obj, .step</strong> e file BIM. Il team tecnico verifica ogni modello prima della stampa per garantire fedeltà geometrica e qualità del risultato finale.
           </p>
         </div>

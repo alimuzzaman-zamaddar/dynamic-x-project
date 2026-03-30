@@ -32,7 +32,7 @@ const MaterialsGridSectionDrone = () => {
 
             <h3 className="font-semibold text-black mb-2">Frame Custom</h3>
 
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Telai su misura progettati per massimizzare la rigidità
               strutturale e minimizzare il peso totale del drone
             </p>
@@ -50,7 +50,7 @@ const MaterialsGridSectionDrone = () => {
               Bracci e Carter Motore
             </h3>
 
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Supporti motore con geometrie ottimizzate per assorbire le
               vibrazioni e resistere ai carichi ciclici
             </p>
@@ -68,7 +68,7 @@ const MaterialsGridSectionDrone = () => {
               Supporti Camera e Sensori
             </h3>
 
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Sistemi di fissaggio per gimbal, LiDAR, sensori multispettrali con
               anti-vibrazione integrato
             </p>
@@ -86,7 +86,7 @@ const MaterialsGridSectionDrone = () => {
               Case Elettronici Alleggeriti
             </h3>
 
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Contenitori per ESC, flight controller e batterie con dissipazione
               termica e protezione IP
             </p>

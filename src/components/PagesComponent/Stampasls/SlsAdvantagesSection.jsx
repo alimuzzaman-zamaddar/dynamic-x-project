@@ -22,7 +22,7 @@ const SlsAdvantagesSection = () => {
             <h3 className="font-semibold text-black mb-2">
               Nessuna Struttura di Supporto
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               La polvere non sinterizzata sostiene naturalmente il pezzo durante
               la stampa, eliminando post-processi di rimozione e consentendo
               geometrie altrimenti impossibili.
@@ -34,7 +34,7 @@ const SlsAdvantagesSection = () => {
             <h3 className="font-semibold text-black mb-2">
               Elevata Resistenza Meccanica
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Le parti SLS presentano proprietà quasi isotrope, con resistenze
               simili a componenti prodotti per stampaggio a iniezione, adatte
               all'uso funzionale diretto.
@@ -46,7 +46,7 @@ const SlsAdvantagesSection = () => {
             <h3 className="font-semibold text-black mb-2">
               Geometrie Complesse
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Canali interni, cavità nascoste, reticoli e forme avanzate sono
               realizzabili senza limiti produttivi tipici delle tecnologie
               convenzionali.
@@ -58,7 +58,7 @@ const SlsAdvantagesSection = () => {
             <h3 className="font-semibold text-black mb-2">
               Ideale per Produzione Reale
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Perfetta per prototipi funzionali ad alte prestazioni e piccole
               serie industriali con ottima ripetibilità tra un ciclo e
               l'altro.o.

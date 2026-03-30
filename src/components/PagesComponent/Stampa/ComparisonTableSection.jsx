@@ -5,15 +5,12 @@ const ComparisonTableSection = ({ data, categories }) => {
   return (
     <section className="section">
       <div className="container-main">
-        
         {/* Scroll Wrapper */}
         <div className="w-full overflow-x-auto scroll-smooth">
-          
           {/* Table */}
           <div className="min-w-[700px] md:min-w-[900px] border border-[#F3F4F6] rounded-xl overflow-hidden">
-            
             {/* Header */}
-            <div className="grid grid-cols-[0px_repeat(4,minmax(180px,1fr))] border-b border-[#F3F4F6]">
+            <div className="grid grid-cols-[200px_repeat(3,minmax(180px,1fr))] border-b border-[#F3F4F6]">
               <div></div>
 
               {data.map((col, i) => (
@@ -25,7 +22,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                 >
                   {/* Badge */}
                   <div
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium w-fit"
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[15px] font-medium w-fit"
                     style={{
                       backgroundColor: `${col.color}15`,
                       color: col.color,
@@ -39,9 +36,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                   </div>
 
                   {/* Subtitle */}
-                  <p className="text-xs text-gray-500">
-                    {col.subtitle}
-                  </p>
+                  <p className="text-[15px] text-gray-500">{col.subtitle}</p>
                 </div>
               ))}
             </div>
@@ -53,9 +48,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                 className="grid grid-cols-[200px_repeat(3,minmax(180px,1fr))] border-b border-[#F3F4F6] last:border-none"
               >
                 {/* Label */}
-                <div className="p-4 text-sm text-gray-700">
-                  {cat.label}
-                </div>
+                <div className="p-4 text-sm text-gray-700">{cat.label}</div>
 
                 {/* Values */}
                 {data.map((col, colIndex) => {
@@ -65,9 +58,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                     <div
                       key={colIndex}
                       className={`p-4 flex flex-col gap-2 ${
-                        colIndex !== 0
-                          ? "border-l border-[#F3F4F6]"
-                          : ""
+                        colIndex !== 0 ? "border-l border-[#F3F4F6]" : ""
                       }`}
                     >
                       {/* Stars */}
@@ -79,16 +70,10 @@ const ComparisonTableSection = ({ data, categories }) => {
                             <span
                               key={i}
                               style={{
-                                color: isFilled
-                                  ? col.color
-                                  : "#D1D5DB",
+                                color: isFilled ? col.color : "#D1D5DB",
                               }}
                             >
-                              {isFilled ? (
-                                <StarIcon />
-                              ) : (
-                                <StarBlankIcon />
-                              )}
+                              {isFilled ? <StarIcon /> : <StarBlankIcon />}
                             </span>
                           );
                         })}
@@ -107,7 +92,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                         </div>
 
                         {/* Score */}
-                        <p className="text-xs text-gray-500 text-right">
+                        <p className="text-[15px] text-gray-500 text-right">
                           {value}/5
                         </p>
                       </div>
@@ -131,9 +116,7 @@ const ComparisonTableSection = ({ data, categories }) => {
                   <div
                     key={i}
                     className={`p-4 flex flex-col gap-2 ${
-                      i !== 0
-                        ? "border-l border-[#F3F4F6]"
-                        : ""
+                      i !== 0 ? "border-l border-[#F3F4F6]" : ""
                     }`}
                   >
                     {/* Stars */}
@@ -145,16 +128,10 @@ const ComparisonTableSection = ({ data, categories }) => {
                           <span
                             key={starIndex}
                             style={{
-                              color: isFilled
-                                ? col.color
-                                : "#D1D5DB",
+                              color: isFilled ? col.color : "#D1D5DB",
                             }}
                           >
-                            {isFilled ? (
-                              <StarIcon />
-                            ) : (
-                              <StarBlankIcon />
-                            )}
+                            {isFilled ? <StarIcon /> : <StarBlankIcon />}
                           </span>
                         );
                       })}
@@ -171,7 +148,6 @@ const ComparisonTableSection = ({ data, categories }) => {
                 );
               })}
             </div>
-
           </div>
         </div>
       </div>

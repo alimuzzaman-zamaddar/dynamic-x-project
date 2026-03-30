@@ -104,7 +104,7 @@ const tableData = [
 export const Stampasla = () => {
   return (
     <div>
-      <div className="px-4 xl:px-0 mt-34">
+<div className=" mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title="Stampa 3D SLA ad alta precisione"
           description="Precisione, superfici lisce e dettagli fino all’estremo."

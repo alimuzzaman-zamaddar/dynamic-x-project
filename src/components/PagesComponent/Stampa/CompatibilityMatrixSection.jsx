@@ -9,10 +9,8 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
 
         {/* Wrapper */}
         <div className="border border-[#E5E7EB] rounded-2xl p-4 md:p-6 overflow-x-auto xl:overflow-visible">
-
           {/* Grid */}
           <div className="min-w-[700px] xl:min-w-0">
-
             {/* Header */}
             <div className="grid grid-cols-[160px_repeat(5,minmax(100px,1fr))] mb-6">
               <div></div>
@@ -35,7 +33,7 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
 
                   {/* Label */}
                   <p
-                    className="text-xs font-medium"
+                    className="text-[15px] font-medium"
                     style={{ color: col.color }}
                   >
                     {col.label}
@@ -74,18 +72,16 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
                         style={
                           active
                             ? {
-                              borderColor: `${row.color}30`,
-                              backgroundColor: `${row.color}15`,
-                            }
+                                borderColor: `${row.color}30`,
+                                backgroundColor: `${row.color}15`,
+                              }
                             : {}
                         }
                       >
                         <div
                           className="w-3 h-3 rounded-full"
                           style={{
-                            backgroundColor: active
-                              ? row.color
-                              : "#D1D5DB",
+                            backgroundColor: active ? row.color : "#D1D5DB",
                           }}
                         />
                       </div>
@@ -97,12 +93,12 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
 
             {/* Footer */}
             <div className="grid grid-cols-[160px_repeat(5,minmax(100px,1fr))] mt-6 pt-4 border-t border-[#E5E7EB]">
-              <div className="text-xs text-gray-500">Total</div>
+              <div className="text-[15px] text-gray-500">Total</div>
 
               {columns.map((col, colIndex) => {
                 const total = rows.reduce(
                   (acc, row) => acc + (row.values[colIndex] ? 1 : 0),
-                  0
+                  0,
                 );
 
                 return (
@@ -130,7 +126,6 @@ const CompatibilityMatrixSection = ({ title, columns, rows }) => {
                 );
               })}
             </div>
-
           </div>
         </div>
       </div>

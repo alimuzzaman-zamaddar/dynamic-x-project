@@ -22,7 +22,7 @@ const SlsAdvantagesSectionDrone = () => {
           {/* Card 1 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">Peso Ottimizzato</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Design generativo e materiali tecnici per ridurre la massa senza
               compromettere la struttura
             </p>
@@ -31,7 +31,7 @@ const SlsAdvantagesSectionDrone = () => {
           {/* Card 2 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">Alta Rigidità</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Geometrie avanzate che massimizzano la rigidità torsionale e
               flessionale del componente
             </p>
@@ -40,7 +40,7 @@ const SlsAdvantagesSectionDrone = () => {
           {/* Card 3 */}
           <div className="bg-[#F2F0EF] rounded-xl p-4 md:p-6">
             <h3 className="font-semibold text-black mb-2">Gestione Termica</h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Canali integrati e materiali ad alta conducibilità per dissipare
               il calore nei punti critici
             </p>

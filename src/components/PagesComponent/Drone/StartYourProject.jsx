@@ -64,12 +64,10 @@ const StartYourProject = () => {
                 {/* ID Number */}
 
                 {/* Title */}
-                <h3 className=" font-semibold leading-tight ">
-                  {step.title}
-                </h3>
+                <h3 className=" font-semibold leading-tight ">{step.title}</h3>
 
                 {/* Description - specific size adjustment */}
-                <p className="item-description text-[12px] leading-[18px] text-black opacity-80 mt-[-4px]">
+                <p className="item-description text-[15px] leading-[18px] text-black opacity-80 mt-[-4px]">
                   {step.description}
                 </p>
               </div>
@@ -83,7 +81,7 @@ const StartYourProject = () => {
             {/* SVG Checkmark inside a box to match */}
             <CheckIcon />
           </div>
-          <p className="text-[12px] leading-[22px] text-black">
+          <p className="text-[15px] leading-[22px] text-black">
             <strong className="font-semibold text-black/90">
               Pronto a collaborare?
             </strong>{" "}
