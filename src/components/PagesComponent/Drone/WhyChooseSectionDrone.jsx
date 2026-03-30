@@ -1,27 +1,31 @@
-import React from 'react';
+import React from "react";
 
 const WhyChooseSectionDrone = () => {
   const statistics = [
     {
       value: "−40%",
       label: "Riduzione del Peso",
-      description: "Rispetto a parti prodotte con metodi convenzionali grazie al design generativo"
+      description:
+        "Rispetto a parti prodotte con metodi convenzionali grazie al design generativo",
     },
     {
       value: "3",
       label: "Tecnologie di Stampa",
-      description: "FDM, SLA e SLS disponibili per coprire ogni esigenza applicativa"
+      description:
+        "FDM, SLA e SLS disponibili per coprire ogni esigenza applicativa",
     },
     {
       value: "4",
       label: "Famiglie di Materiali",
-      description: "PA-CF, Nylon rinforzato, ABS tecnico e resine high-temp per ogni scenario"
+      description:
+        "PA-CF, Nylon rinforzato, ABS tecnico e resine high-temp per ogni scenario",
     },
     {
       value: "100%",
       label: "Componenti Custom",
-      description: "Ogni parte è progettata specificamente per la piattaforma e l'applicazione del cliente"
-    }
+      description:
+        "Ogni parte è progettata specificamente per la piattaforma e l'applicazione del cliente",
+    },
   ];
 
   return (
@@ -43,15 +47,13 @@ const WhyChooseSectionDrone = () => {
             // Statistics Item (flex column, centered items)
             <div key={index} className="flex flex-col items-center gap-4">
               {/* Statistic value (bold, large font) */}
-              <div className="section-title">
-                {stat.value}
-              </div>
+              <div className="section-title">{stat.value}</div>
               {/* Statistic label (bold, smaller font) */}
               <div className="text-black text-sm md:text-base font-semibold leading-tight">
                 {stat.label}
               </div>
               {/* Statistic description (normal weight, smaller font) */}
-              <p className="text-black text-[12px] leading-[1.6]">
+              <p className="text-black text-[15px] leading-[1.6]">
                 {stat.description}
               </p>
             </div>

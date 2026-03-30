@@ -53,7 +53,7 @@ const ComparisonSection = () => {
               <th className="py-7 px-6 text-center">
                 <div className="flex flex-col items-center gap-1.5">
                   <span className="text-blue-600 font-bold text-xl">FDM</span>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-[15px] text-gray-500 font-medium">
                     Deposizione Fusa
                   </span>
                 </div>
@@ -61,7 +61,7 @@ const ComparisonSection = () => {
               <th className="py-7 px-6 text-center">
                 <div className="flex flex-col items-center gap-1.5">
                   <span className="text-indigo-600 font-bold text-xl">SLA</span>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-[15px] text-gray-500 font-medium">
                     Stereolitografia
                   </span>
                 </div>
@@ -69,7 +69,7 @@ const ComparisonSection = () => {
               <th className="py-7 px-6 pr-8 text-center">
                 <div className="flex flex-col items-center gap-1.5">
                   <span className="text-purple-600 font-bold text-xl">SLS</span>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-[15px] text-gray-500 font-medium">
                     Sinterizzazione Laser
                   </span>
                 </div>

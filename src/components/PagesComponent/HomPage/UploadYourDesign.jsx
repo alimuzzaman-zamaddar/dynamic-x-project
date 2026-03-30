@@ -31,7 +31,7 @@ const UploadYourDesign = () => {
           <Link to={"/upload-design"}>
             <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
               <FileUpload />
-              <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+              <span className="text-[15px] sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
                 Upload Your Design
               </span>
             </div>

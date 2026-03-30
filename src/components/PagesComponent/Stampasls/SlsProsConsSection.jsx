@@ -1,8 +1,6 @@
 import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-
-
 const SlsProsConsSection = () => {
   return (
     <section className="section">
@@ -27,7 +25,7 @@ const SlsProsConsSection = () => {
               <h3 className="text-lg font-semibold">Punti di Forza</h3>
             </div>
 
-            <ul className="flex flex-col gap-4 text-xs leading-[160%]">
+            <ul className="flex flex-col gap-4 text-[15px] leading-[160%]">
               <li className="flex items-start gap-3">
                 <span>
                   <FaArrowRightLong />
@@ -73,7 +71,7 @@ const SlsProsConsSection = () => {
               <h3 className="text-lg font-semibold text-black">Limitazioni</h3>
             </div>
 
-            <ul className="flex flex-col gap-4 text-xs text-gray-700 leading-[160%]">
+            <ul className="flex flex-col gap-4 text-[15px] text-gray-700 leading-[160%]">
               <li className="flex items-start gap-3">
                 <span>
                   <FaArrowRightLong />

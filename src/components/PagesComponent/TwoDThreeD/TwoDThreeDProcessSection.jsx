@@ -28,7 +28,7 @@ const TwoDThreeDProcessSection = () => {
             <h3 className="mt-8 font-semibold text-black">
               2. Trasformazione Automatica
             </h3>
-            <p className="text-xs text-gray-600 mt-2">
+            <p className="text-[15px] text-gray-600 mt-2">
               Carica disegni, schizzi o immagini nel formato che preferisci.
               Supportiamo i formati più comuni.
             </p>
@@ -42,7 +42,7 @@ const TwoDThreeDProcessSection = () => {
             <h3 className="mt-8 font-semibold text-black">
               2. Trasformazione Automatica
             </h3>
-            <p className="text-xs text-gray-600 mt-2">
+            <p className="text-[15px] text-gray-600 mt-2">
               La nostra tecnologia avanzata converte il tuo file 2D in un
               modello 3D dettagliato e ottimizzato per la stampa.
             </p>
@@ -53,8 +53,10 @@ const TwoDThreeDProcessSection = () => {
             <div className="">
               <img src={pimg3} alt="" />
             </div>
-            <h3 className="mt-8 font-semibold text-black">3. Stampa e Ricevi</h3>
-            <p className="text-xs text-gray-600 mt-2">
+            <h3 className="mt-8 font-semibold text-black">
+              3. Stampa e Ricevi
+            </h3>
+            <p className="text-[15px] text-gray-600 mt-2">
               Ottieni un preventivo istantaneo e ricevi il tuo oggetto stampato
               in 3D direttamente a casa tua.
             </p>

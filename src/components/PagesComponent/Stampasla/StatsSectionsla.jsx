@@ -1,6 +1,6 @@
 import React from "react";
 
-const StatsSectionsla = ({ heading, description, stats}) => {
+const StatsSectionsla = ({ heading, description, stats }) => {
   return (
     <section className="section ">
       <div className="container-main">
@@ -11,8 +11,10 @@ const StatsSectionsla = ({ heading, description, stats}) => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
-           gap-8 md:gap-10 my-8 md:my-12 text-center">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+           gap-8 md:gap-10 my-8 md:my-12 text-center"
+        >
           {stats?.map((item, index) => (
             <div key={index} className="stats-item">
               <h3 className="stats-value">{item.value}</h3>
@@ -21,7 +23,7 @@ const StatsSectionsla = ({ heading, description, stats}) => {
                 {item.label}
               </p>
 
-              <p className="text-black text-[12px] leading-[20px] max-w-[220px]">
+              <p className="text-black text-[15px] leading-[20px] max-w-[220px]">
                 {item.description}
               </p>
             </div>

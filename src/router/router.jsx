@@ -7,7 +7,6 @@ import HomePage from "../pages/HomePage";
 import Footwear from "../pages/Footwear";
 import Jwellery from "../pages/Jwellery";
 import ChiSiamo from "../pages/ChiSiamo";
-import Veterinary from "../pages/Veterinary";
 import TwoDThreeD from "../pages/TwoDThreeD";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
@@ -25,6 +24,7 @@ import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import BioStamp from "../pages/BioStamp";
 import News from "../pages/News";
+import Newsletter from "../pages/Newsletter";
 
 
 const router = createBrowserRouter([
@@ -113,6 +113,10 @@ const router = createBrowserRouter([
       {
         path: "/catalog",
         element: <Catalog />,
+      },
+      {
+        path: "/newsletter",
+        element: <Newsletter />,
       },
       {
         path: "/chi-siamo",

@@ -11,7 +11,7 @@ const WhyChooseSection = ({
       <div className="container-main">
         {/* Header */}
         <div className="mb-12">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-black mb-2">
+          <p className="text-[15px] font-semibold tracking-[0.2em] uppercase text-black mb-2">
             {badge}
           </p>
 

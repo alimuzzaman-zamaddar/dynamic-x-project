@@ -12,7 +12,7 @@ const PrototypingCosa = () => {
     <section className="my-5 xl:my-10">
       <Container>
         <h2 className="section-title ">Cosa Realizziamo</h2>
-        <p className="text-xs font-normal text-[#1E2939] pt-4">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4">
           Operiamo su una gamma completa di applicazioni, coprendo sia le
           esigenze estetiche che quelle funzionali. Ogni progetto viene
           analizzato per scegliere il materiale e la tecnologia più adatta agli
@@ -24,7 +24,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Gadget Premium
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Oggetti personalizzati ad alto impatto visivo, perfetti per
               presentazioni, eventi e lanci di prodotto.
             </h5>
@@ -34,7 +34,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Accessori Personalizzati
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939] ">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939] ">
               Componenti su misura progettati per integrarsi con prodotti
               esistenti o per nuove linee di prodotto.
             </h5>
@@ -44,7 +44,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Piccole Serie
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Produzione in lotti ridotti per validare il mercato prima di
               investire in stampi industriali costosi.
             </h5>
@@ -54,7 +54,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Prototipi Funzionali
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Parti stampate con materiali tecnici per simulare le condizioni
               reali di utilizzo e stress meccanico.
             </h5>
@@ -64,7 +64,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Mockup Estetici
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939] ">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939] ">
               Modelli ad alta fedeltà per presentazioni a stakeholder, investor
               pitch e sessioni di user testing.
             </h5>
@@ -74,7 +74,7 @@ const PrototypingCosa = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Parti per Validazione Tecnica
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Componenti per verificare tolleranze, accoppiamenti e funzionalità
               prima della produzione finale.
             </h5>

@@ -16,9 +16,13 @@ const navMenu = [
   {
     label: "Tecnologie",
     hash: "technologies",
+    dropdown: [
+      { label: "FDM", path: "/stampa" },
+      { label: "SLA", path: "/stampasla" },
+      { label: "SLS", path: "/stampasls" },
+    ],
   },
   { label: "Materiali", path: "/allmaterials", type: "route" },
-
 
   {
     label: "Catalogo",
@@ -44,9 +48,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const handleClickOutside = event => {
+    const handleClickOutside = (event) => {
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
@@ -94,14 +99,25 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
-  ${pathName.includes("/technology-details")
+  ${
+    pathName.includes("/technology-details")
+      ? "bg-transparent"
+      : isHome ||
+          isFashion ||
+          isIndustrial ||
+          isMedicale ||
+          isJwellery ||
+          isArchitettura ||
+          isVintage ||
+          isDrone ||
+          isVeterinary ||
+          isCatalog ||
+          isChiSiamo
+        ? scrollY < 200
           ? "bg-transparent"
-          : isHome || isFashion || isIndustrial || isMedicale || isJwellery || isArchitettura || isVintage || isDrone || isVeterinary || isCatalog || isChiSiamo
-            ? scrollY < 200
-              ? "bg-transparent"
-              : "bg-black"
-            : "bg-black"
-        }`}
+          : "bg-black"
+        : "bg-black"
+  }`}
     >
       <div className="max-w-[1440px] mx-auto lg:py-8 py-4 px-4 flex items-center justify-between">
         <div
@@ -119,8 +135,49 @@ const Navbar = () => {
 
         <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
           {navMenu.map((nav, idx) => (
-            <li key={idx}>
-              {nav.type === "scroll" ? (
+            <li key={idx} className="relative group">
+              {nav.dropdown ? (
+                <>
+                  <span
+                    onClick={() => {
+                      if (nav.hash) {
+                        if (pathName !== nav.path) {
+                          navigate(nav.path);
+                          setTimeout(() => {
+                            document
+                              .getElementById(nav.hash)
+                              ?.scrollIntoView({ behavior: "smooth" });
+                          }, 300);
+                        } else {
+                          document
+                            .getElementById(nav.hash)
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        navigate(nav.path);
+                      }
+                    }}
+                    className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
+                  >
+                    {nav.label}
+                    <span className="text-xs mt-[1px]">▼</span>
+                  </span>
+
+                  <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
+                      {nav.dropdown.map((item, subIdx) => (
+                        <span
+                          key={subIdx}
+                          onClick={() => navigate(item.path)}
+                          className="block px-4 py-2 text-sm text-white hover:text-blue-500 hover:bg-white/5 cursor-pointer transition"
+                        >
+                          {item.label}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : nav.type === "scroll" ? (
                 <Link
                   smooth
                   duration={500}
@@ -136,10 +193,14 @@ const Navbar = () => {
                       if (pathName !== nav.path) {
                         navigate(nav.path);
                         setTimeout(() => {
-                          document.getElementById(nav.hash)?.scrollIntoView({ behavior: "smooth" });
+                          document
+                            .getElementById(nav.hash)
+                            ?.scrollIntoView({ behavior: "smooth" });
                         }, 300);
                       } else {
-                        document.getElementById(nav.hash)?.scrollIntoView({ behavior: "smooth" });
+                        document
+                          .getElementById(nav.hash)
+                          ?.scrollIntoView({ behavior: "smooth" });
                       }
                     } else {
                       navigate(nav.path);
@@ -165,21 +226,101 @@ const Navbar = () => {
             alt="site logo"
           />
 
-          <ul className="flex flex-col gap-y-4">
-            {navMenu.map((nav, idx) => (
-              <li key={idx}>
-                <Link
-                  smooth
-                  duration={500}
-                  to={nav.path}
-                  className=" text-sm xl:text-[15px] text-slate-200  hover:text-primary-black font-medium capitalize cursor-pointer transition-colors duration-300
-          "
+<ul className="flex flex-col gap-y-4 w-full">
+  {navMenu.map((nav, idx) => (
+    <li key={idx} className="w-full">
+      {nav.dropdown ? (
+        <div className="w-full">
+          <div className="flex items-center justify-between w-full">
+            <span
+              onClick={() => {
+                if (nav.hash) {
+                  if (pathName !== nav.path) {
+                    navigate(nav.path);
+                    setIsOpen(false);
+                    setTimeout(() => {
+                      document
+                        .getElementById(nav.hash)
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }, 300);
+                  } else {
+                    document
+                      .getElementById(nav.hash)
+                      ?.scrollIntoView({ behavior: "smooth" });
+                    setIsOpen(false);
+                  }
+                } else {
+                  navigate(nav.path);
+                  setIsOpen(false);
+                }
+              }}
+              className="text-sm xl:text-[15px] text-slate-200 hover:text-primary-black font-medium capitalize cursor-pointer transition-colors duration-300"
+            >
+              {nav.label}
+            </span>
+
+            <button
+              type="button"
+              onClick={() => setMobileDropdownOpen(prev => !prev)}
+              className="text-slate-200 text-xs px-2 py-1"
+            >
+              {mobileDropdownOpen ? "▲" : "▼"}
+            </button>
+          </div>
+
+          <div
+            className={`overflow-hidden transition-all duration-300 ${
+              mobileDropdownOpen ? "max-h-40 mt-2" : "max-h-0"
+            }`}
+          >
+            <div className="ml-4 flex flex-col gap-y-3 border-l border-white/10 pl-4">
+              {nav.dropdown.map((item, subIdx) => (
+                <span
+                  key={subIdx}
+                  onClick={() => {
+                    navigate(item.path);
+                    setIsOpen(false);
+                    setMobileDropdownOpen(false);
+                  }}
+                  className="text-sm text-slate-300 hover:text-white font-medium cursor-pointer transition-colors duration-300"
                 >
-                  {nav.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  {item.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <span
+          onClick={() => {
+            if (nav.hash) {
+              if (pathName !== nav.path) {
+                navigate(nav.path);
+                setIsOpen(false);
+                setTimeout(() => {
+                  document
+                    .getElementById(nav.hash)
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }, 300);
+              } else {
+                document
+                  .getElementById(nav.hash)
+                  ?.scrollIntoView({ behavior: "smooth" });
+                setIsOpen(false);
+              }
+            } else {
+              navigate(nav.path);
+              setIsOpen(false);
+            }
+          }}
+          className="text-sm xl:text-[15px] text-slate-200 hover:text-primary-black font-medium capitalize cursor-pointer transition-colors duration-300"
+        >
+          {nav.label}
+        </span>
+      )}
+    </li>
+  ))}
+</ul>
 
           <button className=" flex w-[80%] items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5  px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
             Login
@@ -193,16 +334,19 @@ const Navbar = () => {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "rotate-45 absolute" : ""
+            }`}
           />
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "opacity-0" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "opacity-0" : ""
+            }`}
           />
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "-rotate-45 absolute" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "-rotate-45 absolute" : ""
+            }`}
           />
         </button>
 
