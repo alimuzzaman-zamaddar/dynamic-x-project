@@ -1,13 +1,14 @@
+import News from "../pages/News";
 import Layout from "../layout/Layout";
 import Vintage from "../pages/Vintage";
 import { Drone } from "../pages/Drone";
 import { Yacht } from "../pages/Yacht";
 import Catalog from "../pages/Catalog";
+import BioStamp from "../pages/BioStamp";
 import HomePage from "../pages/HomePage";
 import Footwear from "../pages/Footwear";
 import Jwellery from "../pages/Jwellery";
 import ChiSiamo from "../pages/ChiSiamo";
-import Veterinary from "../pages/Veterinary";
 import TwoDThreeD from "../pages/TwoDThreeD";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
@@ -23,8 +24,6 @@ import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import BioStamp from "../pages/BioStamp";
-import News from "../pages/News";
 
 
 const router = createBrowserRouter([
