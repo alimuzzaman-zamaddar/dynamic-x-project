@@ -1,8 +1,10 @@
+import News from "../pages/News";
 import Layout from "../layout/Layout";
 import Vintage from "../pages/Vintage";
 import { Drone } from "../pages/Drone";
 import { Yacht } from "../pages/Yacht";
 import Catalog from "../pages/Catalog";
+import BioStamp from "../pages/BioStamp";
 import HomePage from "../pages/HomePage";
 import Footwear from "../pages/Footwear";
 import Jwellery from "../pages/Jwellery";
