@@ -220,8 +220,8 @@ const tableData = [
 ];
 export const StampaPage = () => {
   return (
-    <div className="text-white pt-34">
-      <div className="px-4 xl:px-0">
+    <div className="text-white ">
+     <div className=" mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title="Stampa 3D FDM Professionale"
           description="Produzione rapida, accessibile e scalabile per prototipi e componenti funzali."

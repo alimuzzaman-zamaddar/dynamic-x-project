@@ -11,7 +11,7 @@ const NewBanner = ({
 }) => {
   return (
     <div
-      className="w-full xl:pt-65 pt-35 xl:pb-20 pb-10 bg-center bg-cover bg-no-repeat"
+      className="w-full xl:pt-40 pt-24 xl:pb-6 pb-4 bg-center bg-cover bg-no-repeat"
       style={{ backgroundImage: `url(${image})` }}
     >
       <div className="banner-content text-center px-2 sm:px-4">
@@ -30,7 +30,7 @@ const NewBanner = ({
           <Link to="/upload-design">
             <button
               type="button"
-              className="group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70 active:scale-[0.98] xl:mt-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2"
+              className="group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70 active:scale-[0.98] xl:mt-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2"
             >
               <span className="relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5">
                 {buttonText}

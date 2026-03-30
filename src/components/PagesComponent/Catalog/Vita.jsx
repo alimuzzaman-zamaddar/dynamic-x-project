@@ -23,7 +23,7 @@ const Vita = () => {
             <h3 className="font-semibold text-black">
               Materiali Avanzati
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Resine, filamenti tecnici e polveri metalliche selezionati tra i migliori sul mercato.
             </p>
           </div>
@@ -34,7 +34,7 @@ const Vita = () => {
             <h3 className="font-semibold text-black">
               Tecnologie d'Avanguardia
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               FDM, SLA, SLS e altro: scopri e confronta le tecnologie ideali per ogni progetto.
             </p>
           </div>
@@ -45,7 +45,7 @@ const Vita = () => {
             <h3 className="font-semibold text-black">
               Ispirazioni Illimitate
             </h3>
-            <p className="text-xs text-gray-600 leading-[160%]">
+            <p className="text-[15px] text-gray-600 leading-[160%]">
               Progetti, tutorial e casi studio per stimolare la tua creatività e potenziare le tue idee.
             </p>
           </div>

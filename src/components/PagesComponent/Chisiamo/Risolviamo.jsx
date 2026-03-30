@@ -30,7 +30,7 @@ const Risolviamo = () => {
         </h2>
 
         {/* Description */}
-        <p className="text-xs font-normal text-[#1E2939] pt-4 max-w-4xl">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4 max-w-4xl">
           Nei settori ad alta specializzazione, la manifattura tradizionale non riesce a rispondere alle necessità di flessibilità e velocità richieste dal mercato. I nostri clienti affrontano quotidianamente tre principali colli di bottiglia che compromettono l'efficienza operativa, i costi di gestione e, nei casi più critici, gli esiti dei trattamenti medicali. DynamicsX interviene proprio dove le catene di fornitura convenzionali si fermano, offrendo soluzioni tecniche avanzate per superare queste inefficienze strutturali.
         </p>
         <div className="grid grid-cols-1 gap-6 mt-10">

@@ -156,6 +156,8 @@ const CategorySection = () => {
           </ul>
         </div>
       </Container>
+
+      <div id="technologies" className="h-[60px]"></div>
     </section>
   );
 };

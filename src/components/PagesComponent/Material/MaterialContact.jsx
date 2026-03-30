@@ -10,24 +10,26 @@ const MaterialContact = ({
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const inputRef = useRef(null);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const handleFileChange = e => {
+  const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    const newFiles = files.map(file => ({
+    const newFiles = files.map((file) => ({
       file,
       name: file.name,
       size: file.size,
-      preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : null,
+      preview: file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : null,
     }));
-    setUploadedFiles(prev => [...prev, ...newFiles]);
+    setUploadedFiles((prev) => [...prev, ...newFiles]);
     e.target.value = "";
   };
 
   const handleRemoveFile = (index) => {
-    setUploadedFiles(prev => {
+    setUploadedFiles((prev) => {
       const updated = [...prev];
       if (updated[index].preview) URL.revokeObjectURL(updated[index].preview);
       updated.splice(index, 1);
@@ -54,8 +56,14 @@ const MaterialContact = ({
     { value: "petg-cf-fdm", label: "PETG-CF FDM" },
     { value: "pla-aero-fdm", label: "PLA Aero FDM" },
     { value: "pla-fdm", label: "PLA FDM" },
-    { value: "resina-per-prototipi-visivi-sla", label: "Resina per prototipi visivi (SLA)" },
-    { value: "resina-rigida-alta-prestazione-sla", label: "Resina rigida alta prestazione (SLA)" },
+    {
+      value: "resina-per-prototipi-visivi-sla",
+      label: "Resina per prototipi visivi (SLA)",
+    },
+    {
+      value: "resina-rigida-alta-prestazione-sla",
+      label: "Resina rigida alta prestazione (SLA)",
+    },
     { value: "tpe-fdm", label: "TPE FDM" },
     { value: "tpu-fdm", label: "TPU FDM" },
     { value: "resina-castable-sla", label: "Resina castable (SLA)" },
@@ -63,12 +71,30 @@ const MaterialContact = ({
   ];
 
   const serviceOptions = [
-    { value: "high-precision-3d-printing", label: "High-Precision 3D Printing" },
-    { value: "advanced-3d-modelling", label: "Advanced 3D Modelling & Engineering" },
-    { value: "ready-to-order-catalogs", label: "Ready-to-Order Specialized Catalogs" },
-    { value: "technical-consulting", label: "Technical Consulting & Material Expertise" },
-    { value: "2d-to-3d-conversion", label: "2D-to-3D Conversion & Digital Reconstruction" },
-    { value: "3d-scanning-reverse-engineering", label: "Professional 3D Scanning & Reverse Engineering" },
+    {
+      value: "high-precision-3d-printing",
+      label: "High-Precision 3D Printing",
+    },
+    {
+      value: "advanced-3d-modelling",
+      label: "Advanced 3D Modelling & Engineering",
+    },
+    {
+      value: "ready-to-order-catalogs",
+      label: "Ready-to-Order Specialized Catalogs",
+    },
+    {
+      value: "technical-consulting",
+      label: "Technical Consulting & Material Expertise",
+    },
+    {
+      value: "2d-to-3d-conversion",
+      label: "2D-to-3D Conversion & Digital Reconstruction",
+    },
+    {
+      value: "3d-scanning-reverse-engineering",
+      label: "Professional 3D Scanning & Reverse Engineering",
+    },
   ];
 
   return (
@@ -90,13 +116,29 @@ const MaterialContact = ({
           >
             <div className="flex flex-col gap-y-6">
               <div className="flex flex-row gap-x-6 items-center">
-                <input type="text" placeholder="Name" className="common-input" />
-                <input type="text" placeholder="Surname" className="common-input" />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="common-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Surname"
+                  className="common-input"
+                />
               </div>
 
               <div className="flex sm:flex-row flex-col w-full gap-6 items-center">
-                <input type="email" placeholder="Email" className="common-input" />
-                <input type="text" placeholder="Subject" className="common-input" />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="common-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Subject"
+                  className="common-input"
+                />
               </div>
 
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
@@ -105,22 +147,25 @@ const MaterialContact = ({
                   placeholder="Country Code"
                   className="common-input sm:w-[60%] w-full xl:mb-0 mb-5"
                 />
-                <input type="text" placeholder="Phone number" className="common-input" />
+                <input
+                  type="text"
+                  placeholder="Phone number"
+                  className="common-input"
+                />
               </div>
 
               <div className="flex gap-2">
                 <CustomDropdown
                   options={serviceOptions}
                   placeholder=" service"
-                  onChange={value => console.log("Selected:", value)}
+                  onChange={(value) => console.log("Selected:", value)}
                 />
                 <CustomDropdown
                   options={materialOptions}
                   placeholder="Material"
-                  onChange={value => console.log("Selected:", value)}
+                  onChange={(value) => console.log("Selected:", value)}
                 />
               </div>
-
 
               <textarea
                 placeholder="Message"
@@ -130,11 +175,13 @@ const MaterialContact = ({
               {/* File Upload Area */}
               <div
                 className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer border-2 border-gray-300"
-                onClick={() => uploadedFiles.length === 0 && inputRef.current?.click()}
+                onClick={() =>
+                  uploadedFiles.length === 0 && inputRef.current?.click()
+                }
               >
                 <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
                   <FileUpload />
-                  <span className="text-xs sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
+                  <span className="text-[15px] sm:text-sm md:text-base font-normal leading-[133%] text-black text-center">
                     Upload Your Design
                   </span>
                 </div>
@@ -160,7 +207,7 @@ const MaterialContact = ({
                       <button
                         type="button"
                         onClick={() => handleRemoveFile(i)}
-                        className="absolute -top-2 -right-2 z-10 w-5 h-5 rounded-full bg-black text-white text-xs flex items-center justify-center leading-none hover:bg-red-500 transition-colors duration-200"
+                        className="absolute -top-2 -right-2 z-10 w-5 h-5 rounded-full bg-black text-white text-[15px] flex items-center justify-center leading-none hover:bg-red-500 transition-colors duration-200"
                         aria-label="Remove file"
                       >
                         ×
@@ -194,7 +241,7 @@ const MaterialContact = ({
 
                       {/* File name & size */}
                       <span
-                        className="text-xs text-black font-medium w-full text-center truncate"
+                        className="text-[15px] text-black font-medium w-full text-center truncate"
                         title={f.name}
                       >
                         {f.name}
@@ -212,7 +259,7 @@ const MaterialContact = ({
                     className="flex flex-col items-center justify-center gap-y-2 border-2 border-dashed border-gray-300 rounded-xl p-3 w-[120px] h-full min-h-[110px] text-gray-400 hover:border-black hover:text-black transition-colors duration-200"
                   >
                     <span className="text-2xl leading-none">+</span>
-                    <span className="text-xs">Add more</span>
+                    <span className="text-[15px]">Add more</span>
                   </button>
                 </div>
               )}

@@ -22,7 +22,7 @@ const VetemarysupportsModals = () => {
           </p>
         </div>
         <h2 className="section-title ">Cosa Realizziamo</h2>
-        <p className="text-xs font-normal text-[#1E2939] pt-4">
+        <p className="text-[15px] font-normal text-[#1E2939] pt-4">
           Dal progetto alla produzione, offriamo una gamma completa di
           dispositivi ortopedici e chirurgici personalizzati. Ogni pezzo è
           sviluppato in stretta collaborazione con il veterinario, sulla base di
@@ -34,7 +34,7 @@ const VetemarysupportsModals = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Tutori Personalizzati
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Ortesi su misura per supportare articolazioni compromesse,
               fratture o recuperi post-chirurgici. Adattate anatomicamente a
               ogni paziente per massimizzare la mobilità e ridurre il dolore.
@@ -45,7 +45,7 @@ const VetemarysupportsModals = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Protesi
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939] ">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939] ">
               Soluzioni protesiche funzionali per animali con amputazioni
               parziali o totali degli arti. Progettate per restituire qualità di
               vita e autonomia motoria al paziente.
@@ -56,7 +56,7 @@ const VetemarysupportsModals = () => {
             <h4 className="text-[#0A0A0A] text-base text-center font-bold py-3">
               Guide Chirurgiche
             </h4>
-            <h5 className="text-xs font-normal text-center text-[#1E2939]">
+            <h5 className="text-[15px] font-normal text-center text-[#1E2939]">
               Strumenti di precisione per assistere il chirurgo durante gli
               interventi ortopedici, riducendo i tempi operatori e aumentando
               l'accuratezza del posizionamento implantare.
