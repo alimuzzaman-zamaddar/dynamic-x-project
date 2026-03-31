@@ -12,14 +12,14 @@ const materials = [
     title: "ABS-GF",
     subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici, risultando ideale per applicazioni esterne e strutturali.",
+      "ABS GF rinforzato con fibre di vetro per offrire rigidità superiore e stabilità dimensionale impeccabile.Pensato per chi cerca prestazioni tecniche avanzate, ideale per realizzare componenti che devono durare nel tempo e mantenere precisione anche sotto sollecitazione.",
   },
   {
     imgSrc: gear2,
     title: "ABS",
     subtitle: "FDM",
     description:
-      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
+      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. Èideale per parti funzionali e prototipi.",
   },
   {
     imgSrc: gear5,
@@ -40,14 +40,14 @@ const materials = [
     title: "ASA-CF",
     subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. Ideale per componenti ad alto stress.",
+      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard.È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
   },
   {
     imgSrc: gear2,
     title: "PA6-CF",
     subtitle: "FDM",
     description:
-      "Il Nylon 6 rinforzato con fibra di carbonio offre eccellenti proprietà meccaniche, elevata rigidità e resistenza termica. Mantiene leggerezza e resistenza agli urti.",
+      "Il Nylon 6 rinforzato con fibra di carbonio offre proprietà significativamente elevate di rigidità e resistenza in ambienti asciutti, mantenendo un’eccellente resistenza al calore e agli urti.",
   },
 ];
 

@@ -34,7 +34,7 @@ const statsData = [
     description: "Resine speciali per ogni esigenza",
   },
   {
-    value: "100%5+",
+    value: "100%+",
     label: "Tracciabilità spedizione",
     description: "Consegna affidabile e monitorata",
   },
@@ -104,7 +104,7 @@ const tableData = [
 export const Stampasla = () => {
   return (
     <div>
-<div className=" mt-10 lg:mt-15 xl:mt-25">
+      <div className=" mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title="Stampa 3D SLA ad alta precisione"
           description="Precisione, superfici lisce e dettagli fino all’estremo."

@@ -13,24 +13,23 @@ import gear4 from "../../../assets/img/materials//PA6-GF_Grid_LP 1 (1).png";
 import gear7 from "../../../assets/img/materials/PETG-CF_Grid_LP 1 (2).png";
 import gear8 from "../../../assets/img/materials/PLA Aero_Grid_LP 1 (1).png";
 import gear13 from "../../../assets/img/materials/RESINA RiGIDA_Grid_LP 1.png";
-import gear15 from "../../../assets/img/materials/RESINA DENTALE_Grid_LP 1.png";
 import gear14 from "../../../assets/img/materials/RESINA CASTABLE_Grid_LP 1.png";
 import gear12 from "../../../assets/img/materials/RESINA PROTOTIPI VISIVI_Grid_LP 1.png";
 
 const materials = [
   {
     imgSrc: gear1,
-    title: "ABS-GF",
-    subtitle: "FDM",
-    description:
-      "L’ASA rinforzato con fibra di vetro migliora l’ASA standard offrendo maggiore rigidità, resistenza al calore e stabilità dimensionale. Resiste ai raggi UV e agli agenti atmosferici, risultando ideale per applicazioni esterne e strutturali.",
-  },
-  {
-    imgSrc: gear2,
     title: "ABS",
     subtitle: "FDM",
     description:
-      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. È ideale per parti funzionali e prototipi.",
+      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. Èideale per parti funzionali e prototipi.",
+  },
+  {
+    imgSrc: gear2,
+    title: "ABS-GF",
+    subtitle: "FDM",
+    description:
+      "ABS GF rinforzato con fibre di vetro per offrire rigidità superiore e stabilità dimensionale impeccabile.Pensato per chi cerca prestazioni tecniche avanzate, ideale per realizzare componenti che devono durare nel tempo e mantenere precisione anche sotto sollecitazione.",
   },
   {
     imgSrc: gear3,
@@ -44,7 +43,7 @@ const materials = [
     title: "ASA-CF",
     subtitle: "FDM",
     description:
-      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard. È un’ottima scelta per componenti sottoposti a elevato stress meccanico.",
+      "L’ASA rinforzato con fibra di carbonio (CF-ASA) offre maggiore resistenza, rigidità e stabilità ai raggi UV rispetto all’ASA standard.È un’ottima scelta per componenti sottoposti a elevatostress meccanico.",
   },
   {
     imgSrc: gear2,
@@ -72,7 +71,7 @@ const materials = [
     title: "PET-CF",
     subtitle: "FDM",
     description:
-      "Miscela di PET resistente e fibra di carbonio. La fibra di carbonio aumenta durezza e resistenza meccanica, mantenendo il basso warping e il ridotto ritiro tipici del PET. Ottima resistenza al calore.",
+      "Miscela di PET resistente e fibra di carbonio. La fibra di carbonio aumenta durezza e resistenza meccanica, mantenendo il basso warping e il ridotto ritiro tipici del PET.Ottima resistenza al calore.",
   },
   {
     imgSrc: gear6,
@@ -90,58 +89,51 @@ const materials = [
   },
   {
     imgSrc: gear8,
-    title: "PLA Aero FDM",
+    title: "PLA",
+    subtitle: "FDM",
+    description:
+      "Il PLA è una plastica economica, ideale per prototipi e parti funzionali che non richiedono elevata resistenza meccanica o termica",
+  },
+  {
+    imgSrc: gear9,
+    title: "PLA Aero",
     subtitle: "FDM",
     description:
       "Il PLA Aero raggiunge bassa densità e peso ridotto grazie alla schiumatura alle alte temperature durante la stampa, creando microcavità all’interno del pezzo.",
   },
   {
-    imgSrc: gear9,
-    title: "PLA FDM",
-    subtitle: "FDM",
-    description:
-      "Il PLA è una plastica economica, ideale per prototipi e parti funzionali che non richiedono elevata resistenza meccanica o termica.",
-  },
-  {
     imgSrc: gear10,
-    title: "TPE",
+    title: "TPU",
     subtitle: "FDM",
-    description: "Ottina per modelli trapsarenti o estetici.",
+    description: "Il TPU stampato in FDM è perfetto per produrre parti e prototipi flessibili, come cover, guarnizioni e ammortizzatori.",
   },
   {
     imgSrc: gear11,
-    title: "TPU",
-    subtitle: "FDM",
+    title: "RESINA CASTABLE",
+    subtitle: "SLA",
     description:
-      "Materiale con elevate rigidità e resistenza meccanica, utile per prototipi funzionali o parti Meccaniche dove serve poca flessione, adatto per test di carter o componenti strutturali.",
+      "Resine per prototipi di gioielli e fusioni con superficie liscia e dettagli nitidi",
   },
   {
     imgSrc: gear12,
-    title: "RESINA PER PROTOTIPI VISIVI",
-    subtitle: "FDM",
+    title: "RESINA DENTALE",
+    subtitle: "SLA",
     description:
-      "Il TPE stampato in FDM offre flessibilità ed elasticità simili alla gomma, con buona durabilità. È ideale per parti a contatto con la pelle o alimenti, o per utilizzi in ambienti soggetti a sollecitazioni elastiche.",
+      "Progettata per modelli odontoiatrici e protesi con precisione elevate e materiali con certificazioni mediche.",
   },
   {
     imgSrc: gear13,
-    title: "RESINA RIGIDA ALTA PRESTAZIONE",
-    subtitle: "FDM",
+    title: "RESINA PER PROTOTIPI VISIVI",
+    subtitle: "SLA",
     description:
-      "Il TPU stampato in FDM è perfetto per produrre parti e prototipi flessibili, come cover, guarnizioni e ammortizzatori.",
+      "Ottina per modelli trapsarenti o estetici",
   },
   {
     imgSrc: gear14,
-    title: "RESINA CASTABLE",
-    subtitle: "FDM",
+    title: "RESINA RIGIDA ALTA PRESTAZIONE",
+    subtitle: "SLA",
     description:
-      "Resine per prototipi di gioielli e fusioni con superficie liscia e dettagli nitidi.",
-  },
-  {
-    imgSrc: gear15,
-    title: "RESINA DENTALE",
-    subtitle: "FDM",
-    description:
-      "Progettata per modelli odontoiatrici e protesi con precisione elevate e materiali con certificazioni mediche.",
+      "Materiale con elevate rigidità e resistenza meccanica, utile per prototipi funzionali o parti Meccaniche dove serve poca flessione, adatto per test di carter o componenti strutturali.",
   },
 ];
 
