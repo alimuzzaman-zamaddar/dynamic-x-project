@@ -42,6 +42,8 @@ const UploadYourDesign = () => {
           /> */}
         </div>
       </Container>
+      <div id="categorie" className="h-15"></div>
+
     </section>
   )
 }
