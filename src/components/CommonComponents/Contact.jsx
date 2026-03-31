@@ -6,11 +6,10 @@ import { FileUpload } from "../SvgContainer/SvgContainer";
 import CustomDropdown from "../CustomComponents/CustomDropDown";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-// ❌ REMOVED: storage imports (no longer needed)
 
 const Contact = ({
-  title = "CONTACT US AND GET A QUOTE",
-  description = "Professional 3D printing service for prototyping and production. Over 100+ materials available with lead times as fast as 24 hours.",
+  title = "CONTATTACI PER IL TUO PROGETTO.",
+  description = "Stampa 3D professionale per prototipazione e produzione.Ampia scelta di materiali e consegna veloce, anche in 24 ore.",
 }) => {
   const [formData, setFormData] = useState({
     name: "", surname: "", email: "", subject: "",
