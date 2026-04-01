@@ -23,10 +23,10 @@ const navMenu = [
         label: " Automotive d’epoca & Parti rare", path: "/vintage"
       },
       {
-        label: " Yacht & Componenti", path: "/yatch"
+        label: " Yacht & Componenti", path: "/yacht"
       },
       {
-        label: " Medicale Lab & Biotech", path: "/medicale"
+        label: " Medicale Lab & Biotech", path: "/medicale-lab"
       },
       {
         label: " Dime & Componenti Industriali", path: "/industrial"

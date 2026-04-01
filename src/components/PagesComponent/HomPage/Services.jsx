@@ -71,8 +71,8 @@ const techonologies = [
   },
 ];
 
-const CARD_WIDTH = 260;
 const CARD_GAP = 16;
+const CARD_WIDTH = 260;
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(0);

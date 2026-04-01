@@ -19,6 +19,8 @@ const Newsletter = ({
     companyName: "",
     service: "",
     category: "",
+    privacyAccepted: false, // Mandatory Box
+    marketingAccepted: false, // Newsletter/Marketing Box
   });
 
   const [status, setStatus] = useState("");
@@ -48,31 +50,33 @@ const Newsletter = ({
   ];
 
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation for mandatory privacy checkbox
+    if (!formData.privacyAccepted) {
+      setStatus("Per favore, accetta l'informativa sulla privacy.");
+      return;
+    }
+
     setLoading(true);
     setStatus("");
 
     try {
+      // Save to Firestore
       await addDoc(collection(db, "newsletter_subscribers"), {
-        name: formData.name,
-        surname: formData.surname,
-        email: formData.email,
-        phone: formData.phone,
-        country: formData.country,
-        city: formData.city,
-        companyName: formData.companyName,
-        service: formData.service,
-        category: formData.category,
+        ...formData,
         createdAt: serverTimestamp(),
       });
 
+      // Send via EmailJS
       await emailjs.send(
         "service_madniod",
         "template_48zi4ta",
@@ -86,8 +90,10 @@ const Newsletter = ({
           company_name: formData.companyName,
           service: formData.service,
           category: formData.category,
+          privacy_consent: formData.privacyAccepted ? "Accepted" : "Declined",
+          marketing_consent: formData.marketingAccepted ? "Accepted" : "Declined",
           subject: "Newsletter Subscription",
-          message: `New newsletter subscription from ${formData.name} ${formData.surname}. Preferred service: ${formData.service}. Phone: ${formData.phone}`,
+          message: `New newsletter subscription from ${formData.name} ${formData.surname}.`,
         },
         "XrpBmbTJztTtJrP2f"
       );
@@ -103,6 +109,8 @@ const Newsletter = ({
         companyName: "",
         service: "",
         category: "",
+        privacyAccepted: false,
+        marketingAccepted: false,
       });
     } catch (error) {
       console.error(error);
@@ -130,7 +138,6 @@ const Newsletter = ({
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col gap-y-6">
-              {/* Name & Surname */}
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <input
                   type="text"
@@ -152,7 +159,6 @@ const Newsletter = ({
                 />
               </div>
 
-              {/* Email & Phone */}
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <input
                   type="email"
@@ -174,7 +180,6 @@ const Newsletter = ({
                 />
               </div>
 
-              {/* Country & City */}
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <input
                   type="text"
@@ -196,33 +201,24 @@ const Newsletter = ({
                 />
               </div>
 
-              {/* Service Dropdown */}
               <CustomDropdown
                 options={serviceOptions}
                 placeholder="Preferred service"
                 required
                 onChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    service: value,
-                  }))
+                  setFormData((prev) => ({ ...prev, service: value }))
                 }
               />
 
-              {/* Category Dropdown */}
               <CustomDropdown
                 options={categorisOptions}
                 placeholder="Category List"
                 required
                 onChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    category: value,
-                  }))
+                  setFormData((prev) => ({ ...prev, category: value }))
                 }
               />
 
-              {/* Company Name */}
               <div className="flex flex-col sm:flex-row gap-6 items-center">
                 <input
                   type="text"
@@ -234,13 +230,42 @@ const Newsletter = ({
                   required
                 />
               </div>
+
+              {/* Consent Checkboxes */}
+              <div className="flex flex-col gap-y-4 pt-2">
+                <label className="flex items-start gap-x-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    name="privacyAccepted"
+                    className="mt-1 w-4 h-4 accent-black cursor-pointer"
+                    checked={formData.privacyAccepted}
+                    onChange={handleChange}
+                  />
+                  <span className="text-sm text-black/70 leading-snug group-hover:text-black transition-colors">
+                    Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
+                  </span>
+                </label>
+
+                <label className="flex items-start gap-x-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    name="marketingAccepted"
+                    className="mt-1 w-4 h-4 accent-black cursor-pointer"
+                    checked={formData.marketingAccepted}
+                    onChange={handleChange}
+                  />
+                  <span className="text-sm text-black/70 leading-snug group-hover:text-black transition-colors">
+                    Acconsento a ricevere comunicazioni commerciali e newsletter
+                  </span>
+                </label>
+              </div>
             </div>
 
             {status && (
               <p
                 className={`text-sm font-medium text-center ${status.toLowerCase().includes("successfully")
-                  ? "text-green-500"
-                  : "text-red-600"
+                    ? "text-green-500"
+                    : "text-red-600"
                   }`}
               >
                 {status}

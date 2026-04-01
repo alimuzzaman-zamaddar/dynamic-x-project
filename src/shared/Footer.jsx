@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router";
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
+import { Link } from "react-router";
 
 // Socials and contact
 const socialFooterNav = [
@@ -51,6 +51,7 @@ const Footer = () => {
   return (
     <footer className="h-auto w-full bg-secondary-black pt-12 xl:pt-24 pb-[33.5px]">
       <div className="max-w-[1440px] px-4 mx-auto flex flex-col gap-y-20 lg:gap-y-30">
+
         {/* Top section: Logo + links */}
         <div className="flex flex-col gap-y-12 lg:flex-row justify-between">
           <img
@@ -67,7 +68,7 @@ const Footer = () => {
                 {navCol1.map((item, idx) => (
                   <li key={idx}>
                     <Link
-                      className="text-base text-white font-normal leading-[126.582%]"
+                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
                       to={item.redirectLink}
                     >
                       {item.label}
@@ -84,7 +85,7 @@ const Footer = () => {
                 {navCol2.map((item, idx) => (
                   <li key={idx}>
                     <Link
-                      className="text-base text-white font-normal leading-[126.582%]"
+                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
                       to={item.redirectLink}
                     >
                       {item.label}
@@ -101,12 +102,14 @@ const Footer = () => {
                 <ul className="flex flex-col gap-y-3">
                   {nav.items.map((item, i) => (
                     <li key={i}>
-                      <Link
-                        className="text-base text-white font-normal leading-[126.582%]"
-                        to={item.redirectLink}
+                      <a
+                        className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
+                        href={item.redirectLink}
+                        target={item.redirectLink.startsWith('http') ? "_blank" : "_self"}
+                        rel="noreferrer"
                       >
                         {item.label}
-                      </Link>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -115,25 +118,34 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* --- NEW LEGAL TEXT SECTION (From Client Request) --- */}
+        <div className="border-t border-white/10 pt-8">
+          <p className="text-white/40 font-light text-xs md:text-sm leading-relaxed max-w-4xl">
+            Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679.
+            I dati forniti saranno utilizzati esclusivamente per le finalità indicate e non saranno ceduti a terzi senza esplicito consenso.
+          </p>
+        </div>
+
         {/* Bottom section: Policy + copyright */}
         <div className="flex flex-col items-center w-full gap-y-8 lg:flex-row justify-between">
           <ul className="flex flex-row justify-between lg:justify-normal w-full lg:gap-x-8 items-center">
             <Link
               to={"/privacy-policy"}
-              className="text-white opacity-64 font-light text-base hover:text-white ease-in-out duration-500 hover:opacity-100"
+              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100"
             >
               Privacy Policy
             </Link>
 
             <Link
               to={"/terms-and-conditions"}
-              className="text-white opacity-64 font-light text-base hover:opacity-100 ease-in-out duration-500"
+              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100"
             >
               Terms and Conditions
             </Link>
           </ul>
+
           <span className="text-white text-nowrap opacity-64 font-light text-base">
-            © 2025. DynamicsX. All Rights Reserved.
+            © 2026 DynamicsX. All Rights Reserved.
           </span>
         </div>
       </div>

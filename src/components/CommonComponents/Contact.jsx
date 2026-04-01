@@ -6,21 +6,34 @@ import { FileUpload } from "../SvgContainer/SvgContainer";
 import CustomDropdown from "../CustomComponents/CustomDropDown";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-
 const Contact = ({
   title = "CONTATTACI PER IL TUO PROGETTO.",
-  description = "Stampa 3D professionale per prototipazione e produzione.Ampia scelta di materiali e consegna veloce, anche in 24 ore.",
+  description = "Stampa 3D professionale per prototipazione e produzione. Ampia scelta di materiali e consegna veloce, anche in 24 ore.",
 }) => {
   const [formData, setFormData] = useState({
-    name: "", surname: "", email: "", subject: "",
-    countryCode: "", phone: "", service: "", message: "", file: null,
+    name: "",
+    surname: "",
+    email: "",
+    subject: "",
+    countryCode: "",
+    phone: "",
+    service: "",
+    message: "",
+    file: null,
+    privacyAccepted: false, // Mandatory Box
+    marketingAccepted: false, // Newsletter Box
   });
 
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    // Check if the input is a checkbox to use 'checked' instead of 'value'
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   const handleFileChange = (e) => {
@@ -34,11 +47,17 @@ const Contact = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation: Ensure mandatory privacy policy is accepted
+    if (!formData.privacyAccepted) {
+      setStatus("Per favore, accetta l'informativa sulla privacy per procedere.");
+      return;
+    }
+
     setLoading(true);
     setStatus("");
 
     try {
-      // ✅ Upload file to Cloudinary
       let fileURL = "No file uploaded";
       let fileName = "No file";
 
@@ -47,11 +66,11 @@ const Contact = ({
 
         const cloudinaryData = new FormData();
         cloudinaryData.append("file", formData.file);
-        cloudinaryData.append("upload_preset", "stefano_uploads"); // ✅ your preset
-        cloudinaryData.append("cloud_name", "dyuqrepwj");          // ✅ your cloud name
+        cloudinaryData.append("upload_preset", "stefano_uploads");
+        cloudinaryData.append("cloud_name", "dyuqrepwj");
 
         const cloudinaryRes = await fetch(
-          "https://api.cloudinary.com/v1_1/dyuqrepwj/auto/upload", // ✅ your cloud name
+          "https://api.cloudinary.com/v1_1/dyuqrepwj/auto/upload",
           {
             method: "POST",
             body: cloudinaryData,
@@ -59,10 +78,10 @@ const Contact = ({
         );
 
         const cloudinaryJson = await cloudinaryRes.json();
-        fileURL = cloudinaryJson.secure_url; // ✅ real viewable/downloadable link
+        fileURL = cloudinaryJson.secure_url;
       }
 
-      // ✅ Save to Firestore with real file URL
+      // Save to Firestore including the new consent fields
       await addDoc(collection(db, "contacts"), {
         name: formData.name,
         surname: formData.surname,
@@ -74,10 +93,12 @@ const Contact = ({
         message: formData.message,
         fileURL: fileURL,
         fileName: fileName,
+        privacyAccepted: formData.privacyAccepted,
+        marketingAccepted: formData.marketingAccepted,
         createdAt: serverTimestamp(),
       });
 
-      // ✅ Send email via EmailJS with real file link
+      // Send email via EmailJS
       await emailjs.send(
         "service_madniod",
         "template_9q8zhbi",
@@ -91,16 +112,26 @@ const Contact = ({
           service: formData.service,
           message: formData.message,
           file_name: fileURL,
+          privacy_consent: formData.privacyAccepted ? "Accepted" : "Declined",
+          marketing_consent: formData.marketingAccepted ? "Accepted" : "Declined",
         },
         "XrpBmbTJztTtJrP2f"
       );
 
       setStatus("Message sent successfully! We'll get back to you soon.");
       setFormData({
-        name: "", surname: "", email: "", subject: "",
-        countryCode: "", phone: "", service: "", message: "", file: null,
+        name: "",
+        surname: "",
+        email: "",
+        subject: "",
+        countryCode: "",
+        phone: "",
+        service: "",
+        message: "",
+        file: null,
+        privacyAccepted: false,
+        marketingAccepted: false,
       });
-
     } catch (error) {
       console.error(error);
       setStatus("Something went wrong. Please try again.");
@@ -138,40 +169,64 @@ const Contact = ({
             <div className="flex flex-col gap-y-6">
               <div className="flex flex-row gap-x-6 items-center">
                 <input
-                  type="text" name="name" placeholder="Name"
+                  type="text"
+                  name="name"
+                  placeholder="Name"
                   className="common-input"
-                  value={formData.name} onChange={handleChange} required
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
                 />
                 <input
-                  type="text" name="surname" placeholder="Surname"
+                  type="text"
+                  name="surname"
+                  placeholder="Surname"
                   className="common-input"
-                  value={formData.surname} onChange={handleChange} required
+                  value={formData.surname}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="flex sm:flex-row flex-col w-full gap-6 items-center">
                 <input
-                  type="email" name="email" placeholder="Email"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
                   className="common-input"
-                  value={formData.email} onChange={handleChange} required
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                 />
                 <input
-                  type="text" name="subject" placeholder="Subject"
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
                   className="common-input"
-                  value={formData.subject} onChange={handleChange} required
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <input
-                  type="text" name="countryCode" placeholder="Country Code"
+                  type="text"
+                  name="countryCode"
+                  placeholder="Country Code"
                   className="common-input sm:w-[60%] w-full xl:mb-0 mb-5"
-                  value={formData.countryCode} onChange={handleChange} required
+                  value={formData.countryCode}
+                  onChange={handleChange}
+                  required
                 />
                 <input
-                  type="text" name="phone" placeholder="Phone number"
+                  type="text"
+                  name="phone"
+                  placeholder="Phone number"
                   className="common-input"
-                  value={formData.phone} onChange={handleChange} required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
@@ -183,9 +238,12 @@ const Contact = ({
               />
 
               <textarea
-                name="message" placeholder="Message"
+                name="message"
+                placeholder="Message"
                 className="common-input min-h-[146px]"
-                value={formData.message} onChange={handleChange} required
+                value={formData.message}
+                onChange={handleChange}
+                required
               />
 
               <div className="relative h-auto w-full lg:py-10 py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer border-2 border-gray-300">
@@ -201,10 +259,44 @@ const Contact = ({
                   onChange={handleFileChange}
                 />
               </div>
+
+              {/* Checkbox Section */}
+              <div className="flex flex-col gap-y-4 pt-2">
+                {/* Privacy Policy Box (Mandatory) */}
+                <label className="flex items-start gap-x-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    name="privacyAccepted"
+                    className="mt-1 w-4 h-4 accent-black cursor-pointer"
+                    checked={formData.privacyAccepted}
+                    onChange={handleChange}
+                  />
+                  <span className="text-sm text-black/70 leading-snug group-hover:text-black transition-colors">
+                    Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
+                  </span>
+                </label>
+
+                {/* Newsletter Box (Optional) */}
+                <label className="flex items-start gap-x-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    name="marketingAccepted"
+                    className="mt-1 w-4 h-4 accent-black cursor-pointer"
+                    checked={formData.marketingAccepted}
+                    onChange={handleChange}
+                  />
+                  <span className="text-sm text-black/70 leading-snug group-hover:text-black transition-colors">
+                    Acconsento a ricevere comunicazioni commerciali e newsletter
+                  </span>
+                </label>
+              </div>
             </div>
 
             {status && (
-              <p className={`text-sm font-medium text-center ${status.startsWith("✅") ? "text-red-600" : "text-green-500"}`}>
+              <p
+                className={`text-sm font-medium text-center ${status.includes("successfully") ? "text-green-500" : "text-red-600"
+                  }`}
+              >
                 {status}
               </p>
             )}

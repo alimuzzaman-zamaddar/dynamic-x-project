@@ -25,6 +25,9 @@ import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import CookiePolicy from "../pages/CookiePolicy";
+import TermsCondiditon from "../pages/TermsCondiditon";
 
 
 const router = createBrowserRouter([
@@ -129,6 +132,18 @@ const router = createBrowserRouter([
       {
         path: "/news",
         element: <News />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/cookie-policy",
+        element: <CookiePolicy />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsCondiditon />,
       },
       {
         path: "/technology-details/:title",
