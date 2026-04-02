@@ -2,8 +2,8 @@ import { db } from "../firebase";
 import emailjs from "@emailjs/browser";
 import React, { useState } from "react";
 import Container from "../shared/Container";
-import CustomDropdown from "../components/CustomComponents/CustomDropDown";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import CustomDropdown from "../components/CustomComponents/CustomDropDown";
 
 const Newsletter = ({
   title = "ISCRIVITI ALLA NEWSLETTER",
@@ -14,7 +14,7 @@ const Newsletter = ({
     surname: "",
     email: "",
     phone: "",
-    country: "",
+    country: "", 
     city: "",
     companyName: "",
     service: "",

@@ -44,7 +44,7 @@ const Resta = () => {
             </p>
           </div>
         </div>
-        <Link to={"upload-design"}>
+        <Link to={"/upload-design"}>
           <button
             className='px-7 py-3 rounded-xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold'
           >
@@ -92,4 +92,4 @@ const Resta = () => {
   )
 }
 
-export default Resta
+export default Resta;
