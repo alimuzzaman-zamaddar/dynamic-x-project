@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
-import { Link } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 // Socials and contact
 const socialFooterNav = [
@@ -9,11 +9,11 @@ const socialFooterNav = [
     items: [
       {
         label: "Instagram",
-        redirectLink: "https://www.instagram.com/yourusername/",
+        redirectLink: "https://www.instagram.com/dynamicsx_/",
       },
       {
         label: "LinkedIn",
-        redirectLink: "https://www.linkedin.com/company/yourcompany/",
+        redirectLink: "https://www.linkedin.com/company/dynamicsx3d/",
       },
     ],
   },
@@ -32,9 +32,9 @@ const socialFooterNav = [
 const mainNavLinks = [
   { label: "Home", redirectLink: "/" },
   { label: "Chi Siamo", redirectLink: "/chi-siamo" },
-  { label: "Categorie", redirectLink: "/" },
-  { label: "Tecnologie", redirectLink: "/" },
-  { label: "Servizi", redirectLink: "/" },
+  { label: "Categorie", redirectLink: "/", hash: "categorie" },
+  { label: "Tecnologie", redirectLink: "/", hash: "technologies" },
+  { label: "Servizi", redirectLink: "/", hash: "services" },
   { label: "Materiali", redirectLink: "/allmaterials" },
   { label: "Catalogo", redirectLink: "/catalog" },
   { label: "2D to 3D", redirectLink: "/2d3d" },
@@ -43,10 +43,33 @@ const mainNavLinks = [
 ];
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // Split navigation links into two roughly equal columns
   const midIndex = Math.ceil(mainNavLinks.length / 2);
   const navCol1 = mainNavLinks.slice(0, midIndex);
   const navCol2 = mainNavLinks.slice(midIndex);
+
+  // Handle hash links like Navbar
+  const handleClick = (item) => {
+    if (item.hash) {
+      if (location.pathname !== item.redirectLink) {
+        navigate(item.redirectLink);
+        setTimeout(() => {
+          document
+            .getElementById(item.hash)
+            ?.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      } else {
+        document
+          .getElementById(item.hash)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(item.redirectLink);
+    }
+  };
 
   return (
     <footer className="h-auto w-full bg-secondary-black pt-12 xl:pt-24 pb-[33.5px]">
@@ -58,6 +81,7 @@ const Footer = () => {
             src={logo}
             className="w-32 2xl:w-40 cursor-pointer h-10 2xl:h-12 object-contain"
             alt="site logo"
+            onClick={() => navigate("/")}
           />
 
           <div className="flex flex-col md:flex-row gap-x-20">
@@ -67,12 +91,12 @@ const Footer = () => {
               <ul className="flex flex-col gap-y-3">
                 {navCol1.map((item, idx) => (
                   <li key={idx}>
-                    <Link
-                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
-                      to={item.redirectLink}
+                    <span
+                      onClick={() => handleClick(item)}
+                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors cursor-pointer"
                     >
                       {item.label}
-                    </Link>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -84,12 +108,12 @@ const Footer = () => {
               <ul className="flex flex-col gap-y-3">
                 {navCol2.map((item, idx) => (
                   <li key={idx}>
-                    <Link
-                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
-                      to={item.redirectLink}
+                    <span
+                      onClick={() => handleClick(item)}
+                      className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors cursor-pointer"
                     >
                       {item.label}
-                    </Link>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -105,7 +129,7 @@ const Footer = () => {
                       <a
                         className="text-base text-white font-normal leading-[126.582%] hover:text-white/80 transition-colors"
                         href={item.redirectLink}
-                        target={item.redirectLink.startsWith('http') ? "_blank" : "_self"}
+                        target={item.redirectLink.startsWith("http") ? "_blank" : "_self"}
                         rel="noreferrer"
                       >
                         {item.label}
@@ -118,7 +142,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* --- NEW LEGAL TEXT SECTION (From Client Request) --- */}
+        {/* Legal Text */}
         <div className="border-t border-white/10 pt-8">
           <p className="text-white/40 font-light text-xs md:text-sm leading-relaxed max-w-4xl">
             Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679.
@@ -129,19 +153,19 @@ const Footer = () => {
         {/* Bottom section: Policy + copyright */}
         <div className="flex flex-col items-center w-full gap-y-8 lg:flex-row justify-between">
           <ul className="flex flex-row justify-between lg:justify-normal w-full lg:gap-x-8 items-center">
-            <Link
-              to={"/privacy-policy"}
-              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100"
+            <span
+              onClick={() => navigate("/privacy-policy")}
+              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100 cursor-pointer"
             >
               Privacy Policy
-            </Link>
+            </span>
 
-            <Link
-              to={"/terms-and-conditions"}
-              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100"
+            <span
+              onClick={() => navigate("/terms-and-conditions")}
+              className="text-white opacity-64 font-light text-base hover:text-white transition-all duration-500 hover:opacity-100 cursor-pointer"
             >
               Terms and Conditions
-            </Link>
+            </span>
           </ul>
 
           <span className="text-white text-nowrap opacity-64 font-light text-base">

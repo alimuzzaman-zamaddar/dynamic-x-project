@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 
 const CookieBanner = () => {
-  // ✅ FIX: Use a lazy initializer function in useState.
-  // This determines the correct visibility on the first render,
-  // preventing the "cascading render" / "setState in useEffect" warning.
+
   const [isVisible, setIsVisible] = useState(() => {
-    // If we're in a browser environment
     if (typeof window !== "undefined") {
       const consent = localStorage.getItem("cookieConsent");
-      // If 'cookieConsent' is null, the banner should be visible (true)
       return !consent;
     }
     return false;

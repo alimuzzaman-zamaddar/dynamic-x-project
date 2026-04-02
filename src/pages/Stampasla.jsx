@@ -34,7 +34,7 @@ const statsData = [
     description: "Resine speciali per ogni esigenza",
   },
   {
-    value: "100%+",
+    value: "100%",
     label: "Tracciabilità spedizione",
     description: "Consegna affidabile e monitorata",
   },

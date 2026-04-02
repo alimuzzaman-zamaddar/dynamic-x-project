@@ -21,13 +21,13 @@ import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
 import Architettura from "../pages/Architettura";
 import { createBrowserRouter } from "react-router";
+import CookiePolicy from "../pages/CookiePolicy";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsCondiditon from "../pages/TermsCondiditon";
 import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import PrivacyPolicy from "../pages/PrivacyPolicy";
-import CookiePolicy from "../pages/CookiePolicy";
-import TermsCondiditon from "../pages/TermsCondiditon";
 
 
 const router = createBrowserRouter([

@@ -10,12 +10,7 @@ import machine6 from "../../../assets/img/home/serive7.png";
 import machine7 from "../../../assets/img/home/service8.png";
 
 const techonologies = [
-  {
-    bgImg: machine5,
-    title: "Conversione 2D to 3D",
-    description:
-      "Trasformiamo disegni tecnici in modelli tridimensionali stampabili.",
-  },
+
   {
     bgImg: machine4,
     title: "Stampa 3D Professionale",
@@ -34,6 +29,12 @@ const techonologies = [
     description: "Produzione flessibile e conveniente per serie limitate.",
   },
   {
+    bgImg: machine5,
+    title: "Conversione 2D to 3D",
+    description:
+      "Trasformiamo disegni tecnici in modelli tridimensionali stampabili.",
+  },
+  {
     bgImg: machine2,
     title: "Ottimizzazione DFAM",
     description:
@@ -50,12 +51,6 @@ const techonologies = [
     title: "Modellazione 3D",
     description:
       "Creazione di modelli CAD pronti per produzione e prototipazione.",
-  },
-  {
-    bgImg: machine5,
-    title: "Conversione 2D to 3D",
-    description:
-      "Trasformiamo disegni tecnici in modelli tridimensionali stampabili.",
   },
   {
     bgImg: machine6,
