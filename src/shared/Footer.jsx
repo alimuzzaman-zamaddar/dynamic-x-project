@@ -21,8 +21,8 @@ const socialFooterNav = [
     title: "Contact",
     items: [
       {
-        label: "xeniabat@gmail.com",
-        redirectLink: "mailto:xeniabat@gmail.com",
+        label: "info@dynamicxs.it",
+        redirectLink: "mailto:info@dynamicxs.it",
       },
     ],
   },
@@ -143,12 +143,12 @@ const Footer = () => {
         </div>
 
         {/* Legal Text */}
-        <div className="border-t border-white/10 pt-8">
+        {/* <div className="border-t border-white/10 pt-8">
           <p className="text-white/40 font-light text-xs md:text-sm leading-relaxed max-w-4xl">
             Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679.
             I dati forniti saranno utilizzati esclusivamente per le finalità indicate e non saranno ceduti a terzi senza esplicito consenso.
           </p>
-        </div>
+        </div> */}
 
         {/* Bottom section: Policy + copyright */}
         <div className="flex flex-col items-center w-full gap-y-8 lg:flex-row justify-between">
