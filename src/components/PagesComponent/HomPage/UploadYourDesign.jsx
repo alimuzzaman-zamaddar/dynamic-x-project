@@ -28,7 +28,7 @@ const UploadYourDesign = () => {
           }}
           className="relative h-auto w-full py-5 px-4 rounded-xl flex items-center justify-center cursor-pointer"
         >
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <div className="flex flex-col gap-y-4 sm:gap-y-5 items-center pointer-events-none">
               <FileUpload />
               <span className="text-[15px] sm:text-sm md:text-xl font-bold leading-[133%] text-black text-center">
