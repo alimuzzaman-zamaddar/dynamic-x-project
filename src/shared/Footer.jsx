@@ -1,8 +1,7 @@
 import React from "react";
-import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
 import { useLocation, useNavigate } from "react-router";
+import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
 
-// Socials and contact
 const socialFooterNav = [
   {
     title: "Socials",
@@ -28,7 +27,6 @@ const socialFooterNav = [
   },
 ];
 
-// Main nav links (top-level only)
 const mainNavLinks = [
   { label: "Home", redirectLink: "/" },
   { label: "Chi Siamo", redirectLink: "/chi-siamo" },
@@ -46,12 +44,10 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Split navigation links into two roughly equal columns
   const midIndex = Math.ceil(mainNavLinks.length / 2);
   const navCol1 = mainNavLinks.slice(0, midIndex);
   const navCol2 = mainNavLinks.slice(midIndex);
 
-  // Handle hash links like Navbar
   const handleClick = (item) => {
     if (item.hash) {
       if (location.pathname !== item.redirectLink) {

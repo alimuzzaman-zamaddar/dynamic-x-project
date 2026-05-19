@@ -21,10 +21,8 @@ const Layout = () => {
     <>
       <ScrollToTop />
       <Navbar />
-      <Outlet /> {/* Fixed the missing '>' here */}
+      <Outlet />
       <Footer />
-
-      {/* The banner is placed here so it stays on top of all pages */}
       <CookieBanner />
     </>
   );

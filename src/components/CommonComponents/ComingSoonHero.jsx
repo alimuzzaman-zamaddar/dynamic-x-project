@@ -4,7 +4,7 @@ import hero_video from "../../assets/videos/recording mountain top.mp4";
 
 const ComingSoonHero = () => {
   return (
-    <section className="relative h-[832px] w-full overflow-hidden">
+    <section className="relative h-208 w-full overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src={hero_video}
