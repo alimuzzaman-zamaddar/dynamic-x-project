@@ -29,6 +29,7 @@ import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import NewUploadDesign from "../pages/NewUploadDesign";
+import FileUpload from "../pages/FileUpload";
 
 
 const router = createBrowserRouter([
@@ -125,6 +126,10 @@ const router = createBrowserRouter([
       {
         path: "/new-upload-design",
         element: <NewUploadDesign />,
+      },
+      {
+        path: "/file-upload",
+        element: <FileUpload />,
       },
       {
         path: "/chi-siamo",
