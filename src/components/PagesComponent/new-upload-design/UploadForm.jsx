@@ -884,7 +884,7 @@ export default function UploadForm() {
 
                               <button
                                 type="button"
-                                onClick={() => showToast('🚀 Added configuration seamlessly to your shopping cart!')}
+                                onClick={() => showToast(' Added configuration seamlessly to your shopping cart!')}
                                 className="w-full mt-2 cursor-pointer rounded-xl bg-black py-3 text-sm font-bold text-white  transition duration-150 flex items-center justify-center gap-1 shadow-md"
                               >
                                 Add to Cart
