@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import Container from '../../../shared/Container';
 import * as THREE from 'three';
+import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 
-// Optional local pricing fallbacks for known materials (API doesn't currently include price)
 const MATERIAL_PRICING = {
   PLA: 0.05,
   PETG: 0.07,
@@ -10,8 +10,6 @@ const MATERIAL_PRICING = {
   'Tough Resin': 0.12,
   Transparent: 0.15,
 };
-
-const INITIAL_POSTPROCESS = { sand: false, primer: false, paint: false, uv: false };
 
 export default function UploadForm() {
   const fileInputRef = useRef(null);
@@ -22,13 +20,14 @@ export default function UploadForm() {
   const rendererRef = useRef(null);
   const meshRef = useRef(null);
   const animationRef = useRef(null);
+
   const controlsRef = useRef({
     isDragging: false,
     isRightDown: false,
     lastMouse: { x: 0, y: 0 },
     rotation: { x: 0.5, y: 0.5 },
     pan: { x: 0, y: 0 },
-    zoom: 3
+    zoom: 3.5 // Re-calibrated default base fallback zoom
   });
 
   const [dragOver, setDragOver] = useState(false);
@@ -42,7 +41,6 @@ export default function UploadForm() {
   const [material, setMaterial] = useState('Standard Resin');
   const [color, setColor] = useState('#1a1a2e');
   const [infill, setInfill] = useState(20);
-  const [postProcess, setPostProcess] = useState(INITIAL_POSTPROCESS);
   const [originalDims, setOriginalDims] = useState({ x: 0, y: 0, z: 0 });
   const [volume, setVolume] = useState(0);
   const [area, setArea] = useState(0);
@@ -55,16 +53,14 @@ export default function UploadForm() {
 
   useEffect(() => {
     const raw = localStorage.getItem('uploadedModel');
-    if (!raw) return;
-
-    try {
-      const parsed = JSON.parse(raw);
-      setStoredUpload(parsed);
-      if (parsed?.name) {
-        setFileName(parsed.name);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        setStoredUpload(parsed);
+        if (parsed?.name) setFileName(parsed.name);
+      } catch (error) {
+        console.error('Failed to parse uploaded model from localStorage', error);
       }
-    } catch (error) {
-      console.error('Failed to parse uploaded model from localStorage', error);
     }
   }, []);
 
@@ -81,7 +77,7 @@ export default function UploadForm() {
           const tJson = await tRes.json();
           const techs = Array.isArray(tJson.data) ? tJson.data : [];
           setTechnologies(techs);
-          if (techs && techs.length) {
+          if (techs.length) {
             const match = techs.find((t) => t.code === process) || techs[0];
             if (match) {
               chosenTechId = match.id;
@@ -97,9 +93,9 @@ export default function UploadForm() {
             const mJson = await mRes.json();
             const mats = Array.isArray(mJson.data) ? mJson.data : [];
             setMaterialsList(mats);
-            if (mats && mats.length && !materialsList.length) {
+            if (mats.length && !materialsList.length) {
               setMaterial(mats[0].name);
-              if (mats[0].colours && mats[0].colours.length) {
+              if (mats[0].colours?.length) {
                 setColor(mats[0].colours[0].code || color);
               }
             }
@@ -113,7 +109,6 @@ export default function UploadForm() {
     };
 
     fetchAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -122,7 +117,7 @@ export default function UploadForm() {
     const loadFromStorage = async () => {
       try {
         setLoading(true);
-        const [prefix, base64] = storedUpload.fileContent.split(',');
+        const [, base64] = storedUpload.fileContent.split(',');
         if (!base64) throw new Error('Invalid stored file content');
         const binary = atob(base64);
         const buffer = new ArrayBuffer(binary.length);
@@ -147,9 +142,7 @@ export default function UploadForm() {
     return () => window.clearTimeout(timer);
   }, [toast]);
 
-  const showToast = (message) => {
-    setToast(message);
-  };
+  const showToast = (message) => setToast(message);
 
   const updateCamera = () => {
     const camera = cameraRef.current;
@@ -169,31 +162,23 @@ export default function UploadForm() {
     if (!container || !canvas) return;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf3f4f6);
+    scene.background = new THREE.Color(0xE7E7E7);
     sceneRef.current = scene;
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambient = new THREE.AmbientLight(0xE7E7E7, 0.6);
     scene.add(ambient);
 
-    const dir1 = new THREE.DirectionalLight(0xffffff, 0.8);
+    const dir1 = new THREE.DirectionalLight(0xE7E7E7, 0.8);
     dir1.position.set(5, 10, 5);
     scene.add(dir1);
 
-    const dir2 = new THREE.DirectionalLight(0x6b7280, 0.4);
-    dir2.position.set(-5, 3, -5);
-    scene.add(dir2);
-
-    const hemi = new THREE.HemisphereLight(0xffffff, 0xf3f4f6, 0.4);
-    scene.add(hemi);
-
     const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
-    camera.position.set(0, 1.5, 3);
+    camera.position.set(0, 1.5, 3.5);
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.shadowMap.enabled = true;
     rendererRef.current = renderer;
 
     const resize = () => {
@@ -243,21 +228,11 @@ export default function UploadForm() {
       updateCamera();
     };
 
-    const handleContextMenu = (event) => {
-      event.preventDefault();
-    };
+    const handleContextMenu = (event) => event.preventDefault();
 
     const animate = () => {
       animationRef.current = requestAnimationFrame(animate);
-      if (meshRef.current && !controlsRef.current.isDragging) {
-        meshRef.current.rotation.y += 0.003;
-      }
       renderer.render(scene, camera);
-    };
-
-    const handleResize = () => {
-      resize();
-      updateCamera();
     };
 
     resize();
@@ -269,39 +244,21 @@ export default function UploadForm() {
     window.addEventListener('mouseup', handleMouseUp);
     container.addEventListener('wheel', handleWheel, { passive: false });
     container.addEventListener('contextmenu', handleContextMenu);
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', resize);
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
       container.removeEventListener('mousedown', handleMouseDown);
       container.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
       container.removeEventListener('wheel', handleWheel);
       container.removeEventListener('contextmenu', handleContextMenu);
-      window.removeEventListener('resize', handleResize);
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
-      }
+      window.removeEventListener('resize', resize);
+      if (rendererRef.current) rendererRef.current.dispose();
     };
   }, []);
 
   const parseSTL = (buffer) => {
-    const isASCII = (data) => {
-      const header = new Uint8Array(data, 0, Math.min(256, data.byteLength));
-      for (let i = 0; i < header.length; i += 1) {
-        if (header[i] > 127) return false;
-      }
-      const text = new TextDecoder().decode(new Uint8Array(data, 0, Math.min(256, data.byteLength)));
-      return text.includes('solid') && text.includes('facet');
-    };
-
-    if (isASCII(buffer)) return parseASCII(buffer);
-    return parseBinary(buffer);
-  };
-
-  const parseBinary = (buffer) => {
     const reader = new DataView(buffer);
     const triangles = reader.getUint32(80, true);
     const positions = new Float32Array(triangles * 9);
@@ -323,54 +280,15 @@ export default function UploadForm() {
       }
       offset += 2;
     }
-
     return { positions, normals, count: triangles };
-  };
-
-  const parseASCII = (buffer) => {
-    const text = new TextDecoder().decode(buffer);
-    const positions = [];
-    const normals = [];
-    const normalRe = /facet normal\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)/g;
-    const vertexRe = /vertex\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)\s+([-+]?\d*\.?\d+(?:[eE][-+]?\d+)?)/g;
-    let normalMatch;
-    const normalsArray = [];
-    while ((normalMatch = normalRe.exec(text)) !== null) {
-      normalsArray.push([parseFloat(normalMatch[1]), parseFloat(normalMatch[2]), parseFloat(normalMatch[3])]);
-    }
-
-    let vertexMatch;
-    const vertices = [];
-    while ((vertexMatch = vertexRe.exec(text)) !== null) {
-      vertices.push([parseFloat(vertexMatch[1]), parseFloat(vertexMatch[2]), parseFloat(vertexMatch[3])]);
-    }
-
-    const count = Math.floor(vertices.length / 3);
-    for (let i = 0; i < count; i += 1) {
-      const normal = normalsArray[i] || [0, 1, 0];
-      for (let v = 0; v < 3; v += 1) {
-        const vertex = vertices[i * 3 + v];
-        positions.push(vertex[0], vertex[1], vertex[2]);
-        normals.push(normal[0], normal[1], normal[2]);
-      }
-    }
-
-    return { positions: new Float32Array(positions), normals: new Float32Array(normals), count };
   };
 
   const computeVolume = (positions) => {
     let vol = 0;
     for (let i = 0; i < positions.length; i += 9) {
-      const ax = positions[i];
-      const ay = positions[i + 1];
-      const az = positions[i + 2];
-      const bx = positions[i + 3];
-      const by = positions[i + 4];
-      const bz = positions[i + 5];
-      const cx = positions[i + 6];
-      const cy = positions[i + 7];
-      const cz = positions[i + 8];
-      vol += (ax * (by * cz - bz * cy) - ay * (bx * cz - bz * cx) + az * (bx * cy - by * cx)) / 6;
+      vol += (positions[i] * (positions[i + 4] * positions[i + 8] - positions[i + 5] * positions[i + 7]) -
+        positions[i + 1] * (positions[i + 3] * positions[i + 8] - positions[i + 5] * positions[i + 6]) +
+        positions[i + 2] * (positions[i + 3] * positions[i + 7] - positions[i + 4] * positions[i + 6])) / 6;
     }
     return Math.abs(vol);
   };
@@ -390,7 +308,6 @@ export default function UploadForm() {
       cross.crossVectors(ab, ac);
       areaSum += cross.length() / 2;
     }
-
     return areaSum;
   };
 
@@ -401,25 +318,14 @@ export default function UploadForm() {
     }
   };
 
-  const applyWireframe = (enabled) => {
-    if (meshRef.current) {
-      meshRef.current.material.wireframe = enabled;
-    }
-  };
-
   const loadSTL = async (buffer, name) => {
-    if (!sceneRef.current) {
-      showToast('3D scene is not ready yet. Please try again.');
-      setLoading(false);
-      return;
-    }
+    if (!sceneRef.current) return;
 
     try {
       if (meshRef.current) {
         sceneRef.current.remove(meshRef.current);
         meshRef.current.geometry.dispose();
         meshRef.current.material.dispose();
-        meshRef.current = null;
       }
 
       const parsed = parseSTL(buffer);
@@ -435,6 +341,8 @@ export default function UploadForm() {
 
       const size = new THREE.Vector3();
       geometry.boundingBox.getSize(size);
+
+      // PERFECT INITIAL CAMERA AUTO-ZOOM CALCULATION
       const maxDim = Math.max(size.x, size.y, size.z);
       const fitScale = maxDim > 0 ? 2 / maxDim : 1;
 
@@ -442,13 +350,17 @@ export default function UploadForm() {
         color: new THREE.Color(color),
         specular: 0x888888,
         shininess: 80,
-        wireframe: false
       });
 
       const mesh = new THREE.Mesh(geometry, materialMesh);
-      mesh.scale.setScalar(fitScale * (scale / 100));
+      mesh.scale.setScalar(fitScale * (scale / 200));
       meshRef.current = mesh;
       sceneRef.current.add(mesh);
+
+      if (cameraRef.current) {
+        controlsRef.current.zoom = 3.2;
+        updateCamera();
+      }
 
       setTris(parsed.count);
       setOriginalDims({ x: +size.x.toFixed(4), y: +size.y.toFixed(4), z: +size.z.toFixed(4) });
@@ -458,19 +370,16 @@ export default function UploadForm() {
       setLoading(false);
       setFileName(name);
     } catch (error) {
-      console.error('Failed to parse STL file', error);
       showToast('⚠ Failed to load STL file');
       setLoading(false);
     }
   };
 
   const handleFile = async (file) => {
-    if (!file) return;
-    if (!file.name.toLowerCase().endsWith('.stl')) {
+    if (!file || !file.name.toLowerCase().endsWith('.stl')) {
       showToast('⚠ Please upload an STL file');
       return;
     }
-    setSelectedFile(file);
     setLoading(true);
     setModelLoaded(false);
     setFileName(file.name);
@@ -479,88 +388,28 @@ export default function UploadForm() {
       const buffer = await file.arrayBuffer();
       await loadSTL(buffer, file.name);
     } catch (error) {
-      console.error(error);
       showToast('⚠ Could not read the selected file');
       setLoading(false);
     }
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      handleFile(file);
-    }
-  };
-
   const unitsMultiplier = unit === 'mm' ? 1 : 0.0393701;
-  const scaleRatio = scale / 100;
 
   const displayDims = useMemo(() => {
     return {
-      x: (originalDims.x * scaleRatio * unitsMultiplier).toFixed(2),
-      y: (originalDims.y * scaleRatio * unitsMultiplier).toFixed(2),
-      z: (originalDims.z * scaleRatio * unitsMultiplier).toFixed(2)
+      x: (originalDims.x * unitsMultiplier).toFixed(2),
+      y: (originalDims.y * unitsMultiplier).toFixed(2),
+      z: (originalDims.z * unitsMultiplier).toFixed(2)
     };
-  }, [originalDims, scaleRatio, unitsMultiplier]);
+  }, [originalDims, unitsMultiplier]);
 
   const stats = useMemo(() => {
-    const vol = volume * scaleRatio * scaleRatio * scaleRatio * 0.001;
-    const areaValue = area * scaleRatio * scaleRatio * unitsMultiplier * unitsMultiplier;
+    const vol = volume * 0.001;
     return {
       volume: vol.toFixed(2),
-      area: areaValue.toFixed(2),
       dims: `${displayDims.x} × ${displayDims.y} × ${displayDims.z}`
     };
-  }, [area, displayDims, scaleRatio, unitsMultiplier, volume]);
-
-  const price = useMemo(() => {
-    if (!modelLoaded) return '$0.00';
-    const volCm3 = volume * scaleRatio * scaleRatio * scaleRatio * 0.001;
-    const materialUnitPrice = MATERIAL_PRICING[material] ?? 0.08;
-    const materialPrice = materialUnitPrice * Math.max(0.01, volCm3);
-    const infillMultiplier = 0.3 + (infill / 100) * 0.7;
-    const processMultiplier = { SLA: 1, FDM: 0.6, SLS: 1.4 }[process] || 1;
-    const base = Math.max(2.5, materialPrice * infillMultiplier * processMultiplier * 100);
-    const ppCost = Object.entries(postProcess).reduce((sum, [key, enabled]) => sum + (enabled ? ({ sand: 3, primer: 5, paint: 15, uv: 8 }[key]) : 0), 0);
-    return '$' + (base + ppCost).toFixed(2);
-  }, [area, infill, material, modelLoaded, postProcess, process, scaleRatio, volume]);
-
-  const updateScaleFromDim = (value) => {
-    if (!originalDims.x && !originalDims.y && !originalDims.z) return;
-    const numeric = Number(value);
-    if (!numeric) return;
-    const target = unit === 'mm' ? numeric : numeric * 25.4;
-    const baseDimension = originalDims.x || originalDims.y || originalDims.z || 1;
-    const newScale = Math.max(1, Math.min(9999, (target / baseDimension) * 100));
-    setScale(newScale);
-    if (meshRef.current) {
-      const box = meshRef.current.geometry.boundingBox;
-      if (box) {
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const fitScale = Math.max(1, 2 / Math.max(size.x, size.y, size.z));
-        meshRef.current.scale.setScalar(fitScale * (newScale / 100));
-      }
-    }
-  };
-
-  const onStepChange = (step) => {
-    setActiveStep(step);
-  };
-
-  const togglePostProcess = (key) => {
-    setPostProcess((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const resetView = () => {
-    controlsRef.current = {
-      ...controlsRef.current,
-      rotation: { x: 0.5, y: 0.5 },
-      pan: { x: 0, y: 0 },
-      zoom: 3
-    };
-    updateCamera();
-  };
+  }, [displayDims, volume]);
 
   const updateScale = (value) => {
     setScale(value);
@@ -570,47 +419,47 @@ export default function UploadForm() {
         const size = new THREE.Vector3();
         box.getSize(size);
         const fitScale = Math.max(1, 2 / Math.max(size.x, size.y, size.z));
-        meshRef.current.scale.setScalar(fitScale * (value / 100));
+        meshRef.current.scale.setScalar(fitScale * (value / 200));
       }
     }
   };
 
-  useEffect(() => {
-    applyWireframe(false);
-  }, []);
+  const resetView = () => {
+    controlsRef.current = {
+      ...controlsRef.current,
+      rotation: { x: 0.5, y: 0.5 },
+      pan: { x: 0, y: 0 },
+      zoom: 3.2
+    };
+    updateCamera();
+  };
 
   useEffect(() => {
     applyColor(color);
   }, [color]);
 
   return (
-    <section className="pt-12 pb-12  min-h-screen">
+    <section className="pt-12 pb-12 min-h-screen">
       <Container>
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">Upload your design</h1>
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Professional 3D printing service for prototyping and production. Over 100+ materials available with lead times as
-            fast as 24 hours.
+          <p className="text-sm md:text-base text-gray-600 max-w-[350px] mx-auto">
+            Professional 3D printing service for prototyping and production. Lead times as fast as 24 hours.
           </p>
         </div>
 
         <div className="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
+          {/* Left Canvas Preview Panel */}
           <div className="viewer-panel rounded-2xl border border-gray-300 bg-[#E8E8E8] overflow-hidden shadow-lg h-fit">
-            <div className="viewer-toolbar flex flex-col gap-3 px-4 py-3 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between border-b border-gray-200">
+            <div className="viewer-toolbar flex flex-col gap-3 px-4 py-3 border-b border-gray-200 sm:flex-row sm:items-center sm:justify-between">
               <div className="file-name text-gray-900 font-medium truncate max-w-full bg-white p-1 rounded-lg">{fileName}</div>
-              <div className="flex flex-wrap items-center gap-3">
-                {loading && <div className="loading-badge rounded-full bg-gray-200 px-3 py-1 text-xs text-blue-600 font-medium">Loading…</div>}
-                <div className="text-xs text-[#101828] font-normal">Drag to rotate · Scroll to zoom · Right drag to pan</div>
-              </div>
+              <div className="text-xs text-[#101828]">Drag to rotate · Scroll to zoom · Right drag to pan</div>
             </div>
 
             <div
               ref={viewerRef}
               className="relative min-h-130"
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDragOver(true);
-              }}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
               onDrop={(e) => {
                 e.preventDefault();
@@ -621,52 +470,27 @@ export default function UploadForm() {
             >
               {!modelLoaded && !loading && (
                 <div
-                  className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border-2 border-dashed border-gray-300  px-8 text-center text-gray-700 transition-all hover:bg-gray-50"
+                  className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border-2 border-dashed border-gray-300 px-8 text-center text-gray-700 transition-all hover:bg-gray-50"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <div className="upload-icon flex h-20 w-20 items-center justify-center rounded-2xl border border-gray-300  text-4xl text-gray-600 transition-colors">
-                    ⬆
-                  </div>
-                  <div className="upload-text max-w-xs">
+                  <div className="text-4xl text-gray-600">⬆</div>
+                  <div>
                     <h3 className="text-lg font-semibold text-gray-900">Upload Your Design</h3>
-                    <p className="mt-2 text-sm text-gray-600">STL files supported · Supports drag & drop</p>
+                    <p className="mt-2 text-sm text-gray-600">STL files supported · Drag & Drop</p>
                   </div>
-                  <div className="upload-btn-inner rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition">Browse File</div>
+                  <div className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white">Browse File</div>
                 </div>
               )}
-
-              {dragOver && (
-                <div className="absolute inset-0 z-20 rounded-2xl bg-blue-500/10" />
-              )}
-
+              {dragOver && <div className="absolute inset-0 z-20 rounded-2xl bg-blue-500/10" />}
               <canvas ref={canvasRef} className="h-full w-full block" />
             </div>
 
-            <div className="viewer-controls flex flex-wrap items-center gap-3 px-4 py-3  border-t border-gray-200 text-sm text-gray-700">
+            <div className="viewer-controls flex flex-wrap items-center gap-3 px-4 py-3 border-t border-gray-200 text-sm text-gray-700">
               <div className="control-group flex items-center gap-2">
-
-              </div>
-              <div className="control-group flex items-center gap-2">
-                <span className="font-medium text-gray-700">Scale:</span>
-                <div className="scale-input flex items-center gap-2">
-                  <input
-                    type="range"
-                    min="0"
-                    max="500"
-                    value={scale}
-                    onChange={(e) => updateScale(Number(e.target.value))}
-                    className="accent-blue-600"
-                  />
-                  <input
-                    type="number"
-                    value={scale}
-                    min="1"
-                    max="9999"
-                    onChange={(e) => updateScale(Number(e.target.value))}
-                    className="w-16 rounded-lg border border-gray-300  px-2 py-1 text-xs text-gray-900"
-                  />
-                  <span className="text-xs text-gray-500">%</span>
-                </div>
+                <span className="font-medium">Scale:</span>
+                <input type="range" min="0" max="500" value={scale} onChange={(e) => updateScale(Number(e.target.value))} className="accent-blue-600" />
+                <input type="number" value={scale} onChange={(e) => updateScale(Number(e.target.value))} className="w-16 rounded-lg border border-gray-300 px-2 py-1 text-xs text-gray-900" />
+                <span>%</span>
               </div>
               <div className="ml-auto flex gap-2">
                 <button
@@ -690,252 +514,199 @@ export default function UploadForm() {
               </div>
             </div>
 
-            <div className="stats-bar flex flex-wrap justify-between gap-4 px-4 py-3 border-t border-gray-200 text-sm text-gray-700">
-              <div className="stat flex flex-col gap-1">
-                <span className="stat-label text-gray-600 text-xs font-medium">Material Vol.</span>
-                <span className="stat-value text-gray-900 font-semibold">{stats.volume} {unit === 'mm' ? 'mm³' : 'in³'}</span>
-              </div>
-
-              <div className="stat flex flex-col gap-1">
-                <span className="stat-label text-gray-600 text-xs font-medium">Dimensions</span>
-                <span className="stat-value text-gray-900 font-semibold">{stats.dims} {unit}</span>
-              </div>
-              <div className="stat flex flex-col gap-1">
-                <span className="stat-label text-gray-600 text-xs font-medium">Estimated Print Time</span>
-                <span className="stat-value text-gray-900 font-semibold">{storedUpload?.response?.data.print_time_hours ?? '-'} h</span>
-              </div>
-
+            <div className="stats-bar flex flex-wrap justify-between gap-4 px-4 py-3 border-t border-gray-200 text-sm font-semibold text-gray-900">
+              <div>Vol: {stats.volume} {unit === 'mm' ? 'mm³' : 'in³'}</div>
+              <div>Dims: {stats.dims} {unit}</div>
+              <div>Print Time: {storedUpload?.response?.data.print_time_hours ?? '-'} h</div>
             </div>
           </div>
 
-          <div className="config-panel rounded-2xl  text-gray-900 ">
-            <div className="steps-nav flex flex-col gap-3">
-              {['Print Method', 'Material', 'Infill Density', 'Review & Order'].map((label, index) => {
-                const step = index + 1;
-                return (
+          <div className="config-panel flex flex-col gap-4 text-gray-900">
+            {['Print Method', 'Material', 'Infill Density', 'Review & Order'].map((label, index) => {
+              const step = index + 1;
+              const isOpen = activeStep === step;
+
+              return (
+                <div key={step} className="rounded-2xl overflow-hidden">
                   <button
-                    key={step}
                     type="button"
-                    onClick={() => onStepChange(step)}
-                    className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition ${activeStep === step ? 'border-black bg-[#E7E7E7] shadow-sm' : 'border-gray-300 bg-gray-100 hover:border-gray-400'}`}
+                    onClick={() => setActiveStep(isOpen ? 0 : step)}
+                    className={`flex w-full items-center justify-between px-5 py-4 text-left transition cursor-pointer ${isOpen ? 'bg-[#E7E7E7] font-semibold border-b border-gray-300' : 'bg-white hover:bg-gray-100'
+                      }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold ${step < activeStep ? 'bg-[#E7E7E7] text-white' : activeStep === step ? 'bg-black text-white' : 'bg-gray-300 text-gray-600'}`}>
+                      <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${step < activeStep ? 'bg-green-600 text-white' : isOpen ? 'bg-black text-white' : 'bg-black text-white'
+                        }`}>
                         {step < activeStep ? '✓' : step}
                       </span>
-                      <span className="font-medium text-sm">{label}</span>
+                      <span className="text-sm font-medium">{label}</span>
                     </div>
+                    <span className="text-gray-500 text-xs">{isOpen ? <FaArrowDown />
+                      : <FaArrowUp />
+
+                    }</span>
                   </button>
-                );
-              })}
-            </div>
 
-            <div className="step-content mt-5 rounded-2xl border border-gray-300 bg-gray-50 p-4">
-              {activeStep === 1 && (
-                <div className="space-y-4">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-gray-600">Process</span>
-                  {technologies.length ? technologies.map((option) => (
-                    <button
-                      key={option.code}
-                      type="button"
-                      onClick={() => setProcess(option.code)}
-                      className={`w-full rounded-xl border px-4 py-3 text-left transition ${process === option.code ? 'border-black bg-[#E7E7E7] text-gray-900' : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'}`}
-                    >
-                      <div className="flex flex-col">
-                        <div className="flex gap-1 items-center">
-                          <h4 className="font-semibold text-base text-[#101828]">{option.code} -</h4>
-                          <h6 className='font-semibold text-base text-[#101828]'>{option?.title}</h6>
-                        </div>
-                        <h5 className="text-xs text-gray-600 pt-1">{option.description || option.title}</h5>
-                      </div>
-                    </button>
-                  )) : (
-                    ['SLA', 'FDM', 'SLS'].map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setProcess(option)}
-                        className={`w-full rounded-xl border px-4 py-3 text-left transition ${process === option ? 'border-blue-500 bg-blue-50 text-gray-900' : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'}`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-sm">{option}</span>
-                          <span className="text-xs text-gray-600">{option === 'SLA' ? 'Best detail' : option === 'FDM' ? 'Affordable strength' : 'No supports'}</span>
-                        </div>
-                      </button>
-                    ))
-                  )}
-                  <div className="flex gap-3 pt-2">
-                    <button type="button" className="flex-1 rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-black transition" onClick={() => onStepChange(2)}>
-                      Continue →
-                    </button>
-                  </div>
-                </div>
-              )}
+                  {isOpen && (
+                    <div className="p-5 bg-white space-y-4 border-t border-gray-100 animate-fadeIn">
 
-              {activeStep === 2 && (
-                <div className="space-y-4">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-gray-600">Choose Material</span>
-                  {materialsList.length ? materialsList.map((m) => {
-                    const option = m.name;
-                    const info = m;
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => {
-                          setMaterial(option);
-                          if (info.colours && info.colours.length) applyColor(info.colours[0].code || info.colours[0].color || color);
-                        }}
-                        className={`w-full rounded-xl border px-4 py-4 text-left transition ${material === option ? 'border-blue-500 bg-blue-50 text-gray-900' : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'}`}
-                      >
-                        <div className="flex items-center justify-between gap-3 mb-2">
-                          <span className="font-semibold text-sm">{option}</span>
-                          <span className="text-xs font-medium text-blue-600">${(MATERIAL_PRICING[option] ?? 0.08).toFixed(2)}/cm³</span>
+                      {step === 1 && (
+                        <div className="pt-2 space-y-4">
+                          <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-2 px-1">
+                            Process
+                          </span>
+
+                          <div className="space-y-3">
+                            {technologies.length ? technologies.map((option) => {
+                              const isSelected = process === option.code;
+                              return (
+                                <button
+                                  key={option.code}
+                                  type="button"
+                                  onClick={() => setProcess(option.code)}
+                                  className={`w-full rounded-2xl border text-left p-5 transition-all duration-200 cursor-pointer ${isSelected ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
+                                    }`}
+                                >
+                                  <div className="flex flex-col gap-1">
+                                    <h4 className="font-bold text-base text-[#101828]">
+                                      {option.code} — {option.title || (option.code === 'SLA' ? 'Stereolithography' : option.code === 'FDM' ? 'Fused Deposition' : 'Selective Laser Sintering')}
+                                    </h4>
+                                    <p className={`text-sm leading-relaxed ${isSelected ? 'text-gray-700' : 'text-gray-400'}`}>
+                                      {option.description}
+                                    </p>
+                                  </div>
+                                </button>
+                              );
+                            }) : (
+                              [
+                                { code: 'SLA', label: 'Stereolithography', desc: 'High detail, smooth surfaces. Best for miniatures & jewelry.' },
+                                { code: 'FDM', label: 'Fused Deposition', desc: 'Affordable, strong. Great for functional parts & prototypes.' },
+                                { code: 'SLS', label: 'Selective Laser Sintering', desc: 'No supports, excellent strength. Complex geometries.' }
+                              ].map((item) => {
+                                const isSelected = process === item.code;
+                                return (
+                                  <button
+                                    key={item.code}
+                                    type="button"
+                                    onClick={() => setProcess(item.code)}
+                                    className={`w-full rounded-2xl border text-left p-5 transition-all duration-200 cursor-pointer ${isSelected ? 'border-transparent bg-[#E8E8E8] text-[#101828]' : 'border-gray-200 bg-white hover:border-gray-300'
+                                      }`}
+                                  >
+                                    <div className="flex flex-col gap-1">
+                                      <h4 className="font-bold text-base text-[#101828]">{item.code} — {item.label}</h4>
+                                      <p className={`text-sm leading-relaxed ${isSelected ? 'text-gray-700' : 'text-gray-400'}`}>{item.desc}</p>
+                                    </div>
+                                  </button>
+                                );
+                              })
+                            )}
+                          </div>
+                          <div className="pt-2">
+                            <button type="button" className="w-full rounded-full bg-[#101828] py-3.5 text-sm font-semibold text-white hover:bg-black transition flex items-center justify-center gap-1.5" onClick={() => setActiveStep(2)}>
+                              Continue <span>→</span>
+                            </button>
+                          </div>
                         </div>
-                        <p className="text-sm text-gray-600">{info.description || ''}</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {(info.colours || []).map((c) => {
-                            const code = c.code || c;
+                      )}
+
+                      {/* Step 2 Content */}
+                      {step === 2 && (
+                        <div className="space-y-4">
+                          <span className="font-semibold text-sm block mb-1">Choose Material</span>
+                          {materialsList.length ? materialsList.map((m) => {
+                            const option = m.name;
                             return (
-                              <button
-                                key={code}
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  applyColor(code);
-                                }}
-                                className={`h-6 w-6 rounded-full border-2 transition ${color === code ? 'border-blue-600 shadow-md' : 'border-gray-300'}`}
-                                style={{ background: code }}
-                              />
+                              <div
+                                key={option}
+                                onClick={() => setMaterial(option)}
+                                className={`w-full rounded-xl border p-4 text-left transition cursor-pointer ${material === option ? 'border-black bg-[#E7E7E7]' : 'border-gray-300'}`}
+                              >
+                                <span className="font-semibold text-sm block mb-1">{option}</span>
+                                <p className="text-xs text-gray-600 mb-3">{m.description}</p>
+                                {(m.colours || []).length > 0 && (
+                                  <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
+                                    {m.colours.map((c) => (
+                                      <button
+                                        key={c.id}
+                                        type="button"
+                                        title={c.title}
+                                        onClick={(e) => { e.stopPropagation(); applyColor(c.code); }}
+                                        className="h-6 w-6 rounded-full border-2 cursor-pointer"
+                                        style={{ background: c.code, borderColor: color === c.code ? '#000000' : '#D1D5DB' }}
+                                      />
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
                             );
-                          })}
+                          }) : (
+                            Object.keys(MATERIAL_PRICING).map((option) => (
+                              <button
+                                key={option}
+                                type="button"
+                                onClick={() => setMaterial(option)}
+                                className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition ${material === option ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
+                              >
+                                <div className="flex justify-between font-medium">
+                                  <span>{option}</span>
+                                  <span className="text-blue-600">${MATERIAL_PRICING[option].toFixed(2)}/cm³</span>
+                                </div>
+                              </button>
+                            ))
+                          )}
+                          <div className="flex gap-2 pt-2">
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(1)}>Back</button>
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(3)}>Continue</button>
+                          </div>
                         </div>
-                      </button>
-                    );
-                  }) : (
-                    Object.keys(MATERIAL_PRICING).map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setMaterial(option)}
-                        className={`w-full rounded-xl border px-4 py-4 text-left transition ${material === option ? 'border-blue-500 bg-blue-50 text-gray-900' : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'}`}
-                      >
-                        <div className="flex items-center justify-between gap-3 mb-2">
-                          <span className="font-semibold text-sm">{option}</span>
-                          <span className="text-xs font-medium text-blue-600">${(MATERIAL_PRICING[option] ?? 0.08).toFixed(2)}/cm³</span>
+                      )}
+
+                      {/* Step 3 Content */}
+                      {step === 3 && (
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-3">
+                            <input type="range" min="5" max="100" value={infill} onChange={(e) => setInfill(Number(e.target.value))} className="accent-blue-600 flex-1" />
+                            <span className="text-sm font-bold w-12 text-right">{infill}%</span>
+                          </div>
+                          <p className="text-xs text-gray-600">{infill <= 20 ? 'Lightweight — good for display models' : infill <= 50 ? 'Standard strength' : 'Maximum strength, solid'}</p>
+                          <div className="flex gap-2 pt-2">
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(2)}>Back</button>
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(4)}>Continue</button>
+                          </div>
                         </div>
-                        <p className="text-sm text-gray-600">{option}</p>
-                      </button>
-                    ))
-                  )}
-                  <div className="flex gap-3 pt-2">
-                    <button type="button" className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition" onClick={() => onStepChange(1)}>
-                      ← Back
-                    </button>
-                    <button type="button" className="flex-1 rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-black transition" onClick={() => onStepChange(3)}>
-                      Continue →
-                    </button>
-                  </div>
-                </div>
-              )}
+                      )}
 
-              {activeStep === 3 && (
-                <div className="space-y-4">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-gray-600">Infill %</span>
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="range"
-                      min="5"
-                      max="100"
-                      value={infill}
-                      onChange={(e) => setInfill(Number(e.target.value))}
-                      className="accent-blue-600 flex-1"
-                    />
-                    <span className="text-sm font-semibold text-gray-900 w-12 text-right">{infill}%</span>
-                  </div>
-                  <p className="text-sm text-gray-600">{infill <= 20 ? 'Lightweight — good for display models' : infill <= 40 ? 'Light structural use' : infill <= 60 ? 'Standard strength' : infill <= 80 ? 'Strong — functional parts' : 'Maximum strength, solid'}</p>
-                  <div className="flex gap-3 pt-2">
-                    <button type="button" className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition" onClick={() => onStepChange(3)}>
-                      ← Back
-                    </button>
-                    <button type="button" className="flex-1 rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-black transition" onClick={() => onStepChange(5)}>
-                      Continue →
-                    </button>
-                  </div>
-                </div>
-              )}
+                      {/* Step 4 Content */}
+                      {step === 4 && (
+                        <div className="space-y-4">
+                          <div className="rounded-xl bg-gray-50 p-4 border border-gray-200 text-sm space-y-2">
+                            <div><span className="text-gray-500 font-medium">Process:</span> <span className="font-semibold">{process}</span></div>
+                            <div><span className="text-gray-500 font-medium">Material:</span> <span className="font-semibold">{material}</span></div>
 
-              {/* {activeStep === 4 && (
-                <div className="space-y-4">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-gray-600">Finishing Options</span>
-                  {Object.entries({ sand: 'Sanding & Smoothing', primer: 'Primer Coat', paint: 'Full Paint', uv: 'UV Resistant Coating' }).map(([key, label]) => (
-                    <label key={key} className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-300 bg-white px-4 py-3 hover:bg-gray-50 transition">
-                      <input
-                        type="checkbox"
-                        checked={postProcess[key]}
-                        onChange={() => togglePostProcess(key)}
-                        className="accent-blue-600 w-4 h-4"
-                      />
-                      <span className="text-sm font-medium text-gray-900">{label}</span>
-                      <span className="ml-auto text-xs font-semibold text-blue-600">+${key === 'sand' ? 3 : key === 'primer' ? 5 : key === 'paint' ? 15 : 8}</span>
-                    </label>
-                  ))}
-                  <div className="flex gap-3 pt-2">
-                    <button type="button" className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition" onClick={() => onStepChange(4)}>
-                      ← Back
-                    </button>
-                    <button type="button" className="flex-1 rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-black transition" onClick={() => onStepChange(6)}>
-                      Review →
-                    </button>
-                  </div>
-                </div>
-              )} */}
+                            <div><span className="text-gray-500 font-medium"> Dimsensions:</span> <span className="font-semibold">{stats.dims} {unit}</span></div>
+                            <div><span className="text-gray-500 font-medium">Infill:</span> <span className="font-semibold">{infill}%</span></div>
+                            <div><span className="text-gray-500 font-medium">Post-processing:</span> <span className="font-semibold"> None</span></div>
+                          </div>
+                          <div className="flex gap-2 pt-2">
+                            <button type="button" className="w-full cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(3)}>Back</button>
+                            <button type="button" className="w-full cursor-pointer   rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(4)}>Get Price</button>
+                          </div>
+                        </div>
+                      )}
 
-              {activeStep === 4 && (
-                <div className="space-y-4">
-                  <div className="rounded-xl border border-gray-300 bg-white p-4 text-sm text-gray-700">
-                    <div className="font-bold text-gray-900 mb-3">Configuration Summary</div>
-                    <div className="space-y-2 text-sm">
-                      <div><span className="text-gray-600 font-medium">Process:</span> <span className="font-semibold">{process}</span></div>
-                      <div><span className="text-gray-600 font-medium">Material:</span> <span className="font-semibold">{material}</span></div>
-                      <div><span className="text-gray-600 font-medium">Scale:</span> <span className="font-semibold">{scale}%</span></div>
-                      <div><span className="text-gray-600 font-medium">Dimensions:</span> <span className="font-semibold">{stats.dims} {unit}</span></div>
-                      <div><span className="text-gray-600 font-medium">Infill:</span> <span className="font-semibold">{infill}%</span></div>
-                      <div><span className="text-gray-600 font-medium">Post-processing:</span> <span className="font-semibold">{Object.entries(postProcess).filter(([, v]) => v).map(([k]) => ({ sand: 'Sanding', primer: 'Primer', paint: 'Paint', uv: 'UV Coat' }[k])).join(', ') || 'None'}</span></div>
-                      <div><span className="text-gray-600 font-medium">Triangles:</span> <span className="font-semibold">{tris.toLocaleString()}</span></div>
                     </div>
-                  </div>
-                  <div className="flex gap-3 pt-2">
-                    <button type="button" className="rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition" onClick={() => onStepChange(5)}>
-                      ← Back
-                    </button>
-                  </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            {/* <div className="price-display mt-5 rounded-2xl border border-gray-300 bg-gray-900 p-5 text-white">
-              <div className="price-label text-sm text-gray-400 font-medium">Estimated Price</div>
-              <div className="price-value mt-2 text-4xl font-bold">{price}</div>
-              <div className="price-note mt-2 text-xs text-gray-400">Price calculated from volume, material & options</div>
-              <button type="button" disabled={!modelLoaded} className="mt-4 w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-600 transition">
-                Add to Cart
-              </button>
-            </div> */}
+              );
+            })}
           </div>
         </div>
       </Container>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".stl"
-        className="hidden"
-        onChange={handleFileChange}
-      />
+      <input ref={fileInputRef} type="file" accept=".stl" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
 
       {toast && (
-        <div className="toast fixed bottom-8 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 shadow-lg">
+        <div className="toast fixed bottom-8 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm shadow-lg text-center font-medium">
           {toast}
         </div>
       )}
