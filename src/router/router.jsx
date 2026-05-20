@@ -31,6 +31,7 @@ import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import NewUploadDesign from "../pages/NewUploadDesign";
 import FileUpload from "../pages/FileUpload";
 import Product from "../pages/Product";
+import ProductDetails from "../pages/ProductDetails";
 
 
 const router = createBrowserRouter([
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "/product",
         element: <Product />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetails />,
       },
       {
         path: "/chi-siamo",

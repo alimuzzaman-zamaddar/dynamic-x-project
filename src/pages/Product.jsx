@@ -1,5 +1,6 @@
-import Productimage from '../assets/img/product/product.png';
+import { Link } from 'react-router';
 import React, { useState, useEffect, useRef } from 'react';
+import Productimage from '../assets/img/product/product.png';
 import { FiChevronDown, FiChevronLeft, FiChevronRight, FiShoppingCart } from 'react-icons/fi';
 
 // Mock Data
@@ -166,44 +167,55 @@ export default function ProductPage() {
             {productsList.map((product) => (
               <div
                 key={product.id}
-                className="group border border-slate-100 bg-white rounded-2xl p-4 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-slate-200"
+                className="group border border-slate-100 bg-white rounded-2xl p-4 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-slate-200 flex flex-col justify-between"
               >
-                <div className="aspect-square w-full rounded-xl bg-slate-50 flex items-center justify-center p-6 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-100/30 pointer-events-none" />
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="max-h-full max-w-full object-contain mix-blend-multiply  group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {product.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className={`text-sm font-medium px-3 py-1 rounded border ${tag.className}`}
-                    >
-                      {tag.label}
-                    </span>
-                  ))}
-                </div>
-
-                <h4 className="mt-3 text-[#262626] font-medium text-lg line-clamp-1 group-hover:text-slate-900 transition-colors">
-                  {product.title}
-                </h4>
-
-                <div className="mt-3 flex items-center justify-between gap-2 pt-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-[#262626]">${product.price.toFixed(2)}</span>
-                    <span className="text-lg text-[#5D5D5D] line-through">${product.originalPrice.toFixed(2)}</span>
+                {/* Wrap clickable elements in a Link pointing to the dynamic path */}
+                <Link to={`/product/${product.id}`} className="cursor-pointer block flex-1">
+                  <div className="aspect-square w-full rounded-xl bg-slate-50 flex items-center justify-center p-6 overflow-hidden relative">
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-100/30 pointer-events-none" />
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="max-h-full max-w-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                </div>
-                <div className="flex justify-between items-center mt-2">
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {product.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className={`text-sm font-medium px-3 py-1 rounded border ${tag.className}`}
+                      >
+                        {tag.label}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h4 className="mt-3 text-[#262626] font-medium text-lg line-clamp-1 group-hover:text-slate-900 transition-colors">
+                    {product.title}
+                  </h4>
+
+                  <div className="mt-3 flex items-center justify-between gap-2 pt-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-bold text-[#262626]">${product.price.toFixed(2)}</span>
+                      <span className="text-lg text-[#5D5D5D] line-through">${product.originalPrice.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </Link>
+
+                <div className="flex justify-between items-center mt-4 pt-2 border-t border-slate-50">
                   <div className="flex items-center gap-1.5 text-base text-slate-400">
                     <span className="w-3 h-3 rounded-full bg-slate-300 border border-slate-400/20" />
                     Color
                   </div>
-                  <button type="button" className="flex items-center cursor-pointer gap-1.5 bg-[#E5E7EB] hover:bg-slate-900 hover:text-white text-[#101828] text-base font-semibold px-3 py-2 rounded-lg transition-all duration-200 active:scale-95">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      alert('Added to cart!');
+                    }}
+                    className="flex items-center cursor-pointer gap-1.5 bg-[#E5E7EB] hover:bg-slate-900 hover:text-white text-[#101828] text-base font-semibold px-3 py-2 rounded-lg transition-all duration-200 active:scale-95"
+                  >
                     <FiShoppingCart className="w-3.5 h-3.5" />
                     Add to cart
                   </button>

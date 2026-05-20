@@ -398,20 +398,34 @@ export default function UploadForm() {
   const unitsMultiplier = unit === 'mm' ? 1 : 0.0393701;
 
   const displayDims = useMemo(() => {
+    const backendDims = storedUpload?.response?.data?.dimensions;
+    if (backendDims) {
+      return {
+        x: (Number(backendDims.x) * unitsMultiplier).toFixed(2),
+        y: (Number(backendDims.y) * unitsMultiplier).toFixed(2),
+        z: (Number(backendDims.z) * unitsMultiplier).toFixed(2)
+      };
+    }
+
     return {
       x: (originalDims.x * unitsMultiplier).toFixed(2),
       y: (originalDims.y * unitsMultiplier).toFixed(2),
       z: (originalDims.z * unitsMultiplier).toFixed(2)
     };
-  }, [originalDims, unitsMultiplier]);
+  }, [originalDims, unitsMultiplier, storedUpload]);
 
   const stats = useMemo(() => {
-    const vol = volume * 0.001;
+    const backendVol = storedUpload?.response?.data?.volume_cm3;
+    const vol = backendVol !== undefined ? Number(backendVol) : volume;
+    console.log(vol)
+
     return {
       volume: vol.toFixed(2),
       dims: `${displayDims.x} × ${displayDims.y} × ${displayDims.z}`
     };
-  }, [displayDims, volume]);
+  }, [displayDims, volume, storedUpload]);
+
+
 
   const updateScale = (value) => {
     setScale(value);
@@ -444,9 +458,7 @@ export default function UploadForm() {
     return materialsList.find(m => m.name === material) || materialsList[0];
   }, [materialsList, material]);
 
-  // LIVE PRICE ENDPOINT TRIGGER HANDLER
   const fetchCalculatedPrice = async () => {
-    // FIX: Fallback check to ensure localStorage or parsed volumes don't bypass validation
     if (!modelLoaded && !storedUpload && volume === 0) {
       showToast('Please upload an STL model first before retrieving a quote.');
       return;
@@ -463,16 +475,12 @@ export default function UploadForm() {
     try {
       const formData = new FormData();
 
-      // FIX: Use fallback to ensure a valid number is sent even if stats aren't synchronized yet
       const finalVolume = stats.volume !== "0.00" ? stats.volume : (volume * 0.001).toFixed(2);
       formData.append('volume_cm3', finalVolume);
 
-      // Calculate material grams based on standard baseline density and infill ratios
       const densityFactor = 1.2;
       const calculatedGrams = Math.max(1, parseFloat(finalVolume) * densityFactor * (infill / 100));
       formData.append('material_usage_grams', calculatedGrams.toFixed(0));
-
-      // Pull print time parameters from database recovery payload context
       const printHours = storedUpload?.response?.data?.print_time_hours || 6.5;
       formData.append('print_time_hours', printHours.toString());
 
