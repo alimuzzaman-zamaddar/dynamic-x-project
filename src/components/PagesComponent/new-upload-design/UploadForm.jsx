@@ -27,15 +27,14 @@ export default function UploadForm() {
     lastMouse: { x: 0, y: 0 },
     rotation: { x: 0.5, y: 0.5 },
     pan: { x: 0, y: 0 },
-    zoom: 3.5 // Re-calibrated default base fallback zoom
+    zoom: 3.5
   });
 
   const [dragOver, setDragOver] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
   const [fileName, setFileName] = useState('No file loaded');
   const [loading, setLoading] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [unit, setUnit] = useState('mm');
+  const [unit] = useState('mm');
   const [scale, setScale] = useState(100);
   const [process, setProcess] = useState('SLA');
   const [material, setMaterial] = useState('Standard Resin');
@@ -43,13 +42,18 @@ export default function UploadForm() {
   const [infill, setInfill] = useState(20);
   const [originalDims, setOriginalDims] = useState({ x: 0, y: 0, z: 0 });
   const [volume, setVolume] = useState(0);
-  const [area, setArea] = useState(0);
-  const [tris, setTris] = useState(0);
+  const [setArea] = useState(0);
+  const [setTris] = useState(0);
   const [activeStep, setActiveStep] = useState(1);
   const [toast, setToast] = useState('');
   const [storedUpload, setStoredUpload] = useState(null);
   const [technologies, setTechnologies] = useState([]);
   const [materialsList, setMaterialsList] = useState([]);
+
+  const [selectedProcessing, setSelectedProcessing] = useState('');
+
+  const [apiPriceData, setApiPriceData] = useState(null);
+  const [calculatingPrice, setCalculatingPrice] = useState(false);
 
   useEffect(() => {
     const raw = localStorage.getItem('uploadedModel');
@@ -342,7 +346,6 @@ export default function UploadForm() {
       const size = new THREE.Vector3();
       geometry.boundingBox.getSize(size);
 
-      // PERFECT INITIAL CAMERA AUTO-ZOOM CALCULATION
       const maxDim = Math.max(size.x, size.y, size.z);
       const fitScale = maxDim > 0 ? 2 / maxDim : 1;
 
@@ -370,7 +373,6 @@ export default function UploadForm() {
       setLoading(false);
       setFileName(name);
     } catch (error) {
-      showToast('⚠ Failed to load STL file');
       setLoading(false);
     }
   };
@@ -434,6 +436,73 @@ export default function UploadForm() {
     updateCamera();
   };
 
+  const currentTechObj = useMemo(() => {
+    return technologies.find(t => t.code === process) || technologies[0];
+  }, [technologies, process]);
+
+  const currentMatObj = useMemo(() => {
+    return materialsList.find(m => m.name === material) || materialsList[0];
+  }, [materialsList, material]);
+
+  // LIVE PRICE ENDPOINT TRIGGER HANDLER
+  const fetchCalculatedPrice = async () => {
+    // FIX: Fallback check to ensure localStorage or parsed volumes don't bypass validation
+    if (!modelLoaded && !storedUpload && volume === 0) {
+      showToast('Please upload an STL model first before retrieving a quote.');
+      return;
+    }
+    if (!currentTechObj?.id || !currentMatObj?.id) {
+      showToast('Pricing configurations are missing system IDs.');
+      return;
+    }
+
+    setCalculatingPrice(true);
+    const base = import.meta.env.VITE_API_BASE_URL || '';
+    const priceUrl = base ? `${base}/quote/get-price` : '/quote/get-price';
+
+    try {
+      const formData = new FormData();
+
+      // FIX: Use fallback to ensure a valid number is sent even if stats aren't synchronized yet
+      const finalVolume = stats.volume !== "0.00" ? stats.volume : (volume * 0.001).toFixed(2);
+      formData.append('volume_cm3', finalVolume);
+
+      // Calculate material grams based on standard baseline density and infill ratios
+      const densityFactor = 1.2;
+      const calculatedGrams = Math.max(1, parseFloat(finalVolume) * densityFactor * (infill / 100));
+      formData.append('material_usage_grams', calculatedGrams.toFixed(0));
+
+      // Pull print time parameters from database recovery payload context
+      const printHours = storedUpload?.response?.data?.print_time_hours || 6.5;
+      formData.append('print_time_hours', printHours.toString());
+
+      formData.append('technology_id', currentTechObj.id.toString());
+      formData.append('material_id', currentMatObj.id.toString());
+
+      const res = await fetch(priceUrl, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success) {
+          setApiPriceData(json.data);
+          showToast('Price updated successfully!');
+        } else {
+          showToast(json.message || 'Failed to process price.');
+        }
+      } else {
+        showToast('Server error calculating print price.');
+      }
+    } catch (err) {
+      console.error('Error fetching calculated price:', err);
+      showToast('Network error calculating print price.');
+    } finally {
+      setCalculatingPrice(false);
+    }
+  };
+
   useEffect(() => {
     applyColor(color);
   }, [color]);
@@ -443,7 +512,7 @@ export default function UploadForm() {
       <Container>
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">Upload your design</h1>
-          <p className="text-sm md:text-base text-gray-600 max-w-[350px] mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-87.5 mx-auto">
             Professional 3D printing service for prototyping and production. Lead times as fast as 24 hours.
           </p>
         </div>
@@ -468,19 +537,7 @@ export default function UploadForm() {
                 if (file) handleFile(file);
               }}
             >
-              {!modelLoaded && !loading && (
-                <div
-                  className="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border-2 border-dashed border-gray-300 px-8 text-center text-gray-700 transition-all hover:bg-gray-50"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <div className="text-4xl text-gray-600">⬆</div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Upload Your Design</h3>
-                    <p className="mt-2 text-sm text-gray-600">STL files supported · Drag & Drop</p>
-                  </div>
-                  <div className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white">Browse File</div>
-                </div>
-              )}
+
               {dragOver && <div className="absolute inset-0 z-20 rounded-2xl bg-blue-500/10" />}
               <canvas ref={canvasRef} className="h-full w-full block" />
             </div>
@@ -527,7 +584,7 @@ export default function UploadForm() {
               const isOpen = activeStep === step;
 
               return (
-                <div key={step} className="rounded-2xl overflow-hidden">
+                <div key={step} className="rounded-2xl overflow-hidden border border-gray-300">
                   <button
                     type="button"
                     onClick={() => setActiveStep(isOpen ? 0 : step)}
@@ -535,24 +592,22 @@ export default function UploadForm() {
                       }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${step < activeStep ? 'bg-green-600 text-white' : isOpen ? 'bg-black text-white' : 'bg-black text-white'
+                      <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${step < activeStep ? 'bg-green-600 text-white' : 'bg-black text-white'
                         }`}>
                         {step < activeStep ? '✓' : step}
                       </span>
                       <span className="text-sm font-medium">{label}</span>
                     </div>
-                    <span className="text-gray-500 text-xs">{isOpen ? <FaArrowDown />
-                      : <FaArrowUp />
-
-                    }</span>
+                    <span className="text-gray-500 text-xs">{isOpen ? <FaArrowDown /> : <FaArrowUp />}</span>
                   </button>
 
                   {isOpen && (
                     <div className="p-5 bg-white space-y-4 border-t border-gray-100 animate-fadeIn">
 
+                      {/* Step 1 Content */}
                       {step === 1 && (
                         <div className="pt-2 space-y-4">
-                          <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-2 px-1">
+                          <span className="text-base font-bold text-[#101828] uppercase tracking-wider block mb-2 px-1">
                             Process
                           </span>
 
@@ -564,11 +619,11 @@ export default function UploadForm() {
                                   key={option.code}
                                   type="button"
                                   onClick={() => setProcess(option.code)}
-                                  className={`w-full rounded-2xl border text-left p-5 transition-all duration-200 cursor-pointer ${isSelected ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
+                                  className={`w-full rounded-2xl border text-left p-2 transition-all duration-200 cursor-pointer ${isSelected ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
                                     }`}
                                 >
                                   <div className="flex flex-col gap-1">
-                                    <h4 className="font-bold text-base text-[#101828]">
+                                    <h4 className="font-bold text-sm text-[#101828]">
                                       {option.code} — {option.title || (option.code === 'SLA' ? 'Stereolithography' : option.code === 'FDM' ? 'Fused Deposition' : 'Selective Laser Sintering')}
                                     </h4>
                                     <p className={`text-sm leading-relaxed ${isSelected ? 'text-gray-700' : 'text-gray-400'}`}>
@@ -602,60 +657,172 @@ export default function UploadForm() {
                             )}
                           </div>
                           <div className="pt-2">
-                            <button type="button" className="w-full rounded-full bg-[#101828] py-3.5 text-sm font-semibold text-white hover:bg-black transition flex items-center justify-center gap-1.5" onClick={() => setActiveStep(2)}>
+                            <button type="button" className="w-full rounded-full bg-[#101828] py-3.5 text-sm font-semibold text-white hover:bg-black transition flex items-center justify-center gap-1.5 cursor-pointer" onClick={() => setActiveStep(2)}>
                               Continue <span>→</span>
                             </button>
                           </div>
                         </div>
                       )}
 
-                      {/* Step 2 Content */}
                       {step === 2 && (
                         <div className="space-y-4">
-                          <span className="font-semibold text-sm block mb-1">Choose Material</span>
+                          <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-1 px-1">
+                            Choose Material
+                          </span>
+
                           {materialsList.length ? materialsList.map((m) => {
                             const option = m.name;
+                            const isSelectedMat = material === option;
                             return (
                               <div
                                 key={option}
                                 onClick={() => setMaterial(option)}
-                                className={`w-full rounded-xl border p-4 text-left transition cursor-pointer ${material === option ? 'border-black bg-[#E7E7E7]' : 'border-gray-300'}`}
+                                className={`w-full rounded-2xl border p-5 text-left transition duration-200 cursor-pointer ${isSelectedMat ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
+                                  }`}
                               >
-                                <span className="font-semibold text-sm block mb-1">{option}</span>
-                                <p className="text-xs text-gray-600 mb-3">{m.description}</p>
+                                <span className="font-bold text-base text-[#101828] block mb-1">{option}</span>
+                                <p className="text-sm text-gray-500 mb-4">{m.description || 'Smooth surfaces and high detail rendering outputs.'}</p>
+
                                 {(m.colours || []).length > 0 && (
-                                  <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
+                                  <div className="flex flex-wrap gap-3 mb-4">
                                     {m.colours.map((c) => (
-                                      <button
-                                        key={c.id}
-                                        type="button"
-                                        title={c.title}
-                                        onClick={(e) => { e.stopPropagation(); applyColor(c.code); }}
-                                        className="h-6 w-6 rounded-full border-2 cursor-pointer"
-                                        style={{ background: c.code, borderColor: color === c.code ? '#000000' : '#D1D5DB' }}
-                                      />
+                                      <div key={c.id} className="relative group flex flex-col items-center">
+                                        <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-30 pointer-events-none">
+                                          <div className="bg-white text-gray-700 border border-gray-200 text-xs font-medium px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                                            Colour Code : <span className="text-gray-400 font-semibold">{c.code}</span>
+                                          </div>
+                                          <div className="w-2 h-2 bg-white border-r border-b border-gray-200 rotate-45 -mt-1 shadow-sm"></div>
+                                        </div>
+
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            applyColor(c.code);
+                                          }}
+                                          className="h-8 w-8 rounded-full border transition-all duration-150 relative flex items-center justify-center focus:outline-none"
+                                          style={{
+                                            background: c.code,
+                                            borderColor: color === c.code ? '#2563EB' : 'transparent',
+                                            boxShadow: color === c.code ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
+                                          }}
+                                        />
+                                      </div>
                                     ))}
+                                  </div>
+                                )}
+
+                                {(m.processing_types || []).length > 0 && (
+                                  <div className="space-y-2 pt-2 border-t border-gray-200/60" onClick={(e) => e.stopPropagation()}>
+                                    <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-2">
+                                      Processing Types
+                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                      {m.processing_types.map((p) => {
+                                        const isProcSelected = selectedProcessing === p.title;
+                                        return (
+                                          <div key={p.id} className="relative group/pill">
+                                            {/* Dynamic Description Tooltip Bubble */}
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-50">
+                                              <div className="bg-white text-gray-600 border border-gray-200 text-xs font-medium px-4 py-2.5 rounded-2xl shadow-lg leading-normal text-center">
+                                                {p.description || `${p.title} mechanical surface processing option.`}
+                                              </div>
+                                              <div className="w-2 h-2 bg-white border-r border-b border-gray-200 rotate-45 -mt-1 shadow-sm"></div>
+                                            </div>
+
+                                            <button
+                                              type="button"
+                                              onClick={() => setSelectedProcessing(isProcSelected ? '' : p.title)}
+                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm ${isProcSelected
+                                                ? 'bg-[#101828] text-white'
+                                                : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                                                }`}
+                                            >
+                                              {p.title}
+                                            </button>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
                                 )}
                               </div>
                             );
                           }) : (
-                            Object.keys(MATERIAL_PRICING).map((option) => (
-                              <button
-                                key={option}
-                                type="button"
-                                onClick={() => setMaterial(option)}
-                                className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition ${material === option ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-                              >
-                                <div className="flex justify-between font-medium">
-                                  <span>{option}</span>
-                                  <span className="text-blue-600">${MATERIAL_PRICING[option].toFixed(2)}/cm³</span>
+                            [
+                              { name: 'Standard Resin', desc: 'Smooth surfaces and excellent details for display purposes.', colors: ['#1A1A2E', '#F3F4F6', '#2563EB', '#EF4444', '#10B981', '#D97706'], processes: [{ t: 'Cutting', d: 'Precise automated industrial edge separation cut.' }, { t: 'Lamination', d: 'High structural layer sealing and stabilization.' }, { t: 'Binding', d: 'Interlocking structural stock reinforcement.' }, { t: 'Finishing', d: 'Smooth abrasive surface cleanup polish treatments.' }] },
+                              { name: 'Tough Resin', desc: 'Impact-resistant. Great for functional prototyping structural builds.', colors: ['#2E2E3A', '#E5E7EB', '#7C3AED', '#EA580C'], processes: [{ t: 'Cutting', d: 'Impact stock precision division slicing.' }, { t: 'Lamination', d: 'Heavy duty composite protective layout layering.' }, { t: 'Binding', d: 'High durability structural fusion bonding.' }] },
+                              { name: 'Transparent', desc: 'Clear optical resin. Ideal for internal lighting pipes and fluidics channels.', colors: ['#BFDBFE', '#E9D5FF'], processes: [{ t: 'Cutting', d: 'Fine micron edge optical stock division.' }, { t: 'Lamination', d: 'Ultra clear protective anti-reflective coating layer.' }, { t: 'Binding', d: 'Clear structural component assembly binding.' }, { t: 'Finishing', d: 'High glossy clear transparency diamond manual polish finish.' }] }
+                            ].map((item) => {
+                              const isSelectedMat = material === item.name;
+                              return (
+                                <div
+                                  key={item.name}
+                                  onClick={() => setMaterial(item.name)}
+                                  className={`w-full rounded-2xl border p-5 text-left transition duration-200 cursor-pointer ${isSelectedMat ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
+                                    }`}
+                                >
+                                  <span className="font-bold text-base text-[#101828] block mb-1">{item.name}</span>
+                                  <p className="text-sm text-gray-400 mb-4">{item.desc}</p>
+
+                                  <div className="flex flex-wrap gap-3 mb-4">
+                                    {item.colors.map((hex, i) => (
+                                      <div key={i} className="relative group flex flex-col items-center">
+                                        <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-30 pointer-events-none">
+                                          <div className="bg-white text-gray-700 border border-gray-200 text-xs px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                                            Colour Code : <span className="text-gray-400 font-semibold">{hex}</span>
+                                          </div>
+                                          <div className="w-2 h-2 bg-white border-r border-b border-gray-200 rotate-45 -mt-1 shadow-sm"></div>
+                                        </div>
+                                        <button
+                                          type="button"
+                                          onClick={(e) => { e.stopPropagation(); applyColor(hex); }}
+                                          className="h-8 w-8 rounded-full border focus:outline-none transition"
+                                          style={{
+                                            background: hex,
+                                            borderColor: color === hex ? '#2563EB' : 'transparent',
+                                            boxShadow: color === hex ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
+                                          }}
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+
+                                  <div className="space-y-2 pt-2 border-t border-gray-200" onClick={(e) => e.stopPropagation()}>
+                                    <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-2">Processing Types</span>
+                                    <div className="flex flex-wrap gap-2">
+                                      {item.processes.map((proc) => {
+                                        const isProcSelected = selectedProcessing === proc.t;
+                                        return (
+                                          <div key={proc.t} className="relative group/pill">
+                                            {/* Floating Description Tooltip */}
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-55">
+                                              <div className="bg-white text-gray-600 border border-gray-200 text-xs font-medium px-4 py-2.5 rounded-2xl shadow-lg leading-normal text-center">
+                                                {proc.d}
+                                              </div>
+                                              <div className="w-2 h-2 bg-white border-r border-b border-gray-200 rotate-45 -mt-1 shadow-sm"></div>
+                                            </div>
+
+                                            <button
+                                              key={proc.t}
+                                              type="button"
+                                              onClick={() => setSelectedProcessing(isProcSelected ? '' : proc.t)}
+                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm ${isProcSelected ? 'bg-[#101828] text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                                                }`}
+                                            >
+                                              {proc.t}
+                                            </button>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
                                 </div>
-                              </button>
-                            ))
+                              );
+                            })
                           )}
                           <div className="flex gap-2 pt-2">
-                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(1)}>Back</button>
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 bg-white" onClick={() => setActiveStep(1)}>Back</button>
                             <button type="button" className="flex-1 cursor-pointer rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(3)}>Continue</button>
                           </div>
                         </div>
@@ -665,12 +832,12 @@ export default function UploadForm() {
                       {step === 3 && (
                         <div className="space-y-4">
                           <div className="flex items-center gap-3">
-                            <input type="range" min="5" max="100" value={infill} onChange={(e) => setInfill(Number(e.target.value))} className="accent-blue-600 flex-1" />
+                            <input type="range" min="5" max="100" value={infill} onChange={(e) => setInfill(Number(e.target.value))} className="accent-blue-600 flex-1 cursor-pointer" />
                             <span className="text-sm font-bold w-12 text-right">{infill}%</span>
                           </div>
                           <p className="text-xs text-gray-600">{infill <= 20 ? 'Lightweight — good for display models' : infill <= 50 ? 'Standard strength' : 'Maximum strength, solid'}</p>
                           <div className="flex gap-2 pt-2">
-                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(2)}>Back</button>
+                            <button type="button" className="flex-1 cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 bg-white" onClick={() => setActiveStep(2)}>Back</button>
                             <button type="button" className="flex-1 cursor-pointer rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(4)}>Continue</button>
                           </div>
                         </div>
@@ -679,18 +846,53 @@ export default function UploadForm() {
                       {/* Step 4 Content */}
                       {step === 4 && (
                         <div className="space-y-4">
+                          <span className="font-semibold text-lg block mb-1">Configuration Summary</span>
                           <div className="rounded-xl bg-gray-50 p-4 border border-gray-200 text-sm space-y-2">
                             <div><span className="text-gray-500 font-medium">Process:</span> <span className="font-semibold">{process}</span></div>
                             <div><span className="text-gray-500 font-medium">Material:</span> <span className="font-semibold">{material}</span></div>
-
-                            <div><span className="text-gray-500 font-medium"> Dimsensions:</span> <span className="font-semibold">{stats.dims} {unit}</span></div>
+                            <div><span className="text-gray-500 font-medium">Dimensions:</span> <span className="font-semibold">{stats.dims} {unit}</span></div>
                             <div><span className="text-gray-500 font-medium">Infill:</span> <span className="font-semibold">{infill}%</span></div>
-                            <div><span className="text-gray-500 font-medium">Post-processing:</span> <span className="font-semibold"> None</span></div>
+                            {selectedProcessing && (
+                              <div><span className="text-gray-500 font-medium">Processing Option:</span> <span className="font-semibold text-blue-600">{selectedProcessing}</span></div>
+                            )}
+                            <div className="flex gap-2 pt-2">
+                              <button type="button" className="w-full cursor-pointer rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(3)}>Back</button>
+                              <button
+                                type="button"
+                                disabled={calculatingPrice}
+                                className="w-full cursor-pointer rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-black disabled:bg-gray-400 transition flex items-center justify-center gap-2"
+                                onClick={fetchCalculatedPrice}
+                              >
+                                {calculatingPrice ? 'Calculating...' : 'Get Price'}
+                              </button>
+                            </div>
                           </div>
-                          <div className="flex gap-2 pt-2">
-                            <button type="button" className="w-full cursor-pointer rounded-xl border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700" onClick={() => setActiveStep(3)}>Back</button>
-                            <button type="button" className="w-full cursor-pointer   rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white" onClick={() => setActiveStep(4)}>Get Price</button>
-                          </div>
+
+                          {apiPriceData && (
+                            <div className="rounded-2xl  p-5 animate-fadeIn bg-[#E7E7E7]">
+
+                              <div className="flex flex-col justify-between 
+                               pt-1">
+                                <span className="text-sm text-[#6A7282] font-bold uppercase tracking-wider">Estimated Price</span>
+                                <span className="text-2xl font-black text-black py-1">
+                                  ${Number(apiPriceData.final_amount).toFixed(2)}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-gray-500 italic">
+                                Price calculated from volume, material & options
+                              </p>
+
+                              <button
+                                type="button"
+                                onClick={() => showToast('🚀 Added configuration seamlessly to your shopping cart!')}
+                                className="w-full mt-2 cursor-pointer rounded-xl bg-black py-3 text-sm font-bold text-white  transition duration-150 flex items-center justify-center gap-1 shadow-md"
+                              >
+                                Add to Cart
+                              </button>
+                            </div>
+                          )}
+
+
                         </div>
                       )}
 
