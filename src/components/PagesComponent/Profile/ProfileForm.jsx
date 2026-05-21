@@ -7,14 +7,14 @@ export default function ProfileForm() {
 
   return (
     <div className="w-full bg-white">
-      <h1 className="text-3xl text-[#0D0D12] font-medium">Personal & Contact Information</h1>
+      <h1 className="lg:text-3xl text:xl text-[#0D0D12] font-medium">Personal & Contact Information</h1>
       <p className="text-sm text-slate-400 mt-1">
         Maintain your personal and contact information from here
       </p>
 
       <form action="" onSubmit={(e) => e.preventDefault()} className='py-10 w-full space-y-8'>
 
- 
+
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full items-start">
           <img
             src={Profile}
@@ -33,7 +33,7 @@ export default function ProfileForm() {
           </div>
         </div>
 
-  
+
         <div className="w-full pt-2">
           <h5 className='text-base font-semibold text-[#262626] mb-1'>Contact Info</h5>
 

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag } from 'lucide-react'
+import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox } from 'lucide-react'
 import ProductImage from '../assets/img/product/product.png'
 import { Link, useLocation } from 'react-router'
 import { useCart } from '../context/CartContext'
@@ -94,13 +94,22 @@ export default function Checkout() {
                     </span>
                   )}
 
-                  <figure className="w-32 h-32 bg-[#D9D9D9] rounded-xl p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
-                    <img
-                      src={item.thumbnail_image || ProductImage}
-                      alt={item.title}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </figure>
+                  {item.type === 'custom' ? (
+                    <figure className="w-32 h-32 bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
+                      <FileBox size={40} className="text-violet-400" />
+                      <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
+                        {/* {item.customData?.fileName || 'STL File'} */}
+                      </span>
+                    </figure>
+                  ) : (
+                    <figure className="w-32 h-32 bg-[#D9D9D9] rounded-xl p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
+                      <img
+                        src={item.thumbnail_image || ProductImage}
+                        alt={item.title}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </figure>
+                  )}
 
                   <div className="flex-1 w-full space-y-2">
                     <div>

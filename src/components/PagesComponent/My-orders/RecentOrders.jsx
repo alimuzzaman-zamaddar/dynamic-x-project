@@ -21,7 +21,7 @@ export default function RecentOrders() {
     <div className='xl:py-8 py-4'>
       <h2 className="text-xl font-medium text-[#0D0D12] mb-4">Recent Orders</h2>
 
-      <div className="bg-[#F2F2F2] rounded-2xl p-6 sm:p-8 flex flex-col gap-8">
+      <div className="bg-[#F2F2F2] rounded-2xl p-4 lg:p-8 flex flex-col gap-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div>
             <h3 className="text-lg sm:text-2xl font-semibold text-slate-800">
@@ -54,7 +54,7 @@ export default function RecentOrders() {
                 <div className="relative flex items-center justify-start md:justify-center w-fit md:w-full">
 
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all z-10 shrink-0 ${isCompleted
+                    className={`lg:w-10 w-7 lg:h-10 h-7 rounded-full flex items-center justify-center transition-all z-10 shrink-0 ${isCompleted
                       ? 'bg-[#101828] text-white'
                       : 'bg-[#DCE1E7] text-transparent'
                       }`}

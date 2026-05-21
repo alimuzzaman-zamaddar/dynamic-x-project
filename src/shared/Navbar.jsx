@@ -2,6 +2,8 @@ import { Link } from "react-scroll";
 import { useLocation, useNavigate } from "react-router";
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "../context/CartContext";
 
 const navMenu = [
   {
@@ -105,6 +107,7 @@ const Navbar = () => {
   const pathName = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const { totalCount } = useCart();
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -386,6 +389,53 @@ const Navbar = () => {
           </a>
         </div>
 
+
+        {/* Cart icon + mobile hamburger (mobile) */}
+        <div className="flex 2xl:hidden items-center gap-3">
+          {/* Cart icon mobile */}
+          <button
+            onClick={() => navigate('/dashboard/cart')}
+            className="relative p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
+            aria-label="Cart"
+          >
+            <ShoppingCart size={22} />
+            {totalCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
+                {totalCount > 99 ? '99+' : totalCount}
+              </span>
+            )}
+          </button>
+
+          {/* Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="relative w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5"
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""}`} />
+            <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "-rotate-45 absolute" : ""}`} />
+          </button>
+        </div>
+
+        {/* Desktop: cart icon + login button */}
+        <div className="hidden 2xl:flex items-center gap-4">
+          <button
+            onClick={() => navigate('/dashboard/cart')}
+            className="relative p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
+            aria-label="Cart"
+          >
+            <ShoppingCart size={22} />
+            {totalCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
+                {totalCount > 99 ? '99+' : totalCount}
+              </span>
+            )}
+          </button>
+          <button className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
+            Login
+          </button>
+        </div>
         {/* mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -416,6 +466,7 @@ const Navbar = () => {
         >
           Login
         </a>
+
       </div>
     </nav>
   );

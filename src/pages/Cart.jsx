@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Trash2, Minus, Plus, ShoppingBag, Tag } from 'lucide-react'
+import { Trash2, Minus, Plus, ShoppingBag, Tag, FileBox } from 'lucide-react'
 import ProductImage from '../assets/img/product/product.png'
 import { Link } from 'react-router'
 import { useCart } from '../context/CartContext'
@@ -8,9 +8,7 @@ export default function Cart() {
   const { items, updateQuantity, removeItem } = useCart()
   const [checkedIds, setCheckedIds] = useState(() => new Set(items.map((i) => i.cartId)))
 
-  // Keep checkedIds in sync when items change (e.g., newly added)
   const currentIds = new Set(items.map((i) => i.cartId))
-  // Auto-check newly added items
   const syncedCheckedIds = new Set([...checkedIds].filter((id) => currentIds.has(id)))
 
   const handleItemCheck = (cartId) => {
@@ -38,7 +36,7 @@ export default function Cart() {
   return (
     <div className="w-full bg-white">
       <div className="mb-6">
-        <h1 className="text-3xl text-[#0D0D12] font-medium">My Cart</h1>
+        <h1 className="lg:text-3xl text-xl text-[#0D0D12] font-medium">My Cart</h1>
         <p className="text-sm text-slate-400 mt-1">
           View and organize items you've selected for purchase.
         </p>
@@ -91,14 +89,23 @@ export default function Cart() {
                       </span>
                     )}
 
-                    {/* Image */}
-                    <figure className="w-32 h-32 rounded-xl bg-[#D9D9D9] p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
-                      <img
-                        src={item.thumbnail_image || ProductImage}
-                        alt={item.title}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </figure>
+                    {/* Image or File Icon */}
+                    {item.type === 'custom' ? (
+                      <figure className="w-32 h-32 rounded-xl bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
+                        <FileBox size={40} className="text-violet-400" />
+                        <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
+                          {/* {item.customData?.fileName || 'STL File'} */}
+                        </span>
+                      </figure>
+                    ) : (
+                      <figure className="w-32 h-32 rounded-xl bg-[#D9D9D9] p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
+                        <img
+                          src={item.thumbnail_image || ProductImage}
+                          alt={item.title}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </figure>
+                    )}
 
                     <div className="flex-1 w-full space-y-1.5">
                       <div className="flex justify-between items-start">
@@ -138,7 +145,7 @@ export default function Cart() {
                         </button>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 sm:pt-2">
+                      <div className="flex flex-wrap gap-3 items-center justify-between pt-3 sm:pt-2">
                         <div>
                           <span className="text-2xl font-bold text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
                           {item.quantity > 1 && (

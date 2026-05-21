@@ -32,7 +32,7 @@ export default function DashboardSideBar() {
   ];
 
   return (
-    <div className="bg-[#E7E7E780] rounded-3xl p-6 xl:w-70 w-full">
+    <div className="bg-[#E7E7E780] rounded-3xl lg:p-6 p-3 2xl:w-70 w-full">
       <ul className="flex flex-col gap-5">
         {menuItems.map((item) => (
           <li key={item.name}>
@@ -40,14 +40,14 @@ export default function DashboardSideBar() {
               to={item.path}
               end={item.path === "/dashboard"}
               className={({ isActive }) =>
-                `flex items-center gap-4 px-7 py-3 rounded-[20px] transition-all duration-200 ${isActive
+                `flex items-center gap-4 px-7 lg:py-3 py-2 rounded-[20px] transition-all duration-200 ${isActive
                   ? "bg-[#07162E] text-white"
                   : "text-[#1F2937]"
                 }`
               }
             >
               <span>{item.icon}</span>
-              <span className="text-[20px] font-medium">
+              <span className="lg:text-[20px] text-base font-medium">
                 {item.name}
               </span>
             </NavLink>
