@@ -73,7 +73,7 @@ export default function RecentOrders() {
 
                   {/* Vertical Connecting Line (Mobile) */}
                   {!isLast && (
-                    <div className="md:hidden absolute left-5 top-10 bottom-[-24px] w-[2px] bg-[#DCE1E7] z-0">
+                    <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-7 bottom-[-24px] w-[2px] bg-[#DCE1E7] z-0">
                       <div
                         className="w-full bg-[#101828] transition-all duration-300"
                         style={{ height: orderData.currentStep > step.id ? '100%' : '0%' }}
@@ -93,8 +93,8 @@ export default function RecentOrders() {
 
         {/* Footer Actions Panel */}
         <div className="flex justify-end pt-2">
-          <button className="inline-flex items-center gap-2 bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl cursor-pointer">
-            <FolderOpen size={16} className="text-slate-600" />
+          <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-sm font-medium px-4 py-3 sm:py-2.5 rounded-xl cursor-pointer">
+            <FolderOpen size={16} className="text-slate-600 shrink-0" />
             View Order Details
           </button>
         </div>

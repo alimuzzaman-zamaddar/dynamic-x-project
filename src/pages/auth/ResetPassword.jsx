@@ -4,12 +4,22 @@ import {
   HidePassSvg,
   ShowPassSvg,
 } from "../../components/SvgContainer/SvgContainer";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation, Navigate } from "react-router";
+import { useToast } from "../../context/ToastContext";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { showToast } = useToast();
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const email = location.state?.email;
+  const otp = location.state?.otp;
 
   const {
     register,
@@ -17,9 +27,46 @@ const ResetPassword = () => {
     formState: { errors },
   } = useForm();
 
+  if (!email || !otp) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
   const onSubmit = async data => {
-    console.log(data);
-    navigate("/auth/success-message");
+    if (data.password !== data.password_confirmation) {
+      showToast("Passwords do not match", "error");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${BASE_URL}/auth/password/reset/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          otp,
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+        }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Password reset failed");
+      }
+
+      showToast("Password reset successfully!", "success");
+      navigate("/auth/success-message");
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,8 +132,8 @@ const ResetPassword = () => {
           </div>
 
           {/* Submit */}
-          <button type="submit" className="auth_btn">
-            Create Password
+          <button type="submit" disabled={loading} className="auth_btn disabled:opacity-70 disabled:cursor-not-allowed">
+            {loading ? "Creating..." : "Create Password"}
           </button>
         </form>
       </div>
