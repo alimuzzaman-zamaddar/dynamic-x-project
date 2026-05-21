@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import Container from '../../../shared/Container';
 import * as THREE from 'three';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { useNavigate } from 'react-router';
+import { useCart } from '../../../context/CartContext';
 
 const MATERIAL_PRICING = {
   PLA: 0.05,
@@ -12,6 +14,8 @@ const MATERIAL_PRICING = {
 };
 
 export default function UploadForm() {
+  const navigate = useNavigate();
+  const { addCustomProduct } = useCart();
   const fileInputRef = useRef(null);
   const viewerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -907,8 +911,29 @@ export default function UploadForm() {
 
                               <button
                                 type="button"
-                                onClick={() => showToast(' Added configuration seamlessly to your shopping cart!')}
-                                className="w-full mt-2 cursor-pointer rounded-xl bg-black py-3 text-sm font-bold text-white  transition duration-150 flex items-center justify-center gap-1 shadow-md"
+                                onClick={() => {
+                                  addCustomProduct({
+                                    title: fileName !== 'No file loaded' ? fileName.replace(/\.stl$/i, '') : 'Custom 3D Print',
+                                    product_code: `CUSTOM-${Date.now()}`,
+                                    price: Number(apiPriceData.final_amount),
+                                    technology: process,
+                                    material: material,
+                                    selectedColor: color,
+                                    color: [color],
+                                    quantity: 1,
+                                    customData: {
+                                      infill,
+                                      processing: selectedProcessing,
+                                      dimensions: stats.dims,
+                                      volume: stats.volume,
+                                      fileName,
+                                      priceBreakdown: apiPriceData,
+                                    },
+                                  });
+                                  showToast('✅ Added to cart!');
+                                  setTimeout(() => navigate('/dashboard/cart'), 1000);
+                                }}
+                                className="w-full mt-2 cursor-pointer rounded-xl bg-black py-3 text-sm font-bold text-white transition duration-150 flex items-center justify-center gap-1 shadow-md"
                               >
                                 Add to Cart
                               </button>
