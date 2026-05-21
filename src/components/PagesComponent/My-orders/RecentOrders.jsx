@@ -7,7 +7,7 @@ export default function RecentOrders() {
     date: "Oct 24, 2026",
     totalPrice: "156.00",
     itemCount: 5,
-    currentStep: 1, // 1 = Placed, 2 = Production, 3 = Quality Check, 4 = Shipped
+    currentStep: 1,
   }
 
   const steps = [
@@ -22,7 +22,6 @@ export default function RecentOrders() {
       <h2 className="text-xl font-medium text-[#0D0D12] mb-4">Recent Orders</h2>
 
       <div className="bg-[#F2F2F2] rounded-2xl p-6 sm:p-8 flex flex-col gap-8">
-        {/* Header Block: Order Info & Price */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div>
             <h3 className="text-lg sm:text-2xl font-semibold text-slate-800">
