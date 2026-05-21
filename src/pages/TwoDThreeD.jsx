@@ -12,7 +12,8 @@ import Contact from "../components/CommonComponents/Contact";
 const TwoDThreeD = () => {
   return (
     <div>
-      <NewBanner title="2D to 3D" image={banner} showButton={false} />
+      <NewBanner title="2D to 3D" image={banner} showButton={false} comingSoon="Coming Soon 🚀"
+      />
       <HeroSection />
       <TwoDThreeDProcessSection />
       <PreviewCapabilitiesSection />

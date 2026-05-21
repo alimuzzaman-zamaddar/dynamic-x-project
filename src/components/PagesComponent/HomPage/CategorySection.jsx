@@ -18,19 +18,19 @@ import Container from "../../../shared/Container";
 const categories = [
   {
     icon: Drone,
-    title: "DRONI & COMPONENTI",
+    title: "DRONI & COMPONENTI UAV",
     link: "/drone",
     subtitle: "Stampa componenti leggeri e resistenti per droni ad alte prestazioni.",
   },
   {
     icon: Automotive,
-    title: "AUTOMOTIVE D'EPOCA E PARTI RARE",
+    title: "AUTOMOTIVE D’EPOCA E PARTI RARE",
     link: "/vintage",
     subtitle: "Ricrea componenti introvabili per restauri di precisione.",
   },
   {
     icon: Yatch,
-    title: "YACHT & COMPONENTI",
+    title: "YACHT E COMPONENTI NAUTICHE",
     link: "/yacht",
     subtitle: "Parti tecniche e accessori custom per il settore nautico.",
   },
@@ -42,7 +42,7 @@ const categories = [
   },
   {
     icon: Dime,
-    title: "DIME & COMPONENTI INDUSTRIALI",
+    title: "DIME E COMPONENTI INDUSTRIALI",
     link: "/industrial",
     subtitle: "Attrezzature tecniche e componenti per produzione industriale.",
   },
@@ -56,30 +56,30 @@ const categories = [
     icon: Support,
     title: "SUPPORTI VETERINARI",
     link: "/vetemarysupports",
-    subtitle: "Produzione additiva ad alta precisione per componenti funzionali e industriali.",
+    subtitle: "Dispositivi personalizzati per cura e riabilitazione animale.",
   },
   {
     icon: Proto,
     title: "GIOIELLERIA",
     link: "/jwellery",
-    subtitle: "Prototipi e modelli di precisione per design e fusione.",
+    subtitle: "Prototipi, stampi e modelli di precisione per design e fusione.",
   },
   {
     icon: Fashions,
-    title: "FASHION",
+    title: "FASHION & FOOTWEAR",
     link: "/footwear",
     subtitle: "Accessori e componenti innovativi per moda e design.",
   },
   {
     icon: Prodo,
-    title: "PROTOTIPI & PRODOTTI CUSTOM",
+    title: "PROTOTIPI E PRODOTTI CUSTOM",
     link: "/prototyping",
-    subtitle: "Dall'idea al prodotto: prototipi e soluzioni su misura.",
+    subtitle: "Dall’idea al prodotto, prototipi e soluzioni su misura.",
   },
   {
     icon: Alimantare,
     title: "ALIMENTARE",
-    link: "/alimentare",
+    link: "/",
     subtitle: "Stampi e strumenti personalizzati per il settore food.",
   },
 ];
@@ -89,7 +89,8 @@ const CategoryCard = ({ category }) => {
   const Icon = category.icon;
 
   return (
-    <div
+    <section
+      id="categorie"
       onClick={() => navigate(`/${category.link}`)}
       className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
     >
@@ -117,7 +118,7 @@ const CategoryCard = ({ category }) => {
           {category.subtitle}
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -157,7 +158,7 @@ const CategorySection = () => {
         </div>
       </Container>
 
-      <div id="technologies" className="h-[60px]"></div>
+      <div id="technologies" className="h-15"></div>
     </section>
   );
 };

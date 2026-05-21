@@ -11,7 +11,7 @@ import HighQualityMaterialsSection from "../components/PagesComponent/Vetemarysu
 const Vetemarysupports = () => {
   return (
     <>
-      <NewBanner title="SUPPORTI VETERINARI" image={banner} />
+      <NewBanner title="SUPPORTI VETERINARI" image={banner} />   
       <VetemarysupportsModals />
       <HighQualityMaterialsSection />
       <PrintTechnologiesSection />

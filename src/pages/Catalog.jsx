@@ -11,7 +11,8 @@ import Portata from '../components/PagesComponent/Catalog/Portata'
 const Catalog = () => {
   return (
     <>
-      <Newbanner title={"Catalogo"} image={CatalogBanner} showButton={false} />
+      <Newbanner title={"Catalogo"} image={CatalogBanner} showButton={false} comingSoon="Coming Soon 🚀"
+/>
       <Futuro />
       <Vita />
       <Pensato />

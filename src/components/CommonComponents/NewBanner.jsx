@@ -8,6 +8,7 @@ const NewBanner = ({
   buttonText = "Upload Design",
   image,
   showButton = true,
+  comingSoon = "", 
 }) => {
   return (
     <div
@@ -19,13 +20,18 @@ const NewBanner = ({
           {title}
         </h1>
 
+        {comingSoon && (
+          <p className="mt-2 text-xs sm:text-sm md:text-sm xl:text-[14px] tracking-wide text-white/80 uppercase">
+            {comingSoon}
+          </p>
+        )}
+
         {description && (
           <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-[600px] md:max-w-[632px] mx-auto">
             {description}
           </p>
         )}
 
-        {/* ← Only renders when showButton is true */}
         {showButton ? (
           <Link to="/upload-design">
             <button

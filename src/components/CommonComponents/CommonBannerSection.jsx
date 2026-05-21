@@ -1,6 +1,6 @@
 import React from "react";
-import { ArrowBlack } from "../SvgContainer/SvgContainer";
 import { Link } from "react-router";
+import { ArrowBlack } from "../SvgContainer/SvgContainer";
 
 const CommonBannerSection = ({
   title,
@@ -16,18 +16,15 @@ const CommonBannerSection = ({
       }}
     >
       <div className="banner-content text-center px-2 sm:px-4">
-        {/* Title */}
         <h1 className="banner-title text-xl sm:text-2xl md:text-3xl xl:text-[36px]">
           {title}
         </h1>
 
-        {/* Description */}
         {description && (
           <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-[600px] md:max-w-[632px] mx-auto">
             {description}
           </p>
         )}
-        {/*  Clean Button */}
         <Link to={"/upload-design"}>
           <button
             type="button"
