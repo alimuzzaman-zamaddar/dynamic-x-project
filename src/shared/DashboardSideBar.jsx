@@ -32,7 +32,7 @@ export default function DashboardSideBar() {
   ];
 
   return (
-    <div className="bg-[#E7E7E780] rounded-3xl p-6 w-70">
+    <div className="bg-[#E7E7E780] rounded-3xl p-6 lg:w-70 w-full">
       <ul className="flex flex-col gap-5">
         {menuItems.map((item) => (
           <li key={item.name}>

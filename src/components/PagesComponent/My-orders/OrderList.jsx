@@ -13,7 +13,7 @@ export default function OrderList() {
   ]
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 bg-white">
+    <div className="w-full  bg-white">
       <h2 className="text-2xl font-medium text-[#0D0D12] mb-6">Orders List</h2>
       <div className="flex gap-3 overflow-x-auto pb-3 mb-8 scrollbar-none snap-x">
         {tabs.map((tab) => (
@@ -57,7 +57,7 @@ export default function OrderList() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 py-2">
+            <div className="flex flex-wrap  py-2 items-center justify-between">
               <div className="grid grid-cols-2 gap-x-6 gap-y-1">
                 <div>
                   <span className="text-base font-bold text-[#0D0D12] block">
@@ -77,10 +77,10 @@ export default function OrderList() {
                 </div>
               </div>
 
-              {/* Action Button */}
-              <button className="bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl self-end sm:self-auto cursor-pointer whitespace-nowrap">
+              <button className="bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl self-end sm:self-auto cursor-pointer whitespace-nowrap lg: mt-0 mt-3">
                 View Order Details
               </button>
+
             </div>
           </div>
         ))}
