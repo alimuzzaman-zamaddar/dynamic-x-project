@@ -18,7 +18,7 @@ export default function RecentOrders() {
   ]
 
   return (
-    <div>
+    <div className='xl:py-8 py-4'>
       <h2 className="text-xl font-medium text-[#0D0D12] mb-4">Recent Orders</h2>
 
       <div className="bg-[#F2F2F2] rounded-2xl p-6 sm:p-8 flex flex-col gap-8">
