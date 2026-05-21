@@ -7,6 +7,7 @@ import Company from '../assets/img/product/company.jpg'
 import Me from '../assets/img/product/me.png'
 import { ChevronDown, Minus, MoreVertical, Plus, ShoppingCart, CheckCircle } from 'lucide-react'
 import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
@@ -14,6 +15,7 @@ export default function ProductDetails() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addNormalProduct } = useCart()
+  const { showToast } = useToast()
 
   // UI state
   const [comment, setComment] = useState('')
@@ -77,6 +79,7 @@ export default function ProductDetails() {
   const handleAddToCart = () => {
     if (!product) return
     addNormalProduct(product, quantity, selectedColor)
+    showToast(`"${product.title}" added to cart!`)
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)
   }
@@ -84,6 +87,7 @@ export default function ProductDetails() {
   const handleBuyNow = () => {
     if (!product) return
     addNormalProduct(product, quantity, selectedColor)
+    showToast(`"${product.title}" added to cart!`)
     navigate('/dashboard/cart')
   }
 
