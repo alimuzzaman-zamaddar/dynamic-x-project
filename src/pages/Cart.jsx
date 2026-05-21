@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Trash2, Minus, Plus } from 'lucide-react'
 import ProductImage from "../assets/img/product/product.png"
+import { Link } from 'react-router'
 
 export default function Cart() {
   const [qty1, setQty1] = useState(10)
@@ -185,10 +186,11 @@ export default function Cart() {
             <span className="text-base text-slate-600 font-medium">Subtotal</span>
             <span className="text-2xl font-medium text-[#262626]">${dynamicSubtotal}</span>
           </div>
-
-          <button className="w-full bg-[#0F141C] hover:bg-slate-800 text-white font-semibold py-3.5 rounded-full transition-all duration-200 cursor-pointer tracking-wide shadow-sm text-sm">
-            Checkout
-          </button>
+          <Link to={"/dashboard/checkout"}>
+            <button className="w-full bg-[#0F141C] hover:bg-slate-800 text-white font-semibold py-3.5 rounded-full transition-all duration-200 cursor-pointer tracking-wide shadow-sm text-sm">
+              Checkout
+            </button>
+          </Link>
         </div>
 
       </div>
