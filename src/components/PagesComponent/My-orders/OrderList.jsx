@@ -40,7 +40,7 @@ export default function OrderList() {
             {/* Top Row: Order Details and Pricing Header */}
             <div className="flex justify-between items-start gap-4">
               <div>
-                <h3 className="text-2xl font-normal text-[#0D0D12]">
+                <h3 className="lg:text-2xl text-lg font-normal text-[#0D0D12]">
                   Order #{order.id}
                 </h3>
                 <p className="text-xs sm:text-base text-slate-400 mt-1">
@@ -48,7 +48,7 @@ export default function OrderList() {
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <span className="text-2xl font-normal text-[#0D0D12]">
+                <span className="lg:text-2xl text-base font-normal text-[#0D0D12]">
                   ${order.price}
                 </span>
                 <p className="text-base text-slate-400 mt-1">
@@ -60,7 +60,7 @@ export default function OrderList() {
             <div className="flex flex-wrap  py-2 items-center justify-between">
               <div className="grid grid-cols-2 gap-x-6 gap-y-1">
                 <div>
-                  <span className="text-base font-bold text-[#0D0D12] block">
+                  <span className="lg:text-base text-sm font-bold text-[#0D0D12] block">
                     Status
                   </span>
                   <span className="text-sm text-slate-500 block mt-1">
@@ -68,7 +68,7 @@ export default function OrderList() {
                   </span>
                 </div>
                 <div>
-                  <span className="text-base font-bold text-[#0D0D12] block whitespace-nowrap">
+                  <span className="lg:text-base text-sm font-bold text-[#0D0D12] block whitespace-nowrap">
                     Est. delivery date
                   </span>
                   <span className="text-sm text-slate-500 block mt-1 whitespace-nowrap">
