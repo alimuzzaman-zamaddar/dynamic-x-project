@@ -68,52 +68,67 @@ export default function UploadForm() {
     }
   }, []);
 
+  // Fetch technologies on mount
   useEffect(() => {
     const base = import.meta.env.VITE_API_BASE_URL || '';
     const techUrl = base ? `${base}/quote/technologies` : '/quote/technologies';
-    const matUrl = base ? `${base}/quote/materials` : '/quote/materials';
 
-    const fetchAll = async () => {
+    const fetchTechnologies = async () => {
       try {
         const tRes = await fetch(techUrl);
-        let chosenTechId = null;
         if (tRes.ok) {
           const tJson = await tRes.json();
           const techs = Array.isArray(tJson.data) ? tJson.data : [];
           setTechnologies(techs);
-          if (techs.length) {
-            const match = techs.find((t) => t.code === process) || techs[0];
-            if (match) {
-              chosenTechId = match.id;
-              if (match.code) setProcess(match.code);
-            }
+          // Set first technology as default
+          if (techs.length && !process) {
+            setProcess(techs[0].code);
           }
-        }
-
-        try {
-          const query = chosenTechId ? `?technology_id=${encodeURIComponent(Number(chosenTechId))}` : '';
-          const mRes = await fetch(`${matUrl}${query}`);
-          if (mRes.ok) {
-            const mJson = await mRes.json();
-            const mats = Array.isArray(mJson.data) ? mJson.data : [];
-            setMaterialsList(mats);
-            if (mats.length && !materialsList.length) {
-              setMaterial(mats[0].name);
-              if (mats[0].colours?.length) {
-                setColor(mats[0].colours[0].code || color);
-              }
-            }
-          }
-        } catch (errMat) {
-          console.error('Failed to fetch materials (GET)', errMat);
         }
       } catch (err) {
-        console.error('Failed to fetch technologies/materials', err);
+        console.error('Failed to fetch technologies', err);
       }
     };
 
-    fetchAll();
+    fetchTechnologies();
   }, []);
+
+  // Fetch materials when process/technology changes
+  useEffect(() => {
+    if (!process || technologies.length === 0) return;
+
+    const base = import.meta.env.VITE_API_BASE_URL || '';
+    const matUrl = base ? `${base}/quote/materials` : '/quote/materials';
+
+    const fetchMaterials = async () => {
+      try {
+        // Find the technology ID for the current process
+        const currentTech = technologies.find((t) => t.code === process);
+        if (!currentTech?.id) return;
+
+        const query = `?technology_id=${encodeURIComponent(Number(currentTech.id))}`;
+        const mRes = await fetch(`${matUrl}${query}`);
+
+        if (mRes.ok) {
+          const mJson = await mRes.json();
+          const mats = Array.isArray(mJson.data) ? mJson.data : [];
+          setMaterialsList(mats);
+
+          // Set first material as default when technology changes
+          if (mats.length) {
+            setMaterial(mats[0].name);
+            if (mats[0].colours?.length) {
+              setColor(mats[0].colours[0].code || '#1a1a2e');
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch materials for technology:', err);
+      }
+    };
+
+    fetchMaterials();
+  }, [process, technologies]);
 
   useEffect(() => {
     if (!storedUpload?.fileContent || modelLoaded || loading) return;

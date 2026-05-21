@@ -7,7 +7,6 @@ export default function ProfileForm() {
 
   return (
     <div className="w-full bg-white">
-      {/* Header Info Block */}
       <h1 className="text-3xl text-[#0D0D12] font-medium">Personal & Contact Information</h1>
       <p className="text-sm text-slate-400 mt-1">
         Maintain your personal and contact information from here
@@ -15,7 +14,7 @@ export default function ProfileForm() {
 
       <form action="" onSubmit={(e) => e.preventDefault()} className='py-10 w-full space-y-8'>
 
-        {/* Section: Personal Info with Avatar Layout */}
+ 
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full items-start">
           <img
             src={Profile}
@@ -34,12 +33,12 @@ export default function ProfileForm() {
           </div>
         </div>
 
-        {/* Section: Contact Info Responsive Grid block */}
+  
         <div className="w-full pt-2">
           <h5 className='text-base font-semibold text-[#262626] mb-1'>Contact Info</h5>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full items-end">
-            {/* Email Field Column */}
+
             <div className="w-full">
               <label htmlFor="emailAddress" className='text-sm font-normal text-[#63716E] mt-3 mb-2 block'>Email Address</label>
               <input
@@ -54,7 +53,6 @@ export default function ProfileForm() {
               <label htmlFor="phoneNumber" className='text-sm font-normal text-[#63716E] mt-3 mb-2 block'>Phone Number</label>
 
               <div className="flex items-center rounded-3xl bg-[#F7F7F7] overflow-hidden px-4 focus-within:bg-slate-100 transition-colors">
-                {/* Region Selector Wrapper */}
                 <div className="relative flex items-center gap-1.5 shrink-0 pr-3  border-slate-300">
                   <img
                     src="https://flagcdn.com/w20/us.png"
