@@ -163,7 +163,7 @@ const Navbar = () => {
             : "bg-black"
         }`}
     >
-      <div className="max-w-[1440px] mx-auto lg:py-8 py-4 px-4 flex items-center justify-between">
+      <div className="max-w-max-width mx-auto lg:py-8 py-4  flex items-center justify-between">
         <div
           onClick={() => {
             navigate("/");

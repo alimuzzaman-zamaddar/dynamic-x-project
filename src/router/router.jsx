@@ -31,7 +31,12 @@ import Industrial from "../components/PagesComponent/HomPage/Industrial";
 import NewUploadDesign from "../pages/NewUploadDesign";
 import FileUpload from "../pages/FileUpload";
 import Product from "../pages/Product";
+import Myorders from "../pages/Myorders";
 import ProductDetails from "../pages/ProductDetails";
+import DashboardLayout from "../layout/DashboardLayout";
+import FileLibrary from "../pages/FileLibrary";
+import Cart from "../pages/Cart";
+import Profile from "../pages/Profile";
 
 
 const router = createBrowserRouter([
@@ -169,6 +174,28 @@ const router = createBrowserRouter([
         path: "/technology-details/:title",
         element: <TechnologyDetailsPage />,
       },
+      {
+        path: "dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Myorders />,
+          },
+          {
+            path: "file",
+            element: <FileLibrary />,
+          },
+          {
+            path: "cart",
+            element: <Cart />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
+      }
     ],
   },
 ]);
