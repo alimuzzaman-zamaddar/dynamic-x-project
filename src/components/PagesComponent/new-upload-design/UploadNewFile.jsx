@@ -176,7 +176,7 @@ export default function UploadNewFile() {
           <div className="space-y-10">
             <label
               htmlFor="upload-file"
-              className="w-full p-10 md:p-16 flex flex-col items-center justify-center cursor-pointer hover:border-gray-400 transition-colors bg-white group"
+              className="w-full md:p-16 flex flex-col items-center justify-center cursor-pointer hover:border-gray-400 transition-colors bg-white group"
             >
               <input
                 id="upload-file"

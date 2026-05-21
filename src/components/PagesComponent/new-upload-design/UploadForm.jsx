@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import { useCart } from '../../../context/CartContext';
+import { useToast } from '../../../context/ToastContext';
 
 const MATERIAL_PRICING = {
   PLA: 0.05,
@@ -16,6 +17,7 @@ const MATERIAL_PRICING = {
 export default function UploadForm() {
   const navigate = useNavigate();
   const { addCustomProduct } = useCart();
+  const { showToast: showGlobalToast } = useToast();
   const fileInputRef = useRef(null);
   const viewerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -930,8 +932,8 @@ export default function UploadForm() {
                                       priceBreakdown: apiPriceData,
                                     },
                                   });
-                                  showToast('✅ Added to cart!');
-                                  setTimeout(() => navigate('/dashboard/cart'), 1000);
+                                  showGlobalToast('Custom print added to cart!');
+                                  setTimeout(() => navigate('/dashboard/cart'), 1200);
                                 }}
                                 className="w-full mt-2 cursor-pointer rounded-xl bg-black py-3 text-sm font-bold text-white transition duration-150 flex items-center justify-center gap-1 shadow-md"
                               >

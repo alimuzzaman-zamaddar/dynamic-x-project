@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag } from 'lucide-react'
+import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox } from 'lucide-react'
 import ProductImage from '../assets/img/product/product.png'
 import { Link, useLocation } from 'react-router'
 import { useCart } from '../context/CartContext'
@@ -94,13 +94,22 @@ export default function Checkout() {
                     </span>
                   )}
 
-                  <figure className="w-32 h-32 bg-[#D9D9D9] rounded-xl p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
-                    <img
-                      src={item.thumbnail_image || ProductImage}
-                      alt={item.title}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </figure>
+                  {item.type === 'custom' ? (
+                    <figure className="w-32 h-32 bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
+                      <FileBox size={40} className="text-violet-400" />
+                      <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
+                        {/* {item.customData?.fileName || 'STL File'} */}
+                      </span>
+                    </figure>
+                  ) : (
+                    <figure className="w-32 h-32 bg-[#D9D9D9] rounded-xl p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
+                      <img
+                        src={item.thumbnail_image || ProductImage}
+                        alt={item.title}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </figure>
+                  )}
 
                   <div className="flex-1 w-full space-y-2">
                     <div>
@@ -109,7 +118,7 @@ export default function Checkout() {
                     </div>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 py-3">
                       {item.technology && (
                         <span className="text-xs font-medium px-2 py-0.5 rounded bg-orange-50 text-orange-600 border border-orange-100">
                           {item.technology}
@@ -234,7 +243,7 @@ export default function Checkout() {
         <div className="border border-slate-200 rounded-2xl p-6 bg-white w-full space-y-6 lg:sticky lg:top-6">
           <div className="space-y-3">
             <h3 className="text-base font-semibold text-slate-800">Order Summary</h3>
-            {checkoutItems.map((item) => (
+            {/* {checkoutItems.map((item) => (
               <div key={item.cartId} className="flex justify-between items-center text-sm text-slate-500">
                 <span className="line-clamp-1 flex-1 pr-2">
                   {item.type === 'custom' && <span className="text-violet-500 font-medium">[Custom] </span>}
@@ -242,7 +251,7 @@ export default function Checkout() {
                 </span>
                 <span className="font-semibold text-slate-800 shrink-0">${(item.price * getQty(item)).toFixed(2)}</span>
               </div>
-            ))}
+            ))} */}
           </div>
 
           <hr className="border-t border-dashed border-slate-200" />
@@ -269,7 +278,7 @@ export default function Checkout() {
 
           <div className="flex justify-between items-center">
             <span className="text-base font-medium text-slate-700">Grand Total</span>
-            <span className="text-3xl font-bold text-slate-900">${grandTotal.toFixed(2)}</span>
+            <span className="text-3xl font-medium text-slate-900">${grandTotal.toFixed(2)}</span>
           </div>
 
           <button className="w-full bg-[#0F141C] hover:bg-slate-800 text-white font-medium py-3.5 rounded-full transition-all duration-200 cursor-pointer text-center text-sm tracking-wide shadow-sm">

@@ -39,6 +39,13 @@ import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
 import Checkout from "../pages/Checkout";
 
+import AuthLayout from "../layout/AuthLayout";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+import VerifyEmail from "../pages/auth/VerifyEmail";
+import VerifyOtp from "../pages/auth/VerifyOtp";
+import ResetPassword from "../pages/auth/ResetPassword";
+import SuccessMessage from "../pages/auth/SuccessMessage";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +89,6 @@ const router = createBrowserRouter([
         element: <Drone />,
       },
       {
-
         path: "/yacht",
         element: <Yacht />,
       },
@@ -103,7 +109,6 @@ const router = createBrowserRouter([
         element: <TwoDThreeD />,
       },
       {
-
         path: "/footwear",
         element: <Footwear />,
       },
@@ -200,7 +205,39 @@ const router = createBrowserRouter([
             element: <Checkout />,
           },
         ],
-      }
+      },
+    ],
+  },
+
+  // Auth Layout
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "verify-email",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "verify-otp",
+        element: <VerifyOtp />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "success-message",
+        element: <SuccessMessage />,
+      },
     ],
   },
 ]);
