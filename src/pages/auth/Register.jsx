@@ -1,14 +1,20 @@
+import { Link, useNavigate } from "react-router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   HidePassSvg,
   ShowPassSvg,
 } from "../../components/SvgContainer/SvgContainer";
-import { Link } from "react-router";
+import { useToast } from "../../context/ToastContext";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const {
     register,
@@ -17,7 +23,39 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async data => {
-    console.log(data);
+
+    if (data.password !== data.password_confirmation) {
+      showToast("Passwords do not match", "error");
+      return;
+    }
+
+    const payload = { ...data, agree_to_terms: 1 }
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Registration failed");
+      }
+
+      showToast("Registration successful!", "success");
+      navigate("/auth/verify-otp", { state: { email: data.email, type: "register" } });
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,11 +80,10 @@ const Register = () => {
             type="text"
             placeholder="Full Name"
             {...register("name", { required: true })}
-            className={`auth_input ${
-              errors.name
-                ? "border-red-500 placeholder:text-red-500"
-                : "border-[#CFD3D4]"
-            }`}
+            className={`auth_input ${errors.name
+              ? "border-red-500 placeholder:text-red-500"
+              : "border-[#CFD3D4]"
+              }`}
           />
         </div>
 
@@ -60,11 +97,10 @@ const Register = () => {
             type="email"
             placeholder="Email Address"
             {...register("email", { required: true })}
-            className={`auth_input ${
-              errors.email
-                ? "border-red-500 placeholder:text-red-500"
-                : "border-[#CFD3D4]"
-            }`}
+            className={`auth_input ${errors.email
+              ? "border-red-500 placeholder:text-red-500"
+              : "border-[#CFD3D4]"
+              }`}
           />
         </div>
 
@@ -79,11 +115,10 @@ const Register = () => {
               type={!showPassword ? "password" : "text"}
               placeholder="Enter Password"
               {...register("password", { required: true })}
-              className={`auth_input !pe-9 ${
-                errors.password
-                  ? "border-red-500 placeholder:text-red-500"
-                  : "border-[#CFD3D4]"
-              }`}
+              className={`auth_input pe-9! ${errors.password
+                ? "border-red-500 placeholder:text-red-500"
+                : "border-[#CFD3D4]"
+                }`}
             />
             <p
               onClick={() => setShowPassword(prev => !prev)}
@@ -105,11 +140,10 @@ const Register = () => {
               type={!showConfirmPassword ? "password" : "text"}
               placeholder="Confirm Password"
               {...register("password_confirmation", { required: true })}
-              className={`auth_input !pe-9 ${
-                errors.password_confirmation
-                  ? "border-red-500 placeholder:text-red-500"
-                  : "border-[#CFD3D4]"
-              }`}
+              className={`auth_input !pe-9 ${errors.password_confirmation
+                ? "border-red-500 placeholder:text-red-500"
+                : "border-[#CFD3D4]"
+                }`}
             />
             <p
               onClick={() => setShowConfirmPassword(prev => !prev)}
@@ -121,8 +155,8 @@ const Register = () => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="auth_btn">
-          Get Started
+        <button type="submit" disabled={loading} className="auth_btn disabled:opacity-70 disabled:cursor-not-allowed">
+          {loading ? "Registering..." : "Get Started"}
         </button>
       </form>
 

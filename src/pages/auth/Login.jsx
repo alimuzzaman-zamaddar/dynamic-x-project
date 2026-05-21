@@ -4,10 +4,18 @@ import {
   HidePassSvg,
   ShowPassSvg,
 } from "../../components/SvgContainer/SvgContainer";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useToast } from "../../context/ToastContext";
+import { useAuth } from "../../context/AuthContext";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -16,7 +24,36 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async data => {
-    console.log(data);
+    try {
+      setLoading(true);
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Login failed");
+      }
+
+      const token = json.token || json.data?.access_token || json.data?.token;
+      if (token) {
+        login(token, json.data?.user || json.data);
+      }
+
+      showToast("Login successful!", "success");
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,8 +122,8 @@ const Login = () => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="auth_btn">
-          Sign In
+        <button type="submit" disabled={loading} className="auth_btn disabled:opacity-70 disabled:cursor-not-allowed">
+          {loading ? "Signing In..." : "Sign In"}
         </button>
       </form>
 

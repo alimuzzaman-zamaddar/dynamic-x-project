@@ -1,26 +1,100 @@
 import OTPInput from "react-otp-input";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation, Navigate } from "react-router";
+import { useToast } from "../../context/ToastContext";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const VerifyOtp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { showToast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+
+  const email = location.state?.email;
+  const type = location.state?.type; // "register" or "reset"
+
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
 
+  if (!email || !type) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
   const onSubmit = async data => {
-    console.log(data);
-    navigate("/auth/reset-password");
+    try {
+      setLoading(true);
+      const endpoint = type === "register" ? "/auth/register/verify-otp" : "/auth/password/reset/verify";
+      
+      const res = await fetch(`${BASE_URL}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({ email, otp: data.otp }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Verification failed");
+      }
+
+      showToast("OTP verified successfully!", "success");
+      
+      if (type === "register") {
+        navigate("/auth/login");
+      } else {
+        navigate("/auth/reset-password", { state: { email, otp: data.otp } });
+      }
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    try {
+      setResendLoading(true);
+      const endpoint = type === "register" ? "/auth/register/resend-otp" : "/auth/password/reset/resend";
+      
+      const res = await fetch(`${BASE_URL}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Resend failed");
+      }
+
+      showToast("OTP resent to your email", "success");
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setResendLoading(false);
+    }
   };
 
   return (
     <div className="p-4.5 md:p-5 xl:p-6 2xl:p-8">
       <h2 className="auth_title">OTP Verification</h2>
       <p className="auth_sub_title">
-        Please enter the code that has been sent to J****s@smartyair.com
+        Please enter the code that has been sent to {email}
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,15 +130,15 @@ const VerifyOtp = () => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="auth_btn">
-          Verify
+        <button type="submit" disabled={loading} className="auth_btn disabled:opacity-70 disabled:cursor-not-allowed">
+          {loading ? "Verifying..." : "Verify"}
         </button>
       </form>
 
       <p className="block w-full text-center text-sm text-[#919eab] font-inter mt-4 2xl:mt-5">
         Don’t receive the code?{" "}
-        <button className="text-blue-500 font-semibold cursor-pointer hover:underline">
-          Resend
+        <button type="button" onClick={handleResend} disabled={resendLoading} className="text-blue-500 font-semibold cursor-pointer hover:underline disabled:opacity-50">
+          {resendLoading ? "Resending..." : "Resend"}
         </button>
       </p>
     </div>

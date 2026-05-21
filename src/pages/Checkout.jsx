@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react'
-import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox } from 'lucide-react'
-import ProductImage from '../assets/img/product/product.png'
 import { Link, useLocation } from 'react-router'
 import { useCart } from '../context/CartContext'
+import ProductImage from '../assets/img/product/product.png'
+import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox } from 'lucide-react'
 
 const SHIPPING_FEE = 0.5
 
@@ -10,7 +10,6 @@ export default function Checkout() {
   const location = useLocation()
   const { items, updateQuantity } = useCart()
 
-  // selectedCartIds passed from Cart page via route state; if none, use all items
   const selectedCartIds = useMemo(() => {
     const state = location.state?.selectedCartIds
     if (state && Array.isArray(state) && state.length > 0) return new Set(state)
@@ -19,7 +18,6 @@ export default function Checkout() {
 
   const checkoutItems = items.filter((i) => selectedCartIds.has(i.cartId))
 
-  // Local quantity overrides (so user can adjust quantity on checkout page too)
   const [qtyOverride, setQtyOverride] = useState({})
 
   const getQty = (item) => qtyOverride[item.cartId] ?? item.quantity
@@ -95,7 +93,7 @@ export default function Checkout() {
                   )}
 
                   {item.type === 'custom' ? (
-                    <figure className="w-32 h-32 bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
+                    <figure className="w-32 h-32 bg-linear-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
                       <FileBox size={40} className="text-violet-400" />
                       <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
                         {/* {item.customData?.fileName || 'STL File'} */}
@@ -140,30 +138,30 @@ export default function Checkout() {
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between pt-2">
-                      <div>
-                        <span className="text-xl font-bold text-slate-800">${(item.price * getQty(item)).toFixed(2)}</span>
-                        {getQty(item) > 1 && (
-                          <span className="text-xs text-slate-400 ml-1">(${item.price.toFixed(2)} × {getQty(item)})</span>
-                        )}
-                      </div>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-3 sm:pt-2 gap-3">
+                        <div>
+                          <span className="text-xl sm:text-2xl font-bold text-slate-800">${(item.price * getQty(item)).toFixed(2)}</span>
+                          {getQty(item) > 1 && (
+                            <span className="text-xs text-slate-400 ml-1 block sm:inline-block">(${item.price.toFixed(2)} × {getQty(item)})</span>
+                          )}
+                        </div>
 
-                      <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden">
-                        <button
-                          onClick={() => handleQtyChange(item.cartId, getQty(item) - 1)}
-                          className="px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
-                        >
-                          <Minus size={14} />
-                        </button>
-                        <span className="w-10 text-center font-medium text-sm text-slate-800">{getQty(item)}</span>
-                        <button
-                          onClick={() => handleQtyChange(item.cartId, getQty(item) + 1)}
-                          className="px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
-                        >
-                          <Plus size={14} />
-                        </button>
+                        <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden w-full sm:w-auto">
+                          <button
+                            onClick={() => handleQtyChange(item.cartId, getQty(item) - 1)}
+                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
+                          >
+                            <Minus size={14} className="mx-auto" />
+                          </button>
+                          <span className="w-12 sm:w-10 text-center font-medium text-sm text-slate-800">{getQty(item)}</span>
+                          <button
+                            onClick={() => handleQtyChange(item.cartId, getQty(item) + 1)}
+                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
+                          >
+                            <Plus size={14} className="mx-auto" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               ))}

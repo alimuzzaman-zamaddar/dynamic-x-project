@@ -57,8 +57,8 @@ export default function OrderList() {
               </div>
             </div>
 
-            <div className="flex flex-wrap  py-2 items-center justify-between">
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+            <div className="flex flex-col sm:flex-row py-3 items-start sm:items-center justify-between gap-5 sm:gap-2">
+              <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-1 w-full sm:w-auto">
                 <div>
                   <span className="lg:text-base text-sm font-bold text-[#0D0D12] block">
                     Status
@@ -77,10 +77,9 @@ export default function OrderList() {
                 </div>
               </div>
 
-              <button className="bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl self-end sm:self-auto cursor-pointer whitespace-nowrap lg: mt-0 mt-3">
+              <button className="w-full sm:w-auto bg-[#DCE1E7] hover:bg-slate-300 transition-colors text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl cursor-pointer whitespace-nowrap lg:mt-0 mt-3 flex items-center justify-center">
                 View Order Details
               </button>
-
             </div>
           </div>
         ))}
