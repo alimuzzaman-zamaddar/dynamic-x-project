@@ -1,6 +1,6 @@
 import machine from "../assets/img/wellnesss.png";
+import black from "../assets/img//technology/sls.png";
 import machine_gray from "../assets/img/technology/img side → Portrait of a wellness coach (11).png";
-import black from "../assets/img//technology/img side → Portrait of a wellness coach (10).png";
 
 export const technologies = [
   {
@@ -13,7 +13,7 @@ export const technologies = [
   {
     bgImg: machine_gray,
     title: "SLA",
-     title2: "stampasla",
+    title2: "stampasla",
     short_description:
       "La stereolitografia di ultima generazione, anche nota come MSLA, utilizza un processo di solidificazione (fotopolimerizzazione) per produrre modelli 3D impiegando una resina sensibile agli UV.",
   },
@@ -25,5 +25,3 @@ export const technologies = [
       "L’SLS (Sinterizzazione Laser Selettiva) è una tecnologia di produzione additiva che utilizza un raggio Laser per sinterizzare, e quindi fondere, delle particelle di polvere. Questo processo premette di realizzare geometrie ",
   },
 ];
-
-

@@ -9,24 +9,35 @@ import HomePage from "../pages/HomePage";
 import Footwear from "../pages/Footwear";
 import Jwellery from "../pages/Jwellery";
 import ChiSiamo from "../pages/ChiSiamo";
+import Newsletter from "../pages/Newsletter";
 import TwoDThreeD from "../pages/TwoDThreeD";
 import { Stampasla } from "../pages/Stampasla";
 import { Stampasls } from "../pages/Stampasls";
 import MedicaleLab from "../pages/MedicaleLab";
 import Prototyping from "../pages/Prototyping";
-import { createBrowserRouter } from "react-router";
 import ComingSoon from "../pages/ComingSoonPage";
 import AllMaterials from "../pages/AllMaterials";
 import Uploaddesign from "../pages/Uploaddesign";
 import { StampaPage } from "../pages/StampaPage";
 import Architettura from "../pages/Architettura";
+import { createBrowserRouter } from "react-router";
+import CookiePolicy from "../pages/CookiePolicy";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsCondiditon from "../pages/TermsCondiditon";
 import Vetemarysupports from "../pages/Vetemarysupports";
 import CategoryDetailsPage from "../pages/CategoryDetailsPage";
 import TechnologyDetailsPage from "../pages/TechnologyDetailsPage";
 import Industrial from "../components/PagesComponent/HomPage/Industrial";
-import BioStamp from "../pages/BioStamp";
-import News from "../pages/News";
-import Newsletter from "../pages/Newsletter";
+import NewUploadDesign from "../pages/NewUploadDesign";
+import FileUpload from "../pages/FileUpload";
+import Product from "../pages/Product";
+import Myorders from "../pages/Myorders";
+import ProductDetails from "../pages/ProductDetails";
+import DashboardLayout from "../layout/DashboardLayout";
+import FileLibrary from "../pages/FileLibrary";
+import Cart from "../pages/Cart";
+import Profile from "../pages/Profile";
+import Checkout from "../pages/Checkout";
 
 
 const router = createBrowserRouter([
@@ -121,6 +132,22 @@ const router = createBrowserRouter([
         element: <Newsletter />,
       },
       {
+        path: "/new-upload-design",
+        element: <NewUploadDesign />,
+      },
+      {
+        path: "/file-upload",
+        element: <FileUpload />,
+      },
+      {
+        path: "/product",
+        element: <Product />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetails />,
+      },
+      {
         path: "/chi-siamo",
         element: <ChiSiamo />,
       },
@@ -133,9 +160,47 @@ const router = createBrowserRouter([
         element: <News />,
       },
       {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/cookie-policy",
+        element: <CookiePolicy />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsCondiditon />,
+      },
+      {
         path: "/technology-details/:title",
         element: <TechnologyDetailsPage />,
       },
+      {
+        path: "dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Myorders />,
+          },
+          {
+            path: "file",
+            element: <FileLibrary />,
+          },
+          {
+            path: "cart",
+            element: <Cart />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "checkout",
+            element: <Checkout />,
+          },
+        ],
+      }
     ],
   },
 ]);

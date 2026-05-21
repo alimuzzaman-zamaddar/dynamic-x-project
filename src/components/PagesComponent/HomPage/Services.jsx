@@ -10,6 +10,7 @@ import machine6 from "../../../assets/img/home/serive7.png";
 import machine7 from "../../../assets/img/home/service8.png";
 
 const techonologies = [
+
   {
     bgImg: machine4,
     title: "Stampa 3D Professionale",
@@ -26,6 +27,12 @@ const techonologies = [
     bgImg: machine1,
     title: "Produzione Piccoli Lotti",
     description: "Produzione flessibile e conveniente per serie limitate.",
+  },
+  {
+    bgImg: machine5,
+    title: "Conversione 2D to 3D",
+    description:
+      "Trasformiamo disegni tecnici in modelli tridimensionali stampabili.",
   },
   {
     bgImg: machine2,
@@ -46,12 +53,6 @@ const techonologies = [
       "Creazione di modelli CAD pronti per produzione e prototipazione.",
   },
   {
-    bgImg: machine5,
-    title: "Conversione 2D to 3D",
-    description:
-      "Trasformiamo disegni tecnici in modelli tridimensionali stampabili.",
-  },
-  {
     bgImg: machine6,
     title: "Consulenza Tecnica",
     description:
@@ -65,8 +66,8 @@ const techonologies = [
   },
 ];
 
-const CARD_WIDTH = 260;
 const CARD_GAP = 16;
+const CARD_WIDTH = 260;
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -32,9 +32,11 @@
   --container-max-width: 1440px;
   --container-padding-x: 1rem;
 }
+
 body {
   font-family: "Inter", sans-serif;
 }
+
 @layer components {
   .container {
     max-width: var(--container-max-width);
