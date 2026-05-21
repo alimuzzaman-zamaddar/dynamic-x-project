@@ -213,8 +213,8 @@ export default function UploadNewFile() {
 
               <div
                 className={`bg-gray-100 ${uploading
-                    ? "cursor-not-allowed opacity-70"
-                    : "group-hover:bg-gray-200"
+                  ? "cursor-not-allowed opacity-70"
+                  : "group-hover:bg-gray-200"
                   } text-gray-800 text-sm font-medium px-5 py-2 rounded-lg border border-gray-300 shadow-sm transition-all`}
               >
                 {uploading
@@ -268,7 +268,7 @@ export default function UploadNewFile() {
   );
 
   return (
-    <section className="py-18">
+    <section className={`${isDashboardRoute ? "py-5" : "pt-18"}`}>
       {isDashboardRoute ? (
         content
       ) : (
