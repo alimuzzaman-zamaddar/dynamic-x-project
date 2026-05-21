@@ -2,8 +2,10 @@ import { Link } from "react-scroll";
 import { useLocation, useNavigate } from "react-router";
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, User, LogOut } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 
 const navMenu = [
   {
@@ -97,6 +99,29 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const { totalCount } = useCart();
+  const { user, loading, logout } = useAuth();
+  const { showToast } = useToast();
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/logout`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+          }
+        });
+      } catch (err) {
+        console.error("Logout API failed", err);
+      }
+    }
+    logout();
+    setIsOpen(false);
+    navigate('/');
+    showToast("Logged out successfully", "success");
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -367,11 +392,34 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to={"/auth/login"}>
-            <button className=" flex w-[80%] items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5  px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
-              Login
-            </button>
-          </Link>
+          {loading ? (
+             <div className="w-[80%] h-12 bg-white/10 animate-pulse rounded-full ml-5" />
+          ) : user ? (
+            <div className="w-full px-5 border-t border-white/10 pt-5 mt-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden bg-white/10 flex items-center justify-center shrink-0">
+                  {user.avatar ? (
+                    <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <User className="text-white w-6 h-6" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm text-white font-medium truncate">{user.name}</p>
+                  <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                </div>
+              </div>
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-red-400 hover:text-red-300 cursor-pointer">
+                <LogOut className="w-4 h-4" /> Logout
+              </button>
+            </div>
+          ) : (
+            <div className="w-[80%] ml-5">
+              <button onClick={() => { setIsOpen(false); navigate('/auth/login'); }} className="flex w-full items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
+                Login
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex 2xl:hidden items-center gap-3">
@@ -412,9 +460,34 @@ const Navbar = () => {
               </span>
             )}
           </button>
-          <button onClick={() => navigate("/auth/login")} className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
-            Login
-          </button>
+          {loading ? (
+            <div className="w-11 h-11 rounded-full bg-white/10 animate-pulse"></div>
+          ) : user ? (
+            <div className="relative group flex items-center">
+              <div onClick={() => navigate("/dashboard/profile")} className="w-11 h-11 rounded-full border-2 border-white/20 overflow-hidden cursor-pointer hover:border-white transition-colors bg-white/10 flex items-center justify-center">
+                {user.avatar ? (
+                  <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <User className="text-white w-5 h-5" />
+                )}
+              </div>
+              <div className="absolute top-full right-0 mt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2 flex flex-col">
+                  <div className="px-4 py-2 border-b border-white/10 mb-2">
+                    <p className="text-sm text-white font-medium truncate">{user.name}</p>
+                    <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                  </div>
+                  <button onClick={handleLogout} className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 cursor-pointer transition">
+                    <LogOut className="w-4 h-4" /> Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button onClick={() => navigate("/auth/login")} className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
+              Login
+            </button>
+          )}
         </div>
       </div>
     </nav>

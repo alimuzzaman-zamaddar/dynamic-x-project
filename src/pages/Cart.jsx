@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Trash2, Minus, Plus, ShoppingBag, Tag, FileBox } from 'lucide-react'
-import ProductImage from '../assets/img/product/product.png'
 import { Link } from 'react-router'
+import React, { useState } from 'react'
 import { useCart } from '../context/CartContext'
+import ProductImage from '../assets/img/product/product.png'
+import { Trash2, Minus, Plus, ShoppingBag, Tag, FileBox } from 'lucide-react'
 
 export default function Cart() {
   const { items, updateQuantity, removeItem } = useCart()
@@ -34,7 +34,7 @@ export default function Cart() {
   const dynamicSubtotal = selectedItems.reduce((s, i) => s + i.price * i.quantity, 0)
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white px-0 sm:px-2">
       <div className="mb-6">
         <h1 className="lg:text-3xl text-xl text-[#0D0D12] font-medium">My Cart</h1>
         <p className="text-sm text-slate-400 mt-1">
@@ -88,7 +88,7 @@ export default function Cart() {
                     )}
 
                     {item.type === 'custom' ? (
-                      <figure className="w-32 h-32 rounded-xl bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
+                      <figure className="w-32 h-32 rounded-xl bg-linear-to-br from-violet-50 to-violet-100 border border-violet-200 flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
                         <FileBox size={40} className="text-violet-400" />
                         <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
                           {/* {item.customData?.fileName || 'STL File'} */}
@@ -142,27 +142,27 @@ export default function Cart() {
                         </button>
                       </div>
 
-                      <div className="flex flex-wrap gap-3 items-center justify-between pt-3 sm:pt-2">
+                      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between pt-3 sm:pt-2">
                         <div>
-                          <span className="text-2xl font-medium text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-xl sm:text-2xl font-medium text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
                           {/* {item.quantity > 1 && (
                             <span className="text-xs text-slate-400 ml-1">(${item.price.toFixed(2)} each)</span>
                           )} */}
                         </div>
 
-                        <div className="flex items-center border border-black rounded-lg bg-white overflow-hidden">
+                        <div className="flex items-center border border-black rounded-lg bg-white overflow-hidden w-full sm:w-auto">
                           <button
                             onClick={() => updateQuantity(item.cartId, item.quantity - 1)}
-                            className="px-3 py-2 hover:bg-slate-50 text-black cursor-pointer"
+                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-black cursor-pointer flex-1 sm:flex-none text-center"
                           >
-                            <Minus size={14} />
+                            <Minus size={14} className="mx-auto" />
                           </button>
-                          <span className="w-10 text-center font-medium text-sm text-black">{item.quantity}</span>
+                          <span className="w-12 sm:w-10 text-center font-medium text-sm text-black">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.cartId, item.quantity + 1)}
-                            className="px-3 py-2 hover:bg-slate-50 text-black cursor-pointer"
+                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-black cursor-pointer flex-1 sm:flex-none text-center"
                           >
-                            <Plus size={14} />
+                            <Plus size={14} className="mx-auto" />
                           </button>
                         </div>
                       </div>

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import { useToast } from "../../context/ToastContext";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -11,8 +16,31 @@ const VerifyEmail = () => {
   } = useForm();
 
   const onSubmit = async data => {
-    console.log(data);
-    navigate("/auth/verify-otp");
+    try {
+      setLoading(true);
+      const res = await fetch(`${BASE_URL}/auth/password/reset/request`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({ email: data.email }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.message || json.error || "Request failed");
+      }
+
+      showToast("OTP sent to your email!", "success");
+      navigate("/auth/verify-otp", { state: { email: data.email, type: "reset" } });
+    } catch (err) {
+      console.error(err);
+      showToast(err.message || "Something went wrong", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,8 +72,8 @@ const VerifyEmail = () => {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="auth_btn">
-          Verify
+        <button type="submit" disabled={loading} className="auth_btn disabled:opacity-70 disabled:cursor-not-allowed">
+          {loading ? "Sending..." : "Verify"}
         </button>
       </form>
 

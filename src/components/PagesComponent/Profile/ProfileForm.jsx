@@ -1,88 +1,304 @@
-import React, { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { ChevronDown, Eye, EyeOff, LogOut, Trash2 } from 'lucide-react'
 import Profile from "../../../assets/img/product/profile.png"
+import { useAuth } from "../../../context/AuthContext"
+import { useToast } from "../../../context/ToastContext"
 
 export default function ProfileForm() {
-  const [countryCode, setCountryCode] = useState('+62')
+  const { user, logout, fetchProfile } = useAuth();
+  const { showToast } = useToast();
+
+  const [countryCode, setCountryCode] = useState('+62');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [savingPersonal, setSavingPersonal] = useState(false);
+  const [savingContact, setSavingContact] = useState(false);
+  const [savingSecurity, setSavingSecurity] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name || '');
+      setEmail(user.email || '');
+      setPhone(user.phone?.replace(countryCode, '') || '');
+    }
+  }, [user]);
+
+  const handleUpdateProfile = async (type) => {
+    const setSaving = type === 'personal' ? setSavingPersonal : setSavingContact;
+    setSaving(true);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/profile/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: `${countryCode}${phone}`
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || data.error || "Failed to update profile");
+      showToast("Profile updated successfully", "success");
+      fetchProfile(); // Refresh global auth state
+    } catch (err) {
+      showToast(err.message, "error");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleUpdatePassword = async () => {
+    if (!newPassword || !confirmPassword) {
+      showToast("Please fill in both password fields", "error");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      showToast("Passwords do not match", "error");
+      return;
+    }
+    setSavingSecurity(true);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/profile/update-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          password: newPassword,
+          password_confirmation: confirmPassword
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || data.error || "Failed to update password");
+      showToast("Password updated successfully", "success");
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (err) {
+      showToast(err.message, "error");
+    } finally {
+      setSavingSecurity(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) return;
+    setDeleting(true);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/profile/delete`, {
+        method: "DELETE", // We'll try DELETE, if it fails backend might expect POST
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      
+      if (!res.ok) {
+        // Fallback to POST if DELETE is not allowed
+        const fallbackRes = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/profile/delete`, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        if (!fallbackRes.ok) {
+           const data = await fallbackRes.json().catch(()=>({}));
+           throw new Error(data.message || data.error || "Failed to delete account");
+        }
+      }
+      
+      showToast("Account deleted successfully", "success");
+      logout();
+      window.location.href = '/';
+    } catch (err) {
+      showToast(err.message, "error");
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/logout`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    logout();
+    window.location.href = '/';
+    showToast("Logged out successfully", "success");
+  };
 
   return (
-    <div className="w-full bg-white">
-      <h1 className="lg:text-3xl text:xl text-[#0D0D12] font-medium">Personal & Contact Information</h1>
-      <p className="text-sm text-slate-400 mt-1">
-        Maintain your personal and contact information from here
-      </p>
+    <div className="w-full bg-white pb-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
+        <div>
+          <h1 className="lg:text-3xl text-xl text-[#0D0D12] font-medium">Personal & Contact Information</h1>
+          <p className="text-sm text-slate-400 mt-1">
+            Maintain your personal and contact information from here
+          </p>
+        </div>
+        <div className="flex gap-3 shrink-0">
+          <button onClick={handleLogout} className="w-12 h-12 rounded-2xl border border-red-200 bg-red-50 text-red-600 flex items-center justify-center hover:bg-red-100 transition cursor-pointer">
+            <LogOut size={20} />
+          </button>
+          <button onClick={handleDeleteAccount} disabled={deleting} className="w-12 h-12 rounded-2xl border border-red-200 bg-red-50 text-red-600 flex items-center justify-center hover:bg-red-100 transition disabled:opacity-50 cursor-pointer">
+            <Trash2 size={20} />
+          </button>
+        </div>
+      </div>
 
-      <form action="" onSubmit={(e) => e.preventDefault()} className='py-10 w-full space-y-8'>
+      <div className='w-full space-y-10'>
 
-
-        <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full items-start">
-          <img
-            src={Profile}
-            alt="Profile Avatar"
-            className='w-18 h-18 rounded-full object-cover shrink-0 mx-auto sm:mx-0'
-          />
-          <div className="w-full">
-            <h5 className='text-base font-semibold text-[#262626] mb-1'>Personal Info</h5>
-            <label htmlFor="fullName" className='text-sm font-normal text-[#63716E] mt-3 mb-2 block'>Full Name</label>
-            <input
-              id="fullName"
-              type="text"
-              placeholder='Niko Pradana'
-              className='p-5 rounded-3xl bg-[#F7F7F7] w-full text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
+        {/* Row 1: Personal Info */}
+        <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 w-full items-start lg:items-center">
+          <div className="flex flex-col items-center sm:items-start shrink-0">
+            <h5 className='text-sm font-semibold text-[#262626] mb-3 hidden lg:block invisible'>Avatar</h5>
+            <img
+              src={user?.avatar || Profile}
+              alt="Profile Avatar"
+              className='w-16 h-16 rounded-full object-cover shrink-0'
             />
           </div>
-        </div>
-
-
-        <div className="w-full pt-2">
-          <h5 className='text-base font-semibold text-[#262626] mb-1'>Contact Info</h5>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full items-end">
-
+          <div className="w-full flex flex-col md:flex-row gap-4 items-end">
             <div className="w-full">
-              <label htmlFor="emailAddress" className='text-sm font-normal text-[#63716E] mt-3 mb-2 block'>Email Address</label>
+              <h5 className='text-sm font-semibold text-[#262626] mb-1'>Personal Info</h5>
+              <label htmlFor="fullName" className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Full Name</label>
               <input
-                id="emailAddress"
-                type="email"
-                placeholder='niko.pradana@company.com'
-                className='p-5 rounded-3xl bg-[#F7F7F7] w-full text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
+                id="fullName"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder='Niko Pradana'
+                className='p-4 rounded-2xl bg-[#F7F7F7] w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
               />
             </div>
+            <button disabled={savingPersonal} onClick={() => handleUpdateProfile('personal')} className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer">
+              {savingPersonal ? 'Saving...' : 'Save'}
+            </button>
+          </div>
+        </div>
 
-            <div className="w-full">
-              <label htmlFor="phoneNumber" className='text-sm font-normal text-[#63716E] mt-3 mb-2 block'>Phone Number</label>
-
-              <div className="flex items-center rounded-3xl bg-[#F7F7F7] overflow-hidden px-4 focus-within:bg-slate-100 transition-colors">
-                <div className="relative flex items-center gap-1.5 shrink-0 pr-3  border-slate-300">
-                  <img
-                    src="https://flagcdn.com/w20/us.png"
-                    alt="Country Flag"
-                    className="w-5 h-3.5 object-cover rounded-xs"
-                  />
-                  <select
-                    value={countryCode}
-                    onChange={(e) => setCountryCode(e.target.value)}
-                    className="appearance-none bg-transparent pr-5 py-5 text-sm font-medium text-slate-700 focus:outline-none cursor-pointer border-none ring-0 focus:ring-0"
-                  >
-                    <option value="+62">+62</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
-                  </select>
-                  <ChevronDown size={14} className="text-slate-500 absolute right-0 pointer-events-none" />
-                </div>
-
+        {/* Row 2: Contact Info */}
+        <div className="w-full">
+          <h5 className='text-sm font-semibold text-[#262626] mb-1'>Contact Info</h5>
+          <div className="flex flex-col lg:flex-row gap-4 items-end w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              <div className="w-full">
+                <label className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Email Address</label>
                 <input
-                  id="phoneNumber"
-                  type="tel"
-                  placeholder='813 7788 2244'
-                  className='p-5 bg-transparent w-full text-slate-700 placeholder-slate-500 focus:outline-none border-0 ring-0 focus:ring-0'
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder='niko.pradana@company.com'
+                  className='p-4 rounded-2xl bg-[#F7F7F7] w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
                 />
               </div>
-            </div>
-          </div>
 
+              <div className="w-full">
+                <label className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Phone Number</label>
+                <div className="flex items-center rounded-2xl bg-[#F7F7F7] overflow-hidden px-4 focus-within:bg-slate-100 transition-colors h-[52px]">
+                  <div className="relative flex items-center gap-1.5 shrink-0 pr-2">
+                    <img
+                      src="https://flagcdn.com/w20/us.png"
+                      alt="Country Flag"
+                      className="w-5 h-3.5 object-cover rounded-sm"
+                    />
+                    <select
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="appearance-none bg-transparent pr-4 py-2 text-sm font-medium text-slate-700 focus:outline-none cursor-pointer border-none ring-0 focus:ring-0"
+                    >
+                      <option value="+62">+62</option>
+                      <option value="+1">+1</option>
+                      <option value="+44">+44</option>
+                    </select>
+                    <ChevronDown size={14} className="text-slate-500 absolute right-0 pointer-events-none" />
+                  </div>
+
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder='813 7788 2244'
+                    className='py-2 bg-transparent w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none border-0 ring-0 focus:ring-0'
+                  />
+                </div>
+              </div>
+            </div>
+            <button disabled={savingContact} onClick={() => handleUpdateProfile('contact')} className="w-full lg:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer">
+              {savingContact ? 'Saving...' : 'Save'}
+            </button>
+          </div>
         </div>
-      </form>
+
+        {/* Row 3: Security */}
+        <div className="w-full">
+          <h5 className='text-sm font-semibold text-[#262626] mb-1'>Security</h5>
+          <div className="flex flex-col lg:flex-row gap-4 items-end w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              <div className="w-full relative">
+                <label className='text-xs font-normal text-[#262626] font-semibold mt-2 mb-2 block'>New Password</label>
+                <div className="relative w-full h-[52px]">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    placeholder='New Password'
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className='w-full h-full pl-4 pr-10 rounded-2xl bg-transparent border border-slate-200 text-sm text-slate-700 focus:outline-none focus:border-slate-300 transition-colors'
+                  />
+                  <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer">
+                    {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-full relative">
+                <label className='text-xs font-normal text-[#262626] font-semibold mt-2 mb-2 block'>Confirm New Password</label>
+                <div className="relative w-full h-[52px]">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder='Confirm New Password'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className='w-full h-full pl-4 pr-10 rounded-2xl bg-transparent border border-slate-200 text-sm text-slate-700 focus:outline-none focus:border-slate-300 transition-colors'
+                  />
+                  <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer">
+                    {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button disabled={savingSecurity} onClick={handleUpdatePassword} className="w-full lg:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer h-[52px] lg:mt-0 mt-2">
+              {savingSecurity ? 'Saving...' : 'Save'}
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
   )
 }
