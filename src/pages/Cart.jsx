@@ -70,7 +70,6 @@ export default function Cart() {
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
-            {/* Cart Items */}
             <div className="xl:col-span-2 space-y-4">
               {items.map((item) => (
                 <div key={item.cartId} className="flex items-center gap-3 sm:gap-4 w-full">
@@ -82,14 +81,12 @@ export default function Cart() {
                   />
 
                   <div className="flex-1 bg-[#F8F9FA] sm:bg-white border border-slate-100 sm:border-slate-200 rounded-lg p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center lg:gap-10 gap-5 relative">
-                    {/* Product Type Badge */}
                     {item.type === 'custom' && (
                       <span className="absolute top-3 left-3 bg-violet-100 text-violet-600 text-xs font-semibold px-2 py-0.5 rounded flex items-center gap-1">
                         <Tag size={10} /> Custom
                       </span>
                     )}
 
-                    {/* Image or File Icon */}
                     {item.type === 'custom' ? (
                       <figure className="w-32 h-32 rounded-xl bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
                         <FileBox size={40} className="text-violet-400" />
@@ -98,7 +95,7 @@ export default function Cart() {
                         </span>
                       </figure>
                     ) : (
-                      <figure className="w-32 h-32 rounded-xl bg-[#D9D9D9] p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
+                      <figure className="lg:w-40 md:w-30 w-20 lg:h-50 md:h-30 h-20 rounded-xl  p-2 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
                         <img
                           src={item.thumbnail_image || ProductImage}
                           alt={item.title}
@@ -110,11 +107,11 @@ export default function Cart() {
                     <div className="flex-1 w-full space-y-1.5">
                       <div className="flex justify-between items-start">
                         <div className="flex-1 pr-2">
-                          <h3 className="font-semibold text-[#262626] text-base sm:text-xl leading-tight">{item.title}</h3>
+                          <h3 className="font-medium text-[#262626] text-base sm:text-xl leading-tight">{item.title}</h3>
                           <p className="text-xs sm:text-sm text-[#63716E] py-0.5">{item.product_code}</p>
 
                           {/* Tags */}
-                          <div className="flex flex-wrap gap-1.5 mt-1">
+                          <div className="flex flex-wrap gap-1.5 my-3">
                             {item.technology && (
                               <span className="text-xs font-medium px-2 py-0.5 rounded bg-orange-50 text-orange-600 border border-orange-100">
                                 {item.technology}
@@ -147,10 +144,10 @@ export default function Cart() {
 
                       <div className="flex flex-wrap gap-3 items-center justify-between pt-3 sm:pt-2">
                         <div>
-                          <span className="text-2xl font-bold text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
-                          {item.quantity > 1 && (
+                          <span className="text-2xl font-medium text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
+                          {/* {item.quantity > 1 && (
                             <span className="text-xs text-slate-400 ml-1">(${item.price.toFixed(2)} each)</span>
-                          )}
+                          )} */}
                         </div>
 
                         <div className="flex items-center border border-black rounded-lg bg-white overflow-hidden">
@@ -179,7 +176,7 @@ export default function Cart() {
             <div className="border border-slate-200 rounded-2xl p-6 bg-white w-full">
               <h2 className="text-xl font-medium text-slate-800 mb-4">Order Summary</h2>
 
-              <div className="space-y-3 pb-4 border-b border-dashed border-slate-200">
+              {/* <div className="space-y-3 pb-4 border-b border-dashed border-slate-200">
                 {selectedItems.map((item) => (
                   <div key={item.cartId} className="flex justify-between text-sm text-slate-500">
                     <span className="line-clamp-1 flex-1 pr-2">{item.title} × {item.quantity}</span>
@@ -189,11 +186,11 @@ export default function Cart() {
                 {selectedItems.length === 0 && (
                   <p className="text-sm text-slate-400 text-center py-2">No items selected</p>
                 )}
-              </div>
+              </div> */}
 
               <div className="flex justify-between text-sm items-center py-4 border-b border-dashed border-slate-200 text-slate-500">
                 <span className="text-[#5D5D5D] text-base">Total ({activeItemsCount} Item{activeItemsCount !== 1 ? 's' : ''})</span>
-                <span className="font-semibold text-black text-base">${dynamicSubtotal.toFixed(2)}</span>
+                <span className="font-medium text-black text-base">${dynamicSubtotal.toFixed(2)}</span>
               </div>
 
               <div className="flex justify-between items-center py-6">
