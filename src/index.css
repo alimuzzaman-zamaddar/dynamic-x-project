@@ -250,3 +250,25 @@ body {
            text-2xl sm:text-3xl md:text-4xl;
   }
 }
+
+@layer components {
+  .auth_input {
+    @apply w-full block border border-gray-50 outline-none px-3 xl:px-3.5 py-2 rounded-[10px] text-sm md:text-base;
+  }
+
+  .auth_btn {
+    @apply flex justify-center items-center mt-5 w-full bg-primary-color font-medium text-white py-2.5 xl:py-3 text-sm xl:text-base duration-500 rounded-full hover:scale-95 transition-transform cursor-pointer disabled:cursor-not-allowed disabled:opacity-80;
+  }
+
+  .auth_title {
+    @apply text-[#212B36] text-xl md:text-2xl 2xl:text-3xl font-medium mb-1.5 md:mb-2 2xl:mb-3;
+  }
+
+  .auth_sub_title {
+    @apply text-[#6F6F6F] text-sm leading-[170%] mb-3 md:mb-5;
+  }
+
+  .auth_label {
+    @apply block mb-2 font-medium text-[#0d0d12ec];
+  }
+}

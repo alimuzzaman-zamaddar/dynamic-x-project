@@ -17,37 +17,48 @@ const navMenu = [
     hash: "categorie",
     dropdown: [
       {
-        label: " Droni & Componenti", path: "/drone"
+        label: " Droni & Componenti",
+        path: "/drone",
       },
       {
-        label: " Automotive d’epoca & Parti rare", path: "/vintage"
+        label: " Automotive d’epoca & Parti rare",
+        path: "/vintage",
       },
       {
-        label: " Yacht & Componenti", path: "/yacht"
+        label: " Yacht & Componenti",
+        path: "/yacht",
       },
       {
-        label: " Medicale Lab & Biotech", path: "/medicale-lab"
+        label: " Medicale Lab & Biotech",
+        path: "/medicale-lab",
       },
       {
-        label: " Dime & Componenti Industriali", path: "/industrial"
+        label: " Dime & Componenti Industriali",
+        path: "/industrial",
       },
       {
-        label: " Architettura", path: "/architettura"
+        label: " Architettura",
+        path: "/architettura",
       },
       {
-        label: " Supporti Veterinari", path: "/vetemarysupports"
+        label: " Supporti Veterinari",
+        path: "/vetemarysupports",
       },
       {
-        label: " Gioielleria", path: "/jwellery"
+        label: " Gioielleria",
+        path: "/jwellery",
       },
       {
-        label: " Fashion", path: "/footwear"
+        label: " Fashion",
+        path: "/footwear",
       },
       {
-        label: " Prototipi & Prodotti Custom", path: "/prototyping"
+        label: " Prototipi & Prodotti Custom",
+        path: "/prototyping",
       },
       {
-        label: " Alimentare", path: "/"
+        label: " Alimentare",
+        path: "/",
       },
     ],
   },
@@ -96,7 +107,7 @@ const Navbar = () => {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
@@ -144,24 +155,25 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed ease-in-out duration-500 transition-all lg:px-0 px-4 top-0 left-0 w-full z-50 
-  ${pathName.includes("/technology-details")
+  ${
+    pathName.includes("/technology-details")
+      ? "bg-transparent"
+      : isHome ||
+          isFashion ||
+          isIndustrial ||
+          isMedicale ||
+          isJwellery ||
+          isArchitettura ||
+          isVintage ||
+          isDrone ||
+          isVeterinary ||
+          isCatalog ||
+          isChiSiamo
+        ? scrollY < 200
           ? "bg-transparent"
-          : isHome ||
-            isFashion ||
-            isIndustrial ||
-            isMedicale ||
-            isJwellery ||
-            isArchitettura ||
-            isVintage ||
-            isDrone ||
-            isVeterinary ||
-            isCatalog ||
-            isChiSiamo
-            ? scrollY < 200
-              ? "bg-transparent"
-              : "bg-black"
-            : "bg-black"
-        }`}
+          : "bg-black"
+        : "bg-black"
+  }`}
     >
       <div className="max-w-max-width mx-auto lg:py-8 py-4  flex items-center justify-between">
         <div
@@ -313,8 +325,9 @@ const Navbar = () => {
                     </div>
 
                     <div
-                      className={`overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? "max-h-40 mt-2" : "max-h-0"
-                        }`}
+                      className={`overflow-hidden transition-all duration-300 ${
+                        mobileDropdownOpen ? "max-h-40 mt-2" : "max-h-0"
+                      }`}
                     >
                       <div className="ml-4 flex flex-col gap-y-3 border-l border-white/10 pl-4">
                         {nav.dropdown.map((item, subIdx) => (
@@ -365,9 +378,12 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <button className=" flex w-[80%] items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5  px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
+          <a
+            href="/auth/login"
+            className=" flex w-[80%] items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5  px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  "
+          >
             Login
-          </button>
+          </a>
         </div>
 
         {/* mobile hamburger */}
@@ -377,23 +393,29 @@ const Navbar = () => {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "rotate-45 absolute" : ""
+            }`}
           />
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "opacity-0" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "opacity-0" : ""
+            }`}
           />
           <span
-            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "-rotate-45 absolute" : ""
-              }`}
+            className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${
+              isOpen ? "-rotate-45 absolute" : ""
+            }`}
           />
         </button>
 
         {/* login button */}
-        <button className=" hidden 2xl:flex text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  ">
+        <a
+          href="/auth/login"
+          className=" hidden 2xl:flex text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white  py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500 n  "
+        >
           Login
-        </button>
+        </a>
       </div>
     </nav>
   );
