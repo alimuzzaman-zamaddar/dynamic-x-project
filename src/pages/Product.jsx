@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Productimage from '../assets/img/product/product.png';
 import {
@@ -18,25 +18,21 @@ const SORT_MAP = {
   'Title Z-A': 'title_desc',
 };
 
-const sortOptions = Object.keys(SORT_MAP);
-const showOptions = [9, 12, 24, 36];
-
 export default function ProductPage() {
   const { addNormalProduct } = useCart();
   const { showToast } = useToast();
-  const navigate = useNavigate();
 
   // Filter state
   const [search, setSearch] = useState('');
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [selectedMethods, setSelectedMethods] = useState([]);
-  const [sortBy, setSortBy] = useState('Latest');
-  const [showCount, setShowCount] = useState(9);
+  const [sortBy] = useState('Latest');
+  const [showCount] = useState(9);
   const [page, setPage] = useState(1);
 
   // UI state
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const [isShowOpen, setIsShowOpen] = useState(false);
+  const [ setIsSortOpen] = useState(false);
+  const [ setIsShowOpen] = useState(false);
   const [addedMap, setAddedMap] = useState({});
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [methodOpen, setMethodOpen] = useState(true);
@@ -108,7 +104,6 @@ export default function ProductPage() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile filter is open
   useEffect(() => {
     document.body.style.overflow = mobileFilterOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -156,10 +151,8 @@ export default function ProductPage() {
     </div>
   );
 
-  // ─── Reusable Filter Panel Content ──────────────────────────────────────────
   const FilterContent = () => (
     <div className="space-y-6">
-      {/* Search */}
       <div>
         <h3 className="text-base font-semibold text-[#262626] mb-2">Search</h3>
         <div className="relative">
@@ -257,7 +250,6 @@ export default function ProductPage() {
   return (
     <section className="text-slate-800 antialiased font-sans pt-24 md:pt-30">
 
-      {/* ─── Mobile Filter Drawer Overlay ───────────────────────────────────── */}
       {mobileFilterOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40 md:hidden"
@@ -265,12 +257,10 @@ export default function ProductPage() {
         />
       )}
 
-      {/* ─── Mobile Filter Drawer ────────────────────────────────────────────── */}
       <div
-        className={`fixed top-0 left-0 h-full w-[300px] max-w-[85vw] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col`}
+        className={`fixed top-0 left-0 h-full w-75 max-w-[85vw] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden flex flex-col`}
         style={{ transform: mobileFilterOpen ? 'translateX(0)' : 'translateX(-100%)' }}
       >
-        {/* Drawer header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
           <div className="flex items-center gap-2">
             <FiFilter className="w-4 h-4 text-slate-700" />
@@ -289,12 +279,10 @@ export default function ProductPage() {
           </button>
         </div>
 
-        {/* Drawer body */}
         <div className="flex-1 overflow-y-auto px-5 py-5">
           <FilterContent />
         </div>
 
-        {/* Drawer footer */}
         <div className="px-5 py-4 border-t border-slate-100 shrink-0">
           <button
             onClick={() => setMobileFilterOpen(false)}
@@ -307,13 +295,11 @@ export default function ProductPage() {
 
       <div className="max-w-max-width mx-auto px-4 py-6 md:py-8">
 
-        {/* ─── Page Header ─────────────────────────────────────────────────────── */}
         <div className="mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#262626]">Products</h1>
           <p className="text-sm text-slate-400 mt-1">Explore our full catalog of 3D printed parts</p>
         </div>
 
-        {/* ─── Mobile Top Bar: Filter trigger + Search ─────────────────────────── */}
         <div className="flex items-center gap-3 mb-5 md:hidden">
           <button
             type="button"
@@ -342,7 +328,6 @@ export default function ProductPage() {
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
 
-          {/* ─── Desktop Sidebar ────────────────────────────────────────────────── */}
           <aside className="hidden md:block w-56 lg:w-64 shrink-0 sticky top-28">
             <div className="border border-slate-100 rounded-2xl p-5 bg-white shadow-sm">
               <div className="flex items-center justify-between mb-5">
@@ -364,20 +349,16 @@ export default function ProductPage() {
             </div>
           </aside>
 
-          {/* ─── Main Content ────────────────────────────────────────────────────── */}
           <main className="flex-1 min-w-0">
 
-            {/* Sort / Show Bar */}
             <div className="flex items-center justify-between pb-5 mb-5 border-b border-slate-100 gap-3 flex-wrap">
-              {/* Result count */}
               {!loading && (
                 <p className="text-sm text-slate-500 shrink-0">
                   {products.length} product{products.length !== 1 ? 's' : ''} found
                 </p>
               )}
 
-              <div className="flex items-center gap-3 ml-auto flex-wrap">
-                {/* Sort */}
+              {/* <div className="flex items-center gap-3 ml-auto flex-wrap">
                 <div className="flex items-center gap-2 relative" ref={sortRef}>
                   <span className="text-sm font-medium text-slate-600 hidden sm:inline">Sort:</span>
                   <button
@@ -404,7 +385,6 @@ export default function ProductPage() {
                   )}
                 </div>
 
-                {/* Show count */}
                 <div className="flex items-center gap-2 relative" ref={showRef}>
                   <span className="text-sm font-medium text-slate-600 hidden sm:inline">Show:</span>
                   <button
@@ -430,10 +410,9 @@ export default function ProductPage() {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
 
-            {/* Active filter chips (mobile) */}
             {activeFilterCount > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {search && (
@@ -463,7 +442,6 @@ export default function ProductPage() {
               </div>
             )}
 
-            {/* ─── Product Grid ─────────────────────────────────────────────────── */}
             {loading ? (
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
                 {Array(6).fill(0).map((_, i) => (
@@ -505,9 +483,8 @@ export default function ProductPage() {
                       className="group border border-slate-100 bg-white rounded-2xl p-3 sm:p-4 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-slate-200 flex flex-col justify-between"
                     >
                       <Link to={`/product/${product.id}`} className="cursor-pointer block flex-1">
-                        {/* Image */}
                         <div className="aspect-square w-full rounded-xl bg-slate-50 flex items-center justify-center p-3 sm:p-5 overflow-hidden relative">
-                          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-100/20 pointer-events-none" />
+                          <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-100/20 pointer-events-none" />
                           <img
                             src={product.thumbnail_image || Productimage}
                             alt={product.title}
@@ -515,7 +492,6 @@ export default function ProductPage() {
                           />
                         </div>
 
-                        {/* Tags */}
                         <div className="flex flex-wrap gap-1.5 mt-3">
                           {product.technology && (
                             <span className="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded border bg-orange-50 text-orange-600 border-orange-100">
@@ -529,12 +505,10 @@ export default function ProductPage() {
                           )}
                         </div>
 
-                        {/* Title */}
                         <h4 className="mt-2 text-[#262626] font-medium text-sm sm:text-base line-clamp-2 group-hover:text-slate-900 transition-colors leading-snug">
                           {product.title}
                         </h4>
 
-                        {/* Price */}
                         <div className="mt-2 flex items-baseline gap-1.5 flex-wrap">
                           <span className="text-lg sm:text-2xl font-bold text-[#262626]">${effectivePrice.toFixed(2)}</span>
                           {hasDiscount && (
@@ -543,7 +517,6 @@ export default function ProductPage() {
                         </div>
                       </Link>
 
-                      {/* Bottom bar */}
                       <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-slate-50 gap-2">
                         {renderColorDots(product.color)}
                         <button
@@ -566,7 +539,6 @@ export default function ProductPage() {
               </div>
             )}
 
-            {/* ─── Pagination ───────────────────────────────────────────────────── */}
             {!loading && !error && totalPages > 1 && (
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-6">
                 <div className="flex items-center gap-1 text-sm font-medium flex-wrap justify-center">

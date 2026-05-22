@@ -6,15 +6,20 @@ import { useToast } from "../../../context/ToastContext"
 
 export default function ProfileForm() {
   const { user, logout, fetchProfile } = useAuth();
-  const { showToast } = useToast(); 
+  const { showToast } = useToast();
   const [countryCode, setCountryCode] = useState('+62');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  // Security States
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [savingPersonal, setSavingPersonal] = useState(false);
   const [savingContact, setSavingContact] = useState(false);
   const [savingSecurity, setSavingSecurity] = useState(false);
@@ -66,8 +71,8 @@ export default function ProfileForm() {
   };
 
   const handleUpdatePassword = async () => {
-    if (!newPassword || !confirmPassword) {
-      showToast("Please fill in both password fields", "error");
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      showToast("Please fill in all password fields", "error");
       return;
     }
     if (newPassword !== confirmPassword) {
@@ -85,6 +90,7 @@ export default function ProfileForm() {
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
+          current_password: currentPassword,
           password: newPassword,
           password_confirmation: confirmPassword
         })
@@ -92,6 +98,7 @@ export default function ProfileForm() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || data.error || "Failed to update password");
       showToast("Password updated successfully", "success");
+      setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
     } catch (err) {
@@ -262,6 +269,7 @@ export default function ProfileForm() {
           </div>
         </div>
 
+        {/* Row 2: Contact Info */}
         <div className="w-full">
           <h5 className='text-sm font-semibold text-[#262626] mb-1'>Contact Info</h5>
           <div className="flex flex-col lg:flex-row gap-4 items-end w-full">
@@ -318,25 +326,29 @@ export default function ProfileForm() {
         <div className="w-full">
           <h5 className='text-sm font-semibold text-[#262626] mb-1'>Security</h5>
           <div className="flex flex-col lg:flex-row gap-4 items-end w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+
+              {/* Current Password Field */}
               <div className="w-full relative">
-                <label className='text-xs text-[#262626] font-semibold mt-2 mb-2 block'>Current Password</label>
+                <label className='text-xs text-[#63716E] font-normal mt-2 mb-2 block'>Current Password</label>
                 <div className="relative w-full h-13">
                   <input
-                    type={showNewPassword ? "text" : "password"}
+                    type={showCurrentPassword ? "text" : "password"}
                     placeholder='Current Password'
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
                     className='w-full h-full pl-4 pr-10 rounded-2xl bg-transparent border border-slate-200 text-sm text-slate-700 focus:outline-none focus:border-slate-300 transition-colors'
                   />
-                  <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer">
-                    {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer">
+                    {showCurrentPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
+
+              {/* New Password Field */}
               <div className="w-full relative">
-                <label className='text-xs font-normal text-[#262626] font-semibold mt-2 mb-2 block'>New Password</label>
-                <div className="relative w-full h-[52px]">
+                <label className='text-xs font-normal text-[#63716E] mt-2 mb-2 block'>New Password</label>
+                <div className="relative w-full h-13">
                   <input
                     type={showNewPassword ? "text" : "password"}
                     placeholder='New Password'
@@ -350,8 +362,9 @@ export default function ProfileForm() {
                 </div>
               </div>
 
+              {/* Confirm New Password Field */}
               <div className="w-full relative">
-                <label className='text-xs text-[#262626] font-semibold mt-2 mb-2 block'>Confirm New Password</label>
+                <label className='text-xs text-[#63716E] font-normal mt-2 mb-2 block'>Confirm New Password</label>
                 <div className="relative w-full h-13">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -365,6 +378,7 @@ export default function ProfileForm() {
                   </button>
                 </div>
               </div>
+
             </div>
             <button disabled={savingSecurity} onClick={handleUpdatePassword} className="w-full lg:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer h-13 lg:mt-0 mt-2">
               {savingSecurity ? 'Saving...' : 'Save'}
