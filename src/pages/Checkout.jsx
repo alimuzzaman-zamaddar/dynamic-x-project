@@ -138,30 +138,30 @@ export default function Checkout() {
                       )}
                     </div>
 
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-3 sm:pt-2 gap-3">
-                        <div>
-                          <span className="text-xl sm:text-2xl font-bold text-slate-800">${(item.price * getQty(item)).toFixed(2)}</span>
-                          {getQty(item) > 1 && (
-                            <span className="text-xs text-slate-400 ml-1 block sm:inline-block">(${item.price.toFixed(2)} × {getQty(item)})</span>
-                          )}
-                        </div>
-
-                        <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden w-full sm:w-auto">
-                          <button
-                            onClick={() => handleQtyChange(item.cartId, getQty(item) - 1)}
-                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
-                          >
-                            <Minus size={14} className="mx-auto" />
-                          </button>
-                          <span className="w-12 sm:w-10 text-center font-medium text-sm text-slate-800">{getQty(item)}</span>
-                          <button
-                            onClick={() => handleQtyChange(item.cartId, getQty(item) + 1)}
-                            className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
-                          >
-                            <Plus size={14} className="mx-auto" />
-                          </button>
-                        </div>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-3 sm:pt-2 gap-3">
+                      <div>
+                        <span className="text-xl sm:text-2xl font-bold text-slate-800">${(item.price * getQty(item)).toFixed(2)}</span>
+                        {getQty(item) > 1 && (
+                          <span className="text-xs text-slate-400 ml-1 block sm:inline-block">(${item.price.toFixed(2)} × {getQty(item)})</span>
+                        )}
                       </div>
+
+                      <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden w-full sm:w-auto">
+                        <button
+                          onClick={() => handleQtyChange(item.cartId, getQty(item) - 1)}
+                          className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
+                        >
+                          <Minus size={14} className="mx-auto" />
+                        </button>
+                        <span className="w-12 sm:w-10 text-center font-medium text-sm text-slate-800">{getQty(item)}</span>
+                        <button
+                          onClick={() => handleQtyChange(item.cartId, getQty(item) + 1)}
+                          className="px-4 sm:px-3 py-2 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer flex-1 sm:flex-none text-center"
+                        >
+                          <Plus size={14} className="mx-auto" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -275,8 +275,8 @@ export default function Checkout() {
           <hr className="border-t border-slate-200" />
 
           <div className="flex justify-between items-center">
-            <span className="text-base font-medium text-slate-700">Grand Total</span>
-            <span className="text-3xl font-medium text-slate-900">${grandTotal.toFixed(2)}</span>
+            <span className="text-base font-medium text-slate-700">Grand Total :</span>
+            <span className="lg:text-2xl text-lg font-medium text-slate-900">${grandTotal.toFixed(2)}</span>
           </div>
 
           <button className="w-full bg-[#0F141C] hover:bg-slate-800 text-white font-medium py-3.5 rounded-full transition-all duration-200 cursor-pointer text-center text-sm tracking-wide shadow-sm">

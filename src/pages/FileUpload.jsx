@@ -4,7 +4,7 @@ import ChatBoat from '../components/PagesComponent/new-upload-design/ChatBoat'
 
 export default function FileUpload() {
   return (
-    <div className="pt-30">
+    <div className="lg:pt-30 pt-15">
       <UploadForm />
       <ChatBoat />
     </div>
