@@ -55,9 +55,7 @@ export default function UploadForm() {
   const [storedUpload, setStoredUpload] = useState(null);
   const [technologies, setTechnologies] = useState([]);
   const [materialsList, setMaterialsList] = useState([]);
-
   const [selectedProcessing, setSelectedProcessing] = useState('');
-
   const [apiPriceData, setApiPriceData] = useState(null);
   const [calculatingPrice, setCalculatingPrice] = useState(false);
 
@@ -99,7 +97,6 @@ export default function UploadForm() {
     fetchTechnologies();
   }, []);
 
-  // Fetch materials when process/technology changes
   useEffect(() => {
     if (!process || technologies.length === 0) return;
 
@@ -108,7 +105,6 @@ export default function UploadForm() {
 
     const fetchMaterials = async () => {
       try {
-        // Find the technology ID for the current process
         const currentTech = technologies.find((t) => t.code === process);
         if (!currentTech?.id) return;
 
@@ -547,7 +543,6 @@ export default function UploadForm() {
         </div>
 
         <div className="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
-          {/* Left Canvas Preview Panel */}
           <div className="viewer-panel rounded-2xl border border-gray-300 bg-[#E8E8E8] overflow-hidden shadow-lg h-fit">
             <div className="viewer-toolbar flex flex-col gap-3 px-4 py-3 border-b border-gray-200 sm:flex-row sm:items-center sm:justify-between">
               <div className="file-name text-gray-900 font-medium truncate max-w-full bg-white p-1 rounded-lg">{fileName}</div>
@@ -633,7 +628,6 @@ export default function UploadForm() {
                   {isOpen && (
                     <div className="p-5 bg-white space-y-4 border-t border-gray-100 animate-fadeIn">
 
-                      {/* Step 1 Content */}
                       {step === 1 && (
                         <div className="pt-2 space-y-4">
                           <span className="text-base font-bold text-[#101828] uppercase tracking-wider block mb-2 px-1">
@@ -751,7 +745,6 @@ export default function UploadForm() {
                                         const isProcSelected = selectedProcessing === p.title;
                                         return (
                                           <div key={p.id} className="relative group/pill">
-                                            {/* Dynamic Description Tooltip Bubble */}
                                             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-50">
                                               <div className="bg-white text-gray-600 border border-gray-200 text-xs font-medium px-4 py-2.5 rounded-2xl shadow-lg leading-normal text-center">
                                                 {p.description || `${p.title} mechanical surface processing option.`}
@@ -824,7 +817,6 @@ export default function UploadForm() {
                                         const isProcSelected = selectedProcessing === proc.t;
                                         return (
                                           <div key={proc.t} className="relative group/pill">
-                                            {/* Floating Description Tooltip */}
                                             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-55">
                                               <div className="bg-white text-gray-600 border border-gray-200 text-xs font-medium px-4 py-2.5 rounded-2xl shadow-lg leading-normal text-center">
                                                 {proc.d}
@@ -857,7 +849,6 @@ export default function UploadForm() {
                         </div>
                       )}
 
-                      {/* Step 3 Content */}
                       {step === 3 && (
                         <div className="space-y-4">
                           <div className="flex items-center gap-3">
@@ -872,7 +863,6 @@ export default function UploadForm() {
                         </div>
                       )}
 
-                      {/* Step 4 Content */}
                       {step === 4 && (
                         <div className="space-y-4">
                           <span className="font-semibold text-lg block mb-1">Configuration Summary</span>
