@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Container from "../../../shared/Container";
+import { useAuth } from "../../../context/AuthContext";
+import { getAuthHeaders } from "../../../utils/apiHeaders";
+import { Lock } from "lucide-react";
 
 export default function UploadNewFile() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, loading: authLoading } = useAuth();
 
   const fileInputRef = useRef(null);
 
@@ -46,25 +50,53 @@ export default function UploadNewFile() {
       formData.append("technology_id", selectedTechId);
     }
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Please sign in to upload files.");
+      setUploading(false);
+      return;
+    }
+
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
+        headers: getAuthHeaders(),
         body: formData,
       });
 
       if (!response.ok) {
+        let message = "Upload failed";
         const errText = await response.text();
-
-        throw new Error(errText || "Upload failed");
+        try {
+          const errJson = JSON.parse(errText);
+          message = errJson.message || errJson.error || message;
+        } catch {
+          if (errText) message = errText;
+        }
+        if (response.status === 401) {
+          message = "Session expired. Please sign in again.";
+        }
+        throw new Error(message);
       }
 
       const data = await response.json();
+
+      // Extract server-stored file path from whatever key the API uses
+      const responseData = data?.data || data || {};
+      const serverFilePath =
+        responseData.file_path ||
+        responseData.uploaded_file ||
+        responseData.stl_path ||
+        responseData.path ||
+        responseData.file ||
+        `uploads/stl/${file.name}`;
 
       const modelPayload = {
         name: file.name,
         size: file.size,
         type: file.type,
         uploadedAt: new Date().toISOString(),
+        filePath: serverFilePath,
         response: data,
         fileContent,
       };
@@ -78,7 +110,9 @@ export default function UploadNewFile() {
     } catch (uploadError) {
       console.error("File upload failed:", uploadError);
 
-      setError("Upload failed. Please try again.");
+      setError(
+        uploadError.message || "Upload failed. Please try again."
+      );
       setUploading(false);
     }
   };
@@ -125,8 +159,12 @@ export default function UploadNewFile() {
       : "/quote/technologies";
 
     const fetchTech = async () => {
+      if (!localStorage.getItem("token")) return;
+
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          headers: getAuthHeaders(),
+        });
 
         if (!res.ok) return;
 
@@ -153,6 +191,25 @@ export default function UploadNewFile() {
 
     fetchTech();
   }, []);
+
+  // ── Auth guard ──────────────────────────────────────
+  const lockedContent = (
+    <div className="px-6 py-10 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center gap-4 text-center">
+      <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center">
+        <Lock size={24} className="text-slate-400" />
+      </div>
+      <div>
+        <h3 className="text-gray-800 font-semibold text-base mb-1">Sign in to upload files</h3>
+        <p className="text-gray-400 text-sm">You need to be logged in to upload STL files and get a quote.</p>
+      </div>
+      <button
+        onClick={() => navigate('/auth/login', { state: { from: location.pathname } })}
+        className="mt-2 px-8 py-2.5 bg-[#101828] text-white text-sm font-semibold rounded-full hover:bg-slate-800 transition-colors cursor-pointer"
+      >
+        Sign In to Upload
+      </button>
+    </div>
+  );
 
   const content = (
     <>
@@ -267,12 +324,19 @@ export default function UploadNewFile() {
     </>
   );
 
+  // Determine what to render inside
+  const innerContent = authLoading
+    ? null
+    : !user
+      ? lockedContent
+      : content
+
   return (
     <section className={`${isDashboardRoute ? "py-5" : "pt-18"}`}>
       {isDashboardRoute ? (
-        content
+        innerContent
       ) : (
-        <Container>{content}</Container>
+        <Container>{innerContent}</Container>
       )}
     </section>
   );

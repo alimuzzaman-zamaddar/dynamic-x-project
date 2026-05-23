@@ -46,6 +46,8 @@ import VerifyEmail from "../pages/auth/VerifyEmail";
 import VerifyOtp from "../pages/auth/VerifyOtp";
 import ResetPassword from "../pages/auth/ResetPassword";
 import SuccessMessage from "../pages/auth/SuccessMessage";
+import Blog from "../pages/Blog";
+import BlogDetails from "../pages/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -163,6 +165,14 @@ const router = createBrowserRouter([
       {
         path: "/news",
         element: <News />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/privacy-policy",
