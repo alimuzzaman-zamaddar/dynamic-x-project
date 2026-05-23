@@ -244,11 +244,17 @@ export default function ProfileForm() {
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 w-full items-start lg:items-center">
           <div className="flex flex-col items-center sm:items-start shrink-0">
             <h5 className='text-sm font-semibold text-[#262626] mb-3 hidden lg:block invisible'>Avatar</h5>
-            <img
-              src={user?.avatar || Profile}
-              alt="Profile Avatar"
-              className='w-16 h-16 rounded-full object-cover shrink-0'
-            />
+            {user?.avatar ? (
+              <img
+                src={user.avatar}
+                alt="Profile Avatar"
+                className="w-16 h-16 rounded-full object-cover shrink-0"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center text-2xl font-semibold shrink-0 uppercase">
+                {name?.charAt(0) || "U"}
+              </div>
+            )}
           </div>
           <div className="w-full flex flex-col md:flex-row gap-4 items-end">
             <div className="w-full">

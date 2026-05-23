@@ -1,14 +1,21 @@
 import React, { useState, useMemo } from 'react'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
+import { useToast } from '../context/ToastContext'
 import ProductImage from '../assets/img/product/product.png'
-import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox } from 'lucide-react'
+import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox, Loader2 } from 'lucide-react'
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
 const SHIPPING_FEE = 0.5
 
 export default function Checkout() {
   const location = useLocation()
-  const { items, updateQuantity } = useCart()
+  const navigate = useNavigate()
+  const { user } = useAuth()
+  const { showToast } = useToast()
+  const { items, updateQuantity, clearCart } = useCart()
 
   const selectedCartIds = useMemo(() => {
     const state = location.state?.selectedCartIds
@@ -19,6 +26,8 @@ export default function Checkout() {
   const checkoutItems = items.filter((i) => selectedCartIds.has(i.cartId))
 
   const [qtyOverride, setQtyOverride] = useState({})
+  const [submitting, setSubmitting] = useState(false)
+  const [checkoutError, setCheckoutError] = useState(null)
 
   const getQty = (item) => qtyOverride[item.cartId] ?? item.quantity
   const handleQtyChange = (cartId, value) => {
@@ -31,12 +40,96 @@ export default function Checkout() {
   const grandTotal = totalProductPrice + SHIPPING_FEE
 
   const [address, setAddress] = useState({
-    country: 'Italy',
+    country: 'IT',
     province: '',
     city: '',
     postal: '',
     fullAddress: '',
   })
+
+  const handleCheckout = async () => {
+    if (!address.fullAddress.trim() || !address.city.trim() || !address.postal.trim()) {
+      setCheckoutError('Please fill in your shipping address details.')
+      return
+    }
+    setCheckoutError(null)
+    setSubmitting(true)
+    const token = localStorage.getItem('token')
+    try {
+      const cartItemsPayload = checkoutItems.map((item) => {
+        if (item.type === 'custom') {
+          const cd = item.customData || {}
+          return {
+            item_type: 'custom_print',
+            name: item.title,
+            description: cd.description || '',
+            quantity: getQty(item),
+            unit_price: item.price,
+            total_price: item.price * getQty(item),
+            technology_id: cd.technology_id ?? null,
+            material_id: cd.material_id ?? null,
+            color_id: cd.color_id ?? null,
+            uploaded_file: cd.uploaded_file || cd.file_path || '',
+            ...(cd.volume_cm3 != null ? { volume_cm3: cd.volume_cm3 } : {}),
+            ...(cd.material_usage_grams != null ? { material_usage_grams: cd.material_usage_grams } : {}),
+            ...(cd.print_time_hours != null ? { print_time_hours: cd.print_time_hours } : {}),
+          }
+        }
+        return {
+          item_type: 'product',
+          product_id: item.id,
+          quantity: getQty(item),
+          unit_price: item.price,
+          total_price: item.price * getQty(item),
+        }
+      })
+
+      const payload = {
+        cart_items: cartItemsPayload,
+        shipping_address: address.fullAddress,
+        shipping_city: address.city,
+        shipping_state: address.province,
+        shipping_postal_code: address.postal,
+        shipping_country_code: address.country,
+        shipping_phone: user?.phone || '',
+        subtotal: totalProductPrice,
+        shipping_cost: SHIPPING_FEE,
+        tax: 0,
+        discount: 0,
+        total: grandTotal,
+        currency: 'USD',
+        payment_method: 'stripe',
+        payment_status: 'pending',
+        transaction_id: '',
+        notes: '',
+      }
+
+      const res = await fetch(`${BASE_URL}/auth/checkout`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const json = await res.json()
+
+      if (res.ok && json.success) {
+        clearCart()
+        showToast('Order placed successfully! 🎉', 'success')
+        navigate('/dashboard', { replace: true })
+      } else {
+        setCheckoutError(json.message || 'Checkout failed. Please try again.')
+      }
+    } catch (err) {
+      console.error('Checkout error:', err)
+      setCheckoutError('Network error. Please check your connection.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   if (checkoutItems.length === 0) {
     return (
@@ -181,11 +274,11 @@ export default function Checkout() {
                     onChange={(e) => setAddress((a) => ({ ...a, country: e.target.value }))}
                     className="w-full appearance-none bg-white border border-slate-300 text-sm rounded-xl pl-4 pr-10 py-3 text-slate-700 focus:outline-none focus:border-slate-400 cursor-pointer"
                   >
-                    <option>Italy</option>
-                    <option>Germany</option>
-                    <option>France</option>
-                    <option>Spain</option>
-                    <option>USA</option>
+                    <option value="IT">Italy</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="ES">Spain</option>
+                    <option value="US">USA</option>
                   </select>
                   <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                 </div>
@@ -279,8 +372,20 @@ export default function Checkout() {
             <span className="lg:text-2xl text-lg font-medium text-slate-900">${grandTotal.toFixed(2)}</span>
           </div>
 
-          <button className="w-full bg-[#0F141C] hover:bg-slate-800 text-white font-medium py-3.5 rounded-full transition-all duration-200 cursor-pointer text-center text-sm tracking-wide shadow-sm">
-            Pay Now
+          {checkoutError && (
+            <p className="text-sm text-red-500 text-center">{checkoutError}</p>
+          )}
+
+          <button
+            onClick={handleCheckout}
+            disabled={submitting}
+            className="w-full bg-[#0F141C] hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium py-3.5 rounded-full transition-all duration-200 cursor-pointer text-center text-sm tracking-wide shadow-sm flex items-center justify-center gap-2"
+          >
+            {submitting ? (
+              <><Loader2 size={16} className="animate-spin" /> Processing...</>
+            ) : (
+              'Pay Now'
+            )}
           </button>
         </div>
 
