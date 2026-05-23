@@ -5,6 +5,7 @@ import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import { useCart } from '../../../context/CartContext';
 import { useToast } from '../../../context/ToastContext';
+import { getAuthHeaders } from '../../../utils/apiHeaders';
 
 const MATERIAL_PRICING = {
   PLA: 0.05,
@@ -45,6 +46,7 @@ export default function UploadForm() {
   const [process, setProcess] = useState('SLA');
   const [material, setMaterial] = useState('Standard Resin');
   const [color, setColor] = useState('#1a1a2e');
+  const [selectedColorId, setSelectedColorId] = useState(null);
   const [infill, setInfill] = useState(20);
   const [originalDims, setOriginalDims] = useState({ x: 0, y: 0, z: 0 });
   const [volume, setVolume] = useState(0);
@@ -79,7 +81,7 @@ export default function UploadForm() {
 
     const fetchTechnologies = async () => {
       try {
-        const tRes = await fetch(techUrl);
+        const tRes = await fetch(techUrl, { headers: getAuthHeaders() });
         if (tRes.ok) {
           const tJson = await tRes.json();
           const techs = Array.isArray(tJson.data) ? tJson.data : [];
@@ -109,7 +111,9 @@ export default function UploadForm() {
         if (!currentTech?.id) return;
 
         const query = `?technology_id=${encodeURIComponent(Number(currentTech.id))}`;
-        const mRes = await fetch(`${matUrl}${query}`);
+        const mRes = await fetch(`${matUrl}${query}`, {
+          headers: getAuthHeaders(),
+        });
 
         if (mRes.ok) {
           const mJson = await mRes.json();
@@ -121,6 +125,7 @@ export default function UploadForm() {
             setMaterial(mats[0].name);
             if (mats[0].colours?.length) {
               setColor(mats[0].colours[0].code || '#1a1a2e');
+              setSelectedColorId(mats[0].colours[0].id ?? null);
             }
           }
         }
@@ -332,10 +337,11 @@ export default function UploadForm() {
     return areaSum;
   };
 
-  const applyColor = (newColor) => {
+  const applyColor = (newColor, colorId = null) => {
     setColor(newColor);
+    if (colorId !== null) setSelectedColorId(colorId);
     if (meshRef.current) {
-      meshRef.current.material.color.set(newColor.startsWith('rgba') ? '#7c7c9c' : newColor);
+      meshRef.current.material.color.set(newColor.startsWith('rgba') ? '#9090ad' : newColor);
     }
   };
 
@@ -506,6 +512,7 @@ export default function UploadForm() {
 
       const res = await fetch(priceUrl, {
         method: 'POST',
+        headers: getAuthHeaders(),
         body: formData,
       });
 
@@ -721,7 +728,7 @@ export default function UploadForm() {
                                           type="button"
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            applyColor(c.code);
+                                            applyColor(c.code, c.id);
                                           }}
                                           className="h-8 w-8 rounded-full border transition-all duration-150 relative flex items-center justify-center focus:outline-none"
                                           style={{
@@ -914,10 +921,24 @@ export default function UploadForm() {
                                     color: [color],
                                     quantity: 1,
                                     customData: {
+                                      // Required by checkout API
+                                      technology_id: currentTechObj?.id ?? null,
+                                      material_id: currentMatObj?.id ?? null,
+                                      color_id: selectedColorId,
+                                      uploaded_file: storedUpload?.filePath
+                                        || storedUpload?.response?.data?.file_path
+                                        || storedUpload?.response?.data?.uploaded_file
+                                        || storedUpload?.response?.data?.stl_path
+                                        || storedUpload?.response?.data?.path
+                                        || (storedUpload?.name ? `uploads/stl/${storedUpload.name}` : ''),
+                                      // Extra info
                                       infill,
                                       processing: selectedProcessing,
                                       dimensions: stats.dims,
                                       volume: stats.volume,
+                                      volume_cm3: storedUpload?.response?.data?.volume_cm3 ?? stats.volume,
+                                      material_usage_grams: apiPriceData?.material_usage_grams ?? null,
+                                      print_time_hours: storedUpload?.response?.data?.print_time_hours ?? null,
                                       fileName,
                                       priceBreakdown: apiPriceData,
                                     },
