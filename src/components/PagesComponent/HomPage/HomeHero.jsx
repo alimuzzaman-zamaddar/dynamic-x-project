@@ -23,7 +23,7 @@ const HomeHero = () => {
             Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
           </h4>
           <div className="flex 2xl:flex-row flex-col xxl:gap-7 gap-3">
-            <Link to={"/upload-design"}>
+            <Link to={"/new-upload-design"}>
               <button
                 type="button"
                 className={`
@@ -55,7 +55,7 @@ const HomeHero = () => {
                 />
               </button>
             </Link>
-            <Link to={"/upload-design"}>
+            <Link to={"/new-upload-design"}>
               <button
                 type="button"
                 className={`

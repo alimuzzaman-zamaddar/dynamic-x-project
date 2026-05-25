@@ -70,7 +70,7 @@ const ProjectStartSection = () => {
 
         {/* Action Button: 60px height, Pill shape, Opposite hover */}
         <div className="mt-10">
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="h-[60px] w-full md:w-auto px-10 bg-[#1a1411] text-white border border-[#1a1411] rounded-full font-bold uppercase text-sm tracking-wide transition-all duration-300 hover:bg-transparent hover:text-primary-black cursor-pointer">
               Iscriviti Ora
             </button>

@@ -67,7 +67,7 @@ const LaunchCountdownSection = () => {
 
         {/* Action Button: Dark fill, white text, pill shape, specific specs (60px height, fully rounded, uppercase) */}
         <div className="flex flex-wrap items-center gap-4 mt-6 md:mt-10">
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="h-[60px] cursor-pointer px-8 bg-[#1a1411] hover:bg-white hover:text-black border  text-white rounded-full font-medium uppercase text-sm tracking-wide whitespace-nowrap flex items-center justify-center transition hover:bg-black/90">
               Iscriviti per Aggiornamenti Esclusivi
             </button>
