@@ -148,11 +148,10 @@ export default function ProductDetails() {
                   <figure
                     key={idx}
                     onClick={() => setSelectedImage(imgUrl)}
-                    className={`w-20 h-16 sm:w-25 sm:h-20 bg-[#D9D9D9] border-2 rounded-xl cursor-pointer p-2 shrink-0 transition-all ${
-                      selectedImage === imgUrl
+                    className={`w-20 h-16 sm:w-25 sm:h-20 bg-[#D9D9D9] border-2 rounded-xl cursor-pointer p-2 shrink-0 transition-all ${selectedImage === imgUrl
                         ? 'border-black scale-102 shadow-xs'
                         : 'border-slate-300 hover:border-slate-500'
-                    }`}
+                      }`}
                   >
                     <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-contain" />
                   </figure>
@@ -320,9 +319,9 @@ export default function ProductDetails() {
             </div>
 
             <div className="flex items-baseline gap-2 py-6">
-              <span className="text-3xl font-bold text-[#262626]">${effectivePrice.toFixed(2)}</span>
+              <span className="text-3xl font-bold text-[#262626]">€{effectivePrice.toFixed(2)}</span>
               {hasDiscount && (
-                <span className="text-lg text-[#5D5D5D] line-through">${product.price.toFixed(2)}</span>
+                <span className="text-lg text-[#5D5D5D] line-through">€{product.price.toFixed(2)}</span>
               )}
             </div>
 
@@ -339,11 +338,10 @@ export default function ProductDetails() {
                     <button
                       key={hex}
                       onClick={() => setSelectedColor(hex)}
-                      className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${
-                        selectedColor === hex
+                      className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${selectedColor === hex
                           ? 'border-slate-900 shadow-md scale-105'
                           : 'border-slate-300 hover:border-slate-500'
-                      }`}
+                        }`}
                       style={{ backgroundColor: hex }}
                       title={hex}
                     />
@@ -384,7 +382,7 @@ export default function ProductDetails() {
             <div className="py-4 border-t border-slate-100">
               <div className="flex justify-between text-sm text-slate-600 items-center">
                 <span className="text-[#737373] text-lg font-medium">Subtotal</span>
-                <span className="text-3xl font-medium text-[#262626]">${subtotal}</span>
+                <span className="text-3xl font-medium text-[#262626]">€{subtotal}</span>
               </div>
             </div>
 
@@ -399,11 +397,10 @@ export default function ProductDetails() {
               </button>
               <button
                 onClick={handleAddToCart}
-                className={`w-full border-2 font-bold py-3 rounded-3xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${
-                  addedToCart
+                className={`w-full border-2 font-bold py-3 rounded-3xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${addedToCart
                     ? 'border-green-500 bg-green-50 text-green-700'
                     : 'border-slate-300 hover:border-slate-900 text-slate-900 hover:bg-slate-50'
-                }`}
+                  }`}
               >
                 {addedToCart ? <CheckCircle size={20} /> : <ShoppingCart size={20} />}
                 {addedToCart ? 'Added to Cart!' : 'Add to Cart'}
