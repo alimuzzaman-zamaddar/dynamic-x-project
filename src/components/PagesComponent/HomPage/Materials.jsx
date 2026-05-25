@@ -107,7 +107,7 @@ const Materials = () => {
                       }}
                       className="xl:px-6 px-3 py-3 flex items-center justify-center rounded-xl cursor-pointer"
                     >
-                      <Link to={"/upload-design"}>
+                      <Link to={"/new-upload-design"}>
                         <div className="flex gap-x-2.5 items-center">
                           <Upload />
                           <span className="text-base font-normal leading-[200%] text-black">

@@ -13,6 +13,10 @@ const navMenu = [
     path: "/",
   },
   {
+    label: "Product",
+    path: "/product",
+  },
+  {
     label: "Chi Siamo",
     path: "/chi-siamo",
   },
@@ -86,8 +90,8 @@ const navMenu = [
     path: "/bio-stamp",
   },
   {
-    label: "News",
-    path: "/news",
+    label: "Blog",
+    path: "/blog",
   },
 ];
 
@@ -191,7 +195,7 @@ const Navbar = () => {
             : "bg-black"
         }`}
     >
-      <div className="max-w-max-width mx-auto lg:py-8 py-4  flex items-center justify-between">
+      <div className="container mx-auto lg:py-8 py-4  flex items-center justify-between">
         <div
           onClick={() => {
             navigate("/");
@@ -393,7 +397,7 @@ const Navbar = () => {
             ))}
           </ul>
           {loading ? (
-             <div className="w-[80%] h-12 bg-white/10 animate-pulse rounded-full ml-5" />
+            <div className="w-[80%] h-12 bg-white/10 animate-pulse rounded-full ml-5" />
           ) : user ? (
             <div className="w-full px-5 border-t border-white/10 pt-5 mt-2">
               <div className="flex items-center gap-3 mb-4">
@@ -484,7 +488,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <button onClick={() => navigate("/auth/login")} className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 2xl:px-[71px] border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
+            <button onClick={() => navigate("/auth/login")} className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
               Login
             </button>
           )}

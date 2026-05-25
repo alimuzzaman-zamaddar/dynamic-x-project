@@ -15,8 +15,8 @@ const SlsInfoSection = () => {
             Tecnologia di stampa 3D avanzata per componenti funzionali,
             geometrie complesse e produzione industriale senza compromessi.
           </p>
-          <Link to={"/upload-design"}>
-            <button className="px-6 py-3 rounded-full bg-[#1E1E2F] text-white text-[15px] font-medium hover:opacity-90 transition">
+          <Link to={"/new-upload-design"}>
+            <button className="px-6 py-3 rounded-full bg-[#1E1E2F] text-white text-[15px] font-medium hover:opacity-90 transition cursor-pointer">
               Richiedi un Preventivo
             </button>
           </Link>

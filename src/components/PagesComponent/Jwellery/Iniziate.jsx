@@ -25,12 +25,12 @@ const Iniziate = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-4">
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="px-7 py-3 rounded-4xl bg-[#1A1A2E] cursor-pointer text-white hover:bg-transparent hover:text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold">
               Richiedi un Preventivo
             </button>
           </Link>
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="px-7 py-3 rounded-4xl hover:bg-[#1A1A2E] cursor-pointer hover:text-white bg-transparent text-black border border-[#1A1A2E] duration-300 ease-in-out text-base font-semibold">
               Scopri i Materiali
             </button>
