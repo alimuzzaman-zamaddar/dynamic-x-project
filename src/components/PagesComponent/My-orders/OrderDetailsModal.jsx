@@ -20,13 +20,13 @@ const STEPS = [
 ]
 
 const STATUS_COLORS = {
-  pending:       'bg-amber-100 text-amber-700',
-  production:    'bg-blue-100 text-blue-700',
+  pending: 'bg-amber-100 text-amber-700',
+  production: 'bg-blue-100 text-blue-700',
   quality_check: 'bg-purple-100 text-purple-700',
-  shipped:       'bg-cyan-100 text-cyan-700',
-  delivered:     'bg-green-100 text-green-700',
-  completed:     'bg-green-100 text-green-700',
-  cancelled:     'bg-red-100 text-red-700',
+  shipped: 'bg-cyan-100 text-cyan-700',
+  delivered: 'bg-green-100 text-green-700',
+  completed: 'bg-green-100 text-green-700',
+  cancelled: 'bg-red-100 text-red-700',
 }
 
 /** Safely parse any numeric-like value; returns '0.00' string on failure */
@@ -190,6 +190,20 @@ export default function OrderDetailsModal({ orderId, orderNumber, onClose }) {
                   <div className="space-y-3">
                     {items.map((item, idx) => {
                       const isCustom = item.item_type === 'custom_print' || item.type === 'custom_print'
+
+                      // Extract renderable strings from raw string fields or nested response relational objects
+                      const displayTech = item.technology && typeof item.technology === 'object'
+                        ? (item.technology.title ?? item.technology.name ?? '')
+                        : item.technology;
+
+                      const displayMaterial = item.material && typeof item.material === 'object'
+                        ? (item.material.name ?? item.material.title ?? '')
+                        : item.material;
+
+                      const displayColor = item.color && typeof item.color === 'object'
+                        ? (item.color.title ?? item.color.name ?? item.color.code ?? '')
+                        : item.color;
+
                       return (
                         <div
                           key={item.id ?? idx}
@@ -216,10 +230,10 @@ export default function OrderDetailsModal({ orderId, orderNumber, onClose }) {
 
                             {isCustom && (
                               <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5">
-                                {item.technology && <span className="text-xs text-slate-500">Tech: <b>{item.technology}</b></span>}
-                                {item.material && <span className="text-xs text-slate-500">Material: <b>{item.material}</b></span>}
-                                {item.color && <span className="text-xs text-slate-500">Color: <b>{item.color}</b></span>}
-                                {item.print_time_hours && <span className="text-xs text-slate-500">Print time: <b>{item.print_time_hours}h</b></span>}
+                                {displayTech && <span className="text-xs text-slate-500">Tech: <b>{displayTech}</b></span>}
+                                {displayMaterial && <span className="text-xs text-slate-500">Material: <b>{displayMaterial}</b></span>}
+                                {displayColor && <span className="text-xs text-slate-500">Color: <b>{displayColor}</b></span>}
+                                {item.print_time_hours && <span className="text-xs text-slate-500">Print time: <b>{parseFloat(item.print_time_hours)}h</b></span>}
                               </div>
                             )}
 
@@ -229,14 +243,14 @@ export default function OrderDetailsModal({ orderId, orderNumber, onClose }) {
 
                             <div className="flex items-center gap-3 mt-2">
                               <span className="text-xs text-slate-500">Qty: <b>{item.quantity}</b></span>
-                              <span className="text-xs text-slate-500">Unit: <b>{order.currency} {fmt(item.unit_price ?? item.price)}</b></span>
+                              <span className="text-xs text-slate-500">Unit: <b>€ {fmt(item.unit_price ?? item.price)}</b></span>
                             </div>
                           </div>
 
                           {/* Total */}
                           <div className="text-right shrink-0">
                             <span className="text-sm font-bold text-[#0D0D12]">
-                              {order.currency} {fmt(item.total_price ?? item.subtotal)}
+                              € {fmt(item.total_price ?? item.subtotal)}
                             </span>
                           </div>
                         </div>
@@ -246,18 +260,24 @@ export default function OrderDetailsModal({ orderId, orderNumber, onClose }) {
                 </div>
 
                 {/* Shipping address */}
-                {(order.shipping_address || order.shipping_city) && (
+                {(order.shipping_address) && (
                   <div className="bg-[#F8F9FA] rounded-2xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <MapPin size={15} className="text-slate-500 shrink-0" />
                       <span className="text-sm font-semibold text-[#0D0D12]">Shipping Address</span>
                     </div>
                     <p className="text-sm text-slate-500 leading-relaxed">
-                      {[order.shipping_address, order.shipping_city, order.shipping_state, order.shipping_postal_code, order.shipping_country_code]
-                        .filter(Boolean).join(', ')}
+                      {typeof order.shipping_address === 'object'
+                        ? [order.shipping_address.address, order.shipping_address.city, order.shipping_address.state, order.shipping_address.postal_code, order.shipping_address.country_code]
+                          .filter(Boolean).join(', ')
+                        : [order.shipping_address, order.shipping_city, order.shipping_state, order.shipping_postal_code, order.shipping_country_code]
+                          .filter(Boolean).join(', ')
+                      }
                     </p>
-                    {order.shipping_phone && (
-                      <p className="text-xs text-slate-400 mt-1">{order.shipping_phone}</p>
+                    {(order.shipping_address?.phone || order.shipping_phone) && (
+                      <p className="text-xs text-slate-400 mt-1">
+                        {order.shipping_address?.phone ?? order.shipping_phone}
+                      </p>
                     )}
                   </div>
                 )}
@@ -277,16 +297,16 @@ export default function OrderDetailsModal({ orderId, orderNumber, onClose }) {
                     value != null ? (
                       <div key={label} className="flex justify-between text-sm text-slate-500">
                         <span>{label}</span>
-                        <span>{order.currency} {fmt(value)}</span>
+                        <span>€ {fmt(value)}</span>
                       </div>
                     ) : null
                   )}
                   <div className="border-t border-slate-200 pt-2 flex justify-between font-semibold text-[#0D0D12]">
                     <span>Total</span>
-                    <span>{order.currency ?? 'USD'} {fmt(getTotal(order))}</span>
+                    <span>€ {fmt(getTotal(order))}</span>
                   </div>
-                  {order.payment_method && (
-                    <p className="text-xs text-slate-400 pt-1 capitalize">Payment: {order.payment_method}</p>
+                  {order.payment?.method && (
+                    <p className="text-xs text-slate-400 pt-1 uppercase">Payment Method: {order.payment.method}</p>
                   )}
                 </div>
               </>

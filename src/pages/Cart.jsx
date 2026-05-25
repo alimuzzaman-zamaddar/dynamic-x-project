@@ -144,7 +144,7 @@ export default function Cart() {
 
                       <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between pt-3 sm:pt-2">
                         <div>
-                          <span className="text-xl sm:text-2xl font-medium text-[#262626]">${(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-xl sm:text-2xl font-medium text-[#262626]">€{(item.price * item.quantity).toFixed(2)}</span>
                           {/* {item.quantity > 1 && (
                             <span className="text-xs text-slate-400 ml-1">(${item.price.toFixed(2)} each)</span>
                           )} */}
@@ -190,12 +190,12 @@ export default function Cart() {
 
               <div className="flex justify-between text-sm items-center py-4 border-b border-dashed border-slate-200 text-slate-500">
                 <span className="text-[#5D5D5D] text-base">Total ({activeItemsCount} Item{activeItemsCount !== 1 ? 's' : ''})</span>
-                <span className="font-medium text-black text-base">${dynamicSubtotal.toFixed(2)}</span>
+                <span className="font-medium text-black text-base">€{dynamicSubtotal.toFixed(2)}</span>
               </div>
 
               <div className="flex justify-between items-center py-6">
                 <span className="text-base text-slate-600 font-medium">Subtotal</span>
-                <span className="text-2xl font-medium text-[#262626]">${dynamicSubtotal.toFixed(2)}</span>
+                <span className="text-2xl font-medium text-[#262626]">€{dynamicSubtotal.toFixed(2)}</span>
               </div>
 
               <Link to="/dashboard/checkout" state={{ selectedCartIds: [...syncedCheckedIds] }}>
