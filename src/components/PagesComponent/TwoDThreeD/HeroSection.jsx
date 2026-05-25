@@ -32,7 +32,7 @@ const HeroSection = () => {
           </button>
 
           {/* ISCRIVITI AGLI AGGIORNAMENTI: Outlined -> Solid on Hover */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className={`${btnBase} bg-transparent text-primary-black border-primary-black hover:bg-[#1a1411] hover:text-white hover:border-[#1a1411]`}>
               Iscriviti agli Aggiornamenti
             </button>

@@ -28,7 +28,7 @@ const Richiedi = () => {
               Carica il tuo progetto 3D (.STL, .STEP) per una valutazione
               immediata della producibilità.
             </h5>
-            <Link to={"/upload-design"}>
+            <Link to={"/new-upload-design"}>
               <button className="py-4 px-11 cursor-pointer px-8 bg-transparent text-primary-black font-bold border border-[#1E2939] rounded-3xl text-sm tracking-wide transition hover:bg-[#E5E7EB] whitespace-nowrap mt-10">
                 Upload your design
               </button>
@@ -41,7 +41,7 @@ const Richiedi = () => {
             <h5 className="text-[15px] font-normal  text-[#1E2939]">
               Parla con il nostro team per un assistenza personalizzata
             </h5>
-            <Link to={"/upload-design"}>
+            <Link to={"/new-upload-design"}>
               <button className="py-4 px-11 cursor-pointer px-8 bg-transparent text-primary-black font-bold border border-[#1E2939] rounded-3xl text-sm tracking-wide transition hover:bg-[#E5E7EB] whitespace-nowrap mt-10">
                 Upload your design
               </button>

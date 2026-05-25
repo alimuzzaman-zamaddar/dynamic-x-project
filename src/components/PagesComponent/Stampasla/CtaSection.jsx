@@ -24,15 +24,15 @@ const CtaSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
 
               {/* Primary Button */}
-              <Link to={"/upload-design"}>
-                <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300">
+              <Link to={"/new-upload-design"}>
+                <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300 cursor-pointer">
                   Carica il tuo file
                 </button>
               </Link>
 
               {/* Secondary Button */}
-              <Link to={"/upload-design"}>
-                <button className="px-6 py-4 rounded-full border border-black text-black font-medium text-sm md:text-base hover:bg-black hover:text-white transition-all duration-300">
+              <Link to={"/new-upload-design"}>
+                <button className="px-6 py-4 rounded-full border border-black text-black font-medium text-sm md:text-base hover:bg-black hover:text-white transition-all duration-300 cursor-pointer">
                   Richiedi una consulenza
                 </button>
               </Link>

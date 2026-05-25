@@ -33,15 +33,15 @@ const StartProjectSection = () => {
         {/* Button Area */}
         <div className="flex items-center gap-4 flex-wrap">
           {/* Primary Filled Button */}
-          <Link to={"/upload-design"}>
-            <button className="h-[60px] px-8 bg-[#1a1411] text-white rounded-3xl text-sm md:text-base font-medium flex items-center justify-center transition hover:bg-black/90 whitespace-nowrap">
+          <Link to={"/new-upload-design"}>
+            <button className="h-[60px] px-8 bg-[#1a1411] text-white rounded-3xl text-sm md:text-base font-medium flex items-center justify-center transition hover:bg-black/90 whitespace-nowrap cursor-pointer">
               Richiedi una Consulenza Gratuita
             </button>
           </Link>
 
           {/* Secondary Outlined Button */}
-          <Link to={"/upload-design"}>
-            <button className="h-[60px] px-8 bg-transparent text-black rounded-3xl text-sm md:text-base font-medium flex items-center justify-center border border-black transition hover:bg-black/5 whitespace-nowrap">
+          <Link to={"/new-upload-design"}>
+            <button className="h-[60px] px-8 bg-transparent text-black rounded-3xl text-sm md:text-base font-medium flex items-center justify-center border border-black transition hover:bg-black/5 whitespace-nowrap cursor-pointer">
               Scopri i Nostri Materiali
             </button>
           </Link>

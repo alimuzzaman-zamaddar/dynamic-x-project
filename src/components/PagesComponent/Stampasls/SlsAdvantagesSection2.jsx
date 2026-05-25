@@ -50,14 +50,14 @@ const SlsAdvantagesSection2 = () => {
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
           {/* Primary Button */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="px-6 py-4 rounded-full bg-black text-white font-medium text-sm md:text-base hover:bg-transparent hover:text-black border border-black transition-all duration-300">
               Carica il Tuo File e Ottieni un Preventivo
             </button>
           </Link>
 
           {/* Secondary Button */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button className="px-6 py-4 rounded-full border border-black text-black font-medium text-sm md:text-base hover:bg-black hover:text-white transition-all duration-300">
               Ottieni una consulenza
             </button>

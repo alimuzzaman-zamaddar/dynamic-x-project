@@ -75,7 +75,7 @@ const ProductDevelopmentCTA = () => {
         {/* Responsive Button Row */}
         <div className="flex flex-col md:flex-row items-center gap-4 mt-20 md:mt-24">
           {/* Solid -> Outlined on Hover */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button
               className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}
             >
@@ -84,7 +84,7 @@ const ProductDevelopmentCTA = () => {
           </Link>
 
           {/* Outlined -> Solid on Hover */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button
               className={`${btnBase} bg-transparent text-primary-black border-border-gray hover:bg-[#1a1411] hover:text-white hover:border-[#1a1411]`}
             >
@@ -93,7 +93,7 @@ const ProductDevelopmentCTA = () => {
           </Link>
 
           {/* Solid -> Outlined on Hover */}
-          <Link to={"/upload-design"}>
+          <Link to={"/new-upload-design"}>
             <button
               className={`${btnBase} bg-[#1a1411] text-white border-[#1a1411] hover:bg-transparent hover:text-primary-black`}
             >

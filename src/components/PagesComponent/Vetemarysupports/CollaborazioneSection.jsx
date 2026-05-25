@@ -32,12 +32,12 @@ export default function CollaborazioneSection() {
       </div>
 
       <div className="flex flex-wrap items-center gap-4 my-11">
-        <Link to={"/upload-design"}>
+        <Link to={"/new-upload-design"}>
           <button className="h-12 cursor-pointer px-8 bg-[#1a1411] text-white rounded-full text-base font-medium flex items-center justify-center transition hover:bg-white whitespace-nowrap hover:text-black hover:border border hover:border-black ">
             Richiedi una Consulenza
           </button>
         </Link>
-        <Link to={"/upload-design"}>
+        <Link to={"/new-upload-design"}>
           <button className="h-12 cursor-pointer px-8 bg-transparent text-primary-black font-medium border border-black rounded-full text-base flex items-center justify-center transition hover:bg-black hover:text-white whitespace-nowrap">
             Scopri i Materiali
           </button>
