@@ -37,7 +37,7 @@ const mainNavLinks = [
   { label: "Catalogo", redirectLink: "/catalog" },
   { label: "2D to 3D", redirectLink: "/2d3d" },
   { label: "Bio stamp 3D", redirectLink: "/bio-stamp" },
-  { label: "News", redirectLink: "/news" },
+  { label: "Blog", redirectLink: "/blog" },
 ];
 
 const Footer = () => {
