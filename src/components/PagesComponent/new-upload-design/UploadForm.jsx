@@ -123,6 +123,7 @@ export default function UploadForm() {
           // Set first material as default when technology changes
           if (mats.length) {
             setMaterial(mats[0].name);
+            setSelectedProcessing('');
             if (mats[0].colours?.length) {
               setColor(mats[0].colours[0].code || '#1a1a2e');
               setSelectedColorId(mats[0].colours[0].id ?? null);
@@ -448,8 +449,6 @@ export default function UploadForm() {
     };
   }, [displayDims, volume, storedUpload]);
 
-
-
   const updateScale = (value) => {
     setScale(value);
     if (meshRef.current) {
@@ -568,7 +567,6 @@ export default function UploadForm() {
                 if (file) handleFile(file);
               }}
             >
-
               {dragOver && <div className="absolute inset-0 z-20 rounded-2xl bg-blue-500/10" />}
               <canvas ref={canvasRef} className="h-full w-full block" />
             </div>
@@ -605,7 +603,7 @@ export default function UploadForm() {
             <div className="stats-bar flex flex-wrap justify-between gap-4 px-4 py-3 border-t border-gray-200 text-sm font-semibold text-gray-900">
               <div>Vol: {stats.volume} {unit === 'mm' ? 'mm³' : 'in³'}</div>
               <div>Dims: {stats.dims} {unit}</div>
-              <div>Print Time: {storedUpload?.response?.data.print_time_hours ?? '-'} h</div>
+              {/* <div>Print Time: {storedUpload?.response?.data.print_time_hours ?? '-'} h</div> */}
             </div>
           </div>
 
@@ -706,7 +704,10 @@ export default function UploadForm() {
                             return (
                               <div
                                 key={option}
-                                onClick={() => setMaterial(option)}
+                                onClick={() => {
+                                  setMaterial(option);
+                                  setSelectedProcessing('');
+                                }}
                                 className={`w-full rounded-2xl border p-5 text-left transition duration-200 cursor-pointer ${isSelectedMat ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
                                   }`}
                               >
@@ -728,13 +729,14 @@ export default function UploadForm() {
                                           type="button"
                                           onClick={(e) => {
                                             e.stopPropagation();
+                                            setMaterial(option); // Updates active target layout scope
                                             applyColor(c.code, c.id);
                                           }}
-                                          className="h-8 w-8 rounded-full border transition-all duration-150 relative flex items-center justify-center focus:outline-none"
+                                          className="h-8 w-8 rounded-full border transition-all duration-150 relative flex items-center justify-center focus:outline-none cursor-pointer"
                                           style={{
                                             background: c.code,
-                                            borderColor: color === c.code ? '#2563EB' : 'transparent',
-                                            boxShadow: color === c.code ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
+                                            borderColor: color === c.code && isSelectedMat ? '#2563EB' : 'transparent',
+                                            boxShadow: color === c.code && isSelectedMat ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
                                           }}
                                         />
                                       </div>
@@ -749,10 +751,10 @@ export default function UploadForm() {
                                     </span>
                                     <div className="flex flex-wrap gap-2">
                                       {m.processing_types.map((p) => {
-                                        const isProcSelected = selectedProcessing === p.title;
+                                        const isProcSelected = selectedProcessing === p.title && isSelectedMat;
                                         return (
                                           <div key={p.id} className="relative group/pill">
-                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-50">
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-55">
                                               <div className="bg-white text-gray-600 border border-gray-200 text-xs font-medium px-4 py-2.5 rounded-2xl shadow-lg leading-normal text-center">
                                                 {p.description || `${p.title} mechanical surface processing option.`}
                                               </div>
@@ -761,8 +763,11 @@ export default function UploadForm() {
 
                                             <button
                                               type="button"
-                                              onClick={() => setSelectedProcessing(isProcSelected ? '' : p.title)}
-                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm ${isProcSelected
+                                              onClick={() => {
+                                                setMaterial(option); // Fixed bug: Assigns corresponding wrapper container context correctly
+                                                setSelectedProcessing(isProcSelected ? '' : p.title);
+                                              }}
+                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm cursor-pointer ${isProcSelected
                                                 ? 'bg-[#101828] text-white'
                                                 : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
                                                 }`}
@@ -787,7 +792,10 @@ export default function UploadForm() {
                               return (
                                 <div
                                   key={item.name}
-                                  onClick={() => setMaterial(item.name)}
+                                  onClick={() => {
+                                    setMaterial(item.name);
+                                    setSelectedProcessing('');
+                                  }}
                                   className={`w-full rounded-2xl border p-5 text-left transition duration-200 cursor-pointer ${isSelectedMat ? 'border-transparent bg-[#E8E8E8]' : 'border-gray-200 bg-white hover:border-gray-300'
                                     }`}
                                 >
@@ -805,12 +813,16 @@ export default function UploadForm() {
                                         </div>
                                         <button
                                           type="button"
-                                          onClick={(e) => { e.stopPropagation(); applyColor(hex); }}
-                                          className="h-8 w-8 rounded-full border focus:outline-none transition"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setMaterial(item.name); // Updates static mapping configuration card wrapper cleanly
+                                            applyColor(hex);
+                                          }}
+                                          className="h-8 w-8 rounded-full border focus:outline-none transition cursor-pointer"
                                           style={{
                                             background: hex,
-                                            borderColor: color === hex ? '#2563EB' : 'transparent',
-                                            boxShadow: color === hex ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
+                                            borderColor: color === hex && isSelectedMat ? '#2563EB' : 'transparent',
+                                            boxShadow: color === hex && isSelectedMat ? '0 0 0 2px bg-white, 0 0 0 4px #2563EB' : 'none'
                                           }}
                                         />
                                       </div>
@@ -821,7 +833,7 @@ export default function UploadForm() {
                                     <span className="text-xs font-bold text-[#101828] uppercase tracking-wider block mb-2">Processing Types</span>
                                     <div className="flex flex-wrap gap-2">
                                       {item.processes.map((proc) => {
-                                        const isProcSelected = selectedProcessing === proc.t;
+                                        const isProcSelected = selectedProcessing === proc.t && isSelectedMat;
                                         return (
                                           <div key={proc.t} className="relative group/pill">
                                             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/pill:flex flex-col items-center z-30 pointer-events-none max-w-xs min-w-55">
@@ -832,10 +844,12 @@ export default function UploadForm() {
                                             </div>
 
                                             <button
-                                              key={proc.t}
                                               type="button"
-                                              onClick={() => setSelectedProcessing(isProcSelected ? '' : proc.t)}
-                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm ${isProcSelected ? 'bg-[#101828] text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                                              onClick={() => {
+                                                setMaterial(item.name); // Fixed bug: Assigns corresponding wrapper container context correctly
+                                                setSelectedProcessing(isProcSelected ? '' : proc.t);
+                                              }}
+                                              className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm cursor-pointer ${isProcSelected ? 'bg-[#101828] text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
                                                 }`}
                                             >
                                               {proc.t}
@@ -874,8 +888,13 @@ export default function UploadForm() {
                         <div className="space-y-4">
                           <span className="font-semibold text-lg block mb-1">Configuration Summary</span>
                           <div className="rounded-xl bg-gray-50 p-4 border border-gray-200 text-sm space-y-2">
-                            <div><span className="text-gray-500 font-medium">Process:</span> <span className="font-semibold">{process}</span></div>
-                            <div><span className="text-gray-500 font-medium">Material:</span> <span className="font-semibold">{material}</span></div>
+                            <div><span className="text-gray-500 font-medium">Technology:</span> <span className="font-semibold text-black">{process}</span></div>
+                            <div><span className="text-gray-500 font-medium">Material:</span> <span className="font-semibold text-black">{material}</span></div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-gray-500 font-medium">Selected Color:</span>
+                              <span className="font-semibold text-black uppercase">{color}</span>
+                              <span className="w-3.5 h-3.5 rounded-full border border-gray-300 inline-block" style={{ backgroundColor: color }} />
+                            </div>
                             <div><span className="text-gray-500 font-medium">Dimensions:</span> <span className="font-semibold">{stats.dims} {unit}</span></div>
                             <div><span className="text-gray-500 font-medium">Infill:</span> <span className="font-semibold">{infill}%</span></div>
                             {selectedProcessing && (
@@ -895,13 +914,11 @@ export default function UploadForm() {
                           </div>
 
                           {apiPriceData && (
-                            <div className="rounded-2xl  p-5 animate-fadeIn bg-[#E7E7E7]">
-
-                              <div className="flex flex-col justify-between 
-                               pt-1">
+                            <div className="rounded-2xl p-5 animate-fadeIn bg-[#E7E7E7]">
+                              <div className="flex flex-col justify-between pt-1">
                                 <span className="text-sm text-[#6A7282] font-bold uppercase tracking-wider">Estimated Price</span>
                                 <span className="text-2xl font-black text-black py-1">
-                                  ${Number(apiPriceData.final_amount).toFixed(2)}
+                                  €{Number(apiPriceData.final_amount).toFixed(2)}
                                 </span>
                               </div>
                               <p className="text-[11px] text-gray-500 italic">
@@ -921,7 +938,6 @@ export default function UploadForm() {
                                     color: [color],
                                     quantity: 1,
                                     customData: {
-                                      // Required by checkout API
                                       technology_id: currentTechObj?.id ?? null,
                                       material_id: currentMatObj?.id ?? null,
                                       color_id: selectedColorId,
@@ -931,7 +947,6 @@ export default function UploadForm() {
                                         || storedUpload?.response?.data?.stl_path
                                         || storedUpload?.response?.data?.path
                                         || (storedUpload?.name ? `uploads/stl/${storedUpload.name}` : ''),
-                                      // Extra info
                                       infill,
                                       processing: selectedProcessing,
                                       dimensions: stats.dims,
@@ -952,11 +967,8 @@ export default function UploadForm() {
                               </button>
                             </div>
                           )}
-
-
                         </div>
                       )}
-
                     </div>
                   )}
                 </div>

@@ -510,9 +510,9 @@ export default function ProductPage() {
                         </h4>
 
                         <div className="mt-2 flex items-baseline gap-1.5 flex-wrap">
-                          <span className="text-lg sm:text-2xl font-bold text-[#262626]">${effectivePrice.toFixed(2)}</span>
+                          <span className="text-lg sm:text-2xl font-bold text-[#262626]">€{effectivePrice.toFixed(2)}</span>
                           {hasDiscount && (
-                            <span className="text-xs sm:text-sm text-[#5D5D5D] line-through">${product.price.toFixed(2)}</span>
+                            <span className="text-xs sm:text-sm text-[#5D5D5D] line-through">€{product.price.toFixed(2)}</span>
                           )}
                         </div>
                       </Link>

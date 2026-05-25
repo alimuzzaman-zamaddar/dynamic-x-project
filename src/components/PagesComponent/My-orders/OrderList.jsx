@@ -67,11 +67,10 @@ export default function OrderList() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-3 rounded-xl text-xs sm:text-sm font-medium transition-colors whitespace-nowrap snap-center cursor-pointer ${
-              activeTab === tab
+            className={`px-6 py-3 rounded-xl text-xs sm:text-sm font-medium transition-colors whitespace-nowrap snap-center cursor-pointer ${activeTab === tab
                 ? 'bg-[#101828] text-white'
                 : 'bg-[#F0F2F5] text-slate-600 hover:bg-slate-200'
-            }`}
+              }`}
           >
             {tab}
           </button>
@@ -115,7 +114,7 @@ export default function OrderList() {
                 </div>
                 <div className="text-right shrink-0">
                   <span className="lg:text-2xl text-base font-normal text-[#0D0D12]">
-                    {order.currency} {parseFloat(order.total_amount).toFixed(2)}
+                    € {parseFloat(order.total_amount).toFixed(2)}
                   </span>
                   <p className="text-base text-slate-400 mt-1">
                     {order.items_count} Items

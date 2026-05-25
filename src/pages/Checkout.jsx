@@ -233,9 +233,9 @@ export default function Checkout() {
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-3 sm:pt-2 gap-3">
                       <div>
-                        <span className="text-xl sm:text-2xl font-bold text-slate-800">${(item.price * getQty(item)).toFixed(2)}</span>
+                        <span className="text-xl sm:text-2xl font-bold text-slate-800">€{(item.price * getQty(item)).toFixed(2)}</span>
                         {getQty(item) > 1 && (
-                          <span className="text-xs text-slate-400 ml-1 block sm:inline-block">(${item.price.toFixed(2)} × {getQty(item)})</span>
+                          <span className="text-xs text-slate-400 ml-1 block sm:inline-block">(€{item.price.toFixed(2)} × {getQty(item)})</span>
                         )}
                       </div>
 
@@ -351,7 +351,7 @@ export default function Checkout() {
             <h3 className="text-base font-semibold text-slate-800">Total Products</h3>
             <div className="flex justify-between items-center text-sm text-slate-500">
               <span>Total Product Price ({checkoutItems.reduce((s, i) => s + getQty(i), 0)} Items)</span>
-              <span className="font-semibold text-slate-800">${totalProductPrice.toFixed(2)}</span>
+              <span className="font-semibold text-slate-800">€{totalProductPrice.toFixed(2)}</span>
             </div>
           </div>
 
@@ -361,7 +361,7 @@ export default function Checkout() {
             <h3 className="text-base font-semibold text-slate-800">Shipping</h3>
             <div className="flex justify-between items-center text-sm text-slate-500">
               <span>Shipping Fee</span>
-              <span className="font-semibold text-slate-800">${SHIPPING_FEE.toFixed(2)}</span>
+              <span className="font-semibold text-slate-800">€{SHIPPING_FEE.toFixed(2)}</span>
             </div>
           </div>
 
@@ -369,7 +369,7 @@ export default function Checkout() {
 
           <div className="flex justify-between items-center">
             <span className="text-base font-medium text-slate-700">Grand Total :</span>
-            <span className="lg:text-2xl text-lg font-medium text-slate-900">${grandTotal.toFixed(2)}</span>
+            <span className="lg:text-2xl text-lg font-medium text-slate-900">€{grandTotal.toFixed(2)}</span>
           </div>
 
           {checkoutError && (

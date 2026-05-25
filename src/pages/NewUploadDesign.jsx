@@ -10,7 +10,6 @@ export default function NewUploadDesign() {
   return (
     <div className="pt-30">
       <UploadNewFile />
-      {/* <UploadForm /> */}
       <ChatBoat />
       <Technologies />
       <Services />

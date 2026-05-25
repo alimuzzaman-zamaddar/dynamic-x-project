@@ -109,7 +109,7 @@ export default function RecentOrders() {
           </div>
           <div className="text-right self-end sm:self-auto">
             <span className="text-lg sm:text-xl font-bold text-slate-800">
-              {order.currency} {parseFloat(order.total_amount).toFixed(2)}
+              € {parseFloat(order.total_amount).toFixed(2)}
             </span>
             <p className="text-xs text-slate-400 mt-0.5">
               {order.items_count} Items
@@ -130,9 +130,8 @@ export default function RecentOrders() {
               >
                 <div className="relative flex items-center justify-start md:justify-center w-fit md:w-full">
                   <div
-                    className={`lg:w-10 w-7 lg:h-10 h-7 rounded-full flex items-center justify-center transition-all z-10 shrink-0 ${
-                      isCompleted ? 'bg-[#101828] text-white' : 'bg-[#DCE1E7] text-transparent'
-                    }`}
+                    className={`lg:w-10 w-7 lg:h-10 h-7 rounded-full flex items-center justify-center transition-all z-10 shrink-0 ${isCompleted ? 'bg-[#101828] text-white' : 'bg-[#DCE1E7] text-transparent'
+                      }`}
                   >
                     {isCompleted && <Check size={16} strokeWidth={3} />}
                   </div>

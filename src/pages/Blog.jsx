@@ -146,7 +146,7 @@ export default function Blog() {
                 type="button"
                 onClick={() => scrollKeywords(-1)}
                 disabled={!canScrollKeywordsLeft}
-                className="hidden sm:flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30"
+                className="hidden sm:flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
                 aria-label="Previous keywords"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,7 +164,7 @@ export default function Blog() {
                     key={keyword}
                     type="button"
                     onClick={() => setActiveKeyword(keyword)}
-                    className={`shrink-0 rounded-full px-10 py-1.5 text-[14px] font-medium whitespace-nowrap transition cursor-pointer ${activeKeyword === keyword
+                    className={`shrink-0 rounded-full px-6 py-1 capitalize text-[14px] font-normal whitespace-nowrap transition cursor-pointer ${activeKeyword === keyword
                       ? 'bg-[#1A253C] text-white'
                       : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
                       }`}
@@ -178,7 +178,7 @@ export default function Blog() {
                 type="button"
                 onClick={() => scrollKeywords(1)}
                 disabled={!canScrollKeywordsRight}
-                className="hidden sm:flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30"
+                className="hidden sm:flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
                 aria-label="Next keywords"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
