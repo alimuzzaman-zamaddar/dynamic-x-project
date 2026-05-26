@@ -125,7 +125,7 @@ const VerifyOtp = () => {
           {errors.otp && (
             <p className="text-red-600 mt-2 text-sm text-center">
               {errors.otp.message}
-            </p>
+            </p> 
           )}
         </div>
 

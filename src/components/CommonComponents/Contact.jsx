@@ -245,7 +245,7 @@ const Contact = ({
             )}
 
             <button
-              className="h-auto w-full flex bg-black text-white items-center justify-center rounded-3xl xl:py-6 py-3 hover:bg-transparent hover:border-black hover:text-black border border-transparent transition-all duration-500 text-lg font-medium"
+              className="h-auto w-full flex bg-black text-white items-center justify-center rounded-3xl xl:py-4 py-3 hover:bg-transparent hover:border-black hover:text-black border border-transparent transition-all duration-500 text-lg font-medium cursor-pointer"
               type="submit"
               disabled={loading}
             >

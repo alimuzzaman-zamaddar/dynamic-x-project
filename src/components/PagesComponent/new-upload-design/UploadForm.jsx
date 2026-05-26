@@ -917,11 +917,31 @@ export default function UploadForm() {
                             <div className="rounded-2xl p-5 animate-fadeIn bg-[#E7E7E7]">
                               <div className="flex flex-col justify-between pt-1">
                                 <span className="text-sm text-[#6A7282] font-bold uppercase tracking-wider">Estimated Price</span>
-                                <span className="text-2xl font-black text-black py-1">
+
+                              </div>
+                              <div className="mt-3 space-y-1.5 text-xs text-gray-700 bg-white/50 rounded-xl p-3 border border-gray-200/50">
+                                {apiPriceData.material_cost > 0 && <div className="flex justify-between"><span>Material Cost:</span><span className="font-medium">€{Number(apiPriceData.material_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.labor_cost > 0 && <div className="flex justify-between"><span>Labor Cost:</span><span className="font-medium">€{Number(apiPriceData.labor_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.packaging_cost > 0 && <div className="flex justify-between"><span>Packaging Cost:</span><span className="font-medium">€{Number(apiPriceData.packaging_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.electricity_cost > 0 && <div className="flex justify-between"><span>Electricity Cost:</span><span className="font-medium">€{Number(apiPriceData.electricity_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.failure_cost > 0 && <div className="flex justify-between"><span>Failure Cost:</span><span className="font-medium">€{Number(apiPriceData.failure_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.printer_deprication_cost > 0 && <div className="flex justify-between"><span>Printer Deprication:</span><span className="font-medium">€{Number(apiPriceData.printer_deprication_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.pay_myself_cost > 0 && <div className="flex justify-between"><span>Pay Myself:</span><span className="font-medium">€{Number(apiPriceData.pay_myself_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.rent_overhead_cost > 0 && <div className="flex justify-between"><span>Rent Overhead:</span><span className="font-medium">€{Number(apiPriceData.rent_overhead_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.shipping_cost > 0 && <div className="flex justify-between"><span>Shipping:</span><span className="font-medium">€{Number(apiPriceData.shipping_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.return_cost > 0 && <div className="flex justify-between"><span>Return:</span><span className="font-medium">€{Number(apiPriceData.return_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.marketing_cost > 0 && <div className="flex justify-between"><span>Marketing:</span><span className="font-medium">€{Number(apiPriceData.marketing_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.manufacturing_margin_cost > 0 && <div className="flex justify-between"><span>Manufacturing Margin:</span><span className="font-medium">€{Number(apiPriceData.manufacturing_margin_cost).toFixed(2)}</span></div>}
+                                {apiPriceData.tax_cost > 0 && <div className="flex justify-between"><span>Tax:</span><span className="font-medium">€{Number(apiPriceData.tax_cost).toFixed(2)}</span></div>}
+                              </div>
+                              <div className="flex justify-between">
+
+                                <span className="text-xl font-black text-black py-1 flex justify-end">Total                                </span>
+                                <span className="text-xl font-black text-black py-1 flex justify-end">
                                   €{Number(apiPriceData.final_amount).toFixed(2)}
                                 </span>
                               </div>
-                              <p className="text-[11px] text-gray-500 italic">
+                              <p className="text-[11px] text-gray-500 italic mt-3">
                                 Price calculated from volume, material & options
                               </p>
 
