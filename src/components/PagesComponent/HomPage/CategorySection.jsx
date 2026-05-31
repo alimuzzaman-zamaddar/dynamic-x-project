@@ -86,7 +86,7 @@ const CategoryCard = ({ category }) => {
       className="group block border-2 border-[#979797] rounded-xl w-full h-full transition-all duration-300 hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 no-underline"
     >
       <div className="lg:p-6 p-4 flex flex-col items-center gap-y-3 h-full justify-between">
-        <div className="flex flex-col items-center gap-y-3 flex-grow">
+        <div className="flex flex-col items-center gap-y-3 flex-grow w-full">
           {/* ICON */}
           <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
             <Icon />
@@ -97,14 +97,14 @@ const CategoryCard = ({ category }) => {
             {category.title}
           </span>
 
-          {/* DESCRIPTION */}
+          {/* DESCRIPTION — Audited to be permanently visible without line-clamps or display toggles */}
           <p
-            className="text-center text-black/50 group-hover:text-white/80 transition-all duration-300"
+            className="text-center text-black/70 group-hover:text-white/90 transition-all duration-300 block visible h-auto overflow-visible"
             style={{
               fontFamily: "Inter",
-              fontSize: "16px",
+              fontSize: "14px", // Slighly reduced for better text fitting in dense 5-column desktop grids
               fontWeight: 500,
-              lineHeight: "24px",
+              lineHeight: "22px",
             }}
           >
             {category.subtitle}
