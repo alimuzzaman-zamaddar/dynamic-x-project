@@ -7,7 +7,7 @@ const sectionsData = [
     items: [
       { title: "Innovazione costante" },
       { title: "Flessibilità" },
-      { title: "Soluzione su misure" },
+      { title: " Soluzioni su misura" },
       { title: "Supporto completo" },
     ],
   },

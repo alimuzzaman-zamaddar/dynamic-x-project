@@ -20,8 +20,8 @@ const socialFooterNav = [
     title: "Contact",
     items: [
       {
-        label: "info@dynamicxs.it",
-        redirectLink: "mailto:info@dynamicxs.it",
+        label: "info@dynamicsx.it",
+        redirectLink: "mailto:info@dynamicsx.it",
       },
     ],
   },
@@ -37,7 +37,7 @@ const mainNavLinks = [
   { label: "Catalogo", redirectLink: "/catalog" },
   { label: "2D to 3D", redirectLink: "/2d3d" },
   { label: "Bio stamp 3D", redirectLink: "/bio-stamp" },
-  { label: "News", redirectLink: "/news" },
+  { label: "Blog", redirectLink: "/blog" },
 ];
 
 const Footer = () => {
@@ -165,7 +165,8 @@ const Footer = () => {
           </ul>
 
           <span className="text-white text-nowrap opacity-64 font-light text-base">
-            © 2026 DynamicsX. All Rights Reserved.
+            © 2026 DynamicsX. Tutti i diritti
+            riservati.
           </span>
         </div>
       </div>

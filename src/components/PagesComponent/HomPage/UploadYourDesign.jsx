@@ -12,8 +12,8 @@ const UploadYourDesign = () => {
           Come Funziona: dal File alla Produzione
         </h4>
         <div className="py-8 sm:py-12 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-7">
-          <FeatureCard icon={Carica} title="UPLOAD" description="Carica il file in formato STL, STEP. OBL o file 2D" />
-          <FeatureCard icon={Analysis} title="ANALISI" description="Verifichiamo il tuo progetto in tempo retail" />
+          <FeatureCard icon={Carica} title="UPLOAD" description="Carica il file in formato STL, STEP, OBJ o file 2D" />
+          <FeatureCard icon={Analysis} title="ANALISI" description="Verifichiamo il tuo progetto in tempo reale" />
           <FeatureCard icon={Preventivo} title="PREVENTIVO" description="Ricevi un offera chara ed immadiata" />
           <FeatureCard icon={Prodizune} title="PRODUZIONE" description="Stampiamo con precision" />
           <FeatureCard icon={Consegna} title="CONSEGNA" description="Ricevo il tuo progetto in pochi giorni" />

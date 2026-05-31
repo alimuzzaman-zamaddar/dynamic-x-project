@@ -38,6 +38,8 @@ import FileLibrary from "../pages/FileLibrary";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
 import Checkout from "../pages/Checkout";
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentCancel from "../pages/PaymentCancel";
 
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../pages/auth/Login";
@@ -189,6 +191,14 @@ const router = createBrowserRouter([
       {
         path: "/technology-details/:title",
         element: <TechnologyDetailsPage />,
+      },
+      {
+        path: "/payment/success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment/cancel",
+        element: <PaymentCancel />,
       },
       {
         path: "dashboard",

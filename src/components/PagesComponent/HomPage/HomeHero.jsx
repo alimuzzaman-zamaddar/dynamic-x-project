@@ -55,7 +55,7 @@ const HomeHero = () => {
                 />
               </button>
             </Link>
-            <Link to={"/new-upload-design"}>
+            <Link to={"#contact"}>
               <button
                 type="button"
                 className={`
@@ -67,7 +67,7 @@ const HomeHero = () => {
                   className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
     `}
                 >
-                  Ottieni consulenza gratutta
+                  Ottieni consulenza gratuita
                 </span>
 
                 <div
@@ -94,10 +94,10 @@ const HomeHero = () => {
         <div className="flex lg:mt-[300px] mt-25 flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
           <h3 className=" text-xl 2xl:text-[24px] text-white font-semibold leading-[123%] max-w-[640px]">
             Dal concept al prodotto finito, in modo semplice e rapido.
-            Senza stampi. Senza minimi d’ordine. Senza rischi inutilli.
+            Senza stampi. Senza minimi d’ordine. Senza rischi inutili.
           </h3>
           <span className=" text-base lg:text-[18px] max-w-[650] 3xl:max-w-[650px] font-light leading-[133%] text-white opacity-70">
-            Rendiamo la stampa 3D professionale accessibile a startup, innovatori e azienda strutturate.
+            Rendiamo la stampa 3D professionale accessibile a startup, innovatori e aziende strutturate.
           </span>
         </div>
       </div>

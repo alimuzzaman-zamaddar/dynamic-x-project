@@ -18,7 +18,8 @@ const About = () => {
               alt="site logo"
             />
             <span className="text-base text-black opacity-64 font-normal leading-[150%]   ">
-              DynamicsX è una reltà innovativa nata per rivoluzionare il mondo della stampa 3D. Il nostro obiettivo? Trasformare idee e progetti in oggetti reali, con velocità, precisione e creatività. Crediamo che la stampa 3D non sia solo tecnologia, ma uno strumento per rendere ogni progetto possibile, accessibile e scalabile. Dalla prototipazione rapida alla produzione di piccole serie, aiutiamo designer, aziende e creativi a dare forma alle loro idee in modo concreto e smart.
+              DynamicsX è  una realtà
+              innovativa nata per rivoluzionare il mondo della stampa 3D. Il nostro obiettivo? Trasformare idee e progetti in oggetti reali, con velocità, precisione e creatività. Crediamo che la stampa 3D non sia solo tecnologia, ma uno strumento per rendere ogni progetto possibile, accessibile e scalabile. Dalla prototipazione rapida alla produzione di piccole serie, aiutiamo designer, aziende e creativi a dare forma alle loro idee in modo concreto e smart.
             </span>
           </div>
 

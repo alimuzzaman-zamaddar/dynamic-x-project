@@ -53,7 +53,7 @@ const ContactSection = ({
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <input
                 type="text"
-                placeholder="Country Code"
+                placeholder="dfial-code "
                 className="common-input sm:w-[30%]"
               />
               <input

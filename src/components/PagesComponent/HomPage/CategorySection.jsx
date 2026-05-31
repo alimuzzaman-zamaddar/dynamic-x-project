@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Alimantare,
   Architectaa,
   Automotive,
   Dime,
@@ -12,7 +11,7 @@ import {
   Support,
   Yatch,
 } from "../../SvgContainer/SvgContainer";
-import { useNavigate } from "react-router";
+import { Link } from "react-router"; // Added router Link for proper hover behavior and navigation
 import Container from "../../../shared/Container";
 
 const categories = [
@@ -30,7 +29,7 @@ const categories = [
   },
   {
     icon: Yatch,
-    title: "YACHT E COMPONENTI NAUTICHE",
+    title: "YACHT E COMPONENTI NAUTICI", // Fixed gender agreement (nautiche -> nautici)
     link: "/yacht",
     subtitle: "Parti tecniche e accessori custom per il settore nautico.",
   },
@@ -55,7 +54,7 @@ const categories = [
   {
     icon: Support,
     title: "SUPPORTI VETERINARI",
-    link: "/vetemarysupports",
+    link: "/veterinary",
     subtitle: "Dispositivi personalizzati per cura e riabilitazione animale.",
   },
   {
@@ -76,55 +75,49 @@ const categories = [
     link: "/prototyping",
     subtitle: "Dall’idea al prodotto, prototipi e soluzioni su misura.",
   },
-  {
-    icon: Alimantare,
-    title: "ALIMENTARE",
-    link: "/",
-    subtitle: "Stampi e strumenti personalizzati per il settore food.",
-  },
 ];
 
 const CategoryCard = ({ category }) => {
-  const navigate = useNavigate();
   const Icon = category.icon;
 
   return (
-    <section
-      id="categorie"
-      onClick={() => navigate(`/${category.link}`)}
-      className="group cursor-pointer border-2 border-[#979797] rounded-xl flex flex-col justify-between w-full h-full transition-all duration-300 hover:bg-black"
+    <Link
+      to={category.link}
+      className="group block border-2 border-[#979797] rounded-xl w-full h-full transition-all duration-300 hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 no-underline"
     >
-      <div className="lg:p-6  p-3 flex flex-col items-center gap-y-3 flex-grow">
-        {/* ICON */}
-        <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
-          <Icon />
+      <div className="lg:p-6 p-4 flex flex-col items-center gap-y-3 h-full justify-between">
+        <div className="flex flex-col items-center gap-y-3 flex-grow w-full">
+          {/* ICON */}
+          <div className="text-black group-hover:text-white transition-all duration-300 fill-black group-hover:fill-white">
+            <Icon />
+          </div>
+
+          {/* TITLE */}
+          <span className="lg:text-lg text-base text-center font-semibold text-black group-hover:text-white transition-all duration-300 block">
+            {category.title}
+          </span>
+
+          {/* DESCRIPTION — Audited to be permanently visible without line-clamps or display toggles */}
+          <p
+            className="text-center text-black/70 group-hover:text-white/90 transition-all duration-300 block visible h-auto overflow-visible"
+            style={{
+              fontFamily: "Inter",
+              fontSize: "14px", // Slighly reduced for better text fitting in dense 5-column desktop grids
+              fontWeight: 500,
+              lineHeight: "22px",
+            }}
+          >
+            {category.subtitle}
+          </p>
         </div>
-
-        {/* TITLE */}
-        <span className="lg:text-lg text-base text-center font-semibold text-black group-hover:text-white transition-all duration-300">
-          {category.title}
-        </span>
-
-        {/* DESCRIPTION */}
-        <p
-          className="text-center text-black/50 group-hover:text-white/80 transition-all duration-300"
-          style={{
-            fontFamily: "Inter",
-            fontSize: "16px",
-            fontWeight: 500,
-            lineHeight: "24px",
-          }}
-        >
-          {category.subtitle}
-        </p>
       </div>
-    </section>
+    </Link>
   );
 };
 
 const CategorySection = () => {
   return (
-    <section className="h-auto w-full py-10 xl:py-25">
+    <section id="categorie" className="h-auto w-full py-10 xl:py-25">
       <Container>
         <h2 className="lg:text-4xl text-2xl font-semibold text-black pb-3">
           Categorie
@@ -132,28 +125,21 @@ const CategorySection = () => {
 
         <div className="flex flex-col gap-y-7.5 w-full">
           <div className="flex flex-col gap-y-3">
-            <h2 className="lg:text-lg text-base font-normal text-black">
+            <h3 className="lg:text-lg text-base font-normal text-black">
               La stampa 3D resa semplice. Soluzioni per ogni progetto, idea e applicazione.
-            </h2>
+            </h3>
           </div>
 
-          <ul
-            className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-12 lg:gap-7.5 gap-3">
-            {categories.map((category, idx) => {
-              const isLastRow = idx >= 8;
-
-              return (
-                <li
-                  key={idx}
-                  className={`
-          flex
-          ${isLastRow ? "xl:col-span-4" : "xl:col-span-3"}
-        `}
-                >
-                  <CategoryCard category={category} />
-                </li>
-              );
-            })}
+          {/* Grid-template-columns configuration:
+            - Standard responsive layouts for mobile/tablet screens
+            - xl:grid-cols-5 sets up exactly repeat(5, 1fr) for a perfect 5x2 row balance
+          */}
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:gap-7.5 gap-4 w-full">
+            {categories.map((category, idx) => (
+              <li key={idx} className="flex w-full min-h-full">
+                <CategoryCard category={category} />
+              </li>
+            ))}
           </ul>
         </div>
       </Container>

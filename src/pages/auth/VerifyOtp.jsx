@@ -30,7 +30,7 @@ const VerifyOtp = () => {
     try {
       setLoading(true);
       const endpoint = type === "register" ? "/auth/register/verify-otp" : "/auth/password/reset/verify";
-      
+
       const res = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
         headers: {
@@ -47,7 +47,7 @@ const VerifyOtp = () => {
       }
 
       showToast("OTP verified successfully!", "success");
-      
+
       if (type === "register") {
         navigate("/auth/login");
       } else {
@@ -65,7 +65,7 @@ const VerifyOtp = () => {
     try {
       setResendLoading(true);
       const endpoint = type === "register" ? "/auth/register/resend-otp" : "/auth/password/reset/resend";
-      
+
       const res = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
         headers: {
@@ -106,8 +106,8 @@ const VerifyOtp = () => {
             rules={{
               required: "OTP is required",
               minLength: {
-                value: 6,
-                message: "OTP must be 6 digits",
+                value: 4,
+                message: "OTP must be 4 digits",
               },
             }}
             render={({ field }) => (
@@ -115,7 +115,7 @@ const VerifyOtp = () => {
                 {...field}
                 value={field.value || ""}
                 onChange={field.onChange}
-                numInputs={6}
+                numInputs={4}
                 renderInput={props => <input {...props} />}
                 containerStyle={"flex items-center !gap-2 justify-center"}
                 inputStyle={`mx-auto !w-10 md:!h-12 !h-10 md:!w-12 xl:!w-14 xl:!h-14 border border-[#CFD3D4] md:rounded-[12px] rounded-[8px] text-lg font-medium text-black bg-gray-50 outline-none`}
@@ -125,7 +125,7 @@ const VerifyOtp = () => {
           {errors.otp && (
             <p className="text-red-600 mt-2 text-sm text-center">
               {errors.otp.message}
-            </p>
+            </p> 
           )}
         </div>
 
