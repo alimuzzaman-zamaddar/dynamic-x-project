@@ -55,7 +55,7 @@ const HomeHero = () => {
                 />
               </button>
             </Link>
-            <Link to={"/new-upload-design"}>
+            <Link to={"#contact"}>
               <button
                 type="button"
                 className={`
@@ -67,7 +67,7 @@ const HomeHero = () => {
                   className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
     `}
                 >
-                  Ottieni consulenza gratutta
+                  Ottieni consulenza gratuita
                 </span>
 
                 <div

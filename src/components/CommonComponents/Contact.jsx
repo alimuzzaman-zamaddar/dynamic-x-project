@@ -141,7 +141,7 @@ const Contact = ({
   ];
 
   return (
-    <section className="h-auto lg:pt-21 pt-8 w-full">
+    <section className="h-auto lg:pt-21 pt-8 w-full" id="contact">
       <Container>
         <div className="flex xl:flex-row flex-col justify-between gap-x-26.5 items-center">
           <div className="xl:max-w-162 w-full">
