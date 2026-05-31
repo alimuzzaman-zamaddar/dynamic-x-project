@@ -1,6 +1,6 @@
-import { Link } from "react-scroll";
-import { useLocation, useNavigate } from "react-router";
 import React, { useEffect, useRef, useState } from "react";
+import { Link as ScrollLink } from "react-scroll";
+import { useLocation, useNavigate, Link } from "react-router"; // Imported Link
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
 import { ShoppingCart, User, LogOut } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -9,11 +9,7 @@ import { useToast } from "../context/ToastContext";
 
 const navMenu = [
   {
-    label: "Home",
-    path: "/",
-  },
-  {
-    label: "Product",
+    label: "Shop",
     path: "/product",
   },
   {
@@ -23,45 +19,24 @@ const navMenu = [
   {
     label: "Categorie",
     hash: "categorie",
+    path: "/",
     dropdown: [
-      {
-        label: " Droni & Componenti", path: "/drone"
-      },
-      {
-        label: " Automotive d’epoca & Parti rare", path: "/vintage"
-      },
-      {
-        label: " Yacht & Componenti", path: "/yacht"
-      },
-      {
-        label: " Medicale Lab & Biotech", path: "/medicale-lab"
-      },
-      {
-        label: " Dime & Componenti Industriali", path: "/industrial"
-      },
-      {
-        label: " Architettura", path: "/architettura"
-      },
-      {
-        label: " Supporti Veterinari", path: "/vetemarysupports"
-      },
-      {
-        label: " Gioielleria", path: "/jwellery"
-      },
-      {
-        label: " Fashion", path: "/footwear"
-      },
-      {
-        label: " Prototipi & Prodotti Custom", path: "/prototyping"
-      },
-      {
-        label: " Alimentare", path: "/"
-      },
+      { label: "Droni & Componenti", path: "/drone" },
+      { label: "Automotive d’epoca & Parti rare", path: "/vintage" },
+      { label: "Yacht & Componenti", path: "/yacht" },
+      { label: "Medicale Lab & Biotech", path: "/medicale-lab" },
+      { label: "Dime & Componenti Industriali", path: "/industrial" },
+      { label: "Architettura", path: "/architettura" },
+      { label: "Supporti Veterinari", path: "/veterinary" },
+      { label: "Gioielleria", path: "/jwellery" },
+      { label: "Fashion", path: "/footwear" },
+      { label: "Prototipi & Prodotti Custom", path: "/prototyping" },
     ],
   },
   {
     label: "Tecnologie",
     hash: "technologies",
+    path: "/",
     dropdown: [
       { label: "FDM", path: "/stampa" },
       { label: "SLA", path: "/stampasla" },
@@ -78,16 +53,8 @@ const navMenu = [
     path: "/allmaterials",
   },
   {
-    label: "Catalogo",
-    path: "/catalog",
-  },
-  {
     label: "2D to 3D",
     path: "/2d3d",
-  },
-  {
-    label: "Bio stamp 3D",
-    path: "/bio-stamp",
   },
   {
     label: "Blog",
@@ -105,6 +72,7 @@ const Navbar = () => {
   const { totalCount } = useCart();
   const { user, loading, logout } = useAuth();
   const { showToast } = useToast();
+  const [scrollY, setScrollY] = useState(0);
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token');
@@ -147,160 +115,116 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  // const isHome = pathName === "/";
-  const [scrollY, setScrollY] = useState(0);
-
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY || document.documentElement.scrollTop);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const isHome = pathName === "/";
-  const isDrone = pathName === "/drone";
-  const isVintage = pathName === "/vintage";
-  const isCatalog = pathName === "/catalog";
-  const isFashion = pathName === "/footwear";
-  const isJwellery = pathName === "/jwellery";
-  const isChiSiamo = pathName === "/chi-siamo";
-  const isIndustrial = pathName === "/industrial";
-  const isVeterinary = pathName === "/veterinary";
-  const isMedicale = pathName === "/medicale-lab";
-  const isArchitettura = pathName === "/architettura";
+
+  // Handles internal fallback transitions for complex hash links
+  const handleHashNavigation = (e, nav) => {
+    e.preventDefault();
+    if (pathName !== nav.path) {
+      navigate(nav.path);
+      setTimeout(() => {
+        document
+          .getElementById(nav.hash)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      document
+        .getElementById(nav.hash)
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false);
+  };
+
+  const transparentRoutes = [
+    "/", "/drone", "/vintage", "/catalog", "/footwear", "/jwellery",
+    "/chi-siamo", "/industrial", "/veterinary", "/medicale-lab", "/architettura"
+  ];
+
+  const isTransparentBg = pathName.includes("/technology-details") ||
+    (transparentRoutes.includes(pathName) && scrollY < 200);
 
   return (
-    <nav
-      className={`fixed ease-in-out duration-500 transition-all  px-4 top-0 left-0 w-full z-50 
-  ${pathName.includes("/technology-details")
-          ? "bg-transparent"
-          : isHome ||
-            isFashion ||
-            isIndustrial ||
-            isMedicale ||
-            isJwellery ||
-            isArchitettura ||
-            isVintage ||
-            isDrone ||
-            isVeterinary ||
-            isCatalog ||
-            isChiSiamo
-            ? scrollY < 200
-              ? "bg-transparent"
-              : "bg-black"
-            : "bg-black"
-        }`}
-    >
-      <div className="container mx-auto lg:py-8 py-4  flex items-center justify-between">
-        <div
-          onClick={() => {
-            navigate("/");
-          }}
-        >
+    <nav className={`fixed ease-in-out duration-500 transition-all px-4 top-0 left-0 w-full z-50 ${isTransparentBg ? "bg-transparent" : "bg-black"}`}>
+      <div className="container mx-auto lg:py-8 py-4 flex items-center justify-between">
+
+        {/* Logo */}
+        <Link to="/" className="flex items-center" aria-label="Home">
           <img
             src={logo}
-            className=" w-32 2xl:w-40 cursor-pointer h-10 2xl:h-12 object-contain"
+            className="w-32 2xl:w-40 cursor-pointer h-10 2xl:h-12 object-contain"
             alt="site logo"
           />
-        </div>
-        {/* navbar desktop */}
+        </Link>
 
+        {/* Desktop Navigation */}
         <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
           {navMenu.map((nav, idx) => (
             <li key={idx} className="relative group">
               {nav.dropdown ? (
                 <>
-                  <span
-                    onClick={() => {
-                      if (nav.hash) {
-                        if (pathName !== nav.path) {
-                          navigate(nav.path);
-                          setTimeout(() => {
-                            document
-                              .getElementById(nav.hash)
-                              ?.scrollIntoView({ behavior: "smooth" });
-                          }, 300);
-                        } else {
-                          document
-                            .getElementById(nav.hash)
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }
-                      } else {
-                        navigate(nav.path);
-                      }
-                    }}
+                  {/* Has fallback route representation for clean status-bar display */}
+                  <Link
+                    to={`${nav.path}#${nav.hash}`}
+                    onClick={(e) => handleHashNavigation(e, nav)}
                     className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
                   >
                     {nav.label}
                     <span className="text-xs mt-[1px]">▼</span>
-                  </span>
+                  </Link>
 
                   <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
                       {nav.dropdown.map((item, subIdx) => (
-                        <span
+                        <Link
                           key={subIdx}
-                          onClick={() => navigate(item.path)}
-                          className="block px-4 py-2 text-sm text-white hover:text-blue-500 hover:bg-white/5 cursor-pointer transition text-nowrap"
+                          to={item.path}
+                          className="block w-full text-left px-4 py-2 text-sm text-white hover:text-blue-500 hover:bg-white/5 cursor-pointer transition text-nowrap"
                         >
                           {item.label}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                   </div>
                 </>
-              ) : nav.type === "scroll" ? (
+              ) : nav.hash ? (
                 <Link
-                  smooth
-                  duration={500}
-                  to={nav.path}
+                  to={`${nav.path}#${nav.hash}`}
+                  onClick={(e) => handleHashNavigation(e, nav)}
                   className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
                 >
                   {nav.label}
                 </Link>
               ) : (
-                <span
-                  onClick={() => {
-                    if (nav.hash) {
-                      if (pathName !== nav.path) {
-                        navigate(nav.path);
-                        setTimeout(() => {
-                          document
-                            .getElementById(nav.hash)
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }, 300);
-                      } else {
-                        document
-                          .getElementById(nav.hash)
-                          ?.scrollIntoView({ behavior: "smooth" });
-                      }
-                    } else {
-                      navigate(nav.path);
-                    }
-                  }}
+                <Link
+                  to={nav.path}
                   className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
                 >
                   {nav.label}
-                </span>
+                </Link>
               )}
             </li>
           ))}
         </ul>
 
-        {/* navbar mobile */}
+        {/* Mobile Sidebar */}
         <div
           ref={sidebarRef}
-          className={`  fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-[280px] bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-[280px] bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
-          <img
-            src={logo}
-            className="w-32 2xl:w-40 h-10 2xl:h-12 object-contain cursor-pointer"
-            alt="site logo"
-          />
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            <img
+              src={logo}
+              className="w-32 2xl:w-40 h-10 2xl:h-12 object-contain cursor-pointer"
+              alt="site logo"
+            />
+          </Link>
 
           <ul className="flex flex-col gap-y-4 w-full">
             {navMenu.map((nav, idx) => (
@@ -308,94 +232,55 @@ const Navbar = () => {
                 {nav.dropdown ? (
                   <div className="w-full">
                     <div className="flex items-center justify-between w-full">
-                      <span
-                        onClick={() => {
-                          if (nav.hash) {
-                            if (pathName !== nav.path) {
-                              navigate(nav.path);
-                              setIsOpen(false);
-                              setTimeout(() => {
-                                document
-                                  .getElementById(nav.hash)
-                                  ?.scrollIntoView({ behavior: "smooth" });
-                              }, 300);
-                            } else {
-                              document
-                                .getElementById(nav.hash)
-                                ?.scrollIntoView({ behavior: "smooth" });
-                              setIsOpen(false);
-                            }
-                          } else {
-                            navigate(nav.path);
-                            setIsOpen(false);
-                          }
-                        }}
-                        className="text-sm xl:text-[15px] text-slate-200 hover:text-primary-black font-medium capitalize cursor-pointer transition-colors duration-300"
+                      <Link
+                        to={`${nav.path}#${nav.hash}`}
+                        onClick={(e) => handleHashNavigation(e, nav)}
+                        className="text-sm xl:text-[15px] text-slate-200 hover:text-white font-medium capitalize cursor-pointer transition-colors duration-300 text-left"
                       >
                         {nav.label}
-                      </span>
+                      </Link>
 
                       <button
                         type="button"
                         onClick={() => setMobileDropdownOpen(prev => !prev)}
-                        className="text-slate-200 text-xs px-2 py-1"
+                        className="text-slate-200 text-xs px-2 py-1 bg-transparent border-none focus:outline-none"
                       >
                         {mobileDropdownOpen ? "▲" : "▼"}
                       </button>
                     </div>
 
-                    <div
-                      className={`overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? "max-h-40 mt-2" : "max-h-0"
-                        }`}
-                    >
+                    <div className={`overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? "max-h-[400px] mt-2" : "max-h-0"}`}>
                       <div className="ml-4 flex flex-col gap-y-3 border-l border-white/10 pl-4">
                         {nav.dropdown.map((item, subIdx) => (
-                          <span
+                          <Link
                             key={subIdx}
+                            to={item.path}
                             onClick={() => {
-                              navigate(item.path);
                               setIsOpen(false);
                               setMobileDropdownOpen(false);
                             }}
-                            className="text-sm text-slate-300 hover:text-white font-medium cursor-pointer transition-colors duration-300"
+                            className="text-sm text-slate-300 hover:text-white font-medium cursor-pointer transition-colors duration-300 text-left w-full"
                           >
                             {item.label}
-                          </span>
+                          </Link>
                         ))}
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <span
-                    onClick={() => {
-                      if (nav.hash) {
-                        if (pathName !== nav.path) {
-                          navigate(nav.path);
-                          setIsOpen(false);
-                          setTimeout(() => {
-                            document
-                              .getElementById(nav.hash)
-                              ?.scrollIntoView({ behavior: "smooth" });
-                          }, 300);
-                        } else {
-                          document
-                            .getElementById(nav.hash)
-                            ?.scrollIntoView({ behavior: "smooth" });
-                          setIsOpen(false);
-                        }
-                      } else {
-                        navigate(nav.path);
-                        setIsOpen(false);
-                      }
-                    }}
-                    className="text-sm xl:text-[15px] text-slate-200 hover:text-primary-black font-medium capitalize cursor-pointer transition-colors duration-300"
+                  <Link
+                    to={nav.hash ? `${nav.path}#${nav.hash}` : nav.path}
+                    onClick={(e) => nav.hash && handleHashNavigation(e, nav)}
+                    className="text-sm xl:text-[15px] text-slate-200 hover:text-white font-medium capitalize cursor-pointer transition-colors duration-300 text-left w-full"
                   >
                     {nav.label}
-                  </span>
+                  </Link>
                 )}
               </li>
             ))}
           </ul>
+
+          {/* Mobile Authentication Area */}
           {loading ? (
             <div className="w-[80%] h-12 bg-white/10 animate-pulse rounded-full ml-5" />
           ) : user ? (
@@ -413,22 +298,34 @@ const Navbar = () => {
                   <p className="text-xs text-slate-400 truncate">{user.email}</p>
                 </div>
               </div>
-              <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-red-400 hover:text-red-300 cursor-pointer">
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-red-400 hover:text-red-300 cursor-pointer bg-transparent border-none focus:outline-none">
                 <LogOut className="w-4 h-4" /> Logout
               </button>
             </div>
           ) : (
-            <div className="w-[80%] ml-5">
-              <button onClick={() => { setIsOpen(false); navigate('/auth/login'); }} className="flex w-full items-center justify-center text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
+            <div className="w-[80%] ml-5 flex flex-col gap-2 items-center">
+              <Link
+                to="/auth/login"
+                onClick={() => setIsOpen(false)}
+                className="flex w-full items-center justify-center text-sm font-normal leading-[128%] text-white py-3.5 px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-black ease-in-out duration-500 text-center"
+              >
                 Login
-              </button>
+              </Link>
+              <Link
+                to="/auth/login"
+                onClick={() => setIsOpen(false)}
+                className="text-xs text-slate-400 hover:text-white underline transition cursor-pointer mt-1"
+              >
+                Non hai un account? Registrati
+              </Link>
             </div>
           )}
         </div>
 
+        {/* Global Right Action Items (Cart & Hamburger) */}
         <div className="flex 2xl:hidden items-center gap-3">
-          <button
-            onClick={() => navigate('/dashboard/cart')}
+          <Link
+            to="/dashboard/cart"
             className="relative p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
             aria-label="Cart"
           >
@@ -438,11 +335,11 @@ const Navbar = () => {
                 {totalCount > 99 ? '99+' : totalCount}
               </span>
             )}
-          </button>
+          </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5"
+            className="relative w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5 bg-transparent border-none focus:outline-none"
             aria-label="Toggle menu"
           >
             <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""}`} />
@@ -451,9 +348,10 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Desktop Authentication Buttons & User Profile Menu */}
         <div className="hidden 2xl:flex items-center gap-4">
-          <button
-            onClick={() => navigate('/dashboard/cart')}
+          <Link
+            to="/dashboard/cart"
             className="relative p-2 text-white hover:text-blue-400 transition-colors cursor-pointer"
             aria-label="Cart"
           >
@@ -463,34 +361,40 @@ const Navbar = () => {
                 {totalCount > 99 ? '99+' : totalCount}
               </span>
             )}
-          </button>
+          </Link>
+
           {loading ? (
             <div className="w-11 h-11 rounded-full bg-white/10 animate-pulse"></div>
           ) : user ? (
             <div className="relative group flex items-center">
-              <div onClick={() => navigate("/dashboard/profile")} className="w-11 h-11 rounded-full border-2 border-white/20 overflow-hidden cursor-pointer hover:border-white transition-colors bg-white/10 flex items-center justify-center">
+              <Link to="/dashboard/profile" className="w-11 h-11 rounded-full border-2 border-white/20 overflow-hidden cursor-pointer hover:border-white transition-colors bg-white/10 flex items-center justify-center">
                 {user.avatar ? (
                   <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <User className="text-white w-5 h-5" />
                 )}
-              </div>
+              </Link>
               <div className="absolute top-full right-0 mt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2 flex flex-col">
                   <div className="px-4 py-2 border-b border-white/10 mb-2">
                     <p className="text-sm text-white font-medium truncate">{user.name}</p>
                     <p className="text-xs text-slate-400 truncate">{user.email}</p>
                   </div>
-                  <button onClick={handleLogout} className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 cursor-pointer transition">
+                  <button onClick={handleLogout} className="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 cursor-pointer transition bg-transparent border-none focus:outline-none">
                     <LogOut className="w-4 h-4" /> Logout
                   </button>
                 </div>
               </div>
             </div>
           ) : (
-            <button onClick={() => navigate("/auth/login")} className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-primary-black ease-in-out duration-500">
-              Login
-            </button>
+            <div className="flex gap-5">
+              <Link to="/auth/login" className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-black ease-in-out duration-500 flex items-center justify-center">
+                Login
+              </Link>
+              <Link to="/auth/login" className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] hover:text-white py-3.5 w-auto px-10 border border-white rounded-full cursor-pointer bg-white hover:bg-transparent text-black ease-in-out duration-500 flex items-center justify-center">
+                Sign Up
+              </Link>
+            </div>
           )}
         </div>
       </div>
