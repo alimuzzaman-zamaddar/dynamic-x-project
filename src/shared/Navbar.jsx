@@ -53,7 +53,7 @@ const navMenu = [
     path: "/allmaterials",
   },
   {
-    label: "2D to 3D",
+    label: "2D To 3D",
     path: "/2d3d",
   },
   {

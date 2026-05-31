@@ -178,7 +178,7 @@ const Contact = ({
               {/* Row 3 */}
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <div className="relative sm:w-[60%] w-full">
-                  <input type="text" name="countryCode" placeholder="Country Code" className={`common-input border-b w-full ${getErrorClass(formData.countryCode)}`} value={formData.countryCode} onChange={handleChange} />
+                  <input type="text" name="countryCode" placeholder="Dial-code " className={`common-input border-b w-full ${getErrorClass(formData.countryCode)}`} value={formData.countryCode} onChange={handleChange} />
                   <ErrorText value={formData.countryCode} />
                 </div>
                 <div className="relative w-full sm:mt-0 mt-8">
@@ -223,7 +223,8 @@ const Contact = ({
                   <label className={`flex items-start gap-x-3 cursor-pointer group p-1 rounded transition-colors ${isSubmitted && !formData.privacyAccepted ? "bg-red-50" : ""}`}>
                     <input type="checkbox" name="privacyAccepted" className="mt-1 w-4 h-4 accent-black" checked={formData.privacyAccepted} onChange={handleChange} />
                     <span className={`text-sm leading-snug ${isSubmitted && !formData.privacyAccepted ? "text-red-600 font-medium" : "text-black/70"}`}>
-                      *Ho letto l'informativa privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
+                      *Ho letto  informativa sulla
+                      privacy e acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
                     </span>
                   </label>
                   {isSubmitted && !formData.privacyAccepted && <span className="text-red-500 text-[10px] absolute -bottom-4 left-1">Devi accettare la privacy</span>}

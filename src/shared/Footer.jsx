@@ -20,8 +20,8 @@ const socialFooterNav = [
     title: "Contact",
     items: [
       {
-        label: "info@dynamicxs.it",
-        redirectLink: "mailto:info@dynamicxs.it",
+        label: "info@dynamicsx.it",
+        redirectLink: "mailto:info@dynamicsx.it",
       },
     ],
   },
@@ -165,7 +165,8 @@ const Footer = () => {
           </ul>
 
           <span className="text-white text-nowrap opacity-64 font-light text-base">
-            © 2026 DynamicsX. All Rights Reserved.
+            © 2026 DynamicsX. Tutti i diritti
+            riservati.
           </span>
         </div>
       </div>

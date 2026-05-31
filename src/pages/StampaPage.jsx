@@ -245,7 +245,7 @@ export const StampaPage = () => {
       />
       <UseCasesSection
         heading="Dove la Stampa FDM Fa la Differenza"
-        description="La tecnologia FDM trova applicazione in un'ampia varietà di settori e contesti produttivi. Che tu stia sviluppando un nuovo prodotto, ottimizzando una linea di produzione o cercando parti di ricambio personalizzate, la stampa 3D FDM offre una risposta concreta e immediata."
+        description="La tecnologia FDM trova applicazione in un'ampia varietà di settori e contesti produttivi. Che tu stia sviluppando un nuovo prodotto, ottimizzando una linea di produzione o cercando parti di ricambio personalizzate, La stampa 3D FDM offre una risposta concreta e immediata."
         items={useCasesData}
       />
       <StatsSection

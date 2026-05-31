@@ -124,7 +124,7 @@ const BioStamp = () => {
             <div className="flex flex-col gap-y-3">
               <h2 className="lg:text-4xl text-2xl font-semibold text-white">BioStamp 3D</h2>
               <span className="text-white/50 leading-[133%] max-w-[622px] font-light text-lg">
-                La nuova frontiera del bioprinting tra natura e tecnologia
+                La nuova frontiera del bioprinting tra natura e  tecnologia
               </span>
             </div>
             <div className="flex justify-end items-end xl:pt-76 pt-20">
@@ -255,7 +255,7 @@ const BioStamp = () => {
       </section>
 
       {/* 3. Inline Newsletter Subscription Form Section */}
-      <section className="py-20 bg-[#1A253C] text-white">
+      <section className="py-20 bg-[#1a1411] text-white">
         <Container>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto">
             <div className="text-center md:text-left">

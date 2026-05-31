@@ -144,7 +144,7 @@ const MaterialContact = ({
               <div className="flex sm:flex-row flex-col w-full gap-x-6 items-center">
                 <input
                   type="text"
-                  placeholder="Country Code"
+                  placeholder="Dial-Code"
                   className="common-input sm:w-[60%] w-full xl:mb-0 mb-5"
                 />
                 <input
