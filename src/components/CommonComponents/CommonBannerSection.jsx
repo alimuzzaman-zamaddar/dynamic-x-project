@@ -25,7 +25,7 @@ const CommonBannerSection = ({
             {description}
           </p>
         )}
-        <Link to={"/upload-design"}>
+        <Link to={"/new-upload-design"}>
           <button
             type="button"
             className={`

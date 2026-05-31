@@ -21,9 +21,11 @@ const HomePage = () => {
       <Materials />
       <BioStamp />
       {/* <RealStories /> */}
-      <Contact />
-      <About />
-      <WhyChooseUs />
+      <div className="pb-20">
+        <Contact />
+      </div>
+      {/* <About /> */}
+      {/* <WhyChooseUs /> */}
     </>
   );
 };

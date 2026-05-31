@@ -7,7 +7,6 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 // Map API status strings → stepper step numbers
 const STATUS_STEP = {
   pending: 1,
-  placed: 1,
   production: 2,
   quality_check: 3,
   shipped: 4,
@@ -15,7 +14,7 @@ const STATUS_STEP = {
 }
 
 const steps = [
-  { id: 1, name: 'Placed' },
+  { id: 1, name: 'Pending' },
   { id: 2, name: 'Production' },
   { id: 3, name: 'Quality Check' },
   { id: 4, name: 'Shipped' },

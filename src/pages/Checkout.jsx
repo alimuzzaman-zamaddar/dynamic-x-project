@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
-import { useToast } from '../context/ToastContext'
+
 import ProductImage from '../assets/img/product/product.png'
 import { ChevronRight, ChevronDown, Minus, Plus, Tag, ShoppingBag, FileBox, Loader2 } from 'lucide-react'
 
@@ -12,9 +12,7 @@ const SHIPPING_FEE = 0.5
 
 export default function Checkout() {
   const location = useLocation()
-  const navigate = useNavigate()
   const { user } = useAuth()
-  const { showToast } = useToast()
   const { items, updateQuantity, clearCart } = useCart()
 
   const selectedCartIds = useMemo(() => {
@@ -47,9 +45,16 @@ export default function Checkout() {
     fullAddress: '',
   })
 
+  const checkoutLockRef = React.useRef(false)
+
   const handleCheckout = async () => {
+    // Prevent double execution
+    if (checkoutLockRef.current || submitting) return
+    checkoutLockRef.current = true
+
     if (!address.fullAddress.trim() || !address.city.trim() || !address.postal.trim()) {
       setCheckoutError('Please fill in your shipping address details.')
+      checkoutLockRef.current = false
       return
     }
     setCheckoutError(null)
@@ -104,6 +109,7 @@ export default function Checkout() {
         notes: '',
       }
 
+      // Step 1: Create the order
       const res = await fetch(`${BASE_URL}/auth/checkout`, {
         method: 'POST',
         headers: {
@@ -116,18 +122,88 @@ export default function Checkout() {
 
       const json = await res.json()
 
-      if (res.ok && json.success) {
-        clearCart()
-        showToast('Order placed successfully! 🎉', 'success')
-        navigate('/dashboard', { replace: true })
-      } else {
+      if (!res.ok || !json.success) {
         setCheckoutError(json.message || 'Checkout failed. Please try again.')
+        setSubmitting(false)
+        checkoutLockRef.current = false
+        return
       }
+
+      const orderId = json.data?.order_id ?? json.data?.id ?? json.order_id
+
+      if (!orderId) {
+        setCheckoutError('Order created but no order ID returned.')
+        setSubmitting(false)
+        checkoutLockRef.current = false
+        return
+      }
+
+      // Step 2: Create Stripe checkout session
+      const sessionRes = await fetch(`${BASE_URL}/auth/checkout/session`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ order_id: orderId }),
+      })
+
+      const sessionJson = await sessionRes.json()
+
+      if (!sessionRes.ok || !sessionJson.success) {
+        setCheckoutError(sessionJson.message || 'Failed to create payment session.')
+        setSubmitting(false)
+        checkoutLockRef.current = false
+        return
+      }
+
+      const checkoutUrl = sessionJson.data?.checkout_url
+
+      if (!checkoutUrl) {
+        setCheckoutError('No checkout URL returned from payment provider.')
+        setSubmitting(false)
+        checkoutLockRef.current = false
+        return
+      }
+
+      // Save order info for the success page
+      localStorage.setItem('dx_pending_order', JSON.stringify({
+        order_id: orderId,
+        items: checkoutItems.map((item) => ({
+          title: item.title,
+          type: item.type,
+          price: item.price,
+          quantity: getQty(item),
+          product_code: item.product_code,
+          thumbnail_image: item.thumbnail_image,
+          technology: item.technology,
+          material: item.material,
+          selectedColor: item.selectedColor,
+        })),
+        shipping: { ...address },
+        subtotal: totalProductPrice,
+        shipping_cost: SHIPPING_FEE,
+        tax: 0,
+        discount: 0,
+        total: grandTotal,
+        currency: 'USD',
+        date: new Date().toISOString(),
+        user_name: user?.name || '',
+        user_email: user?.email || '',
+      }))
+
+      // Clear cart before redirecting
+      clearCart()
+
+      // Step 3: Redirect to Stripe checkout
+      // Keep submitting=true and lock active — do NOT reset, page is navigating away
+      window.location.href = checkoutUrl
     } catch (err) {
       console.error('Checkout error:', err)
       setCheckoutError('Network error. Please check your connection.')
-    } finally {
       setSubmitting(false)
+      checkoutLockRef.current = false
     }
   }
 

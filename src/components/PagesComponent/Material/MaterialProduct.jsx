@@ -22,7 +22,7 @@ const materials = [
     title: "ABS",
     subtitle: "FDM",
     description:
-      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici. Èideale per parti funzionali e prototipi.",
+      "L’ABS è un materiale durevole e versatile con buona resistenza agli urti e agli agenti chimici.  È ideale per parti funzionali e prototipi.",
   },
   {
     imgSrc: gear2,

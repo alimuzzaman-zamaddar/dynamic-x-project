@@ -10,7 +10,6 @@ import machine6 from "../../../assets/img/home/serive7.png";
 import machine7 from "../../../assets/img/home/service8.png";
 
 const techonologies = [
-
   {
     bgImg: machine4,
     title: "Stampa 3D Professionale",
@@ -129,19 +128,20 @@ const Services = () => {
                       </div>
                     </div>
                   ) : (
-                    /* Inactive card — image only, no background */
-                    <div className="flex flex-col gap-y-3">
+                    /* Inactive card — transparent background, text completely visible */
+                    <div className="flex flex-col gap-y-3 h-full">
                       <img
                         src={technology.bgImg}
                         alt={technology.title}
                         className="w-full object-cover rounded-2xl"
                         style={{ height: "180px" }}
                       />
-                      <div className="px-1 flex flex-col gap-y-1">
+                      <div className="px-1 flex flex-col gap-y-2">
                         <h5 className="text-base font-semibold text-black leading-snug">
                           {technology.title}
                         </h5>
-                        <p className="text-sm text-black opacity-60 font-medium line-clamp-2">
+                        {/* UPDATED: Removed line-clamp-2 to ensure the full text displays permanently */}
+                        <p className="text-sm text-black opacity-60 font-medium block visible h-auto overflow-visible">
                           {technology.description}
                         </p>
                       </div>

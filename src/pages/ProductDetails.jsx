@@ -21,7 +21,10 @@ export default function ProductDetails() {
   const [comment, setComment] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [selectedColor, setSelectedColor] = useState(null)
-  const [selectedImage, setSelectedImage] = useState(ProductImage)
+
+  // Track image selection by its array index instead of string URL
+  const [currentImgIndex, setCurrentImgIndex] = useState(0)
+
   const [addedToCart, setAddedToCart] = useState(false)
   const [filterType, setFilterType] = useState('All')
 
@@ -29,6 +32,14 @@ export default function ProductDetails() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  // Gallery images preparation
+  const productGallery = product?.images?.length > 0
+    ? product.images.map((img) => img.url || ProductImage)
+    : [ProductImage, ProductImage, ProductImage]
+
+  // Safe reference for the main preview image
+  const selectedImage = productGallery[currentImgIndex] || ProductImage
 
   useEffect(() => {
     if (!id) return
@@ -41,15 +52,13 @@ export default function ProductDetails() {
         const json = await res.json()
         const data = json.data
         setProduct(data)
+
+        // Reset image selection index back to first image on product switch
+        setCurrentImgIndex(0)
+
         // Set default selected color
         if (data.color && data.color.length > 0) {
           setSelectedColor(data.color[0])
-        }
-        // Set default image
-        if (data.images && data.images.length > 0) {
-          setSelectedImage(data.images[0].url || ProductImage)
-        } else {
-          setSelectedImage(ProductImage)
         }
       } catch (err) {
         console.error('Failed to fetch product details:', err)
@@ -70,11 +79,6 @@ export default function ProductDetails() {
     : 0
   const subtotal = (effectivePrice * quantity).toFixed(2)
   const hasDiscount = product?.discount_price != null
-
-  // Gallery images
-  const productGallery = product?.images?.length > 0
-    ? product.images.map((img) => img.url || ProductImage)
-    : [ProductImage, ProductImage, ProductImage]
 
   const handleAddToCart = () => {
     if (!product) return
@@ -147,10 +151,10 @@ export default function ProductDetails() {
                 {productGallery.map((imgUrl, idx) => (
                   <figure
                     key={idx}
-                    onClick={() => setSelectedImage(imgUrl)}
-                    className={`w-20 h-16 sm:w-25 sm:h-20 bg-[#D9D9D9] border-2 rounded-xl cursor-pointer p-2 shrink-0 transition-all ${selectedImage === imgUrl
-                        ? 'border-black scale-102 shadow-xs'
-                        : 'border-slate-300 hover:border-slate-500'
+                    onClick={() => setCurrentImgIndex(idx)}
+                    className={`w-20 h-16 sm:w-25 sm:h-20 bg-[#D9D9D9] border-2 rounded-xl cursor-pointer p-2 shrink-0 transition-all ${currentImgIndex === idx
+                      ? 'border-black scale-102 shadow-xs'
+                      : 'border-slate-300 hover:border-slate-500'
                       }`}
                   >
                     <img src={imgUrl} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-contain" />
@@ -339,8 +343,8 @@ export default function ProductDetails() {
                       key={hex}
                       onClick={() => setSelectedColor(hex)}
                       className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${selectedColor === hex
-                          ? 'border-slate-900 shadow-md scale-105'
-                          : 'border-slate-300 hover:border-slate-500'
+                        ? 'border-slate-900 shadow-md scale-105'
+                        : 'border-slate-300 hover:border-slate-500'
                         }`}
                       style={{ backgroundColor: hex }}
                       title={hex}
@@ -398,8 +402,8 @@ export default function ProductDetails() {
               <button
                 onClick={handleAddToCart}
                 className={`w-full border-2 font-bold py-3 rounded-3xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${addedToCart
-                    ? 'border-green-500 bg-green-50 text-green-700'
-                    : 'border-slate-300 hover:border-slate-900 text-slate-900 hover:bg-slate-50'
+                  ? 'border-green-500 bg-green-50 text-green-700'
+                  : 'border-slate-300 hover:border-slate-900 text-slate-900 hover:bg-slate-50'
                   }`}
               >
                 {addedToCart ? <CheckCircle size={20} /> : <ShoppingCart size={20} />}

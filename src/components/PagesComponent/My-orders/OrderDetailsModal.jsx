@@ -13,7 +13,7 @@ const STATUS_STEP = {
 }
 
 const STEPS = [
-  { id: 1, name: 'Placed' },
+  { id: 1, name: 'Pending Production' },
   { id: 2, name: 'Production' },
   { id: 3, name: 'Quality Check' },
   { id: 4, name: 'Shipped' },
