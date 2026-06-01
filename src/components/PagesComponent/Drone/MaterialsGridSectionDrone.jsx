@@ -27,7 +27,7 @@ const MaterialsGridSectionDrone = () => {
             <img
               src={img1}
               alt="PA12 Nylon"
-              className="w-full h-[160px] object-cover  mb-4"
+              className="w-full h-40 object-cover  mb-4"
             />
 
             <h3 className="font-semibold text-black mb-2">Frame Custom</h3>
@@ -43,7 +43,7 @@ const MaterialsGridSectionDrone = () => {
             <img
               src={img2}
               alt="PA11"
-              className="w-full h-[160px] object-cover  mb-4"
+              className="w-full h-40 object-cover  mb-4"
             />
 
             <h3 className="font-semibold text-black mb-2">
@@ -61,7 +61,7 @@ const MaterialsGridSectionDrone = () => {
             <img
               src={img3}
               alt="TPU"
-              className="w-full h-[160px] object-cover  mb-4"
+              className="w-full h-40 object-cover  mb-4"
             />
 
             <h3 className="font-semibold text-black mb-2">
@@ -79,7 +79,7 @@ const MaterialsGridSectionDrone = () => {
             <img
               src={img4}
               alt="Alumide"
-              className="w-full h-[160px] object-cover  mb-4"
+              className="w-full h-40 object-cover  mb-4"
             />
 
             <h3 className="font-semibold text-black mb-2">

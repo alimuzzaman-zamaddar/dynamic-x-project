@@ -43,7 +43,7 @@ const PrintingTechnologiesDrone = () => {
           {technologies.map((tech) => (
             <div
               key={tech.id}
-              className="border-2 border-[#1A1A1A]/40 border-l-[4px] border-l-[#1A1A1A] p-6 flex flex-col gap-3 "
+              className="border-2 border-[#1A1A1A]/40 border-l-4 border-l-[#1A1A1A] p-6 flex flex-col gap-3 "
             >
               <h3 className="font-semibold text-primary-black leading-tight">
                 {tech.title}
