@@ -7,7 +7,7 @@ const technologies = [
     id: 1,
     title: "Componenti Non Disponibili o Obsoleti",
     description: "L'assenza di ricambi originali paralizza interi ecosistemi: un proprietario di un'Alfa Romeo Spider del 1972 che attende sei mesi per una modanatura del cruscotto fuori produzione, un operatore di droni costretto a fermare un velivolo da 15.000€ per un braccio del telaio esaurito, o una clinica veterinaria bloccata per l'impossibilità di reperire impianti su misura. DynamicsX trasforma una foto o un file CAD in un componente fisico pronto all'uso in sole 48–72 ore, eliminando l'obsolescenza come ostacolo."
-  }, 
+  },
   {
     id: 2,
     title: "Cicli di Sviluppo Lenti e Costosi",
@@ -25,11 +25,7 @@ const Risolviamo = () => {
   return (
     <section className='lg:pt-18 pt-8'>
       <Container>
-        <h2 className="lg:text-4xl text-2xl font-semibold text-[#0A0A0A]">
-          Le Sfide che Risolviamo
-        </h2>
-
-        {/* Description */}
+        <h2 className="lg:text-4xl text-2xl font-semibold text-[#0A0A0A]">Le Sfide che Risolviamo</h2>
         <p className="text-[15px] font-normal text-[#1E2939] pt-4 max-w-4xl">
           Nei settori ad alta specializzazione, la manifattura tradizionale non riesce a rispondere alle necessità di flessibilità e velocità richieste dal mercato. I nostri clienti affrontano quotidianamente tre principali colli di bottiglia che compromettono l'efficienza operativa, i costi di gestione e, nei casi più critici, gli esiti dei trattamenti medicali. DynamicsX interviene proprio dove le catene di fornitura convenzionali si fermano, offrendo soluzioni tecniche avanzate per superare queste inefficienze strutturali.
         </p>
@@ -37,14 +33,10 @@ const Risolviamo = () => {
           {technologies.map((tech) => (
             <div
               key={tech.id}
-              className=" border-l-[4px] border-l-[#1A1A1A] p-6 flex flex-col gap-3"
+              className=" border-l-4 border-l-[#1A1A1A] p-6 flex flex-col gap-3"
             >
-              <h3 className="text-xl md:text-[22px] font-semibold text-primary-black leading-tight">
-                {tech.title}
-              </h3>
-              <p className="text-[14px] md:text-[15px] leading-[1.6] text-black/70">
-                {tech.description}
-              </p>
+              <h3 className="text-xl md:text-[22px] font-semibold text-primary-black leading-tight">{tech.title}</h3>
+              <p className="text-[14px] md:text-[15px] leading-[1.6] text-black/70">{tech.description}</p>
             </div>
           ))}
         </div>
