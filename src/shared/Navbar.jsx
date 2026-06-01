@@ -176,7 +176,7 @@ const Navbar = () => {
                     className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
                   >
                     {nav.label}
-                    <span className="text-xs mt-[1px]">▼</span>
+                    <span className="text-xs mt-px">▼</span>
                   </Link>
 
                   <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
