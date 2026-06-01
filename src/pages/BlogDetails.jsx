@@ -126,13 +126,13 @@ export default function BlogDetails() {
           </button>
         </div>
 
-        <div className="relative w-full overflow-hidden rounded-2xl aspect-[16/7] bg-gray-100">
+        <div className="relative w-full overflow-hidden rounded-2xl aspect-16/7 bg-gray-100">
           <div
             className="flex h-full w-full transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {slides.map((slide, index) => (
-              <div key={index} className="relative h-full w-full flex-shrink-0">
+              <div key={index} className="relative h-full w-full shrink-0">
                 {slide.type === 'image' ? (
                   <img src={slide.url} alt="" className="h-full w-full object-cover" />
                 ) : (
