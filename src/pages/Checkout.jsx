@@ -45,6 +45,8 @@ export default function Checkout() {
     fullAddress: '',
   })
 
+  const [paymentMethod, setPaymentMethod] = useState('stripe')
+
   const checkoutLockRef = React.useRef(false)
 
   const handleCheckout = async () => {
@@ -74,6 +76,7 @@ export default function Checkout() {
             technology_id: cd.technology_id ?? null,
             material_id: cd.material_id ?? null,
             color_id: cd.color_id ?? null,
+            user_file_id: cd.user_file_id ?? null,
             uploaded_file: cd.uploaded_file || cd.file_path || '',
             ...(cd.volume_cm3 != null ? { volume_cm3: cd.volume_cm3 } : {}),
             ...(cd.material_usage_grams != null ? { material_usage_grams: cd.material_usage_grams } : {}),
@@ -103,7 +106,7 @@ export default function Checkout() {
         discount: 0,
         total: grandTotal,
         currency: 'USD',
-        payment_method: 'stripe',
+        payment_method: paymentMethod,
         payment_status: 'pending',
         transaction_id: '',
         notes: '',
@@ -129,36 +132,7 @@ export default function Checkout() {
         return
       }
 
-      const orderId = json.data?.order_id ?? json.data?.id ?? json.order_id
-
-      if (!orderId) {
-        setCheckoutError('Order created but no order ID returned.')
-        setSubmitting(false)
-        checkoutLockRef.current = false
-        return
-      }
-
-      // Step 2: Create Stripe checkout session
-      const sessionRes = await fetch(`${BASE_URL}/auth/checkout/session`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ order_id: orderId }),
-      })
-
-      const sessionJson = await sessionRes.json()
-
-      if (!sessionRes.ok || !sessionJson.success) {
-        setCheckoutError(sessionJson.message || 'Failed to create payment session.')
-        setSubmitting(false)
-        checkoutLockRef.current = false
-        return
-      }
-
-      const checkoutUrl = sessionJson.data?.checkout_url
+      const checkoutUrl = json.data?.checkout_url
 
       if (!checkoutUrl) {
         setCheckoutError('No checkout URL returned from payment provider.')
@@ -166,6 +140,8 @@ export default function Checkout() {
         checkoutLockRef.current = false
         return
       }
+
+      const orderId = json.data?.checkout_intent_id ?? json.data?.id ?? json.order_id ?? ''
 
       // Save order info for the success page
       localStorage.setItem('dx_pending_order', JSON.stringify({
@@ -422,6 +398,28 @@ export default function Checkout() {
             <div className="flex justify-between items-center text-sm text-slate-500">
               <span>Shipping Fee</span>
               <span className="font-semibold text-slate-800">€{SHIPPING_FEE.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <hr className="border-t border-slate-200" />
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-slate-800">Payment Method</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('stripe')}
+                className={`py-2 px-3 border rounded-xl flex items-center justify-center transition-colors cursor-pointer ${paymentMethod === 'stripe' ? 'border-[#0F141C] bg-slate-50 font-semibold text-[#0F141C]' : 'border-slate-200 hover:border-slate-300 text-slate-600'}`}
+              >
+                Stripe
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('paypal')}
+                className={`py-2 px-3 border rounded-xl flex items-center justify-center transition-colors cursor-pointer ${paymentMethod === 'paypal' ? 'border-[#0F141C] bg-slate-50 font-semibold text-[#0F141C]' : 'border-slate-200 hover:border-slate-300 text-slate-600'}`}
+              >
+                PayPal
+              </button>
             </div>
           </div>
 

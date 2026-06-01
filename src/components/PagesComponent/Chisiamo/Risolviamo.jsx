@@ -7,7 +7,7 @@ const technologies = [
     id: 1,
     title: "Componenti Non Disponibili o Obsoleti",
     description: "L'assenza di ricambi originali paralizza interi ecosistemi: un proprietario di un'Alfa Romeo Spider del 1972 che attende sei mesi per una modanatura del cruscotto fuori produzione, un operatore di droni costretto a fermare un velivolo da 15.000€ per un braccio del telaio esaurito, o una clinica veterinaria bloccata per l'impossibilità di reperire impianti su misura. DynamicsX trasforma una foto o un file CAD in un componente fisico pronto all'uso in sole 48–72 ore, eliminando l'obsolescenza come ostacolo."
-  },
+  }, 
   {
     id: 2,
     title: "Cicli di Sviluppo Lenti e Costosi",
