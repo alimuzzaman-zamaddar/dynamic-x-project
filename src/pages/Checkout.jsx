@@ -45,6 +45,8 @@ export default function Checkout() {
     fullAddress: '',
   })
 
+  const [paymentMethod, setPaymentMethod] = useState('stripe')
+
   const checkoutLockRef = React.useRef(false)
 
   const handleCheckout = async () => {
@@ -74,6 +76,7 @@ export default function Checkout() {
             technology_id: cd.technology_id ?? null,
             material_id: cd.material_id ?? null,
             color_id: cd.color_id ?? null,
+            user_file_id: cd.user_file_id ?? null,
             uploaded_file: cd.uploaded_file || cd.file_path || '',
             ...(cd.volume_cm3 != null ? { volume_cm3: cd.volume_cm3 } : {}),
             ...(cd.material_usage_grams != null ? { material_usage_grams: cd.material_usage_grams } : {}),
@@ -103,7 +106,7 @@ export default function Checkout() {
         discount: 0,
         total: grandTotal,
         currency: 'USD',
-        payment_method: 'stripe',
+        payment_method: paymentMethod,
         payment_status: 'pending',
         transaction_id: '',
         notes: '',
@@ -129,36 +132,7 @@ export default function Checkout() {
         return
       }
 
-      const orderId = json.data?.order_id ?? json.data?.id ?? json.order_id
-
-      if (!orderId) {
-        setCheckoutError('Order created but no order ID returned.')
-        setSubmitting(false)
-        checkoutLockRef.current = false
-        return
-      }
-
-      // Step 2: Create Stripe checkout session
-      const sessionRes = await fetch(`${BASE_URL}/auth/checkout/session`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ order_id: orderId }),
-      })
-
-      const sessionJson = await sessionRes.json()
-
-      if (!sessionRes.ok || !sessionJson.success) {
-        setCheckoutError(sessionJson.message || 'Failed to create payment session.')
-        setSubmitting(false)
-        checkoutLockRef.current = false
-        return
-      }
-
-      const checkoutUrl = sessionJson.data?.checkout_url
+      const checkoutUrl = json.data?.checkout_url
 
       if (!checkoutUrl) {
         setCheckoutError('No checkout URL returned from payment provider.')
@@ -166,6 +140,8 @@ export default function Checkout() {
         checkoutLockRef.current = false
         return
       }
+
+      const orderId = json.data?.checkout_intent_id ?? json.data?.id ?? json.order_id ?? ''
 
       // Save order info for the success page
       localStorage.setItem('dx_pending_order', JSON.stringify({
@@ -192,12 +168,8 @@ export default function Checkout() {
         user_name: user?.name || '',
         user_email: user?.email || '',
       }))
-
-      // Clear cart before redirecting
       clearCart()
-
-      // Step 3: Redirect to Stripe checkout
-      // Keep submitting=true and lock active — do NOT reset, page is navigating away
+      // eslint-disable-next-line react-hooks/immutability
       window.location.href = checkoutUrl
     } catch (err) {
       console.error('Checkout error:', err)
@@ -231,7 +203,6 @@ export default function Checkout() {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
-      {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-slate-400 mb-8 select-none">
         <Link to="/dashboard/cart">
           <span className="hover:text-slate-600 transition-colors">My Cart</span>
@@ -242,10 +213,8 @@ export default function Checkout() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-        {/* Left Column */}
         <div className="lg:col-span-2 space-y-8">
 
-          {/* Order Items */}
           <div>
             <h2 className="text-2xl font-semibold text-slate-800 mb-4">Your Order</h2>
             <div className="space-y-4">
@@ -254,7 +223,6 @@ export default function Checkout() {
                   key={item.cartId}
                   className="border border-slate-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 bg-white relative"
                 >
-                  {/* Custom Badge */}
                   {item.type === 'custom' && (
                     <span className="absolute top-3 right-3 bg-violet-100 text-violet-600 text-xs font-semibold px-2 py-0.5 rounded flex items-center gap-1">
                       <Tag size={10} /> Custom Order
@@ -265,7 +233,6 @@ export default function Checkout() {
                     <figure className="w-32 h-32 bg-linear-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl flex flex-col items-center justify-center shrink-0 mx-auto sm:mx-0 gap-1">
                       <FileBox size={40} className="text-violet-400" />
                       <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wide px-2 text-center line-clamp-2">
-                        {/* {item.customData?.fileName || 'STL File'} */}
                       </span>
                     </figure>
                   ) : (
@@ -284,7 +251,6 @@ export default function Checkout() {
                       <p className="text-sm text-slate-400 mt-0.5">{item.product_code}</p>
                     </div>
 
-                    {/* Tags */}
                     <div className="flex flex-wrap gap-1.5 py-3">
                       {item.technology && (
                         <span className="text-xs font-medium px-2 py-0.5 rounded bg-orange-50 text-orange-600 border border-orange-100">
@@ -337,13 +303,11 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Shipping Address */}
           <div>
             <h2 className="text-2xl font-semibold text-slate-800 mb-4">Shipping Address</h2>
 
             <div className="border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-4 bg-white">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Country */}
                 <div className="relative">
                   <select
                     value={address.country}
@@ -359,7 +323,6 @@ export default function Checkout() {
                   <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                 </div>
 
-                {/* Province */}
                 <div className="relative">
                   <input
                     type="text"
@@ -370,7 +333,6 @@ export default function Checkout() {
                   />
                 </div>
 
-                {/* City */}
                 <div className="relative">
                   <input
                     type="text"
@@ -381,7 +343,6 @@ export default function Checkout() {
                   />
                 </div>
 
-                {/* Postal Code */}
                 <div className="relative">
                   <input
                     type="text"
@@ -406,7 +367,6 @@ export default function Checkout() {
           </div>
         </div>
 
-        {/* Right: Order Summary */}
         <div className="border border-slate-200 rounded-2xl p-6 bg-white w-full space-y-6 lg:sticky lg:top-6">
           <div className="space-y-3">
             <h3 className="text-base font-semibold text-slate-800">Order Summary</h3>
@@ -438,6 +398,28 @@ export default function Checkout() {
             <div className="flex justify-between items-center text-sm text-slate-500">
               <span>Shipping Fee</span>
               <span className="font-semibold text-slate-800">€{SHIPPING_FEE.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <hr className="border-t border-slate-200" />
+
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-slate-800">Payment Method</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('stripe')}
+                className={`py-2 px-3 border rounded-xl flex items-center justify-center transition-colors cursor-pointer ${paymentMethod === 'stripe' ? 'border-[#0F141C] bg-slate-50 font-semibold text-[#0F141C]' : 'border-slate-200 hover:border-slate-300 text-slate-600'}`}
+              >
+                Stripe
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('paypal')}
+                className={`py-2 px-3 border rounded-xl flex items-center justify-center transition-colors cursor-pointer ${paymentMethod === 'paypal' ? 'border-[#0F141C] bg-slate-50 font-semibold text-[#0F141C]' : 'border-slate-200 hover:border-slate-300 text-slate-600'}`}
+              >
+                PayPal
+              </button>
             </div>
           </div>
 

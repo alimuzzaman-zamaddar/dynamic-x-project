@@ -27,7 +27,7 @@ const NewBanner = ({
         )}
 
         {description && (
-          <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-[600px] md:max-w-[632px] mx-auto">
+          <p className="banner-description text-sm sm:text-base md:text-base xl:text-[16px] leading-6 sm:leading-7 md:leading-8 max-w-[90%] sm:max-w-150 md:max-w-158 mx-auto">
             {description}
           </p>
         )}
@@ -36,9 +36,9 @@ const NewBanner = ({
           <Link to="/new-upload-design">
             <button
               type="button"
-              className="group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70 active:scale-[0.98] xl:mt-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2"
+              className="group relative flex items-center gap-5 px-4 md:px-7 py-4 md:py-4 text-sm md:text-[15.5px] font-medium tracking-[-0.01em] text-neutral-900 bg-white border border-white/40 rounded-full overflow-hidden transition-all duration-500 ease-out hover:bg-transparent hover:text-white hover:border-white/70 active:scale-[0.98] xl:mt-4 focus-visible:outline focus-visible:outline-white cursor-pointer focus-visible:outline-offset-2"
             >
-              <span className="relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5">
+              <span className="relative transition-all mr-10 duration-500 ease-out group-hover:translate-x-0.5">
                 {buttonText}
               </span>
 
@@ -46,7 +46,7 @@ const NewBanner = ({
                 <ArrowBlack className="size-5 transition-transform duration-500 group-hover:scale-110" />
               </div>
 
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full" />
+              <div className="absolute inset-0 rounded-full bg-linear-to-r from-white/0 via-white/10 to-white/0 opacity-0 -translate-x-full transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-full" />
             </button>
           </Link>
         ) : (

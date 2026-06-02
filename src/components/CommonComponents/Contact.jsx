@@ -197,7 +197,7 @@ const Contact = ({
 
               {/* Textarea */}
               <div className="relative">
-                <textarea name="message" placeholder="Message" className={`common-input border-b min-h-[146px] ${getErrorClass(formData.message)}`} value={formData.message} onChange={handleChange} />
+                <textarea name="message" placeholder="Message" className={`common-input border-b min-h-36.5 ${getErrorClass(formData.message)}`} value={formData.message} onChange={handleChange} />
                 <ErrorText value={formData.message} />
               </div>
 

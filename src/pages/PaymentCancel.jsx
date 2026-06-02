@@ -11,14 +11,12 @@ export default function PaymentCancel() {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    // Trigger entrance animation
     const timer = setTimeout(() => setShowContent(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
   return (
     <>
-      {/* CSS animations */}
       <style>{`
         @keyframes cancelPulse {
           0% { transform: scale(0.8); opacity: 0; }
@@ -32,7 +30,7 @@ export default function PaymentCancel() {
         .animate-cancel-pulse { animation: cancelPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
       `}</style>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50/30 flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-red-50/30 flex flex-col items-center justify-center p-4">
         {/* Cancel Header */}
         <div className="relative w-full overflow-hidden">
           {/* Decorative background blur */}
@@ -44,7 +42,7 @@ export default function PaymentCancel() {
             <div className="mb-6 animate-cancel-pulse">
               <div className="relative w-24 h-24 mx-auto">
                 <div className="absolute inset-0 bg-red-400/20 rounded-full animate-ping" style={{ animationDuration: '2s' }} />
-                <div className="relative w-24 h-24 bg-gradient-to-br from-red-400 to-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-red-200">
+                <div className="relative w-24 h-24 bg-linear-to-br from-red-400 to-rose-500 rounded-full flex items-center justify-center shadow-lg shadow-red-200">
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M18 6L6 18M6 6l12 12" style={{ strokeDasharray: 100, animation: 'crossDraw 0.6s ease-out 0.3s both' }} />
                   </svg>

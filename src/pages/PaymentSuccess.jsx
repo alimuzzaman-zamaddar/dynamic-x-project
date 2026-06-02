@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link } from 'react-router'
 import {
   CheckCircle,
   Package,
@@ -15,13 +15,11 @@ import {
 } from 'lucide-react'
 
 export default function PaymentSuccess() {
-  const [searchParams] = useSearchParams()
   const [order, setOrder] = useState(null)
   const [copiedField, setCopiedField] = useState(null)
   const [showContent, setShowContent] = useState(false)
   const invoiceRef = useRef(null)
 
-  const sessionId = searchParams.get('session_id')
 
   useEffect(() => {
     try {
@@ -33,7 +31,6 @@ export default function PaymentSuccess() {
       // ignore
     }
 
-    // Trigger entrance animation
     const timer = setTimeout(() => setShowContent(true), 100)
     return () => clearTimeout(timer)
   }, [])
@@ -65,7 +62,7 @@ export default function PaymentSuccess() {
 
   if (!order) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-emerald-50/30 flex items-center justify-center p-4">
         <div className="text-center space-y-6 max-w-md">
           <div className="w-20 h-20 mx-auto rounded-full bg-emerald-100 flex items-center justify-center">
             <CheckCircle size={40} className="text-emerald-500" />
@@ -114,11 +111,10 @@ export default function PaymentSuccess() {
         .animate-fade-slide-up { animation: fadeSlideUp 0.5s ease-out forwards; }
       `}</style>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 pb-16 mt-30">
-        {/* Success Header */}
+      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-emerald-50/30 pb-16 mt-30">
         <div className="no-print relative overflow-hidden">
           {/* Decorative gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/80 via-emerald-50/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-b from-emerald-50/80 via-emerald-50/30 to-transparent pointer-events-none" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-200/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-200/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -127,7 +123,7 @@ export default function PaymentSuccess() {
             <div className="mb-6 animate-success-pulse">
               <div className="relative w-24 h-24 mx-auto">
                 <div className="absolute inset-0 bg-emerald-400/20 rounded-full animate-ping" style={{ animationDuration: '2s' }} />
-                <div className="relative w-24 h-24 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-200">
+                <div className="relative w-24 h-24 bg-linear-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-200">
                   <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6L9 17l-5-5" style={{ strokeDasharray: 100, animation: 'checkDraw 0.6s ease-out 0.3s both' }} />
                   </svg>
@@ -185,7 +181,7 @@ export default function PaymentSuccess() {
           {/* Invoice Card */}
           <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
             {/* Invoice Header */}
-            <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 sm:p-8 text-white">
+            <div className="bg-linear-to-r from-slate-800 to-slate-900 p-6 sm:p-8 text-white">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -355,10 +351,10 @@ export default function PaymentSuccess() {
                       <span className="font-medium text-emerald-600">-{formatCurrency(order.discount)}</span>
                     </div>
                   )}
-                  <hr className="border-t border-dashed border-slate-200 !my-3" />
+                  <hr className="border-t border-dashed border-slate-200 my-3!" />
                   <div className="flex justify-between items-center">
                     <span className="text-base font-semibold text-slate-800">Total Paid</span>
-                    <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="text-2xl font-bold bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                       {formatCurrency(order.total)}
                     </span>
                   </div>
@@ -371,7 +367,7 @@ export default function PaymentSuccess() {
               </div>
 
               {/* Footer note */}
-              <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5">
+              <div className="bg-linear-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                     <CheckCircle size={16} className="text-emerald-600" />
