@@ -961,6 +961,7 @@ export default function UploadForm() {
                                       technology_id: currentTechObj?.id ?? null,
                                       material_id: currentMatObj?.id ?? null,
                                       color_id: selectedColorId,
+                                      user_file_id: storedUpload?.response?.data?.file_id ?? null,
                                       uploaded_file: storedUpload?.filePath
                                         || storedUpload?.response?.data?.file_path
                                         || storedUpload?.response?.data?.uploaded_file

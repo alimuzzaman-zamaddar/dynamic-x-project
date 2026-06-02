@@ -106,13 +106,13 @@ export default function ProductDetails() {
   if (loading) {
     return (
       <section className="pt-24 md:pt-40 pb-20 px-4 bg-white">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-max-width mx-auto">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-10 items-start animate-pulse">
             <div className="xl:col-span-2 space-y-6">
               <div className="h-96 bg-slate-100 rounded-3xl" />
               <div className="h-40 bg-slate-100 rounded-2xl" />
             </div>
-            <div className="h-[500px] bg-slate-100 rounded-3xl" />
+            <div className="h-125 bg-slate-100 rounded-3xl" />
           </div>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function ProductDetails() {
   if (error || !product) {
     return (
       <section className="pt-24 md:pt-40 pb-20 px-4 bg-white">
-        <div className="max-w-[1440px] mx-auto text-center py-20">
+        <div className="max-w-max-width mx-auto text-center py-20">
           <p className="text-xl font-semibold text-slate-700">Product not found</p>
           <p className="text-sm text-slate-400 mt-2">{error}</p>
           <button
@@ -138,7 +138,7 @@ export default function ProductDetails() {
 
   return (
     <section className="pt-24 md:pt-40 pb-20 px-4 bg-white">
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-max-width mx-auto">
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-10 items-start">
 
           {/* Left Side */}
@@ -163,7 +163,7 @@ export default function ProductDetails() {
               </div>
 
               {/* Main Preview */}
-              <div className="border border-gray-300 p-3 rounded-3xl w-full h-[320px] sm:h-[400px] xl:max-h-125 order-1 sm:order-2">
+              <div className="border border-gray-300 p-3 rounded-3xl w-full h-80 sm:h-100 xl:max-h-125 order-1 sm:order-2">
                 <figure className="bg-[#D9D9D9] rounded-xl w-full h-full p-6 sm:p-10 flex items-center justify-center">
                   <img src={selectedImage} alt={product.title} className="max-h-full max-w-full object-contain" />
                 </figure>
@@ -357,7 +357,7 @@ export default function ProductDetails() {
             {/* Quantity Picker */}
             <div className="space-y-3 pb-5">
               <label className="text-sm font-semibold text-[#737373] block">Quantity</label>
-              <div className="flex items-center border border-[#262626] rounded-3xl bg-white overflow-hidden justify-between max-w-[200px]">
+              <div className="flex items-center border border-[#262626] rounded-3xl bg-white overflow-hidden justify-between max-w-50">
                 <button
                   onClick={() => handleQuantityChange(quantity - 1)}
                   className="p-3 hover:bg-slate-100 transition-colors text-slate-600 hover:text-slate-900 cursor-pointer"

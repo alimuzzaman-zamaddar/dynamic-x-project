@@ -50,11 +50,9 @@ export function CartProvider({ children }) {
     writeCart(newItems);
   }, []);
 
-  /** Add a normal product (from /product or /product/:id page) */
   const addNormalProduct = useCallback((product, quantity = 1, selectedColor = null) => {
     const effectivePrice = product.discount_price ?? product.price;
     setItems((prev) => {
-      // Check if same product+color already in cart
       const existing = prev.find(
         (i) => i.type === 'normal' && i.id === product.id && i.selectedColor === selectedColor
       );
@@ -88,7 +86,6 @@ export function CartProvider({ children }) {
     });
   }, []);
 
-  /** Add a custom product (from custom quote / upload flow) */
   const addCustomProduct = useCallback((customProduct) => {
     const newItem = {
       cartId: generateId(),

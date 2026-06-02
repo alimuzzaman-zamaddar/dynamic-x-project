@@ -169,18 +169,17 @@ const Navbar = () => {
             <li key={idx} className="relative group">
               {nav.dropdown ? (
                 <>
-                  {/* Has fallback route representation for clean status-bar display */}
                   <Link
                     to={`${nav.path}#${nav.hash}`}
                     onClick={(e) => handleHashNavigation(e, nav)}
                     className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
                   >
                     {nav.label}
-                    <span className="text-xs mt-[1px]">▼</span>
+                    <span className="text-xs mt-px">▼</span>
                   </Link>
 
                   <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                    <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
+                    <div className="min-w-45 rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
                       {nav.dropdown.map((item, subIdx) => (
                         <Link
                           key={subIdx}
@@ -216,7 +215,7 @@ const Navbar = () => {
         {/* Mobile Sidebar */}
         <div
           ref={sidebarRef}
-          className={`fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-[280px] bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-70 bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <Link to="/" onClick={() => setIsOpen(false)}>
             <img
@@ -249,7 +248,7 @@ const Navbar = () => {
                       </button>
                     </div>
 
-                    <div className={`overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? "max-h-[400px] mt-2" : "max-h-0"}`}>
+                    <div className={`overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? "max-h-100 mt-2" : "max-h-0"}`}>
                       <div className="ml-4 flex flex-col gap-y-3 border-l border-white/10 pl-4">
                         {nav.dropdown.map((item, subIdx) => (
                           <Link
@@ -331,7 +330,7 @@ const Navbar = () => {
           >
             <ShoppingCart size={22} />
             {totalCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
                 {totalCount > 99 ? '99+' : totalCount}
               </span>
             )}
@@ -357,7 +356,7 @@ const Navbar = () => {
           >
             <ShoppingCart size={22} />
             {totalCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 leading-none shadow-md">
                 {totalCount > 99 ? '99+' : totalCount}
               </span>
             )}
@@ -375,7 +374,7 @@ const Navbar = () => {
                 )}
               </Link>
               <div className="absolute top-full right-0 mt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="min-w-[180px] rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2 flex flex-col">
+                <div className="min-w-45 rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2 flex flex-col">
                   <div className="px-4 py-2 border-b border-white/10 mb-2">
                     <p className="text-sm text-white font-medium truncate">{user.name}</p>
                     <p className="text-xs text-slate-400 truncate">{user.email}</p>

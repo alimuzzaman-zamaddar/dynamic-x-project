@@ -16,7 +16,7 @@ const ComingSoonHero = () => {
       <div className="absolute inset-0 bg-black/40" />
 
       <div className="relative container h-full w-full flex flex-col items-center justify-center  ">
-        <div className="flex flex-col gap-y-10 items-center max-w-[719px] ">
+        <div className="flex flex-col gap-y-10 items-center max-w-179.75 ">
           <div className="flex flex-col gap-y-6 items-center ">
             <h2 className="text-[73px] font-normal text-white ">
               {" "}
@@ -43,12 +43,12 @@ const ComingSoonHero = () => {
         hover:bg-transparent hover:text-white
         hover:border-white/70
         active:scale-[0.98]
-        focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/50 cursor-pointer focus-visible:outline-offset-2
+        focus-visible:outline focus-visible:outline-white/50 cursor-pointer focus-visible:outline-offset-2
       `}
           >
             <span
               className={`
-          relative transition-all mr-[40px] duration-500 ease-out
+          relative transition-all mr-10 duration-500 ease-out
           group-hover:translate-x-0.5
         `}
             >
@@ -61,7 +61,7 @@ const ComingSoonHero = () => {
           flex size-11 items-center justify-center rounded-full
           bg-neutral-900 text-white
           transition-all duration-500 ease-out
-          group-hover:bg-transparent group-hover:scale-110 group-hover:rotate-[135deg]
+          group-hover:bg-transparent group-hover:scale-110 group-hover:rotate-135
         `}
             >
               <ArrowBlack className="size-5 transition-transform duration-500 group-hover:scale-110" />
@@ -70,7 +70,7 @@ const ComingSoonHero = () => {
             <div
               className={`
           absolute inset-0 rounded-full
-          bg-gradient-to-r from-white/0 via-white/10 to-white/0
+          bg-linear-to-r from-white/0 via-white/10 to-white/0
           opacity-0 -translate-x-full
           transition-all duration-700 ease-out
           group-hover:opacity-100 group-hover:translate-x-full
