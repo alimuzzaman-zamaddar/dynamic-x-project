@@ -178,13 +178,13 @@ export default function MaterialsPage() {
                       />
                     </div>
 
-                    <span className="text-[15px] font-light leading-[150%] max-w-[290px] mt-5 text-black/60">
+                    <span className="text-[15px] font-light leading-[150%] max-w-72.5 mt-5 text-black/60">
                       {material.description}
                     </span>
                   </div>
 
                   {/* BUTTON (PUSHED TO BOTTOM) */}
-                  <div className="mt-auto">
+                  {/* <div className="mt-auto">
                     <button
                       style={{
                         border: "1px solid rgba(0, 0, 0, 0.16)",
@@ -202,7 +202,7 @@ export default function MaterialsPage() {
                         </div>
                       </Link>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </li>
             );

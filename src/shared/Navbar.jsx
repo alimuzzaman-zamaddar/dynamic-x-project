@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { useLocation, useNavigate, Link } from "react-router"; // Imported Link
+import { useLocation, useNavigate, Link } from "react-router";
 import logo from "../assets/img/home/W.DynamicsX - RED 1.png";
 import { ShoppingCart, User, LogOut } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -153,64 +153,66 @@ const Navbar = () => {
   return (
     <nav className={`fixed ease-in-out duration-500 transition-all px-4 top-0 left-0 w-full z-50 ${isTransparentBg ? "bg-transparent" : "bg-black"}`}>
       <div className="container mx-auto lg:py-8 py-4 flex items-center justify-between">
+        <div className="flex gap-x-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center" aria-label="Home">
+            <img
+              src={logo}
+              className="w-32 2xl:w-40 cursor-pointer h-10 2xl:h-12 object-contain"
+              alt="site logo"
+            />
+          </Link>
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center" aria-label="Home">
-          <img
-            src={logo}
-            className="w-32 2xl:w-40 cursor-pointer h-10 2xl:h-12 object-contain"
-            alt="site logo"
-          />
-        </Link>
+          {/* Desktop Navigation */}
+          <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
+            {navMenu.map((nav, idx) => (
+              <li key={idx} className="relative group">
+                {nav.dropdown ? (
+                  <>
+                    <Link
+                      to={`${nav.path}#${nav.hash}`}
+                      onClick={(e) => handleHashNavigation(e, nav)}
+                      className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
+                    >
+                      {nav.label}
+                      <span className="text-xs mt-px">▼</span>
+                    </Link>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
-          {navMenu.map((nav, idx) => (
-            <li key={idx} className="relative group">
-              {nav.dropdown ? (
-                <>
+                    <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                      <div className="min-w-45 rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
+                        {nav.dropdown.map((item, subIdx) => (
+                          <Link
+                            key={subIdx}
+                            to={item.path}
+                            className="block w-full text-left px-4 py-2 text-sm text-white hover:text-blue-500 hover:bg-white/5 cursor-pointer transition text-nowrap"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : nav.hash ? (
                   <Link
                     to={`${nav.path}#${nav.hash}`}
                     onClick={(e) => handleHashNavigation(e, nav)}
-                    className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition flex items-center gap-1"
+                    className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
                   >
                     {nav.label}
-                    <span className="text-xs mt-px">▼</span>
                   </Link>
+                ) : (
+                  <Link
+                    to={nav.path}
+                    className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
+                  >
+                    {nav.label}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
 
-                  <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                    <div className="min-w-45 rounded-xl bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-2">
-                      {nav.dropdown.map((item, subIdx) => (
-                        <Link
-                          key={subIdx}
-                          to={item.path}
-                          className="block w-full text-left px-4 py-2 text-sm text-white hover:text-blue-500 hover:bg-white/5 cursor-pointer transition text-nowrap"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              ) : nav.hash ? (
-                <Link
-                  to={`${nav.path}#${nav.hash}`}
-                  onClick={(e) => handleHashNavigation(e, nav)}
-                  className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
-                >
-                  {nav.label}
-                </Link>
-              ) : (
-                <Link
-                  to={nav.path}
-                  className="text-sm xl:text-[15.6px] text-white hover:text-blue-500 capitalize cursor-pointer transition"
-                >
-                  {nav.label}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
+        </div>
 
         {/* Mobile Sidebar */}
         <div
