@@ -4,19 +4,22 @@ import Container from '../../../shared/Container'
 import { FeatureCard } from '../../CommonComponents/FeatureCard'
 import { Analysis, Carica, Consegna, FileUpload, Preventivo, Prodizune } from '../../SvgContainer/SvgContainer'
 
-const UploadYourDesign = () => {
+const UploadYourDesign = ({ data }) => {
   return (
     <section className='bg-black lg:py-16 py-4'>
       <Container>
         <h4 className="text-white lg:text-4xl text-2xl font-normal text-center leading-tight">
-          Come Funziona: dal File alla Produzione
+          {data?.title}
         </h4>
         <div className="py-8 sm:py-12 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-7">
-          <FeatureCard icon={Carica} title="UPLOAD" description="Carica il file in formato STL, STEP, OBJ o file 2D" />
-          <FeatureCard icon={Analysis} title="ANALISI" description="Verifichiamo il tuo progetto in tempo reale" />
-          <FeatureCard icon={Preventivo} title="PREVENTIVO" description="Ricevi un offera chara ed immadiata" />
-          <FeatureCard icon={Prodizune} title="PRODUZIONE" description="Stampiamo con precision" />
-          <FeatureCard icon={Consegna} title="CONSEGNA" description="Ricevo il tuo progetto in pochi giorni" />
+          {data?.cards?.map((card, index) => (
+            <FeatureCard
+              key={index}
+              iconUrl={card.icon_url} 
+              title={card.title}
+              description={card.subtitle}
+            />
+          ))}
         </div>
 
         {/* Upload drop-zone */}
@@ -37,9 +40,9 @@ const UploadYourDesign = () => {
             </div>
           </Link>
           {/* <input
-            type="file"
-            className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
-          /> */}
+              type="file"
+              className="absolute top-0 left-0 h-full w-full rounded-xl opacity-0 cursor-pointer"
+            /> */}
         </div>
       </Container>
       <div id="categorie" className="h-15"></div>
