@@ -11,8 +11,6 @@ import { PageLoader } from "../shared/Loader";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
-
-
 const HomePage = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true); 
