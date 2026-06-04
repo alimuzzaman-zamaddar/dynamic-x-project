@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router"; 
 import Container from "../../../shared/Container";
 
 const CategoryCard = ({ category }) => {
+  const dynamicLink = category.link.startsWith("/") ? category.link : `/${category.link}`;
+
   return (
     <Link
-      to={category.link || "#"}
+      to={dynamicLink}
       className="group block border-2 border-[#979797] rounded-xl w-full h-full transition-all duration-300 hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 no-underline"
     >
       <div className="lg:p-6 p-4 flex flex-col items-center gap-y-3 h-full justify-between">
@@ -37,7 +39,7 @@ const CategoryCard = ({ category }) => {
   );
 };
 
-const CategorySection = ({ data }) => {        
+const CategorySection = ({ data }) => {
   const cards = data?.cards || [];
   const subtitle = data?.subtitle || '';
 
@@ -55,7 +57,7 @@ const CategorySection = ({ data }) => {
             </h3>
           </div>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:gap-7.5 gap-4 w-full">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:gap-7.5 gap-4 w-full list-none p-0">
             {cards.map((category, idx) => (
               <li key={idx} className="flex w-full min-h-full">
                 <CategoryCard category={category} />

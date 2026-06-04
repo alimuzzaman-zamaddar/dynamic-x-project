@@ -1,6 +1,6 @@
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Container from "../../../shared/Container";
-import React, { useRef, useState, useEffect } from "react";
 
 const Technologies = ({ data }) => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const Technologies = ({ data }) => {
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const SCROLL_AMOUNT = 360;
-  const cards = data?.cards || [];   
+  const cards = data?.cards || [];
 
   const updateArrows = () => {
     const el = sliderRef.current;
@@ -21,14 +21,16 @@ const Technologies = ({ data }) => {
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
+
     updateArrows();
     el.addEventListener("scroll", updateArrows);
     window.addEventListener("resize", updateArrows);
+
     return () => {
       el.removeEventListener("scroll", updateArrows);
       window.removeEventListener("resize", updateArrows);
     };
-  }, []);
+  }, [cards]);
 
   const scrollLeft = () => sliderRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: "smooth" });
   const scrollRight = () => sliderRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
@@ -64,32 +66,36 @@ const Technologies = ({ data }) => {
 
         <div
           ref={sliderRef}
-          className="flex flex-row gap-x-5 overflow-x-auto scroll-smooth"
+          className="flex flex-row gap-x-5 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {cards.map((card, idx) => (
-            <div
-              key={idx}
-              onClick={() => navigate(`/${card.title.toLowerCase()}`)}
-              className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
-            >
-              <div className="overflow-hidden rounded-xl">
-                <img
-                  src={card.image_url}                               
-                  className="w-[300px] lg:w-[330px] lg:h-[300px] h-40 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
-                  alt={card.title}
-                />
+          {cards.map((card, idx) => {
+            const safeSlug = card.link || card.slug || card.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+            return (
+              <div
+                key={idx}
+                onClick={() => navigate(`/${safeSlug}`)}
+                className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
+              >
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={card.image_url}
+                    className="w-[300px] lg:w-[330px] lg:h-[300px] h-40 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
+                    alt={card.title}
+                  />
+                </div>
+                <div className="flex flex-col gap-y-2 max-w-[330px]">
+                  <h5 className="lg:text-2xl text-lg font-semibold text-black leading-[133%]">
+                    {card.title}
+                  </h5>
+                  <span className="text-sm text-black opacity-60 font-medium">
+                    {card.subtitle}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col gap-y-2 max-w-[330px]">
-                <h5 className="lg:text-2xl text-lg font-semibold text-black leading-[133%]">
-                  {card.title}                                          
-                </h5>
-                <span className="text-sm text-black opacity-60 font-medium">
-                  {card.subtitle}                                      
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div id="services" className="h-[60px]"></div>
