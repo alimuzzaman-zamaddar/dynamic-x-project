@@ -9,7 +9,7 @@ const Technologies = ({ data }) => {
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const SCROLL_AMOUNT = 360;
-  const cards = data?.cards || [];   // 👈 from API
+  const cards = data?.cards || [];   
 
   const updateArrows = () => {
     const el = sliderRef.current;
@@ -70,22 +70,22 @@ const Technologies = ({ data }) => {
           {cards.map((card, idx) => (
             <div
               key={idx}
-              onClick={() => navigate(`/${card.title.toLowerCase()}`)}  // 👈 e.g. /fdm, /sla
+              onClick={() => navigate(`/${card.title.toLowerCase()}`)}
               className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
             >
               <div className="overflow-hidden rounded-xl">
                 <img
-                  src={card.image_url}                                  // 👈 from API
+                  src={card.image_url}                               
                   className="w-[300px] lg:w-[330px] lg:h-[300px] h-40 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
                   alt={card.title}
                 />
               </div>
               <div className="flex flex-col gap-y-2 max-w-[330px]">
                 <h5 className="lg:text-2xl text-lg font-semibold text-black leading-[133%]">
-                  {card.title}                                          {/* 👈 from API */}
+                  {card.title}                                          
                 </h5>
                 <span className="text-sm text-black opacity-60 font-medium">
-                  {card.subtitle}                                       {/* 👈 from API */}
+                  {card.subtitle}                                      
                 </span>
               </div>
             </div>
