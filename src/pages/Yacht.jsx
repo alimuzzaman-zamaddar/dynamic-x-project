@@ -36,8 +36,9 @@ export const Yacht = () => {
   const TechnologiesData = data?.data?.tecnologie_di_stampa_disponibili || {};
   const WhyChooseUsData = data?.data?.perche_sceglierci || {};
 
-
   if (loading) return <div><PageLoader /></div>;
+
+
   return (
     <div>
       <NewBanner title={NewBannerData.title} image={NewBannerData.bg_image_url || banner} />
