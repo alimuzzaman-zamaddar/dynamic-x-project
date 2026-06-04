@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Container from "../../../shared/Container";
+import React, { useRef, useState, useEffect } from "react";
 
 const Technologies = ({ data }) => {
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ const Technologies = ({ data }) => {
           })}
         </div>
 
-        <div id="services" className="h-[60px]"></div>
+        <div id="services" className="h-15"></div>
       </Container>
     </section>
   );
