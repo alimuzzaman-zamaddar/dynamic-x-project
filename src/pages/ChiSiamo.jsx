@@ -33,6 +33,7 @@ const ChiSiamo = () => {
   const NewBannerData = data?.data?.hero || {};
   const DynamicsXData = data?.data?.under_hero || {};
   const ChisiamoData = data?.data?.chi_siamo || {};
+  const NostroData = data?.data?.our_approach || {};
 
 
   if (loading) {
@@ -47,7 +48,7 @@ const ChiSiamo = () => {
         underHero={DynamicsXData}
         chiSiamo={ChisiamoData}
       />
-      <Nostro />
+      <Nostro data={NostroData} />
       <Oggi />
       <Risolviamo />
       <div className="lg:pb-18 pb-8">
