@@ -43,6 +43,7 @@ const Footwear = () => {
   if (loading) {
     return <PageLoader />;
   }
+  
   return (
     <>
       <NewBanner image={heroData?.bg_image_url || Fashionbg} title={heroData?.title} />
