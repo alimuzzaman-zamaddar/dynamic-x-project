@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ArchitecturalModels = () => {
+const ArchitecturalModels = ({ data }) => {
   const features = [
     {
       title: 'Fedeltà al Progetto',

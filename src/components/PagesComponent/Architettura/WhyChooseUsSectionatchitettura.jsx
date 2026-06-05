@@ -1,7 +1,7 @@
 import React from 'react';
 import ArtisanGraphic from '../../../assets/img/stampa/Architect.png';
 
-const WhyChooseUsSectionatchitettura = () => {
+const WhyChooseUsSectionatchitettura = ({ data }) => {
   const points = [
     {
       title: "Precisione Millimetrica",

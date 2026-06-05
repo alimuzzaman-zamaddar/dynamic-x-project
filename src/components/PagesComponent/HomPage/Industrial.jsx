@@ -36,6 +36,7 @@ const Industrial = () => {
   if (loading) {
     return <PageLoader />;
   }
+  
   return (
     <section>
       <NewBanner image={NewBannerData.image || InduatrialBg} title={NewBannerData.title} />

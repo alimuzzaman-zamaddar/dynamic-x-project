@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MaterialAndTechnologySection = () => {
+const MaterialAndTechnologySection = ({ data }) => {
   const technologies = [
     {
       title: "FDM — Fused Deposition Modeling",

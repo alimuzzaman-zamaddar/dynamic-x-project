@@ -1,6 +1,6 @@
 import React from "react";
 
-const RequestQuoteSection = () => {
+const RequestQuoteSection = ({ data }) => {
   const stats = [
     {
       value: "24h",

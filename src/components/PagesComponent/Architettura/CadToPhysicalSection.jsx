@@ -2,7 +2,7 @@ import React from 'react';
 import CadPhysicalGraphic from '../../../assets/img/stampa/CadToPhysicalSection.png';
 
 
-const CadToPhysicalSection = () => {
+const CadToPhysicalSection = ({ data }) => {
   const steps = [
     { 
       title: "Ottimizzazione", 
