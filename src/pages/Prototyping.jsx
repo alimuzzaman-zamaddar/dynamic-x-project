@@ -42,6 +42,7 @@ const Prototyping = () => {
   const timeToMarketData = data?.data?.il_nostro_approccio_al_time_to_market || {};
   const percheSceglierciData = data?.data?.perche_sceglierci || {};
   const prontiSviluppareData = data?.data?.pronti_a_sviluppare_il_tuo_prodotto || {};
+  console.log('Fetched data:', data);
 
   return (
     <div>

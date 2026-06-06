@@ -107,7 +107,7 @@ export const Stampasla = () => {
       <div className=" mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title="Stampa 3D SLA ad alta precisione"
-          description="Precisione, superfici lisce e dettagli fino all’estremo."
+          // description="Precisione, superfici lisce e dettagli fino all’estremo."
           image={bannerimage}
         />
       </div>
