@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Contact from "../components/CommonComponents/Contact";
+import bannerImg from "../assets/img/stampa/stampa.png";
 import StatsSection from "../components/PagesComponent/Stampa/StatsSection";
 import UseCasesSection from "../components/PagesComponent/Stampa/UseCasesSection";
 import MaterialsSection from "../components/PagesComponent/Stampa/MaterialsSection";
@@ -85,20 +86,17 @@ export const StampaPage = () => {
   if (loading) return <PageLoader />;
   if (!cmsData) return null;
 
-  // 1. Feature Highlights (technology_fdm)
   const featureHighlightsItems = cmsData.technology_fdm?.cards?.map(card => ({
     title: card.title,
     description: card.subtitle
   })) || [];
 
-  // 2. Benefits (produzione_intelligente)
   const benefitsItems = cmsData.produzione_intelligente?.items?.map(item => ({
     icon: item.title.split(' ')[0],
     title: item.title.replace(/^[^ ]+\s+/, ''),
     description: item.subtitle
   })) || [];
 
-  // 3. Materials (materiali_disponibili)
   const materialsItems = cmsData.materiali_disponibili?.cards?.map(card => ({
     title: card.title,
     image: card.image_url,
@@ -111,14 +109,12 @@ export const StampaPage = () => {
     }) : []
   })) || [];
 
-  // 4. Use Cases (dove_la_stampa_fdm_fa_la_differenza)
   const useCasesItems = cmsData.dove_la_stampa_fdm_fa_la_differenza?.cards?.map(card => ({
     icon: iconMapping[card.title] || null,
     title: card.title,
     description: card.subtitle
   })) || [];
 
-  // 5. Stats (precisione_e_affidabilita_garantite)
   const statsItems = cmsData.precisione_e_affidabilita_garantite?.cards?.map(card => ({
     value: card.num,
     label: card.title,
@@ -130,7 +126,7 @@ export const StampaPage = () => {
       <div className="mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
           title={cmsData.hero?.title}
-          image={cmsData.hero?.bg_image_url}
+          image={cmsData.hero?.bg_image_url || bannerImg}
         />
       </div>
 
