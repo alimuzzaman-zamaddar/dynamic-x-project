@@ -1,72 +1,30 @@
-import React from "react";
-import bannerimage from "../assets/img/stampa/banner2.png";
+import React, { useEffect, useState } from "react";
 import Contact from "../components/CommonComponents/Contact";
+import bannerimage from "../assets/img/stampa/banner2.png";
 import CtaSection from "../components/PagesComponent/Stampasla/CtaSection";
 import ProcessSection from "../components/PagesComponent/Stampasla/ProcessSection";
 import ProsConsSection from "../components/PagesComponent/Stampasla/ProsConsSection";
 import StatsSectionsla from "../components/PagesComponent/Stampasla/StatsSectionsla";
 import CommonBannerSection from "../components/CommonComponents/CommonBannerSection";
 import WhyChooseSection from "../components/PagesComponent/Stampasla/WhyChooseSection";
+import MaterialsInfoSection from "../components/PagesComponent/Stampasla/MaterialsInfoSection";
+import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
 import {
   IdealeIcon,
   MaterialiIcon,
   SearchIcon,
   TempiIcon,
 } from "../components/SvgContainer/SvgContainer1";
-import MaterialsInfoSection from "../components/PagesComponent/Stampasla/MaterialsInfoSection";
-import ComparisonTableSection from "../components/PagesComponent/Stampa/ComparisonTableSection";
+import { PageLoader } from "../shared/Loader";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
-const statsData = [
-  {
-    value: "0.025mm",
-    label: "Precisione degli strati",
-    description: "Dettaglio superficiale fine e accurato",
-  },
-  {
-    value: "~7gg",
-    label: "Tempi di produzione",
-    description: "Dalla conferma alla spedizione",
-  },
-  {
-    value: "5+",
-    label: "Famiglie di materiali",
-    description: "Resine speciali per ogni esigenza",
-  },
-  {
-    value: "100%",
-    label: "Tracciabilità spedizione",
-    description: "Consegna affidabile e monitorata",
-  },
-];
-
-const features = [
-  {
-    title: "Risoluzione e Dettagli Elevati",
-    description:
-      "Superfici lisce, spigoli nitidi e dettagli fini che altre tecnologie di stampa 3D faticano a eguagliare. Ideale per geometrie complesse e",
-    icon: <SearchIcon />,
-  },
-  {
-    title: "Tempi di Produzione Rapidi",
-    description:
-      "Ciclo produttivo completo in pochi giorni lavorativi. Dalla conferma dell'ordine alla consegna, senza ritardi inattesi.",
-    icon: <TempiIcon />,
-  },
-  {
-    title: "Ideale per Prototipi Estetici",
-    description:
-      "Perfetta per modelli visivi, presentazioni ai clienti e parti che richiedono finiture superficiali raffinate e un aspetto professionale.",
-    icon: <IdealeIcon />,
-  },
-
-  {
-    title: "Materiali Speciali Avanzati",
-    description:
-      "Ampia gamma di resine: trasparenti, ignifughe, ESD, simili ad ABS o nylon — per ogni applicazione tecnica e funzionale.",
-    icon: <MaterialiIcon />,
-  },
-];
+const iconMapping = {
+  "Risoluzione e Dettagli Elevati": <SearchIcon />,
+  "Tempi di Produzione Rapidi": <TempiIcon />,
+  "Ideale per Prototipi Estetici": <IdealeIcon />,
+  "Materiali Speciali Avanzati": <MaterialiIcon />,
+};
 
 const categories = [
   { label: "Risoluzione" },
@@ -102,32 +60,110 @@ const tableData = [
 ];
 
 export const Stampasla = () => {
+  const [cmsData, setCmsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/cms/stampasla`);
+        const result = await response.json();
+        if (result.success && result.data) {
+          setCmsData(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching SLA data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) return <PageLoader />;
+  if (!cmsData) return null;
+
+  const statsItems = cmsData.stereolitografia_sla?.cards?.map((card) => ({
+    value: card.num,
+    label: card.title,
+    description: card.subtitle,
+  })) || [];
+
+  const featuresItems = cmsData.vantaggi?.cards?.map((card) => ({
+    title: card.title,
+    description: card.subtitle,
+    icon: iconMapping[card.title] || <SearchIcon />,
+  })) || [];
+
+  const processSteps = cmsData.come_funziona?.steps?.map((step) => ({
+    title: step.title,
+    subtitle: step.subtitle,
+  })) || [];
+
+  const ctaButtons = cmsData.pronto_a_stampare?.buttons?.map((btn) => ({
+    text: btn.text,
+    link: btn.link,
+  })) || [];
+
+  const materialsItems = cmsData.materiali_disponibili?.items?.map((item) => ({
+    title: item.title,
+    subtitle: item.subtitle,
+  })) || [];
+
+  const prosConsCards = cmsData.pro_e_contro?.cards?.map((card) => ({
+    title: card.title,
+    points: card.description ? card.description.split("\r\n") : [],
+  })) || [];
+
   return (
     <div>
-      <div className=" mt-10 lg:mt-15 xl:mt-25">
+      <div className="mt-10 lg:mt-15 xl:mt-25">
         <CommonBannerSection
-          title="Stampa 3D SLA ad alta precisione"
-          description="Precisione, superfici lisce e dettagli fino all’estremo."
-          image={bannerimage}
+          title={cmsData.hero?.title}
+          image={cmsData.hero?.bg_image_url || bannerimage}
         />
       </div>
+
       <StatsSectionsla
-        heading="Stereolitografia SLA: Stampa 3D ad Alta Risoluzione"
-        description="La stereolitografia (SLA) è una delle tecnologie di stampa 3D più avanzate disponibili oggi. Utilizzando resine fotosensibili indurite con luce UV, la SLA produce parti con una risoluzione e una finitura superficiale straordinariamente elevate — ideali per prototipazione ad alta definizione, modelli visivi e componenti con dettagli complessi che altre tecnologie faticano a replicare."
-        stats={statsData}
+        heading={cmsData.stereolitografia_sla?.title}
+        description={cmsData.stereolitografia_sla?.subtitle}
+      stats={statsItems}
       />
 
       <WhyChooseSection
-        title="Perché Scegliere la Stampa SLA"
-        description="La stereolitografia offre un equilibrio unico tra precisione..."
-        features={features}
+        title={cmsData.vantaggi?.title}
+        description={cmsData.vantaggi?.subtitle}
+        features={featuresItems}
       />
-      <ProcessSection />
-      <CtaSection />
 
-      <MaterialsInfoSection />
-      <ProsConsSection />
+      <ProcessSection
+        heading={cmsData.come_funziona?.heading}
+        title={cmsData.come_funziona?.title}
+        subtitle={cmsData.come_funziona?.subtitle}
+        steps={processSteps}
+      />
+
+      <CtaSection
+        title={cmsData.pronto_a_stampare?.title}
+        subtitle={cmsData.pronto_a_stampare?.subtitle}
+        buttons={ctaButtons}
+      />
+
+      <MaterialsInfoSection
+        heading={cmsData.materiali_disponibili?.heading}
+        title={cmsData.materiali_disponibili?.title}
+        subtitle={cmsData.materiali_disponibili?.subtitle}
+        items={materialsItems}
+      />
+
+      <ProsConsSection
+        title={cmsData.pro_e_contro?.title}
+        subtitle={cmsData.pro_e_contro?.subtitle}
+        cards={prosConsCards}
+      />
+
       <ComparisonTableSection data={tableData} categories={categories} />
+
       <div className="mb-6">
         <Contact />
       </div>

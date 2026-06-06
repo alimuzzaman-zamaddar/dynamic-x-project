@@ -27,7 +27,7 @@ const navMenu = [
       { label: "Medicale Lab & Biotech", path: "/medicale-lab" },
       { label: "Dime & Componenti Industriali", path: "/industrial" },
       { label: "Architettura", path: "/architettura" },
-      { label: "Supporti Veterinari", path: "/veterinary" },
+      { label: "Supporti Veterinari", path: "/vetemarysupports" },
       { label: "Gioielleria", path: "/jwellery" },
       { label: "Fashion", path: "/footwear" },
       { label: "Prototipi & Prodotti Custom", path: "/prototyping" },

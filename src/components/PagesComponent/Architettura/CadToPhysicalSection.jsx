@@ -1,94 +1,66 @@
 import React from 'react';
-import CadPhysicalGraphic from '../../../assets/img/stampa/CadToPhysicalSection.png';
 
+const CadToPhysicalSection = ({ data }) => {
+  const steps = data?.divs || [];
 
-const CadToPhysicalSection = () => {
-  const steps = [
-    { 
-      title: "Ottimizzazione", 
-      desc: "Prepariamo file per stampa e correggiamo errori.", 
-      position: "top-left" 
-    },
-    { 
-      title: "Ricezione CAD/BIM", 
-      desc: "Accettiamo formati standard e verifichiamo la geometria.", 
-      position: "bottom-left" 
-    },
-    { 
-      title: "Stampa FDM o SLA", 
-      desc: "Produciamo con materiali premium e precisione.", 
-      position: "top-right" 
-    },
-    { 
-      title: "Post-produzione", 
-      desc: "Finitura, controllo qualità e consegna puntuale.", 
-      position: "bottom-right" 
-    }
-  ];
+  const leftSteps = steps.slice(0, 2);
+  const rightSteps = steps.slice(2, 4);
 
   return (
-    // section class for global padding
     <section className="section bg-white text-primary-black font-family-inter">
-      {/* container-main for standard content max-width (1040px) and centering */}
       <div className="container-main">
-        
-        {/* Header Area using section-header pattern */}
+
         <div className="section-header mb-12">
-          {/* section-title for uniform title style */}
           <h2 className="section-title mb-4">
-            Dal File CAD al Modello Fisico
+            {data?.title}
           </h2>
-          {/* section-description for consistent description style and spacing */}
-          <p className="section-description max-w-[850px]">
-            Il nostro processo è pensato per integrarsi perfettamente nel flusso di lavoro degli studi di progettazione. Gestiamo formati file standard del settore e offriamo supporto tecnico in ogni fase, dalla verifica della geometria alla consegna del modello finito.
+          <p className="section-description max-w-[850px] text-black/80">
+            {data?.subtitle}
           </p>
         </div>
 
-        {/* Process Flow Wrapper */}
         <div className="flex flex-col xl:flex-row items-center gap-6">
-          
-          {/* Left Steps Column */}
-          <div className="flex flex-col xl:gap-6 xl:gap-24  md:left-0 md:top-[15%] md:w-[320px] text-left">
-            {steps.filter(step => step.position.includes('left')).map((step, index) => (
+
+          <div className="flex flex-col xl:gap-24 gap-6 md:left-0 md:top-[15%] md:w-[320px] text-left w-full">
+            {leftSteps.map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <h4 className="font-bold text-[15px] text-black/90">
                   {step.title}
                 </h4>
                 <p className="text-[15px] text-primary-gray/80 leading-relaxed xl:max-w-[167px]">
-                  {step.desc}
+                  {step.subtitle}
                 </p>
               </div>
             ))}
           </div>
 
-          {/* Central Graphic (Image from image_12.png) */}
-          <div className="flex items-center justify-center my-4 xl:my-16 md:my-0 md:w-full">
-            <img 
-              src={CadPhysicalGraphic} 
-              alt="CAD to Physical model process flow graphic" 
-              className="h-[150px] xl:h-auto"
-            />
+          <div className="flex items-center justify-center my-4 xl:my-16 md:my-0 md:w-full w-full">
+            {data?.image_url && (
+              <img
+                src={data.image_url}
+                alt={data?.title || "Process flow graphic"}
+                className="h-[150px] xl:h-auto object-contain"
+              />
+            )}
           </div>
 
-          {/* Right Steps Column */}
-          <div className="flex flex-col  xl:gap-24  text-left md:text-right">
-            {steps.filter(step => step.position.includes('right')).map((step, index) => (
+          <div className="flex flex-col xl:gap-24 gap-6 text-left md:text-right w-full">
+            {rightSteps.map((step, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <h4 className="font-bold text-[15px] text-black/90">
                   {step.title}
                 </h4>
                 <p className="text-[15px] text-primary-gray/80 leading-relaxed xl:max-w-[167px] md:max-w-none md:ml-auto">
-                  {step.desc}
+                  {step.subtitle}
                 </p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* File Formats Footer */}
         <div className="mt-6 xl:mt-10 pt-8">
           <p className="text-[15px] text-primary-gray/90 leading-relaxed max-w-[1000px]">
-            Accettiamo file nei formati più diffusi: <strong>.dwg, .dxf, .stl, .obj, .step</strong> e file BIM. Il team tecnico verifica ogni modello prima della stampa per garantire fedeltà geometrica e qualità del risultato finale.
+            {data?.footer_text}
           </p>
         </div>
       </div>
