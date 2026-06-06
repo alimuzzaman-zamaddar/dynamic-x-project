@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router";
 import Container from "../../../shared/Container";
 import React, { useRef, useState, useEffect } from "react";
-import { technologies } from "../../../static_data/static.data";
 
-const Technologies = () => {
+const Technologies = ({ data }) => {
   const navigate = useNavigate();
   const sliderRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const SCROLL_AMOUNT = 360;
+  const cards = data?.cards || [];
 
   const updateArrows = () => {
     const el = sliderRef.current;
@@ -21,33 +21,25 @@ const Technologies = () => {
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
+
     updateArrows();
     el.addEventListener("scroll", updateArrows);
     window.addEventListener("resize", updateArrows);
+
     return () => {
       el.removeEventListener("scroll", updateArrows);
       window.removeEventListener("resize", updateArrows);
     };
-  }, []);
+  }, [cards]);
 
-  const scrollLeft = () => {
-    sliderRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    sliderRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
-  };
+  const scrollLeft = () => sliderRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: "smooth" });
+  const scrollRight = () => sliderRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
 
   return (
     <section id="technologies" className="h-auto w-full xl:pb-25 pb-10">
       <Container>
-        {/* Header row */}
         <div className="flex items-center justify-between pb-5">
-          <h2 className="lg:text-4xl text-2xl font-semibold text-black">
-            Tecnologie
-          </h2>
-
-          {/* Arrow buttons */}
+          <h2 className="lg:text-4xl text-2xl font-semibold text-black">Tecnologie</h2>
           <div className="flex items-center gap-2">
             <button
               onClick={scrollLeft}
@@ -56,13 +48,7 @@ const Technologies = () => {
               aria-label="Previous"
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path
-                  d="M11 13.5L6.5 9L11 4.5"
-                  stroke="#111827"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M11 13.5L6.5 9L11 4.5" stroke="#111827" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
             <button
@@ -72,51 +58,47 @@ const Technologies = () => {
               aria-label="Next"
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path
-                  d="M7 4.5L11.5 9L7 13.5"
-                  stroke="#111827"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M7 4.5L11.5 9L7 13.5" stroke="#111827" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Slider */}
         <div
           ref={sliderRef}
-          className="flex flex-row gap-x-5 overflow-x-auto scroll-smooth"
+          className="flex flex-row gap-x-5 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+          {cards.map((card, idx) => {
+            const safeSlug = card.link || card.slug || card.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-          {technologies.map((technology, idx) => (
-            <div
-              key={idx}
-              onClick={() => navigate(`/${technology?.title2}`)}
-              className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
-            >
-              <div className="overflow-hidden rounded-xl">
-                <img
-                  src={technology.bgImg}
-                  className="w-[300px] lg:w-[330px] lg:h-[300px] h-40 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
-                  alt={technology.title}
-                />
+            return (
+              <div
+                key={idx}
+                onClick={() => navigate(`/${safeSlug}`)}
+                className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
+              >
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={card.image_url}
+                    className="w-[300px] lg:w-[330px] lg:h-[300px] h-40 object-cover rounded-xl transition-transform duration-300 group-hover:scale-105"
+                    alt={card.title}
+                  />
+                </div>
+                <div className="flex flex-col gap-y-2 max-w-[330px]">
+                  <h5 className="lg:text-2xl text-lg font-semibold text-black leading-[133%]">
+                    {card.title}
+                  </h5>
+                  <span className="text-sm text-black opacity-60 font-medium">
+                    {card.subtitle}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col gap-y-2 max-w-[330px]">
-                <h5 className="lg:text-2xl text-lg font-semibold text-black leading-[133%]">
-                  {technology.title}
-                </h5>
-                <span className=" text-sm text-black opacity-60 font-medium">
-                  {technology.short_description}
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-        <div id="services" className="h-[60px]"></div>
+
+        <div id="services" className="h-15"></div>
       </Container>
     </section>
   );

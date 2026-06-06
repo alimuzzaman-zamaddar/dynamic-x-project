@@ -4,7 +4,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { ArrowBlack } from "../../SvgContainer/SvgContainer";
 import hero_video from "../../../assets/videos/recording mountain top.mp4";
 
-const HomeHero = () => {
+const HomeHero = ({ data }) => {
   return (
     <section id="hero" className="relative  w-full overflow-hidden">
       <video
@@ -20,7 +20,7 @@ const HomeHero = () => {
       <div className="relative max-w-[1440px] mx-auto   w-full lg:pb-[113px] pb-10 xl:pt-[120px] sm:pt-[10px] 2xl:pt-[201px] flex xl:px-30 px-4 flex-col-reverse gap-y-6 md:gap-y-10 xl:flex-row justify-between">
         <div className="flex flex-col gap-y-6.5 items-start">
           <h4 className=" text-xl 2xl:text-[24px] font-normal leading-[144%] text-white max-w-[626px]">
-            Trasforma la tua idea in realtà. Più velocemente di quanto immagini.
+            {data.title}
           </h4>
           <div className="flex 2xl:flex-row flex-col xxl:gap-7 gap-3">
             <Link to={"/new-upload-design"}>
@@ -35,7 +35,7 @@ const HomeHero = () => {
                   className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
     `}
                 >
-                  Carica il tuo file
+                  {data.btn1_text}
                 </span>
 
                 <div
@@ -67,7 +67,7 @@ const HomeHero = () => {
                   className={` relative transition-all mr-[40px] duration-500 ease-out group-hover:translate-x-0.5
     `}
                 >
-                  Ottieni consulenza gratuita
+                  {data.btn2_text}
                 </span>
 
                 <div
@@ -93,11 +93,10 @@ const HomeHero = () => {
 
         <div className="flex lg:mt-[300px] mt-25 flex-col gap-y-6 md:gap-y-10 xl:gap-y-[40px]">
           <h3 className=" text-xl 2xl:text-[24px] text-white font-semibold leading-[123%] max-w-[640px]">
-            Dal concept al prodotto finito, in modo semplice e rapido.
-            Senza stampi. Senza minimi d’ordine. Senza rischi inutili.
+            {data.description}
           </h3>
           <span className=" text-base lg:text-[18px] max-w-[650] 3xl:max-w-[650px] font-light leading-[133%] text-white opacity-70">
-            Rendiamo la stampa 3D professionale accessibile a startup, innovatori e aziende strutturate.
+            {data.sub_description}
           </span>
         </div>
       </div>

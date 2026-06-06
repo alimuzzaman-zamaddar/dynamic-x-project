@@ -1,10 +1,8 @@
-import React from "react";
-
-export const FeatureCard = ({ icon, title, description }) => {
+export const FeatureCard = ({ iconUrl, title, description }) => {
   return (
     <div className="pt-6 pb-10 px-6 rounded-xl border-2 border-white backdrop-blur-[4.5px]">
       <div className="flex justify-center">
-        {React.createElement(icon)}
+        {iconUrl && <img src={iconUrl} alt={title} className="w-10 h-10 object-contain" />}
       </div>
       <h3 className="pt-5 pb-2.5 font-normal text-base text-center text-white">{title}</h3>
       <p className="font-normal text-[15px] text-white/50 text-center">{description}</p>

@@ -4,8 +4,21 @@ const AuthContext = createContext(null);
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem('dx_user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
+    }
+  });
   const [loading, setLoading] = useState(true);
+
+  const clearAuth = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('dx_user');
+    setUser(null);
+  };
 
   const fetchProfile = async () => {
     const token = localStorage.getItem('token');
@@ -18,23 +31,25 @@ export function AuthProvider({ children }) {
     try {
       const res = await fetch(`${BASE_URL}/auth/profile`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json'
-        }
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
       });
-      
+
       const json = await res.json();
-      
+
       if (res.ok && json.success && json.data) {
         setUser(json.data);
+        localStorage.setItem('dx_user', JSON.stringify(json.data));
+      } else if (res.status === 401) {
+        clearAuth();
       } else {
-        // Token might be invalid
-        setUser(null);
-        localStorage.removeItem('token');
+        console.warn('Profile fetch failed, keeping stored auth state if available.', json);
       }
     } catch (err) {
-      console.error("Failed to fetch profile:", err);
-      setUser(null);
+      console.error('Failed to fetch profile:', err);
+      // Keep existing auth state on network errors to avoid logging out users
+      // unnecessarily after payment redirects or transient connectivity issues.
     } finally {
       setLoading(false);
     }
@@ -46,13 +61,15 @@ export function AuthProvider({ children }) {
 
   const login = (token, userData) => {
     localStorage.setItem('token', token);
-    setUser(userData);
-    fetchProfile(); // Re-fetch to be safe, or just use userData if provided
+    if (userData) {
+      setUser(userData);
+      localStorage.setItem('dx_user', JSON.stringify(userData));
+    }
+    fetchProfile();
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    setUser(null);
+    clearAuth();
   };
 
   return (

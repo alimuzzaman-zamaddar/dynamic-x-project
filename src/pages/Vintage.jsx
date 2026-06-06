@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Vintagebanner from "../assets/img/bg/vintageban.png"
 import Contact from "../components/CommonComponents/Contact";
 import NewBanner from "../components/CommonComponents/NewBanner";
@@ -8,43 +8,55 @@ import StatsSectionVintage from "../components/PagesComponent/Vintage/StatsSecti
 import StartProjectSection from "../components/PagesComponent/Vintage/StartProjectSection";
 import PrintingTechnologies from "../components/PagesComponent/Vintage/PrintingTechnologies";
 import ComponentsStampiamoSection from "../components/PagesComponent/Vintage/ComponentsStampiamoSection";
+import { PageLoader } from "../shared/Loader";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
-
-const statsData = [
-  {
-    value: "±0.1mm",
-    label: "Tolleranza dimensionale",
-    description:
-      "Precisione garantita su geometrie complesse grazie alla scansione 3D ad alta risoluzione.",
-  },
-  {
-    value: "4",
-    label: "Materiali certificati",
-    description:
-      "ABS, ASA, Nylon e Resine castable selezionati per uso automotive professionale.",
-  },
-  {
-    value: "2",
-    label: "Tecnologie di stampa",
-    description:
-      "FDM e SLA per coprire ogni esigenza: da parti strutturali a dettagli ornamentali.",
-  },
-];
 
 const Vintage = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/cms/vintage`);
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const NewBannerData = data?.data?.hero || {};
+  const AutomotiveSectionData = data?.data?.under_hero || {};
+  const ProblemSectionData = data?.data?.problem_we_solve || {};
+  const componentsStampiamoData = data?.data?.componenti_che_stampiamo || {};
+  const PrintingTechnologiesData = data?.data?.tecnologie_di_stampa_utilizzate || {};
+  const PerChiLavoriamoData = data?.data?.per_chi_lavoriamo || {};
+  const statsData = data?.data?.qualita_senza_compromessi || {};
+  const StartProjectData = data?.data?.inizia_il_tuo_progetto || {};
+
+
+
+  if (loading) return <div><PageLoader /></div>;
+
+
   return (
     <>
-      <NewBanner image={Vintagebanner} title={"AUTOMOTIVE D’EPOCA & PARTI RARE"} />
-      <AutomotiveSection />
-      <ComponentsStampiamoSection />
-      <PrintingTechnologies />
-      <PerChiLavoriamo />
+      <NewBanner image={NewBannerData.bg_image_url || Vintagebanner} title={NewBannerData.title || "AUTOMOTIVE D’EPOCA & PARTI RARE"} />
+      <AutomotiveSection auto={AutomotiveSectionData} problem={ProblemSectionData} />
+      <ComponentsStampiamoSection data={componentsStampiamoData} />
+      <PrintingTechnologies data={PrintingTechnologiesData} />
+      <PerChiLavoriamo data={PerChiLavoriamoData} />
       <StatsSectionVintage
-        heading="Qualità Senza Compromessi"
-        description="Ogni pezzo che produciamo porta con sé decenni di storia automobilistica. Per questo il nostro standard non è semplicemente la funzionalità — è la fedeltà all'originale, resa possibile dalla tecnologia più avanzata disponibile oggi."
+        heading={statsData?.title}
+        description={statsData?.subtitle}
         stats={statsData}
       />
-      <StartProjectSection />
+      <StartProjectSection data={StartProjectData} />
       <div className="mb-6">
         <Contact />
       </div>
