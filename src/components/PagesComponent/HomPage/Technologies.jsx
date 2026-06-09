@@ -70,7 +70,7 @@ const Technologies = ({ data }) => {
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {cards.map((card, idx) => {
-            const safeSlug = card.link || card.slug || card.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+            const safeSlug = card.link || card.slug || card.title?.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
             return (
               <div

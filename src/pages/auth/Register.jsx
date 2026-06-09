@@ -29,7 +29,12 @@ const Register = () => {
       return;
     }
 
-    const payload = { ...data, agree_to_terms: 1 }
+    const { name, surname, ...rest } = data;
+    const payload = {
+      ...rest,
+      name: `${name || ""} ${surname || ""}`.trim(),
+      agree_to_terms: 1
+    };
 
     try {
       setLoading(true);
@@ -87,15 +92,15 @@ const Register = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="auth_label">
+          <label htmlFor="surname" className="auth_label">
             SurName
           </label>
 
           <input
             type="text"
             placeholder="SurName"
-            {...register("name", { required: true })}
-            className={`auth_input ${errors.name
+            {...register("surname", { required: true })}
+            className={`auth_input ${errors.surname
               ? "border-red-500 placeholder:text-red-500"
               : "border-[#CFD3D4]"
               }`}

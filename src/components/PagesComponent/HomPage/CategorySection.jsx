@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router"; 
+import { Link } from "react-router";
 import Container from "../../../shared/Container";
 
 const CategoryCard = ({ category }) => {
-  const dynamicLink = category.link.startsWith("/") ? category.link : `/${category.link}`;
+  const dynamicLink = category.link?.startsWith("/") ? category.link : `/${category.link}`;
 
   return (
     <Link
