@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mail } from "lucide-react";
 import Container from "../../../shared/Container";
 import bio_stamp from "../../../assets/img/bg/Desktop.png";
 
@@ -255,46 +255,65 @@ const BioStamp = ({ data }) => {
       </section>
 
       {/* 3. Inline Newsletter Subscription Form Section */}
-      <section className="py-20 bg-[#1a1411] text-white">
-        <Container>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto">
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-semibold">Rimani aggiornato</h3>
-              <p className="text-sm text-gray-300 mt-1">
-                Iscriviti alla nostra newsletter per ricevere novità sul progetto BioStamp 3D.
-              </p>
-            </div>
+      <section className="relative overflow-hidden bg-[#0d0a08] py-24 text-white">
+        {/* Ambient Background Glows */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 bg-orange-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-72 h-72 bg-emerald-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="w-full sm:max-w-md">
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 w-full">
-                <input
-                  type="email"
-                  required
-                  placeholder="Inserisci la tua email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={submitting}
-                  className="w-full px-4 py-2.5 rounded-full text-sm text-gray-900 bg-white outline-none placeholder:text-gray-400 border border-transparent focus:border-gray-300 transition"
-                />
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="px-6 py-2.5 bg-orange-600 hover:bg-orange-500 disabled:bg-gray-400 text-white font-medium text-sm rounded-full whitespace-nowrap transition cursor-pointer flex items-center justify-center gap-2"
-                >
-                  {submitting && <Loader2 size={16} className="animate-spin" />}
-                  Iscriviti
-                </button>
-              </form>
+        <Container className="relative z-10">
+          <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-to-b from-[#16120f] to-[#110e0c] border border-white/[0.04] p-8 md:p-14 shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-              {/* Status Message Feedbacks */}
-              {newsletterStatus.message && (
-                <p
-                  className={`text-xs mt-2 text-center sm:text-left ${newsletterStatus.type === "success" ? "text-emerald-400" : "text-rose-400"
-                    }`}
-                >
-                  {newsletterStatus.message}
+              {/* Left Column: Content */}
+              <div className="lg:col-span-7 space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-medium tracking-wide uppercase">
+                  <Mail size={12} /> Newsletter
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">
+                  Rimani aggiornato
+                </h3>
+                <p className="text-base text-gray-400 max-w-xl leading-relaxed">
+                  Iscriviti alla nostra newsletter per ricevere novità in anteprima sul progetto BioStamp 3D.
                 </p>
-              )}
+              </div>
+
+              {/* Right Column: Form */}
+              <div className="lg:col-span-5 w-full">
+                <form onSubmit={handleSubscribe} className="relative flex flex-col sm:flex-row gap-2.5 p-1.5 rounded-2xl sm:rounded-full bg-white/[0.02] border border-white/[0.08] backdrop-blur-md focus-within:border-orange-500/50 transition-all duration-300">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Inserisci la tua email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={submitting}
+                    className="w-full px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-full text-sm text-white bg-transparent outline-none placeholder:text-gray-500 transition-all"
+                  />
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="px-6 py-3 sm:py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 disabled:from-gray-700 disabled:to-gray-800 text-white font-medium text-sm rounded-xl sm:rounded-full whitespace-nowrap transition-all duration-300 transform active:scale-[0.98] disabled:transform-none cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-orange-600/20 disabled:shadow-none"
+                  >
+                    {submitting && <Loader2 size={16} className="animate-spin" />}
+                    Iscriviti
+                  </button>
+                </form>
+
+                {/* Status Message Feedbacks */}
+                {newsletterStatus.message && (
+                  <div className="px-2 mt-3">
+                    <p
+                      className={`text-xs font-medium flex items-center gap-1.5 ${newsletterStatus.type === "success" ? "text-emerald-400" : "text-rose-400"
+                        }`}
+                    >
+                      <span className={`w-1 h-1 rounded-full ${newsletterStatus.type === "success" ? "bg-emerald-400" : "bg-rose-400"
+                        }`} />
+                      {newsletterStatus.message}
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
           </div>
         </Container>

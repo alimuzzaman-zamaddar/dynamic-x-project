@@ -76,7 +76,7 @@ const Technologies = ({ data }) => {
               <div
                 key={idx}
                 onClick={() => navigate(`/${safeSlug}`)}
-                className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer flex-shrink-0 group"
+                className="flex flex-col lg:gap-y-5 gap-y-3 py-2 cursor-pointer shrink-0 group"
               >
                 <div className="overflow-hidden rounded-xl">
                   <img
