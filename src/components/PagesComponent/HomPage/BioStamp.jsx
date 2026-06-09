@@ -87,7 +87,7 @@ const BioStamp = ({ data }) => {
 
     try {
       // Replace with your designated endpoints if separate from standard base API routes
-      const res = await fetch(`${BASE_URL}/newsletter/subscribe`, {
+      const res = await fetch(`${BASE_URL}/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

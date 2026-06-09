@@ -59,10 +59,10 @@ const Login = () => {
   return (
     <div className="p-4.5 md:p-5 xl:p-6 2xl:p-8">
       <h2 className="auth_title">Welcome Back!</h2>
-      <p className="auth_sub_title">
+      {/* <p className="auth_sub_title">
         Professional 3D printing service for prototyping and production. Over
         100+ materials available with lead times as fast as 24 hours.
-      </p>
+      </p> */}
 
       <form
         onSubmit={handleSubmit(onSubmit)}

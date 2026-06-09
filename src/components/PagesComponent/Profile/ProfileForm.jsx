@@ -8,7 +8,8 @@ export default function ProfileForm() {
   const { user, logout, fetchProfile } = useAuth();
   const { showToast } = useToast();
   const [countryCode, setCountryCode] = useState('+62');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -35,7 +36,9 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (user) {
-      setName(user.name || '');
+      const parts = (user.name || '').trim().split(/\s+/);
+      setFirstName(parts[0] || '');
+      setSurname(parts.slice(1).join(' ') || '');
       setEmail(user.email || '');
       setPhone(user.phone?.replace(countryCode, '') || '');
     }
@@ -54,7 +57,7 @@ export default function ProfileForm() {
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-          name,
+          name: `${firstName} ${surname}`.trim(),
           email,
           phone: `${countryCode}${phone}`
         })
@@ -252,24 +255,38 @@ export default function ProfileForm() {
               />
             ) : (
               <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center text-2xl font-semibold shrink-0 uppercase">
-                {name?.charAt(0) || "U"}
+                {firstName?.charAt(0) || "U"}
               </div>
             )}
           </div>
           <div className="w-full flex flex-col md:flex-row gap-4 items-end">
-            <div className="w-full">
-              <h5 className='text-sm font-semibold text-[#262626] mb-1'>Personal Info</h5>
-              <label htmlFor="fullName" className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Full Name</label>
-              <input
-                id="fullName"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder='Niko Pradana'
-                className='p-4 rounded-2xl bg-[#F7F7F7] w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
-              />
+            <div className="w-full flex flex-col sm:flex-row gap-4">
+              <div className="w-full">
+                <h5 className='text-sm font-semibold text-[#262626] mb-1'>Personal Info</h5>
+                <label htmlFor="firstName" className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Name</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder='Niko'
+                  className='p-4 rounded-2xl bg-[#F7F7F7] w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
+                />
+              </div>
+              <div className="w-full">
+                <h5 className='text-sm font-semibold text-[#262626] mb-1 invisible sm:block'>&nbsp;</h5>
+                <label htmlFor="surname" className='text-xs font-normal text-[#63716E] mt-2 mb-1 block'>Surname</label>
+                <input
+                  id="surname"
+                  type="text"
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
+                  placeholder='Pradana'
+                  className='p-4 rounded-2xl bg-[#F7F7F7] w-full text-sm text-slate-700 placeholder-slate-500 focus:outline-none focus:bg-slate-100 transition-colors border-0'
+                />
+              </div>
             </div>
-            <button disabled={savingPersonal} onClick={() => handleUpdateProfile('personal')} className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer">
+            <button disabled={savingPersonal} onClick={() => handleUpdateProfile('personal')} className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-2xl font-medium shrink-0 hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer mb-[1px]">
               {savingPersonal ? 'Saving...' : 'Save'}
             </button>
           </div>
