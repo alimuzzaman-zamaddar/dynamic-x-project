@@ -35,6 +35,7 @@ const VerifyEmail = () => {
 
       showToast("OTP sent to your email!", "success");
       navigate("/auth/verify-otp", { state: { email: data.email, type: "reset" } });
+
     } catch (err) {
       console.error(err);
       showToast(err.message || "Something went wrong", "error");
@@ -63,11 +64,10 @@ const VerifyEmail = () => {
             type="email"
             placeholder="Email Address"
             {...register("email", { required: true })}
-            className={`auth_input ${
-              errors.email
+            className={`auth_input ${errors.email
                 ? "border-red-500 placeholder:text-red-500"
                 : "border-[#CFD3D4]"
-            }`}
+              }`}
           />
         </div>
 

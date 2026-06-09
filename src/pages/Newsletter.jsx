@@ -95,6 +95,20 @@ const Newsletter = ({
         createdAt: serverTimestamp(),
       });
 
+      // POST request to backend subscribe endpoint
+      await fetch(`${import.meta.env.VITE_API_BASE_URL || ""}/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          surname: formData.surname,
+          email: formData.email,
+        }),
+      });
+
       await emailjs.send(
         "service_madniod",
         "template_48zi4ta",

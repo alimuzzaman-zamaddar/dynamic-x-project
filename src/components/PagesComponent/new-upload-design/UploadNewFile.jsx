@@ -4,6 +4,7 @@ import Container from "../../../shared/Container";
 import { useAuth } from "../../../context/AuthContext";
 import { getAuthHeaders } from "../../../utils/apiHeaders";
 import { Lock } from "lucide-react";
+import { saveUploadedModel } from "../../../utils/indexedDB";
 
 export default function UploadNewFile() {
   const navigate = useNavigate();
@@ -21,16 +22,6 @@ export default function UploadNewFile() {
 
   const isDashboardRoute =
     location.pathname.startsWith("/dashboard");
-
-  const readFileAsDataURL = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-
-      reader.readAsDataURL(file);
-    });
 
   const uploadFile = async (file, fileContent) => {
     if (!file) return;
@@ -101,10 +92,7 @@ export default function UploadNewFile() {
         fileContent,
       };
 
-      localStorage.setItem(
-        "uploadedModel",
-        JSON.stringify(modelPayload)
-      );
+      await saveUploadedModel(modelPayload);
 
       navigate("/file-upload");
     } catch (uploadError) {
@@ -123,18 +111,22 @@ export default function UploadNewFile() {
 
       setSelectedFile(file);
 
-      const fileContent =
-        await readFileAsDataURL(file);
+      try {
+        const fileContent = await file.arrayBuffer();
 
-      if (file.type.startsWith("image/")) {
-        setPreviewUrl(
-          URL.createObjectURL(file)
-        );
-      } else {
-        setPreviewUrl("");
+        if (file.type.startsWith("image/")) {
+          setPreviewUrl(
+            URL.createObjectURL(file)
+          );
+        } else {
+          setPreviewUrl("");
+        }
+
+        await uploadFile(file, fileContent);
+      } catch (err) {
+        console.error("Failed to read file buffer", err);
+        setError("Failed to read the file. Please try again.");
       }
-
-      await uploadFile(file, fileContent);
 
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
@@ -241,7 +233,7 @@ export default function UploadNewFile() {
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
-                accept=".stl,.stp,.step,.zip"
+                accept=".stl,.stp,.step,.zip,.3mf"
                 className="hidden"
               />
 
@@ -281,7 +273,7 @@ export default function UploadNewFile() {
 
               <p className="text-xs text-gray-400 mt-5 tracking-wide">
                 Supported file type: STL, STP,
-                STEP, ZIP
+                STEP, ZIP, 3MF
               </p>
 
               {error && (
