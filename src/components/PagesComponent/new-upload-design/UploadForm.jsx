@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router';
 import { useCart } from '../../../context/CartContext';
 import { useToast } from '../../../context/ToastContext';
 import { getAuthHeaders } from '../../../utils/apiHeaders';
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
+import { getUploadedModel } from '../../../utils/indexedDB';
 
 const MATERIAL_PRICING = {
   PLA: 0.05,
@@ -27,6 +30,7 @@ export default function UploadForm() {
   const rendererRef = useRef(null);
   const meshRef = useRef(null);
   const animationRef = useRef(null);
+  const fitScaleRef = useRef(1);
 
   const controlsRef = useRef({
     isDragging: false,
@@ -62,16 +66,18 @@ export default function UploadForm() {
   const [calculatingPrice, setCalculatingPrice] = useState(false);
 
   useEffect(() => {
-    const raw = localStorage.getItem('uploadedModel');
-    if (raw) {
+    const fetchStored = async () => {
       try {
-        const parsed = JSON.parse(raw);
-        setStoredUpload(parsed);
-        if (parsed?.name) setFileName(parsed.name);
+        const parsed = await getUploadedModel();
+        if (parsed) {
+          setStoredUpload(parsed);
+          if (parsed.name) setFileName(parsed.name);
+        }
       } catch (error) {
-        console.error('Failed to parse uploaded model from localStorage', error);
+        console.error('Failed to parse uploaded model from IndexedDB', error);
       }
-    }
+    };
+    fetchStored();
   }, []);
 
   // Fetch technologies on mount
@@ -144,18 +150,25 @@ export default function UploadForm() {
     const loadFromStorage = async () => {
       try {
         setLoading(true);
-        const [, base64] = storedUpload.fileContent.split(',');
-        if (!base64) throw new Error('Invalid stored file content');
-        const binary = atob(base64);
-        const buffer = new ArrayBuffer(binary.length);
-        const view = new Uint8Array(buffer);
-        for (let i = 0; i < binary.length; i += 1) {
-          view[i] = binary.charCodeAt(i);
+        let buffer;
+        if (typeof storedUpload.fileContent === 'string') {
+          // Backward compatibility for base64 strings
+          const parts = storedUpload.fileContent.split(',');
+          const base64 = parts.length > 1 ? parts[1] : parts[0];
+          const binary = atob(base64);
+          buffer = new ArrayBuffer(binary.length);
+          const view = new Uint8Array(buffer);
+          for (let i = 0; i < binary.length; i += 1) {
+            view[i] = binary.charCodeAt(i);
+          }
+        } else {
+          // Direct ArrayBuffer from IndexedDB
+          buffer = storedUpload.fileContent;
         }
-        await loadSTL(buffer, storedUpload.name || 'Stored model');
+        await loadModelBuffer(buffer, storedUpload.name || 'Stored model');
       } catch (error) {
         console.error('Failed loading stored model:', error);
-        showToast('Unable to render stored model from localStorage');
+        showToast('Unable to render stored model');
         setLoading(false);
       }
     };
@@ -285,31 +298,6 @@ export default function UploadForm() {
     };
   }, []);
 
-  const parseSTL = (buffer) => {
-    const reader = new DataView(buffer);
-    const triangles = reader.getUint32(80, true);
-    const positions = new Float32Array(triangles * 9);
-    const normals = new Float32Array(triangles * 9);
-    let offset = 84;
-
-    for (let i = 0; i < triangles; i += 1) {
-      const nx = reader.getFloat32(offset, true); offset += 4;
-      const ny = reader.getFloat32(offset, true); offset += 4;
-      const nz = reader.getFloat32(offset, true); offset += 4;
-
-      for (let v = 0; v < 3; v += 1) {
-        positions[i * 9 + v * 3] = reader.getFloat32(offset, true); offset += 4;
-        positions[i * 9 + v * 3 + 1] = reader.getFloat32(offset, true); offset += 4;
-        positions[i * 9 + v * 3 + 2] = reader.getFloat32(offset, true); offset += 4;
-        normals[i * 9 + v * 3] = nx;
-        normals[i * 9 + v * 3 + 1] = ny;
-        normals[i * 9 + v * 3 + 2] = nz;
-      }
-      offset += 2;
-    }
-    return { positions, normals, count: triangles };
-  };
-
   const computeVolume = (positions) => {
     let vol = 0;
     for (let i = 0; i < positions.length; i += 9) {
@@ -342,68 +330,123 @@ export default function UploadForm() {
     setColor(newColor);
     if (colorId !== null) setSelectedColorId(colorId);
     if (meshRef.current) {
-      meshRef.current.material.color.set(newColor.startsWith('rgba') ? '#9090ad' : newColor);
+      const hexColor = newColor.startsWith('rgba') ? '#9090ad' : newColor;
+      meshRef.current.traverse((child) => {
+        if (child.isMesh && child.material) {
+          if (Array.isArray(child.material)) {
+            child.material.forEach((m) => m.color.set(hexColor));
+          } else {
+            child.material.color.set(hexColor);
+          }
+        }
+      });
     }
   };
 
-  const loadSTL = async (buffer, name) => {
+  const loadModelBuffer = async (buffer, name) => {
     if (!sceneRef.current) return;
 
     try {
       if (meshRef.current) {
         sceneRef.current.remove(meshRef.current);
-        meshRef.current.geometry.dispose();
-        meshRef.current.material.dispose();
+        meshRef.current.traverse((child) => {
+          if (child.isMesh) {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach((m) => m.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          }
+        });
       }
 
-      const parsed = parseSTL(buffer);
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.BufferAttribute(parsed.positions, 3));
-      geometry.setAttribute('normal', new THREE.BufferAttribute(parsed.normals, 3));
-      geometry.computeBoundingBox();
+      const is3MF = name.toLowerCase().endsWith('.3mf');
+      let loadedObject;
 
-      const box = geometry.boundingBox.clone();
+      if (is3MF) {
+        const loader = new ThreeMFLoader();
+        loadedObject = loader.parse(buffer);
+      } else {
+        const loader = new STLLoader();
+        const geometry = loader.parse(buffer);
+        const materialMesh = new THREE.MeshPhongMaterial({
+          color: new THREE.Color(color),
+          specular: 0x888888,
+          shininess: 80,
+        });
+        loadedObject = new THREE.Mesh(geometry, materialMesh);
+      }
+
+      // Wrap in a Group to allow rotation/scaling without disrupting child hierarchy
+      const wrapperGroup = new THREE.Group();
+      wrapperGroup.add(loadedObject);
+
+      const box = new THREE.Box3().setFromObject(loadedObject);
       const center = new THREE.Vector3();
       box.getCenter(center);
-      geometry.translate(-center.x, -center.y, -center.z);
+      loadedObject.position.set(-center.x, -center.y, -center.z);
 
       const size = new THREE.Vector3();
-      geometry.boundingBox.getSize(size);
+      box.getSize(size);
 
       const maxDim = Math.max(size.x, size.y, size.z);
       const fitScale = maxDim > 0 ? 2 / maxDim : 1;
+      fitScaleRef.current = fitScale;
 
-      const materialMesh = new THREE.MeshPhongMaterial({
-        color: new THREE.Color(color),
-        specular: 0x888888,
-        shininess: 80,
-      });
-
-      const mesh = new THREE.Mesh(geometry, materialMesh);
-      mesh.scale.setScalar(fitScale * (scale / 200));
-      meshRef.current = mesh;
-      sceneRef.current.add(mesh);
+      wrapperGroup.scale.setScalar(fitScale * (scale / 200));
+      meshRef.current = wrapperGroup;
+      sceneRef.current.add(wrapperGroup);
 
       if (cameraRef.current) {
         controlsRef.current.zoom = 3.2;
         updateCamera();
       }
 
-      setTris(parsed.count);
+      // Traversal based volume, area, and tris calculations
+      let totalVolume = 0;
+      let totalArea = 0;
+      let totalTris = 0;
+
+      loadedObject.traverse((child) => {
+        if (child.isMesh) {
+          const geom = child.geometry;
+          if (geom) {
+            const tempGeom = geom.index ? geom.toNonIndexed() : geom;
+            const positions = tempGeom.attributes.position.array;
+            
+            totalVolume += computeVolume(positions);
+            totalArea += computeArea(positions);
+            totalTris += positions.length / 9;
+
+            if (geom.index) {
+              tempGeom.dispose();
+            }
+          }
+        }
+      });
+
+      setTris(Math.round(totalTris));
       setOriginalDims({ x: +size.x.toFixed(4), y: +size.y.toFixed(4), z: +size.z.toFixed(4) });
-      setVolume(computeVolume(parsed.positions));
-      setArea(computeArea(parsed.positions));
+      setVolume(totalVolume);
+      setArea(totalArea);
       setModelLoaded(true);
       setLoading(false);
       setFileName(name);
     } catch (error) {
+      console.error('Error parsing 3D model buffer:', error);
+      showToast('⚠ Failed to parse 3D model');
       setLoading(false);
     }
   };
 
   const handleFile = async (file) => {
-    if (!file || !file.name.toLowerCase().endsWith('.stl')) {
-      showToast('⚠ Please upload an STL file');
+    const isSTL = file?.name?.toLowerCase().endsWith('.stl');
+    const is3MF = file?.name?.toLowerCase().endsWith('.3mf');
+    if (!file || (!isSTL && !is3MF)) {
+      showToast('⚠ Please upload an STL or 3MF file');
       return;
     }
     setLoading(true);
@@ -412,7 +455,7 @@ export default function UploadForm() {
 
     try {
       const buffer = await file.arrayBuffer();
-      await loadSTL(buffer, file.name);
+      await loadModelBuffer(buffer, file.name);
     } catch (error) {
       showToast('⚠ Could not read the selected file');
       setLoading(false);
@@ -452,13 +495,7 @@ export default function UploadForm() {
   const updateScale = (value) => {
     setScale(value);
     if (meshRef.current) {
-      const box = meshRef.current.geometry.boundingBox;
-      if (box) {
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const fitScale = Math.max(1, 2 / Math.max(size.x, size.y, size.z));
-        meshRef.current.scale.setScalar(fitScale * (value / 200));
-      }
+      meshRef.current.scale.setScalar(fitScaleRef.current * (value / 200));
     }
   };
 
@@ -591,7 +628,15 @@ export default function UploadForm() {
                   className="rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium transition cursor-pointer"
                   onClick={() => {
                     if (meshRef.current) {
-                      meshRef.current.material.wireframe = !meshRef.current.material.wireframe;
+                      meshRef.current.traverse((child) => {
+                        if (child.isMesh && child.material) {
+                          if (Array.isArray(child.material)) {
+                            child.material.forEach((m) => { m.wireframe = !m.wireframe; });
+                          } else {
+                            child.material.wireframe = !child.material.wireframe;
+                          }
+                        }
+                      });
                     }
                   }}
                 >
@@ -999,7 +1044,7 @@ export default function UploadForm() {
         </div>
       </Container>
 
-      <input ref={fileInputRef} type="file" accept=".stl" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+      <input ref={fileInputRef} type="file" accept=".stl,.3mf" className="hidden" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
 
       {toast && (
         <div className="toast fixed bottom-8 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm shadow-lg text-center font-medium">

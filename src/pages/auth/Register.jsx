@@ -61,10 +61,10 @@ const Register = () => {
   return (
     <div className="p-4.5 md:p-5 xl:p-6 2xl:p-8">
       <h2 className="auth_title">Create Account</h2>
-      <p className="auth_sub_title">
+      {/* <p className="auth_sub_title">
         Professional 3D printing service for prototyping and production. Over
         100+ materials available with lead times as fast as 24 hours.
-      </p>
+      </p> */}
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -73,12 +73,27 @@ const Register = () => {
         {/* Full Name */}
         <div>
           <label htmlFor="email" className="auth_label">
-            Full Name
+            Name
           </label>
 
           <input
             type="text"
-            placeholder="Full Name"
+            placeholder="Name"
+            {...register("name", { required: true })}
+            className={`auth_input ${errors.name
+              ? "border-red-500 placeholder:text-red-500"
+              : "border-[#CFD3D4]"
+              }`}
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="auth_label">
+            SurName
+          </label>
+
+          <input
+            type="text"
+            placeholder="SurName"
             {...register("name", { required: true })}
             className={`auth_input ${errors.name
               ? "border-red-500 placeholder:text-red-500"

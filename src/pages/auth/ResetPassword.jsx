@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  HidePassSvg,
-  ShowPassSvg,
-} from "../../components/SvgContainer/SvgContainer";
-import { useNavigate, useLocation, Navigate } from "react-router";
 import { useToast } from "../../context/ToastContext";
+import { useNavigate, useLocation, Navigate } from "react-router";
+import { HidePassSvg, ShowPassSvg, } from "../../components/SvgContainer/SvgContainer";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
@@ -13,10 +10,10 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();
-  
+
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const email = location.state?.email;
   const otp = location.state?.otp;
@@ -32,6 +29,7 @@ const ResetPassword = () => {
   }
 
   const onSubmit = async data => {
+
     if (data.password !== data.password_confirmation) {
       showToast("Passwords do not match", "error");
       return;
@@ -90,11 +88,10 @@ const ResetPassword = () => {
                 type={!showPassword ? "password" : "text"}
                 placeholder="Password"
                 {...register("password", { required: true })}
-                className={`auth_input !pe-9 ${
-                  errors.password
+                className={`auth_input pe-9! ${errors.password
                     ? "border-red-500 placeholder:text-red-500"
                     : "border-[#CFD3D4]"
-                }`}
+                  }`}
               />
               <p
                 onClick={() => setShowPassword(prev => !prev)}
@@ -116,11 +113,10 @@ const ResetPassword = () => {
                 type={!showConfirmPassword ? "password" : "text"}
                 placeholder="Confirm Password"
                 {...register("password_confirmation", { required: true })}
-                className={`auth_input !pe-9 ${
-                  errors.password_confirmation
+                className={`auth_input pe-9! ${errors.password_confirmation
                     ? "border-red-500 placeholder:text-red-500"
                     : "border-[#CFD3D4]"
-                }`}
+                  }`}
               />
               <p
                 onClick={() => setShowConfirmPassword(prev => !prev)}
