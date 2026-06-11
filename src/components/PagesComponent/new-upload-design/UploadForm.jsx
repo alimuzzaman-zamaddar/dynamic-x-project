@@ -774,7 +774,7 @@ export default function UploadForm() {
                                           type="button"
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            setMaterial(option); // Updates active target layout scope
+                                            setMaterial(option); 
                                             applyColor(c.code, c.id);
                                           }}
                                           className="h-8 w-8 rounded-full border transition-all duration-150 relative flex items-center justify-center focus:outline-none cursor-pointer"
@@ -809,7 +809,7 @@ export default function UploadForm() {
                                             <button
                                               type="button"
                                               onClick={() => {
-                                                setMaterial(option); // Fixed bug: Assigns corresponding wrapper container context correctly
+                                                setMaterial(option); 
                                                 setSelectedProcessing(isProcSelected ? '' : p.title);
                                               }}
                                               className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm cursor-pointer ${isProcSelected
@@ -860,7 +860,7 @@ export default function UploadForm() {
                                           type="button"
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            setMaterial(item.name); // Updates static mapping configuration card wrapper cleanly
+                                            setMaterial(item.name);
                                             applyColor(hex);
                                           }}
                                           className="h-8 w-8 rounded-full border focus:outline-none transition cursor-pointer"
@@ -891,7 +891,7 @@ export default function UploadForm() {
                                             <button
                                               type="button"
                                               onClick={() => {
-                                                setMaterial(item.name); // Fixed bug: Assigns corresponding wrapper container context correctly
+                                                setMaterial(item.name); 
                                                 setSelectedProcessing(isProcSelected ? '' : proc.t);
                                               }}
                                               className={`px-5 py-2.5 rounded-full text-sm font-medium transition shadow-sm cursor-pointer ${isProcSelected ? 'bg-[#101828] text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
