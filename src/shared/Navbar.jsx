@@ -154,7 +154,6 @@ const Navbar = () => {
     <nav className={`fixed ease-in-out duration-500 transition-all px-4 top-0 left-0 w-full z-50 ${isTransparentBg ? "bg-transparent" : "bg-black"}`}>
       <div className="container mx-auto lg:py-8 py-4 flex items-center justify-between">
         <div className="flex gap-x-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center" aria-label="Home">
             <img
               src={logo}
@@ -163,7 +162,6 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Navigation */}
           <ul className="hidden 2xl:flex flex-row gap-x-7 2xl:gap-x-8.25 items-center">
             {navMenu.map((nav, idx) => (
               <li key={idx} className="relative group">
@@ -214,10 +212,9 @@ const Navbar = () => {
 
         </div>
 
-        {/* Mobile Sidebar */}
         <div
           ref={sidebarRef}
-          className={`fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-70 bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed 2xl:hidden container flex flex-col items-start gap-y-8 py-6 top-0 left-0 h-full w-70 z-10 bg-slate-900/70 backdrop-blur-xl border-r border-white/10 shadow-2xl transform transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <Link to="/" onClick={() => setIsOpen(false)}>
             <img
@@ -340,12 +337,12 @@ const Navbar = () => {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-8 cursor-pointer h-8 flex flex-col justify-center items-center gap-1.5 bg-transparent border-none focus:outline-none"
+            className="relative w-5 cursor-pointer h-5 flex flex-col justify-center items-center gap-1.5 bg-transparent border-none focus:outline-none"
             aria-label="Toggle menu"
           >
-            <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "rotate-45 absolute" : ""}`} />
             <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-7 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "-rotate-45 absolute" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-white rounded-full transition-all duration-500 ${isOpen ? "-rotate-45 absolute" : ""}`} />
           </button>
         </div>
 
@@ -392,7 +389,7 @@ const Navbar = () => {
               <Link to="/auth/login" className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] text-white py-3.5 w-auto px-10 border border-white rounded-full hover:border-transparent cursor-pointer hover:bg-white hover:text-black ease-in-out duration-500 flex items-center justify-center">
                 Login
               </Link>
-              <Link to="/auth/login" className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] hover:text-white py-3.5 w-auto px-10 border border-white rounded-full cursor-pointer bg-white hover:bg-transparent text-black ease-in-out duration-500 flex items-center justify-center">
+              <Link to="/auth/register" className="text-sm 2xl:text-[15.6px] font-normal leading-[128%] hover:text-white py-3.5 w-auto px-10 border border-white rounded-full cursor-pointer bg-white hover:bg-transparent text-black ease-in-out duration-500 flex items-center justify-center">
                 Sign Up
               </Link>
             </div>

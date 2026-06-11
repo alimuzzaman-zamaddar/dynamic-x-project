@@ -22,27 +22,31 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async data => {
-
+  const onSubmit = async (data) => {
     if (data.password !== data.password_confirmation) {
       showToast("Passwords do not match", "error");
       return;
     }
 
-    const { name, surname, ...rest } = data;
     const payload = {
-      ...rest,
-      name: `${name || ""} ${surname || ""}`.trim(),
-      agree_to_terms: 1
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      agree_to_terms: 1,
     };
+
+    console.log("Payload:", payload);
 
     try {
       setLoading(true);
+
       const res = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(payload),
       });
@@ -50,11 +54,19 @@ const Register = () => {
       const json = await res.json();
 
       if (!res.ok) {
-        throw new Error(json.message || json.error || "Registration failed");
+        throw new Error(
+          json.message || json.error || "Registration failed"
+        );
       }
 
       showToast("Registration successful!", "success");
-      navigate("/auth/verify-otp", { state: { email: data.email, type: "register" } });
+
+      navigate("/auth/verify-otp", {
+        state: {
+          email: data.email,
+          type: "register",
+        },
+      });
     } catch (err) {
       console.error(err);
       showToast(err.message || "Something went wrong", "error");
