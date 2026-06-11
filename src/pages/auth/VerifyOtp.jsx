@@ -14,7 +14,7 @@ const VerifyOtp = () => {
   const [resendLoading, setResendLoading] = useState(false);
 
   const email = location.state?.email;
-  const type = location.state?.type; // "register" or "reset"
+  const type = location.state?.type; 
 
   const {
     handleSubmit,
@@ -26,32 +26,55 @@ const VerifyOtp = () => {
     return <Navigate to="/auth/login" replace />;
   }
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const endpoint = type === "register" ? "/auth/register/verify-otp" : "/auth/password/reset/verify";
+
+      const endpoint =
+        type === "register"
+          ? "/auth/register/verify-otp"
+          : "/auth/password/reset/verify";
 
       const res = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({ email, otp: data.otp }),
+        body: JSON.stringify({
+          email,
+          otp: data.otp,
+        }),
       });
 
       const json = await res.json();
 
       if (!res.ok) {
-        throw new Error(json.message || json.error || "Verification failed");
+        throw new Error(
+          json.message || json.error || "Verification failed"
+        );
       }
 
       showToast("OTP verified successfully!", "success");
 
+      // Registration Flow
       if (type === "register") {
-        navigate("/auth/login");
-      } else {
-        navigate("/auth/reset-password", { state: { email, otp: data.otp } });
+        const { access_token, user } = json.data;
+
+        localStorage.setItem("token", access_token);
+
+        localStorage.setItem("user", JSON.stringify(user));
+
+        navigate("/", { replace: true });
+      }
+
+      else {
+        navigate("/auth/reset-password", {
+          state: {
+            email,
+            otp: data.otp,
+          },
+        });
       }
     } catch (err) {
       console.error(err);
@@ -60,7 +83,6 @@ const VerifyOtp = () => {
       setLoading(false);
     }
   };
-
   const handleResend = async () => {
     try {
       setResendLoading(true);
