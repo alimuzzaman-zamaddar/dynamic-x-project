@@ -36,34 +36,48 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (user) {
-      const parts = (user.name || '').trim().split(/\s+/);
-      setFirstName(parts[0] || '');
-      setSurname(parts.slice(1).join(' ') || '');
-      setEmail(user.email || '');
-      setPhone(user.phone?.replace(countryCode, '') || '');
+      setFirstName(user.name || "");
+      setSurname(user.surname || "");
+      setEmail(user.email || "");
+      setPhone(user.phone?.replace(countryCode, "") || "");
     }
-  }, [user]);
+  }, [user, countryCode]);
 
   const handleUpdateProfile = async (type) => {
-    const setSaving = type === 'personal' ? setSavingPersonal : setSavingContact;
+    const setSaving =
+      type === "personal" ? setSavingPersonal : setSavingContact;
+
     setSaving(true);
+
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/auth/profile/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          name: `${firstName} ${surname}`.trim(),
-          email,
-          phone: `${countryCode}${phone}`
-        })
-      });
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL || ""}/auth/profile/update`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: firstName,
+            surname: surname,
+            email,
+            phone: `${countryCode}${phone}`
+          })
+        }
+      );
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || data.error || "Failed to update profile");
+
+      if (!res.ok) {
+        throw new Error(
+          data.message || data.error || "Failed to update profile"
+        );
+      }
+
       showToast("Profile updated successfully", "success");
       fetchProfile();
     } catch (err) {
